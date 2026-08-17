@@ -38,6 +38,7 @@ export default function TemplatesStudioPage() {
 
   const categories = [
     "All",
+    "Export & Luxury Origin",
     "Industrial & Manufacturing",
     "Construction & EPC",
     "Real Estate & Property",
@@ -51,6 +52,8 @@ export default function TemplatesStudioPage() {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
+      case "Export & Luxury Origin":
+        return Sparkles;
       case "Industrial & Manufacturing":
         return Building2;
       case "Construction & EPC":

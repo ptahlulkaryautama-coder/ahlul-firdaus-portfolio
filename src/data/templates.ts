@@ -1,7 +1,7 @@
 export interface TemplateKit {
   id: string;
   name: string;
-  category: "Industrial & Manufacturing" | "Construction & EPC" | "Real Estate & Property" | "Logistics & Freight" | "Corporate & Holding";
+  category: "Export & Luxury Origin" | "Industrial & Manufacturing" | "Construction & EPC" | "Real Estate & Property" | "Logistics & Freight" | "Corporate & Holding";
   tagline: string;
   description: string;
   idealFor: string;
@@ -15,10 +15,37 @@ export interface TemplateKit {
     formIntegration: string;
     speedScore: string;
   };
-  demoType: "industrial" | "construction" | "property" | "logistics" | "corporate";
+  demoType: "luxury" | "industrial" | "construction" | "property" | "logistics" | "corporate";
 }
 
 export const templateKits: TemplateKit[] = [
+  {
+    id: "luxury-origin-template",
+    name: "Luxury Origin — Premium Brand & B2B Trade Template",
+    category: "Export & Luxury Origin",
+    tagline: "Editorial luxury website template for origin-led commodity brands, premium product houses, and B2B exporters.",
+    description:
+      "Conceived during the development of OOI (Origin Of Indonesia). Features wide-tracked editorial typography, dark material teak and misty landscape aesthetic, GSAP slow-reveal animations, and 4 specialized page layouts (Luxury Brand Homepage, Personal Portfolio, Product House, and B2B Supplier).",
+    idealFor: "Indonesian Origin Exporters, Craft Producers, Commodity Houses, Luxury Product Brands, Boutique Agencies & Founders.",
+    previewImage: "/templates/template-luxury-origin-full.jpg",
+    badge: "Luxury Origin & B2B",
+    techStack: ["HTML5", "CSS3", "GSAP 3", "ScrollTrigger", "Tailwind CSS", "JavaScript ES6+"],
+    features: [
+      "4 Dedicated HTML Templates (Brand Homepage, Portfolio, Product House, B2B Supplier)",
+      "Cormorant Garamond & Inter Editorial Typography System",
+      "GSAP 3 & ScrollTrigger Atmospheric Slow-Reveal Animations",
+      "Dark Teak, Fine Metal & Misty Landscape Visual Asset System",
+      "Inquiry-Led Trade Contact Form & Audience Routing Grid",
+      "100% Static HTML / CSS — Instant Deployment to Netlify or Vercel"
+    ],
+    specs: {
+      pageCount: "4 Complete HTML Layout Templates",
+      responsive: "100% Mobile & Tablet Optimized",
+      formIntegration: "Netlify & Formspree Ready",
+      speedScore: "99/100 Google Lighthouse Score"
+    },
+    demoType: "luxury"
+  },
   {
     id: "industrial-plant-profile",
     name: "Apex Industrial Plant & Manufacturing Profile",
