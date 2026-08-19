@@ -1,0 +1,45 @@
+# Detailed LLM Specification — Ahlul Firdaus (Product Strategy & Web Development)
+
+## Overview
+Ahlul Firdaus is a Founder, Product Strategist, UI/UX Designer & AI-Assisted Full-Stack Web Developer based in Batam, Indonesia. With over 20 years of background in manufacturing, quality assurance, and operations, he designs and develops digital product concepts, community information portals, high-density SaaS management dashboards, and public information hubs.
+
+---
+
+## Detailed Project Case Studies
+
+### 1. Origin Of Indonesia (OOI)
+- **Classification**: Founder-Led Product — Active Prototype
+- **Role**: Founder, Product Strategist, UI/UX Designer & AI-Assisted Web Developer
+- **Duration**: Ongoing Since 2026
+- **Overview**: A founder-led B2B export platform concept designed to present premium Indonesian origin products to international importers, distributors, hospitality groups, and wholesale buyers.
+- **Current Scope**: Focuses on premium product presentation, origin storytelling, export-oriented information architecture, buyer inquiry journeys, and a conceptual export trade simulator.
+- **Tech Stack**: Next.js, TypeScript, Tailwind CSS, Netlify, GitHub.
+
+### 2. CGV10 Portal Warga
+- **Classification**: Community Portal — In Development
+- **Role**: Product Strategist, UI/UX Designer & AI-Assisted Full-Stack Developer
+- **Duration**: Ongoing Since 2026
+- **Overview**: A community information portal designed for residents of Cipta Greenville RT 010/RW 021, consolidating announcements, committee directories, financial summaries, and PALUGADA resident marketplace.
+- **Current Scope**: Centralized digital reference for community information with a mobile-first design and a proposed future visitor pass prototype.
+- **Tech Stack**: Next.js, TypeScript, Tailwind CSS, Supabase, Vercel.
+
+### 3. Masjid Al Ikhlas Digital Presence
+- **Classification**: Live Community Project
+- **Role**: Digital Experience Strategist, UI/UX Designer & AI-Assisted Front-End Developer
+- **Duration**: Ongoing Community Project
+- **Overview**: A responsive public information website for Masjid Al Ikhlas Cipta Greenville, making prayer schedules, mosque programs, community updates, donation guides, and published financial reports accessible.
+- **Tech Stack**: HTML5, Tailwind CSS, JavaScript, SVG Design Assets, Netlify.
+
+### 4. OneEcos Operational SaaS Cockpit
+- **Classification**: Proof of Concept / Dashboard System
+- **Role**: UI/UX Designer & Front-End Developer
+- **Overview**: High-density operational management dashboard exploring multi-warehouse monitoring and telemetry data visualization.
+- **Tech Stack**: Next.js, React, Recharts, Tailwind CSS.
+
+---
+
+## Contact & Social Links
+- Website: https://ahlulfirdaus.com
+- Direct WhatsApp: +62 812-9125-4064
+- Email: pt.ahlulkaryautama@gmail.com
+- GitHub Repository: https://github.com/ptahlulkaryautama-coder/ahlul-firdaus-portfolio

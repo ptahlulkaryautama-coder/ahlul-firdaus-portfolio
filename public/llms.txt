@@ -1,0 +1,35 @@
+# Ahlul Firdaus — Digital Product Strategist & Founder
+
+> Digital product strategist, UI/UX designer, and AI-assisted web developer specializing in B2B export platform concepts, community information portals, high-density SaaS management dashboards, and custom digital experiences in Batam, Kepulauan Riau, Indonesia.
+
+## Core Information
+- **Name**: Ahlul Firdaus
+- **Role**: Founder, Product Strategist, UI/UX Designer & AI-Assisted Developer
+- **Location**: Batam, Kepulauan Riau, Indonesia
+- **Website**: https://ahlulfirdaus.com
+- **Email**: pt.ahlulkaryautama@gmail.com
+- **WhatsApp**: +62 812-9125-4064
+- **GitHub**: https://github.com/ptahlulkaryautama-coder
+
+## Primary Capabilities & Project Focus
+- **B2B Export Platform Concepts**: Founder-led trade presentation, product categorization, origin storytelling, export-readiness framework, and conceptual trade simulations.
+- **Community Information Portals**: Neighborhood announcements, committee directories, financial summaries, and local business marketplaces.
+- **High-Density SaaS Dashboards**: Operational management interfaces aggregating telemetry, inventory counts, and sales analytics.
+- **Public Information Hubs**: Responsive community & mosque information portals featuring prayer schedules, programs, donation guides, and published financial reports.
+
+## Core Projects
+- **Origin Of Indonesia (OOI)**: Founder-Led Product — Active Prototype for B2B Indonesian origin export presentation.
+- **CGV10 Portal Warga**: Community Information Portal for Cipta Greenville RT 010/RW 021.
+- **OneEcos SaaS Cockpit**: High-density operational management dashboard concept.
+- **Masjid Al-Ikhlas Digital Presence**: Live community information website for Masjid Al Ikhlas Cipta Greenville.
+
+## Technology Stack
+- **Frontend & Web**: Next.js, React, TypeScript, Tailwind CSS, Framer Motion, HTML5, CSS3, JavaScript
+- **Data & Foundation**: Supabase, Responsive Web Design, Netlify, Vercel, GitHub
+
+## Full Details & Specifications
+For comprehensive project specs, technical summaries, and project narratives, read:
+- Full LLM Specification: https://ahlulfirdaus.com/llms-full.txt
+- Architecture Visualizer: https://ahlulfirdaus.com/#architecture
+- Case Studies: https://ahlulfirdaus.com/#work
+- System Writings: https://ahlulfirdaus.com/blog
