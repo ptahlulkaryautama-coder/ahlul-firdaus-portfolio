@@ -66,7 +66,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     const resumeText = `AHLUL FIRDAUS
 Digital Systems Architect & Full-Stack Engineer
 Location: Batam, Kepulauan Riau, Indonesia (GMT+7)
-Email: ahlulfirdaus.official@gmail.com | Phone/WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
+Email: ahlul.firdaus@gmail.com | Phone/WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
 
 ==================================================
 EXECUTIVE SUMMARY
@@ -123,7 +123,7 @@ CONTACT & PORTFOLIO
 ==================================================
 Website: https://ahlulfirdaus.com
 WhatsApp: +62 812-9125-4064
-Email: ahlulfirdaus.official@gmail.com
+Email: ahlul.firdaus@gmail.com
 `;
 
     const blob = new Blob([resumeText], { type: "text/plain;charset=utf-8" });
@@ -139,7 +139,7 @@ Email: ahlulfirdaus.official@gmail.com
 
   const handleCopyText = () => {
     const text = `AHLUL FIRDAUS — Digital Systems Architect & Full-Stack Builder
-Email: ahlulfirdaus.official@gmail.com | WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
+Email: ahlul.firdaus@gmail.com | WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
 
 EXECUTIVE SUMMARY:
 Digital Systems Architect & Full-Stack Engineer with extensive experience engineering high-performance web applications, B2B export transaction platforms (OOI), neighborhood governance ledgers (CGV10), and operational SaaS cockpits (OneEcos). Specializes in database design, Escrow engines, PWA systems, and high-density UI/UX.`;
@@ -293,7 +293,7 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                         <Mail className="w-3.5 h-3.5" />
                         <span>Email</span>
                       </div>
-                      <div className="text-xs font-bold text-cream truncate">ahlulfirdaus.official@gmail.com</div>
+                      <div className="text-xs font-bold text-cream truncate">ahlul.firdaus@gmail.com</div>
                       <div className="text-[10px] text-cream-dark/50 font-mono">Primary Contact</div>
                     </div>
 

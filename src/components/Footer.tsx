@@ -13,7 +13,7 @@ export default function Footer() {
     e.preventDefault();
     const resumeText = `AHLUL FIRDAUS
 Operational Systems Architect & Full-Stack Engineer
-Email: ahlulfirdaus.official@gmail.com | Phone/WhatsApp: +62 812-9125-4064
+Email: ahlul.firdaus@gmail.com | Phone/WhatsApp: +62 812-9125-4064
 Website: https://ahlulfirdaus.com
 
 ==================================================
@@ -58,7 +58,7 @@ ENGAGEMENT MODELS
 CONTACT INFORMATION
 ==================================================
 Website: https://ahlulfirdaus.com
-Email: ahlulfirdaus.official@gmail.com
+Email: ahlul.firdaus@gmail.com
 WhatsApp: +62 812-9125-4064
 `;
 
@@ -115,10 +115,10 @@ WhatsApp: +62 812-9125-4064
         {/* Right Side: Scroll back and operational triggers */}
         <div className="flex items-center justify-between md:justify-end gap-5">
           <a
-            href="mailto:ahlulfirdaus.official@gmail.com"
+            href="mailto:ahlul.firdaus@gmail.com"
             className="font-mono text-[10px] text-cream-dark/70 hover:text-gold-muted tracking-wider uppercase transition-colors glass-badge px-3 py-1.5 rounded-lg font-bold"
           >
-            ahlulfirdaus.official@gmail.com
+            ahlul.firdaus@gmail.com
           </a>
           <button
             onClick={handleDownloadCV}

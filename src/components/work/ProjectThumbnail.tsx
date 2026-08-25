@@ -152,34 +152,36 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
             <div className="flex items-center gap-2 bg-cyan-950/80 border border-cyan-500/40 px-2.5 py-1 rounded-md">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo/oneecos-logo.png" alt="OneEcos Logo" className="w-4 h-4 object-contain" />
-              <span className="font-mono text-[9px] text-cyan-300 uppercase tracking-wider font-bold">Business Ecosystem</span>
+              <span className="font-mono text-[9px] text-cyan-300 uppercase tracking-wider font-bold">OneEcos OS</span>
             </div>
-            <span className="font-mono text-[9px] text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">
-              Order-to-Cash
+            <span className="font-mono text-[9px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30 font-semibold">
+              A Fundamental Stage
             </span>
           </div>
 
-          {/* Order-to-Cash Pipeline Visualizer */}
-          <div className="relative z-10 my-auto bg-cyan-950/40 border border-cyan-500/25 p-2 rounded-lg">
-            <div className="text-[8px] font-mono text-cyan-300/70 uppercase mb-1 text-center font-semibold tracking-wider">
-              Order to Cash Flow Pipeline
+          {/* Connected Transaction Flow Pipeline */}
+          <div className="relative z-10 my-auto bg-cyan-950/40 border border-cyan-500/25 p-2 rounded-lg space-y-1">
+            <div className="text-[8px] font-mono text-cyan-300/80 uppercase text-center font-semibold tracking-wider flex items-center justify-center gap-1">
+              <span>Order-to-Cash Transaction Flow</span>
             </div>
-            <div className="flex items-center justify-between text-[9px] font-mono font-bold text-cream gap-0.5">
-              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1.5 py-0.5 rounded text-cyan-200 text-[8px]">Sales Order</span>
-              <span className="text-cyan-400 text-[9px]">→</span>
-              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1.5 py-0.5 rounded text-cyan-200 text-[8px]">Mfg</span>
-              <span className="text-cyan-400 text-[9px]">→</span>
-              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1.5 py-0.5 rounded text-cyan-200 text-[8px]">Shipment</span>
-              <span className="text-cyan-400 text-[9px]">→</span>
-              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1.5 py-0.5 rounded text-cyan-200 text-[8px]">Invoice</span>
-              <span className="text-cyan-400 text-[9px]">→</span>
-              <span className="bg-emerald-900/50 border border-emerald-500/40 px-1.5 py-0.5 rounded text-emerald-300 text-[8px]">Payment</span>
+            <div className="flex items-center justify-between text-[8px] font-mono font-bold text-cream gap-0.5 overflow-x-auto">
+              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1 py-0.5 rounded text-cyan-200 text-[7.5px] shrink-0">RFQ</span>
+              <span className="text-cyan-400 text-[8px]">→</span>
+              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1 py-0.5 rounded text-cyan-200 text-[7.5px] shrink-0">Quote</span>
+              <span className="text-cyan-400 text-[8px]">→</span>
+              <span className="bg-cyan-950 border border-cyan-400 px-1 py-0.5 rounded text-cyan-300 font-extrabold text-[7.5px] shrink-0">Sales Order</span>
+              <span className="text-cyan-400 text-[8px]">→</span>
+              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1 py-0.5 rounded text-cyan-200 text-[7.5px] shrink-0">Mfg</span>
+              <span className="text-cyan-400 text-[8px]">→</span>
+              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1 py-0.5 rounded text-cyan-200 text-[7.5px] shrink-0">Freight</span>
+              <span className="text-cyan-400 text-[8px]">→</span>
+              <span className="bg-emerald-900/50 border border-emerald-500/40 px-1 py-0.5 rounded text-emerald-300 text-[7.5px] shrink-0">Payment</span>
             </div>
           </div>
 
           <div className="relative z-10 flex items-center justify-between text-[9px] font-mono text-cream-dark/70 pt-2 border-t border-cyan-900/40">
-            <span>Sales Order to Shipment to Payment</span>
-            <span className="text-cyan-400 font-semibold">$8.42M Cash Flow</span>
+            <span className="text-cream-dark/80 font-semibold truncate">People Execute. OneEcos Connects.</span>
+            <span className="text-cyan-400 font-bold shrink-0">$8.42M Flow</span>
           </div>
         </div>
       );

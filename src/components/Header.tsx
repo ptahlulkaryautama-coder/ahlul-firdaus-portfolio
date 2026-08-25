@@ -49,7 +49,6 @@ export default function Header() {
     { name: "Identity", href: "/#identity" },
     { name: "Selected Work", href: "/#work" },
     { name: "Templates", href: "/templates" },
-    { name: "Logo Studio", href: "/logo" },
     { name: "Services", href: "/#services" },
     { name: "Capabilities", href: "/#capabilities" },
     { name: "Artifacts", href: "/#artifacts" },

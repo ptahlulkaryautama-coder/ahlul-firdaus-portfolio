@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     }
 
     const resend = new Resend(apiKey || "re_dummy_key_for_build");
-    const toEmail = process.env.CONTACT_TO_EMAIL || "ahlulfirdaus.official@gmail.com";
+    const toEmail = process.env.CONTACT_TO_EMAIL || "ahlul.firdaus@gmail.com";
     const fromEmail = process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
 
     // Send notification to Ahlul

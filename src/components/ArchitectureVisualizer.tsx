@@ -312,12 +312,12 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     ]
   },
   oneecos: {
-    title: "OneEcos Business Ecosystem Platform",
-    subtitle: "Sales Order to Shipment to Payment Workflow Engine",
-    badgeText: "Business Ecosystem",
+    title: "OneEcos Business Operating System",
+    subtitle: "People Execute. OneEcos Connects. Business Scales.",
+    badgeText: "A Fundamental Stage",
     badgeColor: "cyan",
     description:
-      "Unified Order-to-Cash workflow engine linking Sales Order, Procurement, Manufacturing, Shipment, Invoice, and Payment Settlement into an integrated ecosystem.",
+      "A Fundamental Stage (Live Order-to-Cash engine) & OneEcos Enterprise Stage roadmap (AI Insights, Workflow Alerts, Integrated Data & Compliance Audit Trail).",
     nodes: [
       {
         id: "sales",

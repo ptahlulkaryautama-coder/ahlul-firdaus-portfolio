@@ -7,7 +7,7 @@ export interface Project {
   challenge: string;
   solution: string;
   status: string;
-  statusBadge: "Live Project" | "Client Work" | "Active Concept" | "Proof of Concept" | "In Development" | "Founder-Led Product — Active Prototype" | "Community Portal — In Development" | "Live Community Project";
+  statusBadge: "Live Project" | "Client Work" | "Active Concept" | "Proof of Concept" | "In Development" | "Founder-Led Product — Active Prototype" | "Community Portal — In Development" | "Live Community Project" | "A Fundamental Stage";
   context: string;
   techStack: string[];
   duration: string;
@@ -138,33 +138,33 @@ export const projects: Project[] = [
   },
   {
     id: "oneecos",
-    name: "OneEcos Business Ecosystem Platform",
-    category: "Business Ecosystem Platform",
-    oneLiner: "Integrated Order-to-Cash ecosystem orchestrating Sales Orders, Procurement, Manufacturing, Shipments, Invoicing, and Payments.",
-    problem: "Enterprises and multi-node businesses struggle with fragmented operational silos between Sales, Procurement, Factory Planning, Logistics, and Financial Settlement.",
-    challenge: "Connecting complex multi-step workflows (Sales Order -> Manufacturing -> Shipment -> Invoice -> Payment) without data friction, manual spreadsheets, or delayed payment reconciliation.",
-    solution: "Designed the OneEcos Business Ecosystem Platform — a unified 6-node operational workflow engine linking Sales Orders, Procurement, Manufacturing, Freight Shipment, Invoicing, and Payment Collection into a single Order-to-Cash pipeline.",
-    status: "Proof of Concept",
-    statusBadge: "Proof of Concept",
-    context: "Unified business ecosystem platform organizing the complete Order-to-Cash lifecycle.",
+    name: "OneEcos Business Operating System",
+    category: "Business Ecosystem & Operating System",
+    oneLiner: "People Execute. OneEcos Connects. Business Scales — transforming fragmented manual handoffs into one connected Order-to-Cash transaction flow.",
+    problem: "Before OneEcos: Enterprises operate via manual coordination — 12-14 touched functions, 18+ manual handoffs, 8+ duplicate data entries, 10+ status inquiries, and 12+ manual follow-ups across 5-10 disconnected tools, causing high coordination costs and delayed settlement.",
+    challenge: "Transitioning from human-coordinated operational chaos to system-coordinated execution while establishing a single source of truth across Inquiry (RFQ), Quotation, Sales Order, Procurement, Production, Logistics, Billing, and Collection.",
+    solution: "Designed OneEcos: A Business Operating System that connects every step. 'A Fundamental Stage' establishes the core Order-to-Cash transaction flow (reducing touched functions from 14 to 7 and manual handoffs from 18+ to 5). Under active development, 'OneEcos Enterprise Stage' adds AI-powered insights, automated workflow alerts, enterprise data integration, and compliance audit trails.",
+    status: "A Fundamental Stage (Live) | Enterprise Stage (In Development)",
+    statusBadge: "A Fundamental Stage",
+    context: "Unified business operating system unifying the complete Order-to-Cash transaction lifecycle.",
     techStack: ["React", "TypeScript", "Recharts", "Framer Motion", "Tailwind CSS", "REST APIs"],
-    duration: "Ongoing Product Design",
+    duration: "Ongoing Product Evolution",
     role: "Product Strategist, UI/UX Designer & Systems Architect",
-    images: ["/screenshots/oneecos-dashboard.png"],
-    longDescription: "OneEcos Business Ecosystem Platform orchestrates the complete Order-to-Cash workflow across 6 interconnected enterprise nodes: Sales Order (Capture | Validate | Confirm), Procurement (Source | Order | Manage), Manufacturing (Plan | Produce | Monitor), Shipment (Pack | Ship | Track), Invoice (Bill | Reconcile | Send), and Payment (Collect | Match | Settle). Built with a high-density, dark neon executive dashboard displaying real-time global shipment maps, automated cash flow pipelines, and core business telemetry.",
+    images: ["/screenshots/oneecos-dashboard.png", "/screenshots/oneecos-cockpit.jpg"],
+    longDescription: "OneEcos fundamentally shifts how businesses scale: instead of people coordinating the business across fragmented tools, the OneEcos system coordinates the business around a unified transaction flow with the Sales Order at its center. 'A Fundamental Stage' delivers real-time visibility across the entire Order-to-Cash lifecycle (Inquiry, Quote, Sales Order, Procurement, Production, Logistics, Invoicing, Collection). 'OneEcos Enterprise Stage' is expanding the system with real-time AI Insights, automated workflow triggers, multi-entity compliance audit trails, and unified enterprise telemetry.",
     keyDeliverables: [
-      "6-Node Hexagonal Workflow Engine (Sales Order, Procurement, Manufacturing, Shipment, Invoice, Payment)",
-      "Order-to-Cash Pipeline Visualizer (Sales Order -> Manufacturing -> Shipment -> Invoice -> Payment)",
-      "Ecosystem Overview Metrics Panel (Orders, Global Shipments, On-Time Delivery, Payment Received)",
-      "Global Freight Shipment Map & Revenue Analytics Engine",
-      "Enterprise Security & API-First Integration Architecture"
+      "A Fundamental Stage: Core 8-Phase Connected Transaction Flow Engine (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment)",
+      "Operational Efficiency Shift (Cuts touched functions from 14 to 7, manual handoffs from 18+ to 5, duplicate entries to 1 core entry)",
+      "OneEcos Enterprise Stage Roadmap (Real-Time AI Insights, Automated Alerts, Integrated Data & Compliance Audit Trail)",
+      "High-Density Executive Telemetry & Global Order-to-Cash Dashboard",
+      "Unified Role-Based Visibility for Sales, Planning, Procurement, QC, Logistics, Finance & Management"
     ],
     keyDecisions: [
-      "Structured the ecosystem around a circular 6-phase Order-to-Cash lifecycle for end-to-end visibility.",
-      "Implemented real-time status tracking for Global Shipments (In Transit, Delivered, Exceptions).",
-      "Designed a high-contrast dark neon interface with dedicated module telemetry cards."
+      "Anchored the platform on the core philosophy: 'People Execute. OneEcos Connects. Business Scales.'",
+      "Structured product evolution into 'A Fundamental Stage' (Core Transaction Engine) and 'OneEcos Enterprise Stage' (Full Automation & AI Insights).",
+      "Placed Sales Order as the center of truth to eliminate duplicate data entries and manual status follow-ups."
     ],
-    outcome: "Engineered a unified business ecosystem platform architecture uniting Sales, Operations, Supply Chain, and Finance into an end-to-end Order-to-Cash cockpit."
+    outcome: "Engineered a unified business operating system that empowers teams to execute more transactions with lower coordination overhead — scaling revenue without adding operational headcount."
   },
   {
     id: "corum",

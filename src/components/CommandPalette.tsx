@@ -55,15 +55,7 @@ export default function CommandPalette() {
       url: "/templates",
       keywords: ["templates", "kits", "industrial", "construction", "property", "company profile", "epc", "real estate", "logistics"]
     },
-    {
-      id: "tool-logo",
-      title: "Monogram Logo Studio",
-      description: "Interactive vector & motion asset playground (/logo)",
-      category: "Tools & Pages",
-      icon: Box,
-      url: "/logo",
-      keywords: ["logo", "monogram", "brand", "vector", "studio", "af"]
-    },
+
     {
       id: "tool-estimator",
       title: "Project Cost & Architecture Estimator",
@@ -138,11 +130,11 @@ export default function CommandPalette() {
     {
       id: "action-email",
       title: "Copy Direct Email Address",
-      description: "ahlulfirdaus.official@gmail.com",
+      description: "ahlul.firdaus@gmail.com",
       category: "Quick Actions",
       icon: Terminal,
       action: () => {
-        navigator.clipboard.writeText("ahlulfirdaus.official@gmail.com");
+        navigator.clipboard.writeText("ahlul.firdaus@gmail.com");
         alert("Email address copied to clipboard!");
       },
       keywords: ["email", "contact", "copy", "mail"]
