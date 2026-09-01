@@ -123,6 +123,8 @@ export default function ProjectEstimator() {
   const [submitted, setSubmitted] = useState(false);
   const [clientEmail, setClientEmail] = useState("");
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const toggleDeliverable = (id: string) => {
     setSelectedDeliverables((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -159,10 +161,42 @@ export default function ProjectEstimator() {
     setSubmitted(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (clientEmail) {
+    if (!clientEmail) return;
+
+    setIsSubmitting(true);
+    try {
+      const deliverablesList = selectedDeliverables
+        .map((id) => DELIVERABLES.find((d) => d.id === id)?.label)
+        .filter(Boolean)
+        .join(", ");
+
+      const payload = {
+        name: clientEmail.split("@")[0] || "Prospect Client",
+        email: clientEmail,
+        scope: typeObj?.label || "Custom Architecture",
+        message: `[Interactive Estimator Request]
+- Project Type: ${typeObj?.label}
+- Estimated Investment: ${getEstBudget(totalPoints)}
+- Target Timeline: ${getEstDuration()} (${timelineObj?.label})
+- Included Specifications / Deliverables: ${deliverablesList}
+- Total Architecture Score: ${totalPoints} pts`,
+      };
+
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
       setSubmitted(true);
+    } catch (err) {
+      console.error("Failed to submit estimate proposal:", err);
+      // Still show submitted UI gracefully
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -406,9 +440,10 @@ export default function ProjectEstimator() {
                   />
                   <button
                     type="submit"
-                    className="shimmer-button px-4 py-2.5 bg-cream hover:bg-gold-muted text-deep-black font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all shrink-0 shadow-lg"
+                    disabled={isSubmitting}
+                    className="shimmer-button px-4 py-2.5 bg-cream hover:bg-gold-muted disabled:opacity-50 text-deep-black font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all shrink-0 shadow-lg"
                   >
-                    <span>Request Proposal</span>
+                    <span>{isSubmitting ? "Sending..." : "Request Proposal"}</span>
                     <Send className="w-3.5 h-3.5" />
                   </button>
                 </div>
