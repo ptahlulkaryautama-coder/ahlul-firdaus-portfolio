@@ -165,7 +165,7 @@ export default function SakkuDemo() {
             <span>100% Client-Side Private</span>
           </div>
           <a
-            href="https://sakku-2-0.vercel.app/"
+            href="https://sakku.ahlulfirdaus.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold font-mono text-xs transition-colors shadow-lg shadow-teal-500/20"

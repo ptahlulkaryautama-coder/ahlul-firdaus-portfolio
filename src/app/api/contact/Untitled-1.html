@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahlul Firdaus Logo Animation</title>
+    <style>
+        /* Setup the background to make the logo pop */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #121212; /* Dark elegant background */
+        }
+
+        /* Import the "Latin Italiano" style font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+
+        /* Logo styling and animation */
+        .logo-text {
+            font-family: 'Italianno', cursive;
+            font-size: 120px;
+            fill: transparent; /* Starts transparent so we only see the pen outline */
+            stroke: #d4af37; /* Elegant Gold/Champagne color */
+            stroke-width: 1.5px;
+            
+            /* These properties create the drawing effect */
+            stroke-dasharray: 1500;
+            stroke-dashoffset: 1500;
+            
+            /* 1. Draw the outline (pen effect) for 4 seconds 
+               2. Fill the color smoothly after drawing is mostly done */
+            animation: 
+                pen-writing 4s ease-in-out forwards, 
+                fill-text 2s ease-in-out 3s forwards;
+        }
+
+        /* Animation for the pen writing */
+        @keyframes pen-writing {
+            0% {
+                stroke-dashoffset: 1500;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Animation to fill in the ink */
+        @keyframes fill-text {
+            0% {
+                fill: transparent;
+            }
+            100% {
+                fill: #d4af37; /* Fills with gold */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <svg width="600" height="200" viewBox="0 0 600 200">
+        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" class="logo-text">
+            ahlulfirdaus.com
+        </text>
+    </svg>
+
+</body>
+</html>

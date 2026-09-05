@@ -256,7 +256,7 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
 
           <div className="relative z-10 flex items-center justify-between text-[9px] font-mono text-cream-dark/60 pt-2 border-t border-graphite/40">
             <span>Natural-Language Parser</span>
-            <span className="text-teal-400 font-bold">sakku-2-0.vercel.app</span>
+            <span className="text-teal-400 font-bold">sakku.ahlulfirdaus.com</span>
           </div>
         </div>
       );

@@ -210,7 +210,7 @@ export const projects: Project[] = [
     duration: "Active Production Product",
     role: "Product Strategist, UI/UX Designer & Lead Full-Stack Architect",
     images: ["/screenshots/rumahringkas-app.jpg"],
-    liveUrl: "https://sakku-2-0.vercel.app/",
+    liveUrl: "https://sakku.ahlulfirdaus.com/",
     githubUrl: "https://github.com/ptahlulkaryautama-coder/sakku-2-0",
     longDescription: "Sakku 2.0 is an evolution in personal and family financial management, built on the uncompromising foundation of 'Privacy-First, Zero-Latency, Zero-Subscription'. Unlike conventional FinTech applications that monetize user data or charge heavy recurring fees, Sakku 2.0 stores 100% of data locally on the user's device while providing executive-tier financial telemetry. Features include a natural language 'Catat Cepat' parser, envelope budget allocations, multi-account net worth tracking, and an offline-first PWA experience.",
     keyDeliverables: [
@@ -227,7 +227,7 @@ export const projects: Project[] = [
       "Modeled finances after the classic Envelope Budgeting methodology to curb impulse spending.",
       "Provided one-click JSON backup/restore protocols to ensure users retain complete control over their financial history."
     ],
-    outcome: "Successfully deployed at sakku-2-0.vercel.app, empowering users with institutional-grade financial visibility, zero tracking, and zero subscription costs."
+    outcome: "Successfully deployed at sakku.ahlulfirdaus.com, empowering users with institutional-grade financial visibility, zero tracking, and zero subscription costs."
   }
 ];
 

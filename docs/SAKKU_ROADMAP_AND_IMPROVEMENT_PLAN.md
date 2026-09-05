@@ -3,7 +3,7 @@
 > **Document Version:** 1.0.0  
 > **Last Updated:** 2026-09-01  
 > **Author & Architect:** Ahlul Firdaus  
-> **Live App:** [https://sakku-2-0.vercel.app/](https://sakku-2-0.vercel.app/)  
+> **Live App:** [https://sakku.ahlulfirdaus.com/](https://sakku.ahlulfirdaus.com/)  
 > **Product Category:** Privacy-First Personal Finance & Wealth Operating System  
 
 ---
