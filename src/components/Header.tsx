@@ -5,23 +5,8 @@ import { Menu, X, Cpu, Sparkles, Search } from "lucide-react";
 import AccentSwitcher from "./AccentSwitcher";
 import Logo from "./Logo";
 
-export default function Header() {
+function ClockTicker({ isShort = false }: { isShort?: boolean }) {
   const [time, setTime] = useState("");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -39,6 +24,34 @@ export default function Header() {
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  if (!time) {
+    return <span>BTH: --:--:--</span>;
+  }
+
+  if (isShort) {
+    return <span>BTH: {time.split(":").slice(0, 2).join(":")}</span>;
+  }
+
+  return <span>BTH: {time}</span>;
+}
+
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleOpenCommandPalette = () => {
@@ -72,7 +85,7 @@ export default function Header() {
         >
           <div className="relative w-9 h-9 rounded-lg bg-graphite/60 border border-graphite-dark flex items-center justify-center overflow-hidden shadow-inner group-hover:border-gold-muted/50 transition-colors duration-300">
             <div className="absolute inset-0 bg-gold-muted/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-            <Logo size={24} animateMode="draw" hoverMode="lift" className="relative z-20" />
+            <Logo size={24} animateMode="none" hoverMode="lift" className="relative z-20" />
           </div>
           <div className="flex flex-col">
             <span className="font-sans font-extrabold tracking-wider text-sm md:text-base text-cream group-hover:text-gold-muted transition-colors duration-300 flex items-center gap-1.5">
@@ -107,7 +120,7 @@ export default function Header() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="font-mono text-[10px] text-cream-dark/80 tracking-wider">
-              BTH: {time || "00:00:00"}
+              <ClockTicker />
             </span>
           </div>
           <button
@@ -133,7 +146,7 @@ export default function Header() {
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full glass-badge">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             <span className="font-mono text-[9px] text-cream-dark/80">
-              BTH: {time ? time.split(":").slice(0,2).join(":") : "00:00"}
+              <ClockTicker isShort />
             </span>
           </div>
           <button
