@@ -225,37 +225,38 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
         </div>
       );
 
+    case "sakku":
     case "rumah-ringkas":
     default:
       return (
-        <div className="w-full h-44 rounded-xl bg-gradient-to-br from-[#121A16] via-[#090F0C] to-[#1C2C24] border border-teal-500/30 p-4 relative overflow-hidden flex flex-col justify-between group-hover:border-gold-muted transition-colors">
-          <div className="absolute right-0 bottom-0 w-32 h-32 bg-teal-500/15 rounded-full blur-2xl group-hover:bg-gold-muted/25 transition-all duration-500" />
+        <div className="w-full h-44 rounded-xl bg-gradient-to-br from-[#0B1516] via-[#050C0C] to-[#122222] border border-teal-500/30 p-4 relative overflow-hidden flex flex-col justify-between group-hover:border-teal-400/60 transition-colors">
+          <div className="absolute right-0 bottom-0 w-36 h-36 bg-teal-500/15 rounded-full blur-2xl group-hover:bg-teal-400/25 transition-all duration-500" />
           
           <div className="relative z-10 flex items-center justify-between">
-            <div className="flex items-center gap-2 bg-teal-950/70 border border-teal-500/40 px-2.5 py-1 rounded-md">
+            <div className="flex items-center gap-2 bg-teal-950/80 border border-teal-500/40 px-2.5 py-1 rounded-md">
               <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-              <span className="font-mono text-[9px] text-teal-300 uppercase tracking-wider font-bold">Family FinTech</span>
+              <span className="font-mono text-[9px] text-teal-300 uppercase tracking-wider font-bold">Sakku 2.0 OS</span>
             </div>
-            <span className="font-mono text-[9px] text-gold-muted bg-gold-muted/20 px-2 py-0.5 rounded font-bold">
-              Envelope System
+            <span className="font-mono text-[9px] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded font-semibold">
+              Live & Deployed
             </span>
           </div>
 
           {/* Quick Entry & Wealth Preview */}
           <div className="relative z-10 grid grid-cols-2 gap-2 my-auto">
             <div className="bg-graphite-dark/90 border border-teal-500/30 p-2 rounded-lg text-center">
-              <div className="text-[8px] font-mono text-cream-dark/50 uppercase">Input Parser</div>
-              <div className="text-[10px] font-bold text-teal-300 font-mono mt-0.5">Catat Cepat AI</div>
+              <div className="text-[8px] font-mono text-cream-dark/50 uppercase">Zero-Knowledge</div>
+              <div className="text-[10px] font-bold text-teal-300 font-mono mt-0.5">Local-First PWA</div>
             </div>
             <div className="bg-graphite-dark/90 border border-gold-muted/30 p-2 rounded-lg text-center">
-              <div className="text-[8px] font-mono text-cream-dark/50 uppercase">Wealth Hub</div>
+              <div className="text-[8px] font-mono text-cream-dark/50 uppercase">Executive Wealth</div>
               <div className="text-[10px] font-bold text-gold-muted font-mono mt-0.5">Net Worth Sync</div>
             </div>
           </div>
 
           <div className="relative z-10 flex items-center justify-between text-[9px] font-mono text-cream-dark/60 pt-2 border-t border-graphite/40">
-            <span>Multi-Account Aggregator</span>
-            <span className="text-teal-400 font-bold">PWA Web App</span>
+            <span>Natural-Language Parser</span>
+            <span className="text-teal-400 font-bold">sakku-2-0.vercel.app</span>
           </div>
         </div>
       );

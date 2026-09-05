@@ -196,42 +196,48 @@ export const projects: Project[] = [
     outcome: "Streamlined ESG audit compilation time by 60% and established a 100% transparent digital data trail across all 23 industrial compliance parameters."
   },
   {
-    id: "rumah-ringkas",
-    name: "Rumah Ringkas — Keuangan Keluarga",
-    category: "FinTech & Household Wealth Ecosystem",
-    oneLiner: "All-in-one family financial management platform with envelope budgeting, natural language quick-entry, and wealth tracking.",
-    problem: "Household finances managed through chaotic WhatsApp group chats, manual notebook accounting, and zero visibility into total family net worth across multiple banks and e-wallets.",
-    challenge: "Multiple family members (Danu, Sari, Ibu Tuti) needed a frictionless way to record daily transactions instantly without complicated accounting forms.",
-    solution: "Built a mobile-first PWA featuring a 'Catat Cepat' natural language parser, visual envelope budget caps, multi-account Net Worth calculator, and granular family data privacy controls.",
+    id: "sakku",
+    name: "Sakku 2.0 — Privacy-First Wealth OS",
+    category: "FinTech & Wealth Operating System",
+    oneLiner: "Privacy-first personal & family financial operating system with zero-knowledge offline architecture, envelope budgeting, and real-time net worth tracking.",
+    problem: "Personal and family finances are typically tracked across fragmented bank apps, intrusive cloud services that monetize financial data, or messy spreadsheets with zero visibility into true household net worth.",
+    challenge: "Balancing strict 100% data sovereignty (zero cloud storage of banking credentials or personal transactions) with rich executive telemetry (Net Worth, Savings Rate %, Envelope Budgeting, and instant natural-language transaction parsing).",
+    solution: "Engineered Sakku 2.0: A high-performance Local-First PWA featuring natural-language 'Catat Cepat' parsing, visual envelope budgeting, dynamic multi-account net worth aggregation, and an upcoming zero-knowledge encrypted sync engine.",
     status: "Live & Deployed",
     statusBadge: "Live Project",
-    context: "Household wealth management platform linking multi-member financial records into a single family dashboard.",
-    techStack: ["React 19", "Tailwind CSS", "Recharts", "Lucide React", "LocalStorage Sync", "PWA Architecture"],
-    duration: "2.5 Months",
-    role: "Product Architect & Full-Stack Engineer",
+    context: "Privacy-first wealth operating system delivering executive financial telemetry with zero monthly subscriptions and 100% data sovereignty.",
+    techStack: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Recharts", "Lucide React", "LocalStorage / Local-First", "PWA"],
+    duration: "Active Production Product",
+    role: "Product Strategist, UI/UX Designer & Lead Full-Stack Architect",
     images: ["/screenshots/rumahringkas-app.jpg"],
-    longDescription: "Rumah Ringkas brings corporate-grade financial discipline to family budgets. Designed around the classic 'Envelope Budgeting' methodology, family members can quickly type natural-language notes (e.g. 'Makan siang 25rb pakai GoPay'), which the system automatically parses into category, amount, and account balances. The platform aggregates Cash, BCA, GoPay, Jago, Bareksa, and Debts into a live Net Worth indicator.",
+    liveUrl: "https://sakku-2-0.vercel.app/",
+    githubUrl: "https://github.com/ptahlulkaryautama-coder/sakku-2-0",
+    longDescription: "Sakku 2.0 is an evolution in personal and family financial management, built on the uncompromising foundation of 'Privacy-First, Zero-Latency, Zero-Subscription'. Unlike conventional FinTech applications that monetize user data or charge heavy recurring fees, Sakku 2.0 stores 100% of data locally on the user's device while providing executive-tier financial telemetry. Features include a natural language 'Catat Cepat' parser, envelope budget allocations, multi-account net worth tracking, and an offline-first PWA experience.",
     keyDeliverables: [
-      "Natural language 'Catat Cepat' transaction parser with automatic category & account mapping",
-      "Visual Envelope Budgeting Engine with dynamic weekly/monthly cap calculations",
-      "Multi-Account Net Worth Aggregator (Cash, Bank, E-Wallets, Investments, Utang & Piutang)",
-      "Interactive 6-Month Cashflow & Expense Breakdown analytics using Recharts"
+      "Natural-language 'Catat Cepat' transaction parser with automatic category & account mapping",
+      "Visual Envelope Budgeting Engine with dynamic weekly/monthly cap ratios",
+      "Multi-Account Net Worth Aggregator (Cash, BCA, GoPay, Jago, Bareksa Investments & Liabilities)",
+      "Executive Financial Telemetry (Net Worth, Savings Rate %, 6-Month Cash Flow & Expense Breakdown)",
+      "Zero-Knowledge Local-First architecture ensuring 100% data sovereignty and zero server leaks",
+      "PWA installability with instant offline load and responsive mobile-first UI"
     ],
     keyDecisions: [
-      "Built a custom Regex parser for Indonesian financial shorthand ('25rb', '12jt', 'Gaji masuk')",
-      "Implemented client-side reactive state sync across household member records.",
-      "Added CSV export and instant data-reset controls for family data sovereignty."
+      "Adopted a strict Local-First / Zero-Knowledge storage paradigm to eliminate third-party privacy risks.",
+      "Engineered a custom Indonesian regex tokenizer for conversational amounts ('25rb', '12jt', 'Gaji masuk BCA').",
+      "Modeled finances after the classic Envelope Budgeting methodology to curb impulse spending.",
+      "Provided one-click JSON backup/restore protocols to ensure users retain complete control over their financial history."
     ],
-    outcome: "Adopted for daily family financial orchestration, reducing monthly unbudgeted expenses by 22%."
+    outcome: "Successfully deployed at sakku-2-0.vercel.app, empowering users with institutional-grade financial visibility, zero tracking, and zero subscription costs."
   }
 ];
 
 export function getProjectById(id: string): Project | undefined {
+  if (id === "rumah-ringkas") return projects.find((p) => p.id === "sakku");
   return projects.find((p) => p.id === id);
 }
 
 export function getAllProjectIds(): string[] {
-  return projects.map((p) => p.id);
+  return [...projects.map((p) => p.id), "rumah-ringkas"];
 }
 
 

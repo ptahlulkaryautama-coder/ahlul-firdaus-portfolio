@@ -17,8 +17,8 @@ export default function ArchitectureDiagram({ projectId }: ArchitectureDiagramPr
       ? "oneecos"
       : projectId === "corum"
       ? "corum"
-      : projectId === "rumah-ringkas"
-      ? "rumah-ringkas"
+      : projectId === "sakku" || projectId === "rumah-ringkas"
+      ? "sakku"
       : projectId === "masjid-al-ikhlas"
       ? "masjid-al-ikhlas"
       : "ooi";

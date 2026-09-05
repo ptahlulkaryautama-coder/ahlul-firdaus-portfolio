@@ -25,7 +25,7 @@ import {
   HelpCircle
 } from "lucide-react";
 
-export type ProjectPreset = "ooi" | "cgv10" | "oneecos" | "corum" | "rumah-ringkas" | "masjid-al-ikhlas";
+export type ProjectPreset = "ooi" | "cgv10" | "oneecos" | "corum" | "sakku" | "rumah-ringkas" | "masjid-al-ikhlas";
 
 interface NodeData {
   id: string;
@@ -523,36 +523,36 @@ const presets: Record<ProjectPreset, PresetConfig> = {
       }
     ]
   },
-  "rumah-ringkas": {
-    title: "Rumah Ringkas Household Wealth Engine",
+  sakku: {
+    title: "Sakku 2.0 Privacy-First Wealth Architecture",
     subtitle: "Natural Language Quick Entry -> Envelope Budgeting -> Multi-Account Net Worth Sync",
-    badgeText: "Family FinTech",
-    badgeColor: "gold",
+    badgeText: "Local-First FinTech OS",
+    badgeColor: "teal",
     description:
-      "FinTech PWA linking family household members into a single real-time Net Worth calculator with natural language text parsing.",
+      "Zero-Knowledge FinTech PWA linking personal & family multi-account balances into a real-time Net Worth calculator with natural language text parsing.",
     nodes: [
       {
         id: "catat_cepat",
         name: "Catat Cepat Input",
-        subtitle: "Text / Voice Client",
+        subtitle: "Conversational Client",
         category: "Client",
-        icon: <Smartphone className="w-5 h-5 text-gold-muted" />,
+        icon: <Smartphone className="w-5 h-5 text-teal-400" />,
         status: "Active",
-        description: "Family members type informal text notes (e.g. 'Makan siang 25rb pakai GoPay').",
+        description: "Users type informal conversational notes (e.g. 'Makan siang 35rb pakai GoPay').",
         specs: [
           { label: "Input", value: "Natural Language String" },
-          { label: "User Roles", value: "Danu, Sari, Ibu Tuti" }
+          { label: "Storage", value: "Zero-Knowledge Local-First" }
         ],
         connections: ["nlp_parser"]
       },
       {
         id: "nlp_parser",
         name: "Indonesian Regex Parser",
-        subtitle: "Text Classifier",
+        subtitle: "Text & Amount Classifier",
         category: "Logic",
-        icon: <Cpu className="w-5 h-5 text-teal-400" />,
+        icon: <Cpu className="w-5 h-5 text-teal-300" />,
         status: "Idle",
-        description: "Extracts amounts ('25rb' -> 25000), maps categories, and resolves accounts.",
+        description: "Extracts amounts ('35rb' -> 35000), maps categories, and resolves payment channels.",
         specs: [
           { label: "Currency Match", value: "rb / jt / numerical" },
           { label: "Category Match", value: "Auto-keyword map" }
@@ -562,7 +562,7 @@ const presets: Record<ProjectPreset, PresetConfig> = {
       {
         id: "envelope_engine",
         name: "Envelope Budget Allocator",
-        subtitle: "Cap & Cap-Ratio State",
+        subtitle: "Cap & Spending Ratios",
         category: "Gateway",
         icon: <Layers className="w-5 h-5 text-purple-400" />,
         status: "Idle",
@@ -580,7 +580,7 @@ const presets: Record<ProjectPreset, PresetConfig> = {
         category: "Database",
         icon: <Database className="w-5 h-5 text-emerald-400" />,
         status: "Idle",
-        description: "Aggregates Cash, BCA, GoPay, Jago, Bareksa, and Utang/Piutang into live Net Worth.",
+        description: "Aggregates Cash, BCA, GoPay, Jago, Bareksa, and Liabilities into live Net Worth.",
         specs: [
           { label: "Accounts", value: "Cash, Bank, E-Wallet, Utang" },
           { label: "Calculation", value: "Realtime Net Worth" }
@@ -594,7 +594,7 @@ const presets: Record<ProjectPreset, PresetConfig> = {
         title: "1. Natural Language Input Received",
         activeNodes: ["catat_cepat", "nlp_parser"],
         activeConnections: [["catat_cepat", "nlp_parser"]],
-        logMessage: "INPUT_PARSER -> Received string: 'Makan siang 25rb pakai GoPay'",
+        logMessage: "INPUT_PARSER -> Received string: 'Makan siang 35rb pakai GoPay'",
         status: "INITIALIZING"
       },
       {
@@ -602,7 +602,7 @@ const presets: Record<ProjectPreset, PresetConfig> = {
         title: "2. Regex Classification Executed",
         activeNodes: ["nlp_parser", "envelope_engine"],
         activeConnections: [["nlp_parser", "envelope_engine"]],
-        logMessage: "NLP_EXTRACT -> Parsed: Amount: Rp 25.000 | Category: Makan & Jajan | Account: GoPay",
+        logMessage: "NLP_EXTRACT -> Parsed: Amount: Rp 35.000 | Category: Makan & Jajan | Account: GoPay",
         status: "PROCESSING"
       },
       {
@@ -610,7 +610,99 @@ const presets: Record<ProjectPreset, PresetConfig> = {
         title: "3. Envelope & Net Worth Synced",
         activeNodes: ["envelope_engine", "wealth_hub"],
         activeConnections: [["envelope_engine", "wealth_hub"]],
-        logMessage: "WEALTH_HUB -> Deducted Rp 25.000 from GoPay. Envelope 'Makan' updated (76%). Net Worth Synced.",
+        logMessage: "WEALTH_HUB -> Deducted Rp 35.000 from GoPay. Envelope updated. Net Worth Synced locally.",
+        status: "SUCCESS"
+      }
+    ]
+  },
+  "rumah-ringkas": {
+    title: "Sakku 2.0 Privacy-First Wealth Architecture",
+    subtitle: "Natural Language Quick Entry -> Envelope Budgeting -> Multi-Account Net Worth Sync",
+    badgeText: "Local-First FinTech OS",
+    badgeColor: "teal",
+    description:
+      "Zero-Knowledge FinTech PWA linking personal & family multi-account balances into a real-time Net Worth calculator with natural language text parsing.",
+    nodes: [
+      {
+        id: "catat_cepat",
+        name: "Catat Cepat Input",
+        subtitle: "Conversational Client",
+        category: "Client",
+        icon: <Smartphone className="w-5 h-5 text-teal-400" />,
+        status: "Active",
+        description: "Users type informal conversational notes (e.g. 'Makan siang 35rb pakai GoPay').",
+        specs: [
+          { label: "Input", value: "Natural Language String" },
+          { label: "Storage", value: "Zero-Knowledge Local-First" }
+        ],
+        connections: ["nlp_parser"]
+      },
+      {
+        id: "nlp_parser",
+        name: "Indonesian Regex Parser",
+        subtitle: "Text & Amount Classifier",
+        category: "Logic",
+        icon: <Cpu className="w-5 h-5 text-teal-300" />,
+        status: "Idle",
+        description: "Extracts amounts ('35rb' -> 35000), maps categories, and resolves payment channels.",
+        specs: [
+          { label: "Currency Match", value: "rb / jt / numerical" },
+          { label: "Category Match", value: "Auto-keyword map" }
+        ],
+        connections: ["envelope_engine"]
+      },
+      {
+        id: "envelope_engine",
+        name: "Envelope Budget Allocator",
+        subtitle: "Cap & Spending Ratios",
+        category: "Gateway",
+        icon: <Layers className="w-5 h-5 text-purple-400" />,
+        status: "Idle",
+        description: "Calculates weekly vs monthly budget limits and updates visual envelope percentages.",
+        specs: [
+          { label: "Method", value: "Envelope Budgeting" },
+          { label: "Alerts", value: "Threshold Warning (>90%)" }
+        ],
+        connections: ["wealth_hub"]
+      },
+      {
+        id: "wealth_hub",
+        name: "Wealth & Net Worth Hub",
+        subtitle: "Multi-Account Calculator",
+        category: "Database",
+        icon: <Database className="w-5 h-5 text-emerald-400" />,
+        status: "Idle",
+        description: "Aggregates Cash, BCA, GoPay, Jago, Bareksa, and Liabilities into live Net Worth.",
+        specs: [
+          { label: "Accounts", value: "Cash, Bank, E-Wallet, Utang" },
+          { label: "Calculation", value: "Realtime Net Worth" }
+        ],
+        connections: []
+      }
+    ],
+    simulationSteps: [
+      {
+        step: 1,
+        title: "1. Natural Language Input Received",
+        activeNodes: ["catat_cepat", "nlp_parser"],
+        activeConnections: [["catat_cepat", "nlp_parser"]],
+        logMessage: "INPUT_PARSER -> Received string: 'Makan siang 35rb pakai GoPay'",
+        status: "INITIALIZING"
+      },
+      {
+        step: 2,
+        title: "2. Regex Classification Executed",
+        activeNodes: ["nlp_parser", "envelope_engine"],
+        activeConnections: [["nlp_parser", "envelope_engine"]],
+        logMessage: "NLP_EXTRACT -> Parsed: Amount: Rp 35.000 | Category: Makan & Jajan | Account: GoPay",
+        status: "PROCESSING"
+      },
+      {
+        step: 3,
+        title: "3. Envelope & Net Worth Synced",
+        activeNodes: ["envelope_engine", "wealth_hub"],
+        activeConnections: [["envelope_engine", "wealth_hub"]],
+        logMessage: "WEALTH_HUB -> Deducted Rp 35.000 from GoPay. Envelope updated. Net Worth Synced locally.",
         status: "SUCCESS"
       }
     ]

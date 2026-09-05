@@ -10,7 +10,7 @@ import OoiDemo from "../../../components/work/OoiDemo";
 import OneEcosDemo from "../../../components/work/OneEcosDemo";
 import AlIkhlasDemo from "../../../components/work/AlIkhlasDemo";
 import CorumDemo from "../../../components/work/CorumDemo";
-import RumahRingkasDemo from "../../../components/work/RumahRingkasDemo";
+import SakkuDemo from "../../../components/work/SakkuDemo";
 import ArchitectureDiagram from "../../../components/work/ArchitectureDiagram";
 import {
   ArrowLeft,
@@ -307,18 +307,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </section>
         )}
 
-        {project.id === "rumah-ringkas" && (
+        {(project.id === "sakku" || project.id === "rumah-ringkas") && (
           <section className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-cream flex items-center gap-2">
-                <Terminal className="w-5 h-5 text-gold-muted" />
-                Interactive Household Wealth Engine (Catat Cepat &amp; Amplop Budget)
+                <Terminal className="w-5 h-5 text-teal-400" />
+                Interactive Wealth Engine (Catat Cepat &amp; Envelope Budgeting)
               </h2>
-              <span className="text-xs font-mono text-gold-muted glass-badge px-2.5 py-1 rounded-full font-bold">
+              <span className="text-xs font-mono text-teal-300 glass-badge px-2.5 py-1 rounded-full font-bold">
                 Live Interactive Component
               </span>
             </div>
-            <RumahRingkasDemo />
+            <SakkuDemo />
           </section>
         )}
 
