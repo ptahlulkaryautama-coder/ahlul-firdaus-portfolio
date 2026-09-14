@@ -22,71 +22,71 @@
 
 ---
 
-### 🚢 Project 1: OOI — Origin Of Indonesia (B2B Export System)
+### 🚢 Project 1: OOI — Origin Of Indonesia (B2B Export Catalog & Showcase)
 
-* **Topik Utama**: Platform Ekspor B2B & Sistem Escrow.
+* **Topik Utama**: Platform Katalog Ekspor Komoditas Indonesia & Alur Inquiry B2B (`ooindonesia.com`).
 * **Masalah yang Dipecahkan**: 
-  Produser lokal di Indonesia (seperti pembuat kopi, kelapa sawit, rempah) takut ditipu pembeli luar negeri jika barang dikirim duluan. Sebaliknya, pembeli luar negeri takut menyetor uang duluan karena takut barang tak dikirim.
+  Petani, produsen, dan eksportir lokal kesulitan menyajikan data teknis komoditas unggulan (kopi, kelapa, rempah, dll.) dalam format digital yang sesuai dengan standar pengadaan B2B buyer internasional.
 * **Solusi yang Kamu Buat**:
-  Sistem transaksi berbasis **Escrow (Rekening Bersama Digital)**:
-  1. Pembeli luar negeri menyetor uang ke rekening Escrow terunci.
-  2. Sistem memeriksa otomatis dokumen Bea Cukai (Bea Cukai API) & jadwal kapal.
-  3. Setelah kapal berangkat dan dokumen valid, uang Escrow dicairkan bertahap ke produser lokal (30% saat loading, 60% saat kapal berangkat, 10% setelah barang sampai).
+  1. **Katalog Komoditas B2B**: Disusun berdasarkan asal daerah (origin), standar mutu/grade, kemasan, dan kode HS.
+  2. **Alur Inquiry & Sample Request**: Buyer luar negeri bisa meminta sampel dan mengajukan RFQ (Request for Quotation) dengan spesifikasi yang jelas.
+  3. **Origin Storytelling**: Menyatukan narasi ketertelusuran produk dengan data teknis agar membangun kredibilitas dagang.
 
 * **Cara Menjelaskannya ke Klien**:
-  > *"OOI adalah platform ekspor B2B. Masalah terbesar ekspor adalah rasa saling percaya antara pembeli asing dan petani/pabrik lokal. Saya membangun sistem Escrow (rekening bersama) otomatis yang mengunci pembayaran dan mencairkan uangnya hanya ketika dokumen pelabuhan & kapal terverifikasi."*
+  > *"OOI adalah platform showcase ekspor B2B yang menghubungkan komoditas unggulan Indonesia langsung dengan buyer internasional melalui penyajian spesifikasi teknis, standar kemasan, dan alur permintaan sampel yang terstruktur."*
 
-* **Teknologi**: React, Node.js, GraphQL, PostgreSQL, Escrow Logic.
+* **Teknologi**: Next.js, TypeScript, Tailwind CSS, Netlify, GitHub.
 
 ---
 
-### 🏠 Project 2: CGV10 Portal Warga (Community System)
+### 🏠 Project 2: CGV10 Portal Warga (`portalwargacgv.id`)
 
-* **Topik Utama**: Aplikasi Manajemen Perumahan & Pos Satpam.
+* **Topik Utama**: Sistem Informasi Warga, Transparansi Keuangan, & Pasar Warga PALUGADA (RT 010 / RW 021).
 * **Masalah yang Dipecahkan**: 
-  Iuran warga 500+ rumah dicatat manual di buku/Excel yang rawan hilang. Pengumuman tertimbun di grup WhatsApp. Satpam di pintu gerbang mencatat tamu manual di buku yang lambat dan rawan penyusup.
+  Informasi perumahan sering tersebar berantakan di WhatsApp, pengumuman penting tertimbun, dan laporan kas RT sulit diakses warga.
 * **Solusi yang Kamu Buat**:
-  Aplikasi Perumahan Berbasis PWA (bisa di-install di HP tanpa PlayStore):
-  1. **Tagihan Otomatis**: Warga dapat notifikasi tagihan iuran tiap tanggal 1 dan bayar via QRIS/Transfer.
-  2. **QR Code Pintu Gerbang**: Warga bisa buat QR Pass sementara untuk tamunya. Satpam tinggal scan QR dari tablet di pos satpam (langsung terverifikasi dalam 6 detik).
-  3. **Tombol Darurat (Panic Button)**: Satu klik di HP warga mengirim sinyal bahaya langsung ke tablet satpam.
+  1. **Pusat Informasi Warga**: Pengumuman resmi RT, struktur pengurus dengan kontak WhatsApp langsung, dan kontak darurat.
+  2. **Laporan Kas RT Terbuka**: Ringkasan saldo bulanan, iuran masuk, dan pengeluaran secara transparan.
+  3. **PALUGADA (Pasar Warga)**: Wadah promosi UMKM warga (kuliner, jasa, produk) untuk menghidupkan ekonomi tetangga.
 
 * **Cara Menjelaskannya ke Klien**:
-  > *"CGV10 mengubah pengurusan perumahan dari buku manual ke sistem digital. Warga bayar iuran via QRIS, laporan keuangan bisa dipantau transparan oleh semua warga, dan satpam di gerbang menggunakan scanner QR Code untuk verifikasi tamu."*
+  > *"CGV10 adalah portal komunitas warga berbasis web mobile di portalwargacgv.id. Warga bisa mengecek pengumuman resmi RT, memantau kas RT secara transparan, dan mempromosikan usaha UMKM lokal di menu PALUGADA."*
 
-* **Teknologi**: Next.js, Supabase, TypeScript, Tailwind CSS, PWA.
+* **Teknologi**: Next.js, TypeScript, Tailwind CSS, Supabase, Vercel.
 
 ---
 
-### 🕌 Project 3: Masjid Al Ikhlas Digital Presence (Philanthropy Hub)
+### 🕌 Project 3: Masjid Al Ikhlas Digital Presence (`alikhlascgv.vercel.app`)
 
-* **Topik Utama**: Hub Keuangan Transparan & Jadwal Sholat Real-Time.
+* **Topik Utama**: Hub Informasi Publik, Jadwal Sholat Batam Real-Time, & Laporan Kas Infaq.
 * **Masalah yang Dipecahkan**: 
-  Kurangnya transparansi laporan infaq/sedekah masjid dan jamaah muda kurang terhubung dengan agenda kegiatan masjid.
+  Jadwal kajian, agenda masjid, dan transparansi infaq mingguan sebelumnya hanya mengandalkan papan pengumuman fisik atau pesan terusan.
 * **Solusi yang Kamu Buat**:
-  1. **Buku Kas Transparan**: Grafik mingguan yang menampilkan 100% uang masuk dan pengeluaran (perbaikan, santunan anak yatim, pendidikan).
-  2. **Jadwal Sholat Batam Real-Time**: Sync otomatis waktu sholat wilayah Batam dengan hitung mundur sholat berikutnya.
-  3. **Donasi Digital**: Scan QRIS langsung dengan bukti transfer digital.
+  1. **Jadwal Sholat Batam & Hitung Mundur**: Perhitungan waktu sholat wilayah Batam otomatis dengan hitung mundur sholat berikutnya.
+  2. **Laporan Kas Infaq Terbuka**: Publikasi ringkasan kas masuk & keluar mingguan demi akuntabilitas jamaah.
+  3. **Panduan Donasi Digital QRIS**: Memudahkan jamaah berinfaq secara non-tunai.
 
 * **Cara Menjelaskannya ke Klien**:
-  > *"Project ini berfokus pada transparansi dana publik. Jamaah bisa melihat laporan kas masjid secara terbuka tiap minggu dari HP mereka dan berdonasi secara contactless."*
+  > *"Project ini adalah hub digital Masjid Al Ikhlas di alikhlascgv.vercel.app. Jamaah bisa mengecek jadwal sholat Batam terkini beserta hitung mundur, jadwal kajian, laporan kas infaq terbuka, dan panduan infaq digital QRIS."*
 
-* **Teknologi**: HTML5, Tailwind CSS, SVG Design System, Netlify.
+* **Teknologi**: Next.js, HTML5, Tailwind CSS, JavaScript, Vercel.
 
 ---
 
-### 📊 Project 4: OneEcos (SaaS Operations Cockpit)
+### 📊 Project 4: OneEcos (Business Operating System)
 
-* **Topik Utama**: Dashboard Operasional Berkerapatan Tinggi (High-Density UI).
+* **Topik Utama**: Sistem Operasional Bisnis Terpadu & Alur Transaksi Order-to-Cash.
 * **Masalah yang Dipecahkan**: 
-  Pemilik bisnis e-commerce/SaaS pusing harus membuka 10 tab berbeda (Tokopedia, Shopee, Facebook Ads, Bank) hanya untuk melihat profit dan stok barang harian.
+  Bisnis terjebak dalam koordinasi manual: 12-14 fungsi kerja terpisah, 18+ oper-operan spreadsheet manual, dan data ganda yang memperlambat settlement.
 * **Solusi yang Kamu Buat**:
-  Dashboard "Cockpit" dalam 1 layar gelap (Dark Mode) tanpa perlu scroll panjang. Semua angka penting, chart tren, status stok, dan log transaksi langsung terlihat dalam 1 tampilan.
+  1. **Connected Order-to-Cash Engine**: Menghubungkan 8 fase transaksi (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment).
+  2. **Sales Order Single Source of Truth**: Menghilangkan duplikasi input data antar departemen.
+  3. **Executive Operational Cockpit**: Visibilitas real-time untuk Sales, Purchasing, QC, Logistik, dan Keuangan.
 
 * **Cara Menjelaskannya ke Klien**:
-  > *"OneEcos adalah dashboard khusus pebisnis. Seperti kokpit pesawat terbang, semua indikator keuangan, penjualan e-commerce, dan stok diringkas dalam satu layar berdesain gelap yang nyaman di mata."*
+  > *"OneEcos adalah Business Operating System. Filosofinya: 'People Execute. OneEcos Connects. Business Scales.' Sistem ini menyatukan seluruh alur dari penawaran harga sampai barang terkirim dan uang diterima dalam satu alur transaksi terhubung tanpa bolak-balik spreadsheet manual."*
 
-* **Teknologi**: React, Recharts, Framer Motion, Tailwind CSS.
+* **Teknologi**: React, TypeScript, Recharts, Framer Motion, Tailwind CSS.
 
 ---
 
@@ -94,33 +94,33 @@
 
 * **Topik Utama**: Platform Dashboard ESG & Laporan Keberlanjutan Industri (Pabrik Batam).
 * **Masalah yang Dipecahkan**: 
-  Pengumpulan data laporan ESG/Laporan Keberlanjutan tahunan (SRP2026) sangat terfragmentasi di 7 departemen berbeda (Finance, Facilities, EHS, HR, Procurement, QC, IT) yang menggunakan file Excel bertebaran dan rawan salah input.
+  Pengumpulan data laporan ESG tahunan (SRP2026) sangat terfragmentasi di 7 departemen berbeda (Finance, Facilities, EHS, HR, Procurement, QC, IT) yang rawan salah input.
 * **Solusi yang Kamu Buat**:
   1. **Dashboard Laporan ESG Terpusat**: Menggabungkan 23 parameter audit lingkungan (listrik kWh, air m³, bahan baku resin MT, solar forklift L, limbah B3/DOE, HR, & audit K3) dalam 1 layar visual.
-  2. **Protokol Sync JSON Offline-First**: Setiap Penanggung Jawab (PIC) Departemen bisa mengisi data di HP/Laptop tanpa internet, mengunduh file `.json`, dan menggabungkannya (merge) otomatis ke master laporan tanpa crash.
-  3. **Cetak Laporan Audit PDF**: Fitur cetak laporan siap audit langsung dari browser via tombol Export PDF.
+  2. **Protokol Sync JSON Offline-First**: Setiap PIC departemen bisa mengisi data di laptop tanpa internet, mengunduh file JSON, dan menggabungkannya otomatis tanpa server backend.
+  3. **Cetak Laporan Audit PDF**: Fitur cetak laporan siap audit langsung dari browser via CSS Print Engine.
 
 * **Cara Menjelaskannya ke Klien**:
-  > *"PT. Corum adalah sistem laporan keberlanjutan (ESG) pabrik industri. Sebelumnya tiap departemen membuat laporan manual di Excel yang membingungkan saat diaudit. Saya membangun dashboard terpusat berbasis web yang menggabungkan data 7 departemen, menyajikan grafik tren penggunaan energi & bahan baku secara real-time, dan bisa langsung dicetak ke PDF untuk audit resmi."*
+  > *"PT. Corum adalah sistem laporan keberlanjutan (ESG) pabrik industri. Saya membangun dashboard offline-first yang menggabungkan data 23 parameter dari 7 departemen via protokol JSON sync, dan bisa langsung dicetak ke PDF untuk keperluan audit resmi tanpa ketergantungan server luar."*
 
-* **Teknologi**: HTML5, JavaScript, Chart.js, Tailwind CSS, LocalStorage Sync Engine, CSS Print.
+* **Teknologi**: HTML5, JavaScript (ES6+), Chart.js, Tailwind CSS, LocalStorage Sync, CSS Print.
 
 ---
 
-### 🏡 Project 6: Rumah Ringkas — Keuangan Keluarga
+### 💰 Project 6: Sakku 2.0 — Privacy-First Wealth OS (`sakku.ahlulfirdaus.com`)
 
-* **Topik Utama**: Sistem Manajamen Keuangan Rumah Tangga & Budgeting Amplop Digital.
+* **Topik Utama**: Sistem Keuangan Pribadi & Keluarga Berbasis Local-First PWA (Zero-Knowledge Privacy).
 * **Masalah yang Dipecahkan**: 
-  Keuangan keluarga berantakan karena pencatatan manual di grup WhatsApp, tidak tahu berapa total kekayaan bersih (Net Worth) karena uang tersebar di banyak bank/e-wallet (BCA, GoPay, Jago, Bareksa), dan jatan belanja bulanan sering kebobolan.
+  Aplikasi keuangan pada umumnya memonetisasi data perbankan pengguna ke server cloud, meminta langganan bulanan mahal, atau proses inputnya terlalu rumit.
 * **Solusi yang Kamu Buat**:
-  1. **"Catat Cepat" AI Input**: Cukup ketik kalimat sehari-hari (misal: *"Makan siang 25rb pakai GoPay"*, *"Gaji masuk 12jt"*), sistem otomatis mendeteksi nominal, kategori, dan akunnya.
-  2. **Sistem Amplop Budgeting**: Menetapkan jatan bulanan/mingguan per kategori (Makan, Transport, Listrik, Anak) dengan indikator visual amplop yang terisi otomatis.
-  3. **Wealth Hub & Net Worth Calculator**: Menghitung kekayaan bersih keluarga secara real-time (Aset Tunai + Bank + E-Wallet + Investasi dikurangi Utang & Cicilan).
+  1. **"Catat Cepat" Natural Language Parser**: Cukup ketik kalimat sehari-hari (misal: *"Makan siang 25rb pakai GoPay"*, *"Gaji masuk 12jt"*), sistem otomatis mendeteksi nominal, kategori, dan akunnya.
+  2. **Budgeting Metode Amplop (Envelopes)**: Menetapkan alokasi belanja per pos kebutuhan dengan meteran visual.
+  3. **Multi-Account Net Worth Tracking**: Menghitung kekayaan bersih (BCA, GoPay, Jago, Tunai, Investasi) secara real-time dengan 100% data tersimpan di HP/perangkat pengguna.
 
 * **Cara Menjelaskannya ke Klien**:
-  > *"Rumah Ringkas adalah aplikasi PWA keuangan keluarga. Anggota keluarga bisa mencatat transaksi hanya dengan mengetik kalimat biasa seperti di WhatsApp. Aplikasi ini menerapkan metode Amplop untuk mengunci budget belanja, dan secara otomatis menghitung Total Kekayaan Bersih (Net Worth) keluarga dari berbagai akun bank dan e-wallet dalam satu tampilan."*
+  > *"Sakku 2.0 adalah Privacy-First Wealth OS di sakku.ahlulfirdaus.com. Aplikasi ini berjalan sebagai Local-First PWA tanpa menyimpan data transaksi ke server cloud (100% Zero-Knowledge). Pengguna bisa mencatat pengeluaran semudah mengetik chat, mengelola budget amplop, dan memantau Net Worth tanpa biaya langganan."*
 
-* **Teknologi**: React 19, Recharts, Tailwind CSS, Lucide React, LocalStorage Sync, PWA.
+* **Teknologi**: Next.js, React 19, TypeScript, Tailwind CSS, Recharts, LocalStorage / PWA.
 
 ---
 

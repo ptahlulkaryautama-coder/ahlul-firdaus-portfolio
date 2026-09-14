@@ -7,20 +7,23 @@ export default function AccentSwitcher() {
   const [currentTheme, setCurrentTheme] = useState<"gold" | "emerald" | "blue">("gold");
 
   useEffect(() => {
-    const saved = localStorage.getItem("af-portfolio-theme") as "gold" | "emerald" | "blue" | null;
-    if (saved) {
-      setCurrentTheme(saved);
-      if (saved === "gold") {
-        document.documentElement.removeAttribute("data-theme");
-      } else {
-        document.documentElement.setAttribute("data-theme", saved);
+    try {
+      const saved = localStorage.getItem("af-portfolio-theme") as "gold" | "emerald" | "blue" | null;
+      if (saved && (saved === "emerald" || saved === "blue")) {
+        setCurrentTheme(saved);
       }
+    } catch {
+      // LocalStorage unavailable
     }
   }, []);
 
   const setTheme = (theme: "gold" | "emerald" | "blue") => {
     setCurrentTheme(theme);
-    localStorage.setItem("af-portfolio-theme", theme);
+    try {
+      localStorage.setItem("af-portfolio-theme", theme);
+    } catch {
+      // LocalStorage unavailable
+    }
     if (theme === "gold") {
       document.documentElement.removeAttribute("data-theme");
     } else {

@@ -152,7 +152,7 @@ export default function AlIkhlasDemo() {
         </div>
 
         <a
-          href="https://bespoke-sundae-408c0c.netlify.app/"
+          href="https://alikhlascgv.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#C9A55A] text-[#0C1810] font-sans text-xs font-bold hover:bg-[#F3EFE6] transition-colors"

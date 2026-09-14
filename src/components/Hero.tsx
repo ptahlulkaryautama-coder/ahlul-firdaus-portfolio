@@ -38,7 +38,7 @@ export default function Hero() {
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge text-gold-muted font-mono text-[10px] uppercase tracking-wider mb-6 shadow-sm"
@@ -49,7 +49,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mb-4"
@@ -63,7 +63,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-sans font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter leading-[1.05] mb-6"
@@ -73,7 +73,7 @@ export default function Hero() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-base md:text-lg text-cream-dark/85 leading-relaxed font-sans max-w-xl mb-8"
@@ -82,7 +82,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto"
@@ -112,7 +112,7 @@ export default function Hero() {
 
           {/* Quick Stats Bar */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="grid grid-cols-3 gap-6 pt-10 mt-10 border-t border-graphite/40 w-full max-w-lg"
@@ -135,7 +135,7 @@ export default function Hero() {
 
         {/* Right Side: Clean, grounded visual overview with interactive glass card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={false}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.3 }}
           className="lg:col-span-5 w-full flex justify-center"

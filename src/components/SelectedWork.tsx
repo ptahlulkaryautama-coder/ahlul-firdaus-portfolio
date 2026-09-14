@@ -156,10 +156,10 @@ export default function SelectedWork() {
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                transition={{ duration: 0.4 }}
                 onClick={() => setActiveProject(project)}
                 className="group glass-card rounded-2xl p-7 flex flex-col justify-between cursor-pointer transition-all duration-300 relative overflow-hidden focus-visible:outline-2 focus-visible:outline-gold-muted"
                 tabIndex={0}

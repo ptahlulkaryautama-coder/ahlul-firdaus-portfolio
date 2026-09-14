@@ -27,14 +27,14 @@ function ClockTicker({ isShort = false }: { isShort?: boolean }) {
   }, []);
 
   if (!time) {
-    return <span>BTH: --:--:--</span>;
+    return <span className="tabular-nums inline-block min-w-[70px]">BTH: --:--:--</span>;
   }
 
   if (isShort) {
-    return <span>BTH: {time.split(":").slice(0, 2).join(":")}</span>;
+    return <span className="tabular-nums inline-block min-w-[48px]">BTH: {time.split(":").slice(0, 2).join(":")}</span>;
   }
 
-  return <span>BTH: {time}</span>;
+  return <span className="tabular-nums inline-block min-w-[70px]">BTH: {time}</span>;
 }
 
 export default function Header() {
@@ -114,7 +114,7 @@ export default function Header() {
 
         {/* Timezone Heartbeat & CTA */}
         <div className="hidden md:flex items-center gap-5">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-badge">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-badge shrink-0 whitespace-nowrap">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -125,7 +125,7 @@ export default function Header() {
           </div>
           <button
             onClick={handleOpenCommandPalette}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-graphite/60 text-cream-dark/70 hover:text-cream hover:border-gold-muted/40 transition-colors font-mono text-[10px]"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-graphite/60 text-cream-dark/70 hover:text-cream hover:border-gold-muted/40 transition-colors font-mono text-[10px] shrink-0"
             title="Open Command Palette (Cmd + K)"
           >
             <Search className="w-3.5 h-3.5 text-gold-muted" />
@@ -135,7 +135,7 @@ export default function Header() {
           <AccentSwitcher />
           <a
             href="#contact"
-            className="shimmer-button px-5 py-2.5 bg-cream text-deep-black font-sans text-xs tracking-wider rounded-lg hover:bg-gold-muted hover:shadow-lg transition-all duration-300 font-bold focus-visible:ring-2 focus-visible:ring-gold-muted flex items-center gap-2"
+            className="shimmer-button px-5 py-2.5 bg-cream text-deep-black font-sans text-xs tracking-wider rounded-lg hover:bg-gold-muted hover:shadow-lg transition-all duration-300 font-bold focus-visible:ring-2 focus-visible:ring-gold-muted flex items-center gap-2 shrink-0"
           >
             <span>Inquire Project</span>
           </a>
@@ -143,7 +143,7 @@ export default function Header() {
 
         {/* Mobile Menu Toggle */}
         <div className="flex lg:hidden items-center gap-3">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full glass-badge">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full glass-badge shrink-0 whitespace-nowrap">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             <span className="font-mono text-[9px] text-cream-dark/80">
               <ClockTicker isShort />

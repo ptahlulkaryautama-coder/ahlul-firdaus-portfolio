@@ -739,7 +739,7 @@ const presets: Record<ProjectPreset, PresetConfig> = {
         status: "Idle",
         description: "Centralized responsive website serving structured community content.",
         specs: [
-          { label: "Platform", value: "Netlify Static Engine" },
+          { label: "Platform", value: "Vercel Edge Platform" },
           { label: "Design", value: "SVG & Dark Emerald Theme" },
           { label: "CDN", value: "Global Edge Network" }
         ],

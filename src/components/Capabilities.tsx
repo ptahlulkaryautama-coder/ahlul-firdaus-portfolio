@@ -101,9 +101,9 @@ export default function Capabilities() {
           {capabilities.map((cap, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 group focus-visible:outline-2 focus-visible:outline-gold-muted relative overflow-hidden"
               tabIndex={0}

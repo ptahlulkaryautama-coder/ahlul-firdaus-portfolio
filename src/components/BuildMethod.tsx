@@ -81,9 +81,9 @@ export default function BuildMethod() {
           {steps.map((step, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="group glass-card rounded-2xl p-7 transition-all duration-300 relative overflow-hidden focus-visible:outline-2 focus-visible:outline-gold-muted"
               tabIndex={0}

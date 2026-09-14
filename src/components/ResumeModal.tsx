@@ -84,32 +84,35 @@ CORE COMPETENCIES
 ==================================================
 KEY ARCHITECTED SYSTEMS & PROJECTS
 ==================================================
-1. OOI — Origin Of Indonesia (B2B Export System & Automated Escrow Engine)
-   • Built B2B escrow platform bridging international trade buyers and Indonesian producers.
-   • Integrated automated customs documentation verification & milestone disbursement logic.
-   • Tech Stack: React, Node.js, GraphQL, PostgreSQL, Escrow Logic.
+1. OOI — Origin Of Indonesia (B2B Export Platform & Commodity Catalog)
+   • Built B2B export showcase platform presenting Indonesian origin commodities to global buyers.
+   • Standardized technical specifications, origin traceability, packaging standards, and sample-request funnels.
+   • Tech Stack: Next.js, TypeScript, Tailwind CSS, Netlify, GitHub.
 
-2. CGV10 Resident & Gate Control Portal (Community Management PWA)
-   • Replaced manual ledger systems for 500+ household community with instant QRIS payment & digital ledger.
-   • Built tablet-based gate security scanner with 6-second QR guest verification & panic alert dispatch.
-   • Tech Stack: Next.js, Supabase, TypeScript, Tailwind CSS, PWA.
+2. CGV10 Portal Warga (Digital Community Ecosystem — portalwargacgv.id)
+   • Centralized community information hub for 500+ residents of RT 010 / RW 021.
+   • Implemented official announcements, pengurus directory, transparent Kas RT reporting, and PALUGADA resident marketplace.
+   • Tech Stack: Next.js, Supabase, TypeScript, Tailwind CSS, Vercel.
 
-3. Masjid Al-Ikhlas Digital Presence (Transparent Financial Ledger Hub)
-   • Created transparent public ledger displaying weekly cash inflows/outflows for community trust.
-   • Integrated real-time Batam prayer schedule sync with live countdown & contactless QRIS donations.
-   • Tech Stack: HTML5, Tailwind CSS, SVG Design System, Netlify.
+3. Masjid Al-Ikhlas Digital Presence (alikhlascgv.vercel.app)
+   • Centralized digital hub providing Batam prayer timetables with live countdown clock.
+   • Integrated transparent weekly Infaq/Sedekah financial reports and digital QRIS donation channels.
+   • Tech Stack: Next.js, HTML5, Tailwind CSS, JavaScript, Vercel.
 
-4. OneEcos (High-Density SaaS Operations Cockpit)
-   • Designed zero-scroll dark-mode operational dashboard aggregating metrics across sales & inventory.
-   • Tech Stack: React, Recharts, Framer Motion, Tailwind CSS.
+4. OneEcos Business Operating System (Order-to-Cash Engine)
+   • Unified end-to-end commercial transaction flow (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment).
+   • Single-source-of-truth architecture reducing manual handoffs and eliminating redundant data entry.
+   • Tech Stack: React, TypeScript, Recharts, Framer Motion, Tailwind CSS.
 
-5. Laptop Marketplace System (40-Point Valuation Engine)
-   • Engineered 40-point hardware wizard algorithm evaluating used laptop conditions & fair-market grading.
-   • Tech Stack: Next.js, Prisma, PostgreSQL, AWS S3.
+5. PT. Corum — Industrial Sustainability Reporting System (SRP2026)
+   • Consolidated 23 environmental, operational, and social parameters across 7 factory departments.
+   • Engineered client-side JSON data interchange with print-ready audit PDF export engine.
+   • Tech Stack: HTML5, JavaScript (ES6+), Chart.js, Tailwind CSS, CSS Print Engine.
 
-6. DONATHORIQ Brand Concept (Sub-second Headless Storefront)
-   • Built sub-second headless Shopify storefront (<0.8s LCP load time) and digital design system.
-   • Tech Stack: Next.js, Shopify Storefront API, Tailwind CSS.
+6. Sakku 2.0 — Privacy-First Wealth OS (sakku.ahlulfirdaus.com)
+   • Local-First PWA financial operating system with zero-knowledge device storage (100% data sovereignty).
+   • Features conversational Indonesian 'Catat Cepat' parser, envelope budgeting, and multi-wallet Net Worth telemetry.
+   • Tech Stack: Next.js, React 19, TypeScript, Tailwind CSS, Recharts, LocalStorage, PWA.
 
 ==================================================
 ENGAGEMENT MODELS
@@ -365,45 +368,45 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                   {[
                     {
                       name: "OOI — Origin Of Indonesia",
-                      tag: "B2B Export System & Escrow Engine",
-                      desc: "Platform bridging international buyers with Indonesian exporters via milestone-based automated escrow disbursements linked to Customs API verification.",
-                      stack: ["React", "Node.js", "GraphQL", "PostgreSQL", "Escrow Engine"],
-                      badge: "Escrow Core"
+                      tag: "B2B Export Platform & Commodity Catalog",
+                      desc: "Founder-led B2B showcase platform presenting premium Indonesian origin commodities to global importers with standardized technical specs and sample-request workflows.",
+                      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Netlify", "GitHub"],
+                      badge: "B2B Export"
                     },
                     {
-                      name: "CGV10 Community Portal",
-                      tag: "Resident & Gate Security PWA",
-                      desc: "Digitized housing management for 500+ households with automated QRIS dues billing, 6-second gate scanner tablet integration, and panic signal dispatches.",
-                      stack: ["Next.js 16", "Supabase", "TypeScript", "Tailwind CSS", "PWA"],
-                      badge: "500+ Households"
+                      name: "CGV10 Portal Warga",
+                      tag: "Digital Community System — portalwargacgv.id",
+                      desc: "Centralized community hub for 500+ residents of RT 010 / RW 021 with official notices, pengurus directory, transparent Kas RT balance, and PALUGADA resident marketplace.",
+                      stack: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS", "Vercel"],
+                      badge: "Live Project"
                     },
                     {
                       name: "Masjid Al-Ikhlas Digital Presence",
-                      tag: "Transparent Financial Ledger Hub",
-                      desc: "Public-facing transparent cash flow dashboard showing 100% weekly inflows/outflows, combined with real-time Batam prayer schedule sync and contactless donations.",
-                      stack: ["HTML5", "Tailwind CSS", "SVG Design System", "Netlify"],
-                      badge: "100% Transparent"
+                      tag: "Public Info & Transparency Hub — alikhlascgv.vercel.app",
+                      desc: "Mosque portal featuring real-time Batam prayer schedule sync, live prayer countdown clock, weekly transparent Infaq financial reporting, and QRIS donation guide.",
+                      stack: ["Next.js", "HTML5", "Tailwind CSS", "JavaScript", "Vercel"],
+                      badge: "Live Project"
                     },
                     {
-                      name: "OneEcos SaaS Cockpit",
-                      tag: "High-Density Operations Dashboard",
-                      desc: "Zero-scroll dark-mode operational dashboard aggregating multi-channel sales metrics, live inventory levels, and transaction ledgers in a single glance.",
-                      stack: ["React", "Recharts", "Framer Motion", "Tailwind CSS"],
-                      badge: "High-Density UI"
+                      name: "OneEcos Business Operating System",
+                      tag: "Unified Order-to-Cash Transaction Engine",
+                      desc: "Business operating system eliminating manual coordination across 8 transaction phases (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment).",
+                      stack: ["React", "TypeScript", "Recharts", "Framer Motion", "Tailwind CSS"],
+                      badge: "A Fundamental Stage"
                     },
                     {
-                      name: "Laptop Marketplace System",
-                      tag: "40-Point Hardware Valuation Engine",
-                      desc: "Automated hardware diagnostic wizard that evaluates laptop condition across 40 physical/system parameters to compute fair market trade grading.",
-                      stack: ["Next.js", "Prisma", "PostgreSQL", "AWS S3"],
-                      badge: "Algorithmic Pricing"
+                      name: "PT. Corum — Sustainability Reporting System",
+                      tag: "Industrial ESG & Plant Compliance Dashboard",
+                      desc: "Consolidated 23 critical environmental and operational parameters across 7 factory departments with offline-first client-side JSON interchange and PDF audit generation.",
+                      stack: ["HTML5", "JavaScript (ES6+)", "Chart.js", "Tailwind CSS", "CSS Print"],
+                      badge: "Live Project"
                     },
                     {
-                      name: "DONATHORIQ Brand Storefront",
-                      tag: "Sub-Second Headless Storefront",
-                      desc: "Custom headless Shopify e-commerce platform delivering sub-0.8s page loads and unified brand design system.",
-                      stack: ["Next.js", "Shopify API", "Tailwind CSS"],
-                      badge: "Sub-0.8s Load"
+                      name: "Sakku 2.0 — Privacy-First Wealth OS",
+                      tag: "Local-First PWA — sakku.ahlulfirdaus.com",
+                      desc: "Zero-knowledge personal & family financial operating system featuring natural-language 'Catat Cepat' parsing, envelope budgeting, and multi-account Net Worth tracking.",
+                      stack: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Recharts", "PWA"],
+                      badge: "Live Project"
                     }
                   ].map((proj, idx) => (
                     <div

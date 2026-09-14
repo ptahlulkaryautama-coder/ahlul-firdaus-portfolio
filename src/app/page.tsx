@@ -13,12 +13,9 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import FAQSection from "../components/FAQSection";
 
-const ArchitectureVisualizer = dynamic(
-  () => import("../components/ArchitectureVisualizer")
-);
-
-const Testimonials = dynamic(() => import("../components/Testimonials"));
-const WritingsPreview = dynamic(() => import("../components/WritingsPreview"));
+import ArchitectureVisualizer from "../components/ArchitectureVisualizer";
+import Testimonials from "../components/Testimonials";
+import WritingsPreview from "../components/WritingsPreview";
 
 export default function Home() {
   return (

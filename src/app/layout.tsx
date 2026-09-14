@@ -9,7 +9,6 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
-  preload: false,
   fallback: ["system-ui", "-apple-system", "sans-serif"],
 });
 
@@ -17,7 +16,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
-  preload: false,
   fallback: ["ui-monospace", "Courier New", "monospace"],
 });
 
@@ -25,7 +23,6 @@ const playfairDisplay = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
-  preload: false,
   fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
@@ -105,7 +102,10 @@ const personJsonLd = {
   url: "https://ahlulfirdaus.com",
   sameAs: [
     "https://github.com/ahlul-firdaus",
-    "https://bespoke-sundae-408c0c.netlify.app/",
+    "https://portalwargacgv.id",
+    "https://sakku.ahlulfirdaus.com/",
+    "https://alikhlascgv.vercel.app/",
+    "https://ooindonesia.com",
   ],
   knowsAbout: [
     "Next.js",
@@ -189,12 +189,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} antialiased dark`}
       style={{ colorScheme: "dark" }}
     >
       <head>
         <meta name="theme-color" content="#0C1810" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("af-portfolio-theme");if(t&&t!=="gold"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}try{if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(function(r){for(var i=0;i<r.length;i++){r[i].unregister();}});}}catch(e){}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
@@ -208,7 +214,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-deep-black text-cream selection:bg-gold-muted selection:text-deep-black font-sans relative">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-deep-black text-cream selection:bg-gold-muted selection:text-deep-black font-sans relative"
+      >
         <CursorGlow />
         <CommandPalette />
         {children}

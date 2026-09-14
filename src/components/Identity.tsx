@@ -33,9 +33,9 @@ export default function Identity() {
             {/* Statement */}
             <div className="md:col-span-9 space-y-6">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
                 className="relative"
               >
@@ -45,9 +45,9 @@ export default function Identity() {
               </motion.div>
 
               <motion.p
-                initial={{ opacity: 0, y: 15 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-cream-dark/85 text-base md:text-lg leading-relaxed max-w-2xl font-sans"
               >
@@ -56,7 +56,7 @@ export default function Identity() {
 
               {/* Micro grid data indicators */}
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}

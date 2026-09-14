@@ -51,9 +51,9 @@ export default function Story() {
             {/* Biography Content */}
             <div className="md:col-span-8 space-y-8">
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
                 className="space-y-6 text-cream-dark/85 text-base md:text-lg leading-relaxed font-sans"
               >
@@ -76,7 +76,7 @@ export default function Story() {
 
               {/* Quote block */}
               <motion.div
-                initial={{ opacity: 0, x: -10 }}
+                initial={false}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
