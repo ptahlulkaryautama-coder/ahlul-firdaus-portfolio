@@ -60,100 +60,85 @@ interface PresetConfig {
 
 const presets: Record<ProjectPreset, PresetConfig> = {
   ooi: {
-    title: "OOI Proposed Export Escrow Concept",
-    subtitle: "Proposed B2B Milestone Escrow & Trade Logistics State Machine",
-    badgeText: "Future-State Concept",
-    badgeColor: "emerald",
+    title: "OOI Product & Fulfillment Architecture",
+    subtitle: "Curated Brands, Unified Catalog, Batam Consolidation Hub & Global Delivery",
+    badgeText: "Product & Operational Model",
+    badgeColor: "amber",
     description:
-      "Future-State Architecture Concept: Interactive visual representing a proposed future transaction workflow. Not connected to live customs, shipping, banking, escrow, or government systems.",
+      "Product & Operational Architecture: Model illustrating how verified regional Indonesian brands are curated into a unified catalog, routed through retail or B2B inquiry journeys, consolidated at Batam FTZ, and fulfilled for global buyers.",
     nodes: [
       {
-        id: "buyer",
-        name: "Global Bulk Buyer",
-        subtitle: "Client Terminal",
-        category: "Client",
-        icon: <Globe className="w-5 h-5 text-emerald-400" />,
-        status: "Active",
-        description: "Overseas commodity buyer placing bulk RFQ and funding the Escrow vault.",
+        id: "brands",
+        name: "Verified Indonesian Brands",
+        subtitle: "Curated Producers",
+        category: "External",
+        icon: <Building2 className="w-5 h-5 text-amber-400" />,
+        status: "Verified",
+        description: "Curated regional food producers with origin verification and applicable compliance (BPOM, Halal, HACCP).",
         specs: [
-          { label: "Protocol", value: "HTTPS / TLS 1.3" },
-          { label: "Currency", value: "USD / EUR Escrow" },
-          { label: "Auth", value: "2FA Verified" }
+          { label: "Categories", value: "Snacks, Coffee, Spices, Cashews" },
+          { label: "Origin", value: "Java, Bali, Sumatra, Sulawesi" },
+          { label: "Standards", value: "Export Ready" }
         ],
-        connections: ["gateway"]
+        connections: ["catalog"]
       },
       {
-        id: "gateway",
-        name: "API Gateway",
-        subtitle: "Next.js Edge Route",
+        id: "catalog",
+        name: "OOI Curated Catalog",
+        subtitle: "Unified Discovery Hub",
         category: "Gateway",
-        icon: <Server className="w-5 h-5 text-teal-400" />,
-        status: "Idle",
-        description: "Validates trade payloads, authenticates state requests, and routes escrow triggers.",
+        icon: <Layers className="w-5 h-5 text-teal-400" />,
+        status: "Active",
+        description: "Unified discovery experience featuring product cards, origin details, certifications, and gift collections.",
         specs: [
-          { label: "Runtime", value: "Next.js 16 Edge" },
-          { label: "Rate Limit", value: "1,000 req/min" },
-          { label: "Validation", value: "Zod Schema" }
+          { label: "Platform", value: "Next.js & Responsive UI" },
+          { label: "Discovery", value: "Origin & Attribute Filtering" },
+          { label: "Collections", value: "Gift Kits & Single-Origin" }
         ],
-        connections: ["escrow", "customs"]
+        connections: ["order_inquiry"]
       },
       {
-        id: "escrow",
-        name: "Escrow Vault",
-        subtitle: "Smart State Lock",
+        id: "order_inquiry",
+        name: "Retail Order or B2B Inquiry",
+        subtitle: "Conversion Pathways",
         category: "Logic",
-        icon: <Lock className="w-5 h-5 text-gold-muted" />,
+        icon: <Zap className="w-5 h-5 text-purple-400" />,
         status: "Idle",
-        description: "Holds funds in multi-signature vault. Triggers 30% / 60% / 10% milestone payouts.",
+        description: "Separate conversion journeys based on buyer type, order volume, sample requirements, and commercial terms.",
         specs: [
-          { label: "Security", value: "Multi-Sig Lock" },
-          { label: "Milestones", value: "Loading / Transit / Arrival" },
-          { label: "Audit", value: "Immutable Log" }
+          { label: "Retail", value: "Direct Cart & Checkout" },
+          { label: "B2B", value: "Wholesale & Sample Inquiry" },
+          { label: "Routing", value: "Buyer-Type Classification" }
         ],
-        connections: ["payout"]
+        connections: ["batam_hub"]
       },
       {
-        id: "customs",
-        name: "Bea Cukai API",
-        subtitle: "Government Sync",
-        category: "External",
-        icon: <FileCheck className="w-5 h-5 text-purple-400" />,
-        status: "Idle",
-        description: "Verifies export clearance documents, PEB checksums, and container manifests.",
-        specs: [
-          { label: "Endpoint", value: "Bea Cukai Ingest" },
-          { label: "Latency", value: "140ms" },
-          { label: "Verification", value: "Digital Signature" }
-        ],
-        connections: ["vessel"]
-      },
-      {
-        id: "vessel",
-        name: "AIS Vessel Track",
-        subtitle: "Satellite GPS Sync",
-        category: "External",
-        icon: <Ship className="w-5 h-5 text-cyan-400" />,
-        status: "Idle",
-        description: "Tracks container vessel departure from Batam port to confirm Bill of Lading departure.",
-        specs: [
-          { label: "Telemetry", value: "AIS Satellite" },
-          { label: "Refresh", value: "Every 15 mins" },
-          { label: "Event Trigger", value: "Departure Signal" }
-        ],
-        connections: ["escrow"]
-      },
-      {
-        id: "payout",
-        name: "Supplier Payout",
-        subtitle: "Local Bank Settlement",
+        id: "batam_hub",
+        name: "Batam Consolidation Hub",
+        subtitle: "Strategic FTZ Fulfillment",
         category: "Database",
-        icon: <Building2 className="w-5 h-5 text-emerald-300" />,
+        icon: <ShieldCheck className="w-5 h-5 text-emerald-400" />,
         status: "Idle",
-        description: "Automated disbursement directly to Indonesian producer local bank accounts.",
+        description: "Proposed coordination point for multi-supplier preparation, export packing, and single-shipment consolidation.",
         specs: [
-          { label: "Settlement", value: "Real-time RTGS" },
-          { label: "Fee", value: "0.0%" },
-          { label: "Status", value: "Automated Release" }
+          { label: "Location", value: "Batam Free Trade Zone" },
+          { label: "Savings", value: "Up to 40% Shipping Reduction" },
+          { label: "Model", value: "Multi-Supplier Single Box" }
+        ],
+        connections: ["buyer_partner"]
+      },
+      {
+        id: "buyer_partner",
+        name: "International Buyer / Partner",
+        subtitle: "Global Fulfillment",
+        category: "Client",
+        icon: <Globe className="w-5 h-5 text-cyan-400" />,
+        status: "Active",
+        description: "Consumers, specialty retailers, food importers, distributors, and global sourcing partners.",
+        specs: [
+          { label: "Markets", value: "USA, UK, Europe, Australia, SG" },
+          { label: "Lead Time", value: "7–14 Business Days" },
+          { label: "Fulfillment", value: "Consolidated Door-to-Door" }
         ],
         connections: []
       }
@@ -161,117 +146,118 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     simulationSteps: [
       {
         step: 1,
-        title: "1. Escrow Lock Initiated",
-        activeNodes: ["buyer", "gateway", "escrow"],
-        activeConnections: [["buyer", "gateway"], ["gateway", "escrow"]],
-        logMessage: "BUYER_PAYMENT_DEPOSITED -> Vault Locked $150,000 USD (Ref #ESC-8921)",
+        title: "1. Brand Onboarding & Curation",
+        activeNodes: ["brands", "catalog"],
+        activeConnections: [["brands", "catalog"]],
+        logMessage: "BRAND_INGEST -> Verified YAVA, Arva, Otten Coffee & Bamboe. Compliance specs and origin mapped to catalog.",
         status: "INITIALIZING"
       },
       {
         step: 2,
-        title: "2. Customs Document Audit",
-        activeNodes: ["gateway", "customs"],
-        activeConnections: [["gateway", "customs"]],
-        logMessage: "BEA_CUKAI_SYNC -> PEB #7721-EXP Verified. Export Permit Validated (30% Unlocked)",
+        title: "2. Catalog Discovery & Cart Routing",
+        activeNodes: ["catalog", "order_inquiry"],
+        activeConnections: [["catalog", "order_inquiry"]],
+        logMessage: "BUYER_JOURNEY -> Discovery across Snacks & Coffee. Selection routed to B2B Sample & Wholesale Channel.",
         status: "PROCESSING"
       },
       {
         step: 3,
-        title: "3. Vessel Departure Verified",
-        activeNodes: ["customs", "vessel", "escrow"],
-        activeConnections: [["customs", "vessel"], ["vessel", "escrow"]],
-        logMessage: "AIS_GPS_PING -> Vessel 'MV Nusantara' departed Port of Batam. Bill of Lading Validated (60% Unlocked)",
+        title: "3. Batam FTZ Multi-Supplier Consolidation",
+        activeNodes: ["order_inquiry", "batam_hub"],
+        activeConnections: [["order_inquiry", "batam_hub"]],
+        logMessage: "CONSOLIDATION_HUB -> Merged 4 regional suppliers into 1 consolidated export package at Batam FTZ.",
         status: "PROCESSING"
       },
       {
         step: 4,
-        title: "4. Escrow Disbursement Complete",
-        activeNodes: ["escrow", "payout"],
-        activeConnections: [["escrow", "payout"]],
-        logMessage: "PAYOUT_ENGINE -> Direct RTGS Transfer to Local Supplier Executed. Status: 100% SETTLED",
+        title: "4. Consolidated International Fulfillment",
+        activeNodes: ["batam_hub", "buyer_partner"],
+        activeConnections: [["batam_hub", "buyer_partner"]],
+        logMessage: "DISPATCH_COMPLETE -> Consolidated shipment dispatched to International Buyer. Estimated 40% logistics savings.",
         status: "SUCCESS"
       }
     ]
   },
   cgv10: {
-    title: "CGV10 Community Gate & Ledger System",
-    subtitle: "Realtime Edge Synchronization & Offline-First Gate Verification",
-    badgeText: "PWA Community Ecosystem",
-    badgeColor: "purple",
+    title: "Portal Warga CGV — 3-Tier Role-Based Architecture",
+    subtitle: "Public Community Portal, Authenticated Resident Services & Admin Operations",
+    badgeText: "Role-Based Civic Architecture",
+    badgeColor: "emerald",
     description:
-      "Architecture linking 500+ resident mobile devices with security guardhouse tablets and a shared transparent financial ledger.",
+      "Architecture delivering distinct access layers for public visitors, registered residents, and authorized administrators with Row Level Security (RLS) data protection.",
     nodes: [
       {
-        id: "resident",
-        name: "Resident PWA",
-        subtitle: "Mobile Web App",
+        id: "public_portal",
+        name: "1. Public Visitor Portal",
+        subtitle: "Open Community Layer",
         category: "Client",
-        icon: <Smartphone className="w-5 h-5 text-purple-400" />,
+        icon: <Globe className="w-5 h-5 text-teal-400" />,
         status: "Active",
-        description: "Resident app for instant QR visitor pass creation and QRIS dues payment.",
+        description: "Open portal for neighborhood news, leadership info, community guidelines, and PALUGADA directory.",
         specs: [
-          { label: "Type", value: "Progressive Web App" },
-          { label: "Offline Mode", value: "IndexedDB Storage" },
-          { label: "Push", value: "WebPush Alerts" }
+          { label: "Access", value: "Open Public" },
+          { label: "Features", value: "News & PALUGADA" },
+          { label: "PWA", value: "Responsive Web" }
         ],
-        connections: ["edge"]
+        connections: ["auth_engine"]
       },
       {
-        id: "edge",
-        name: "Supabase Realtime Engine",
-        subtitle: "Edge Data Router",
+        id: "resident_portal",
+        name: "2. Authenticated Resident Portal",
+        subtitle: "Personalized Resident Layer",
+        category: "Client",
+        icon: <Smartphone className="w-5 h-5 text-emerald-400" />,
+        status: "Active",
+        description: "Personal dashboard for service requests (with photo upload), Kas RT transparency, and PALUGADA registration.",
+        specs: [
+          { label: "Access", value: "Verified Residents" },
+          { label: "Services", value: "Reports & Documents" },
+          { label: "Finance", value: "Transparent Ledger" }
+        ],
+        connections: ["auth_engine"]
+      },
+      {
+        id: "admin_cockpit",
+        name: "3. Authorized Admin Operations",
+        subtitle: "Operations & Moderation Layer",
+        category: "Client",
+        icon: <ShieldCheck className="w-5 h-5 text-amber-400" />,
+        status: "Active",
+        description: "Operational dashboard for resident management, request review, contribution verification, and content moderation.",
+        specs: [
+          { label: "Access", value: "Role-Based Clearance" },
+          { label: "Workflows", value: "Review & Verification" },
+          { label: "Moderation", value: "PALUGADA & News" }
+        ],
+        connections: ["auth_engine"]
+      },
+      {
+        id: "auth_engine",
+        name: "Role-Based Access Engine",
+        subtitle: "Supabase Auth & RLS Router",
         category: "Gateway",
         icon: <Zap className="w-5 h-5 text-gold-muted" />,
         status: "Idle",
-        description: "Listens for database changes and broadcasts instant gate verification pings.",
+        description: "Enforces strict Row Level Security (RLS) policies separating public, resident, and admin access boundaries.",
         specs: [
-          { label: "Protocol", value: "WebSockets / WSS" },
-          { label: "Latency", value: "< 12ms" },
-          { label: "Security", value: "Row Level Security (RLS)" }
+          { label: "Security", value: "Row Level Security (RLS)" },
+          { label: "Auth", value: "JWT Session Tokens" },
+          { label: "Latency", value: "< 15ms" }
         ],
-        connections: ["guard", "db"]
+        connections: ["community_db"]
       },
       {
-        id: "guard",
-        name: "Guardhouse Scanner",
-        subtitle: "Gate Security Tablet",
-        category: "Logic",
-        icon: <QrCode className="w-5 h-5 text-emerald-400" />,
-        status: "Idle",
-        description: "Tablet running camera QR scanner. Validates visitor QR pass in < 5 seconds.",
-        specs: [
-          { label: "Scanner", value: "HTML5 Camera Feed" },
-          { label: "Validation Time", value: "< 500ms" },
-          { label: "Fallback", value: "Offline Local Cache" }
-        ],
-        connections: ["audit"]
-      },
-      {
-        id: "db",
-        name: "PostgreSQL & Ledger",
-        subtitle: "Audit Ledger Store",
+        id: "community_db",
+        name: "PostgreSQL Community Store",
+        subtitle: "Relational Ledger & Media Store",
         category: "Database",
         icon: <Database className="w-5 h-5 text-cyan-400" />,
         status: "Idle",
-        description: "Stores resident billing history, gate logs, and public community financial balance.",
+        description: "Stores service requests, contribution verification records, moderated marketplace listings, and encrypted attachments.",
         specs: [
           { label: "Engine", value: "PostgreSQL 16" },
-          { label: "Transparency", value: "Public Read Audits" },
-          { label: "Backups", value: "Daily Automated" }
-        ],
-        connections: ["audit"]
-      },
-      {
-        id: "audit",
-        name: "Community Audit Board",
-        subtitle: "Public Dashboard",
-        category: "External",
-        icon: <ShieldCheck className="w-5 h-5 text-teal-300" />,
-        status: "Idle",
-        description: "Live web view showing 100% transparent income & expenditure reports.",
-        specs: [
-          { label: "Access", value: "All Verified Residents" },
-          { label: "Update Rate", value: "Realtime" }
+          { label: "Storage", value: "Photo Attachments" },
+          { label: "Audits", value: "Aggregated Kas RT" }
         ],
         connections: []
       }
@@ -279,34 +265,34 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     simulationSteps: [
       {
         step: 1,
-        title: "1. Visitor QR Generated",
-        activeNodes: ["resident", "edge"],
-        activeConnections: [["resident", "edge"]],
-        logMessage: "RESIDENT_APP -> Generated Temporary Visitor QR Code (Expiry: 4 Hours)",
+        title: "1. Public Portal Discovery",
+        activeNodes: ["public_portal", "auth_engine"],
+        activeConnections: [["public_portal", "auth_engine"]],
+        logMessage: "PUBLIC_VISITOR -> Browsing RT 010 announcements & public PALUGADA local marketplace directory.",
         status: "INITIALIZING"
       },
       {
         step: 2,
-        title: "2. Realtime Edge Sync",
-        activeNodes: ["edge", "guard"],
-        activeConnections: [["edge", "guard"]],
-        logMessage: "SUPABASE_WSS -> Pushed Visitor Token #QR-904 to Guardhouse Tablet (Latency: 8ms)",
+        title: "2. Resident Authentication & Request",
+        activeNodes: ["resident_portal", "auth_engine"],
+        activeConnections: [["resident_portal", "auth_engine"]],
+        logMessage: "RESIDENT_PORTAL -> Authenticated resident session active. Submitted environmental report with photo evidence.",
         status: "PROCESSING"
       },
       {
         step: 3,
-        title: "3. Gate Camera Scan & Verification",
-        activeNodes: ["guard", "db"],
-        activeConnections: [["guard", "db"]],
-        logMessage: "GUARD_SCANNER -> QR Code Scanned. Token Match Verified! Barrier Gate OPENED (0.4s)",
+        title: "3. RLS Data Isolation & Routing",
+        activeNodes: ["auth_engine", "community_db"],
+        activeConnections: [["auth_engine", "community_db"]],
+        logMessage: "RLS_SECURITY_ENGINE -> Validated JWT role claim. Isolated private identity; routed ticket to PostgreSQL store.",
         status: "PROCESSING"
       },
       {
         step: 4,
-        title: "4. Immutable Entry Audit Logged",
-        activeNodes: ["db", "audit"],
-        activeConnections: [["db", "audit"]],
-        logMessage: "AUDIT_LEDGER -> Visitor Entry Logged to PostgreSQL RLS Table. Public Audit Updated.",
+        title: "4. Admin Review & Transparency Sync",
+        activeNodes: ["admin_cockpit", "community_db"],
+        activeConnections: [["admin_cockpit", "community_db"]],
+        logMessage: "ADMIN_OPERATIONS -> Administrator reviewed service ticket, verified contribution, and synced Kas RT aggregate.",
         status: "SUCCESS"
       }
     ]
@@ -708,96 +694,126 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     ]
   },
   "masjid-al-ikhlas": {
-    title: "Masjid Al Ikhlas Community Information Architecture",
-    subtitle: "Public Information and Community Access Architecture",
-    badgeText: "Community Hub",
+    title: "Masjid Al Ikhlas Digital Ecosystem Architecture",
+    subtitle: "Community Information, TPQ Education & DKM Stewardship Flow",
+    badgeText: "Civic & Faith-Based Ecosystem",
     badgeColor: "emerald",
     description:
-      "Structured public information flow organizing jamaah access to prayer schedules, kajian programs, articles, donation guides, and published financial reports.",
+      "Architecture connecting jamaah, TPQ families, and community supporters with real-time worship schedules, Islamic education, warta media, and transparent financial stewardship managed by DKM.",
     nodes: [
       {
         id: "jamaah",
         name: "Jamaah & Community",
-        subtitle: "Mobile & Web Access",
+        subtitle: "Public & Family Access",
         category: "Client",
         icon: <Globe className="w-5 h-5 text-emerald-400" />,
         status: "Active",
-        description: "Community members accessing mosque announcements, schedules, and reports.",
+        description: "Community members, santri parents, and donors accessing mosque schedules, education, and services.",
         specs: [
-          { label: "Access", value: "Responsive Web" },
-          { label: "Target", value: "Mobile First" },
-          { label: "Optimization", value: "Fast Load Speed" }
+          { label: "Access", value: "Responsive Web & PWA" },
+          { label: "Target", value: "Mobile-First Offline Ready" },
+          { label: "Performance", value: "Instant Static Edge" }
         ],
-        connections: ["website"]
+        connections: ["hub"]
       },
       {
-        id: "website",
+        id: "dkm_admin",
+        name: "DKM & Administrators",
+        subtitle: "Protected Stewardship",
+        category: "Client",
+        icon: <ShieldCheck className="w-5 h-5 text-amber-400" />,
+        status: "Active",
+        description: "Mosque leadership managing cash ledgers, period reconciliation, and publishing official warta bulletins.",
+        specs: [
+          { label: "Access", value: "Role-Based Protected" },
+          { label: "Workflows", value: "Ledger & Reconciliation" },
+          { label: "Publishing", value: "Warta & Agenda Sync" }
+        ],
+        connections: ["admin_engine"]
+      },
+      {
+        id: "hub",
         name: "Masjid Digital Hub",
-        subtitle: "Central Information Portal",
+        subtitle: "Central Ecosystem Gateway",
         category: "Gateway",
         icon: <Building2 className="w-5 h-5 text-teal-400" />,
         status: "Idle",
-        description: "Centralized responsive website serving structured community content.",
+        description: "Unified web portal routing visitors to prayer times, TPQ education, media recordings, and donation channels.",
         specs: [
-          { label: "Platform", value: "Vercel Edge Platform" },
-          { label: "Design", value: "SVG & Dark Emerald Theme" },
-          { label: "CDN", value: "Global Edge Network" }
+          { label: "Platform", value: "Next.js & Vercel Edge" },
+          { label: "Theme", value: "Islamic Emerald & Warm Gold" },
+          { label: "PWA", value: "Installable Home Screen" }
         ],
-        connections: ["schedules", "programs", "donations", "reports"]
+        connections: ["schedules", "tpq_portal", "media_hub", "transparency"]
+      },
+      {
+        id: "admin_engine",
+        name: "Admin & Finance Engine",
+        subtitle: "Ledger & Content Management",
+        category: "Logic",
+        icon: <Cpu className="w-5 h-5 text-amber-400" />,
+        status: "Idle",
+        description: "Internal operations engine processing monthly cash ledgers, donation categories, and verifying public balance summaries.",
+        specs: [
+          { label: "Finance", value: "Cash-Flow & Period Balances" },
+          { label: "Verification", value: "Reconciliation Ledger" },
+          { label: "Privacy", value: "100% Donor Data Redacted" }
+        ],
+        connections: ["hub"]
       },
       {
         id: "schedules",
-        name: "Prayer Schedules",
-        subtitle: "Batam Time Engine",
+        name: "Prayer Engine",
+        subtitle: "Batam Schedule & Countdown",
         category: "Logic",
-        icon: <Zap className="w-5 h-5 text-gold-muted" />,
+        icon: <Zap className="w-5 h-5 text-emerald-400" />,
         status: "Idle",
-        description: "Calculates and displays daily prayer timings and live countdowns.",
+        description: "Dynamic schedule calculator for Batam prayer times and next adhan countdown.",
         specs: [
-          { label: "Calculation", value: "Batam Coordinates" },
-          { label: "Display", value: "Live Countdown Timer" }
+          { label: "Coordinates", value: "Batam (1.1301° N, 104.0529° E)" },
+          { label: "Countdown", value: "Real-Time Interval" }
         ],
         connections: []
       },
       {
-        id: "programs",
-        name: "Kajian & Programs",
-        subtitle: "Event & Article Hub",
+        id: "tpq_portal",
+        name: "TPQ Al-Mardhotillah",
+        subtitle: "Quran Education Portal",
         category: "Logic",
-        icon: <Layers className="w-5 h-5 text-blue-400" />,
+        icon: <Layers className="w-5 h-5 text-teal-300" />,
         status: "Idle",
-        description: "Schedules for weekly kajian, Friday sermons, and community events.",
+        description: "Structured learning curriculum, tahsin schedules, and student family announcement hub.",
         specs: [
-          { label: "View", value: "Grid / List Calendar" },
-          { label: "Updates", value: "Regular Publication" }
+          { label: "Programs", value: "Tahsin, Tajwid, Tahfidz Juz 30" },
+          { label: "Audience", value: "Santri & Wali Santri" }
         ],
         connections: []
       },
       {
-        id: "donations",
-        name: "Donation Guide",
-        subtitle: "Bank & QR Information",
-        category: "Logic",
-        icon: <ShieldCheck className="w-5 h-5 text-amber-400" />,
-        status: "Idle",
-        description: "Official bank account numbers and QRIS graphics for community contributions.",
-        specs: [
-          { label: "Channels", value: "Bank Transfer & QRIS" },
-          { label: "Instructions", value: "Published Direct Guide" }
-        ],
-        connections: []
-      },
-      {
-        id: "reports",
-        name: "Financial Reports",
-        subtitle: "Public Transparency Showcase",
+        id: "media_hub",
+        name: "Media & Knowledge Hub",
+        subtitle: "Khutbah & Kajian Archive",
         category: "External",
-        icon: <FileCheck className="w-5 h-5 text-purple-400" />,
+        icon: <Globe className="w-5 h-5 text-blue-400" />,
         status: "Idle",
-        description: "Published summaries of weekly cash inflows, outflows, and balance reports.",
+        description: "Digital bulletin library, khutbah archives, and recorded kajian references.",
         specs: [
-          { label: "Audits", value: "Weekly Expense Summaries" },
-          { label: "Visibility", value: "100% Public Access" }
+          { label: "Content", value: "Khutbah Bulletins & Kajian" },
+          { label: "Format", value: "Audio, PDF & Summaries" }
+        ],
+        connections: []
+      },
+      {
+        id: "transparency",
+        name: "Transparency & Infaq",
+        subtitle: "Published Kas & QRIS Guidance",
+        category: "External",
+        icon: <FileCheck className="w-5 h-5 text-amber-300" />,
+        status: "Idle",
+        description: "Published summaries of mosque cash balance, weekly expenses, and official donation guidance.",
+        specs: [
+          { label: "Visibility", value: "Open Community Kas Summary" },
+          { label: "Channels", value: "QRIS & Official Bank Transfer" }
         ],
         connections: []
       }
@@ -805,26 +821,34 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     simulationSteps: [
       {
         step: 1,
-        title: "Jamaah Requests Information",
-        activeNodes: ["jamaah", "website"],
-        activeConnections: [["jamaah", "website"]],
-        logMessage: "User accesses Masjid Al Ikhlas website on mobile device.",
+        title: "1. Jamaah Connects to Digital Hub",
+        activeNodes: ["jamaah", "hub"],
+        activeConnections: [["jamaah", "hub"]],
+        logMessage: "JAMAAH_ACCESS -> Mobile visitor opened Masjid Al Ikhlas Digital Hub via installable PWA.",
         status: "INITIALIZING"
       },
       {
         step: 2,
-        title: "Prayer Times & Program Load",
-        activeNodes: ["website", "schedules", "programs"],
-        activeConnections: [["website", "schedules"], ["website", "programs"]],
-        logMessage: "Website renders Batam prayer countdown and active kajian program listings.",
+        title: "2. Prayer Times & TPQ Education Loaded",
+        activeNodes: ["hub", "schedules", "tpq_portal"],
+        activeConnections: [["hub", "schedules"], ["hub", "tpq_portal"]],
+        logMessage: "WORSHIP_EDUCATION -> Dynamic Batam prayer countdown loaded. TPQ Al-Mardhotillah curriculum active.",
         status: "PROCESSING"
       },
       {
         step: 3,
-        title: "Donation Guide & Financial Report Access",
-        activeNodes: ["website", "donations", "reports"],
-        activeConnections: [["website", "donations"], ["website", "reports"]],
-        logMessage: "Jamaah accesses published donation instructions and transparent financial reports.",
+        title: "3. DKM Financial Reconciliation",
+        activeNodes: ["dkm_admin", "admin_engine", "hub"],
+        activeConnections: [["dkm_admin", "admin_engine"], ["admin_engine", "hub"]],
+        logMessage: "DKM_STEWARDSHIP -> Admin verified monthly ledger. Reconciled cash-flow and published verified aggregate.",
+        status: "PROCESSING"
+      },
+      {
+        step: 4,
+        title: "4. Verified Transparency & Media Broadcast",
+        activeNodes: ["hub", "transparency", "media_hub"],
+        activeConnections: [["hub", "transparency"], ["hub", "media_hub"]],
+        logMessage: "COMMUNITY_SYNC -> Published transparent Kas report and updated Friday khutbah bulletin for jamaah.",
         status: "SUCCESS"
       }
     ]

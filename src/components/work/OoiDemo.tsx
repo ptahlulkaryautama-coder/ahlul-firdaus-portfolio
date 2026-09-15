@@ -1,65 +1,164 @@
 "use client";
 
 import React, { useState } from "react";
-import { Ship, DollarSign, FileCheck, Anchor, CheckCircle2, ShieldAlert, ArrowRight, RefreshCw } from "lucide-react";
+import {
+  Package,
+  Boxes,
+  Truck,
+  Sparkles,
+  CheckCircle2,
+  AlertCircle,
+  ShoppingBag,
+  ArrowRight,
+  ShieldCheck,
+  Send,
+  Building2
+} from "lucide-react";
 
-interface Commodity {
+interface BrandSupplier {
   id: string;
   name: string;
-  basePricePerKg: number;
-  hsCode: string;
+  category: "Snacks" | "Cashews" | "Specialty Coffee" | "Spices" | "Gift Kits";
   origin: string;
+  certifications: string[];
+  sampleProduct: string;
 }
 
-const COMMODITIES: Commodity[] = [
-  { id: "coffee", name: "Sumatra Arabica Coffee Beans (Grade 1)", basePricePerKg: 6.5, hsCode: "0901.11.10", origin: "Aceh, Indonesia" },
-  { id: "sugar", name: "Organic Coconut Palm Sugar (Bulk)", basePricePerKg: 3.2, hsCode: "1702.90.90", origin: "Central Java, Indonesia" },
-  { id: "cloves", name: "Whole Dried Cloves (Lal Pari)", basePricePerKg: 11.0, hsCode: "0907.10.00", origin: "Maluku, Indonesia" },
-  { id: "cacao", name: "Fermented Cocoa Beans", basePricePerKg: 4.8, hsCode: "1801.00.00", origin: "Sulawesi, Indonesia" },
+const BRAND_SUPPLIERS: BrandSupplier[] = [
+  {
+    id: "arva",
+    name: "Arva Gourmet",
+    category: "Snacks",
+    origin: "Yogyakarta, Central Java",
+    certifications: ["BPOM", "Halal"],
+    sampleProduct: "Truffle Tempeh Chips (100g)"
+  },
+  {
+    id: "yava",
+    name: "YAVA Bali",
+    category: "Cashews",
+    origin: "Karangasem, Bali",
+    certifications: ["BPOM", "Halal", "HACCP"],
+    sampleProduct: "Wild Harvested Roasted Cashews (250g)"
+  },
+  {
+    id: "otten",
+    name: "Otten Coffee",
+    category: "Specialty Coffee",
+    origin: "Gayo Highlands, Aceh",
+    certifications: ["BPOM", "Halal"],
+    sampleProduct: "Single-Origin Gayo Arabica (200g)"
+  },
+  {
+    id: "bamboe",
+    name: "Bamboe Asia",
+    category: "Spices",
+    origin: "Surabaya, East Java",
+    certifications: ["BPOM", "Halal", "HACCP"],
+    sampleProduct: "Authentic Rendang & Curry Spice Blend (60g)"
+  },
+  {
+    id: "giftkit",
+    name: "Archipelago Gift Collection",
+    category: "Gift Kits",
+    origin: "Consolidated, Batam FTZ",
+    certifications: ["Curated Pack"],
+    sampleProduct: "Archipelago Essentials Curated Box"
+  }
+];
+
+interface DestinationRate {
+  id: string;
+  region: string;
+  baseRatePerSupplier: number;
+  consolidatedBaseRate: number;
+  ratePerKg: number;
+  leadTime: string;
+}
+
+const DESTINATIONS: DestinationRate[] = [
+  {
+    id: "us",
+    region: "USA & Canada",
+    baseRatePerSupplier: 38,
+    consolidatedBaseRate: 42,
+    ratePerKg: 11,
+    leadTime: "8–12 Business Days"
+  },
+  {
+    id: "eu",
+    region: "UK & European Union",
+    baseRatePerSupplier: 40,
+    consolidatedBaseRate: 44,
+    ratePerKg: 12,
+    leadTime: "7–11 Business Days"
+  },
+  {
+    id: "au",
+    region: "Australia & New Zealand",
+    baseRatePerSupplier: 32,
+    consolidatedBaseRate: 35,
+    ratePerKg: 9.5,
+    leadTime: "6–10 Business Days"
+  },
+  {
+    id: "sg",
+    region: "Singapore & ASEAN",
+    baseRatePerSupplier: 18,
+    consolidatedBaseRate: 20,
+    ratePerKg: 5,
+    leadTime: "3–6 Business Days"
+  },
+  {
+    id: "ea",
+    region: "Japan & East Asia",
+    baseRatePerSupplier: 30,
+    consolidatedBaseRate: 34,
+    ratePerKg: 8.5,
+    leadTime: "6–9 Business Days"
+  }
 ];
 
 export default function OoiDemo() {
-  const [activeTab, setActiveTab] = useState<"calculator" | "documents" | "rfq">("calculator");
+  const [activeTab, setActiveTab] = useState<"estimator" | "catalog" | "inquiry">("estimator");
 
-  // Calculator state
-  const [selectedCommodityId, setSelectedCommodityId] = useState<string>("coffee");
-  const [weightKg, setWeightKg] = useState<number>(10000);
-  const [containerType, setContainerType] = useState<"20ft" | "40ft">("20ft");
-  const [destinationPort, setDestinationPort] = useState<string>("Rotterdam, NL (NLRTM)");
-  const [incoterm, setIncoterm] = useState<"FOB" | "CIF">("CIF");
+  // Estimator state
+  const [selectedDestination, setSelectedDestination] = useState<string>("us");
+  const [selectedBrandIds, setSelectedBrandIds] = useState<string[]>(["arva", "yava", "otten", "bamboe"]);
+  const [weightKg, setWeightKg] = useState<number>(6);
+  const [buyerType, setBuyerType] = useState<"retail" | "b2b">("b2b");
 
-  // Document verification state
-  const [docs, setDocs] = useState([
-    { id: 1, name: "Certificate of Origin (Form A)", issuer: "Indonesian Chamber of Commerce", status: "Verified", critical: true },
-    { id: 2, name: "Phytosanitary Certificate", issuer: "Ministry of Agriculture", status: "Verified", critical: true },
-    { id: 3, name: "Bill of Lading (B/L)", issuer: "Maersk Shipping Line", status: "Pending Inspection", critical: true },
-    { id: 4, name: "Fumigation & Pest Control Certificate", issuer: "Sucofindo International", status: "Verified", critical: false },
-  ]);
+  // Inquiry form prototype state
+  const [inquirySubmitted, setInquirySubmitted] = useState<boolean>(false);
+  const [inquiryData, setInquiryData] = useState({
+    companyName: "Nordic Specialty Foods Ltd",
+    contactEmail: "buyer@nordicspecialty.com",
+    interest: "Curated Sample Kit + Wholesale Price List",
+    estimatedVolume: "20–50 kg / month"
+  });
 
-  // RFQ Generator State
-  const [rfqSubmitted, setRfqSubmitted] = useState(false);
-  const [buyerCompany, setBuyerCompany] = useState("Global Commodity Importers BV");
+  const currentDestination = DESTINATIONS.find((d) => d.id === selectedDestination) || DESTINATIONS[0];
+  const supplierCount = Math.max(1, selectedBrandIds.length);
 
-  const selectedCommodity = COMMODITIES.find((c) => c.id === selectedCommodityId) || COMMODITIES[0];
-
-  // Price calculations
-  const rawGoodsCost = weightKg * selectedCommodity.basePricePerKg;
-  const freightCost = containerType === "20ft" ? 2800 : 4500;
-  const insuranceCost = incoterm === "CIF" ? rawGoodsCost * 0.015 : 0;
-  const totalTransaction = rawGoodsCost + (incoterm === "CIF" ? freightCost + insuranceCost : 0);
-
-  const depositEscrow = totalTransaction * 0.3;
-  const finalEscrow = totalTransaction * 0.7;
-
-  const toggleDocStatus = (id: number) => {
-    setDocs((prev) =>
-      prev.map((doc) =>
-        doc.id === id
-          ? { ...doc, status: doc.status === "Verified" ? "Pending Inspection" : "Verified" }
-          : doc
-      )
-    );
+  // Toggle brand selection
+  const toggleBrand = (id: string) => {
+    if (selectedBrandIds.includes(id)) {
+      if (selectedBrandIds.length > 1) {
+        setSelectedBrandIds(selectedBrandIds.filter((b) => b !== id));
+      }
+    } else {
+      setSelectedBrandIds([...selectedBrandIds, id]);
+    }
   };
+
+  // Shipping cost calculations (illustrative model)
+  // Separate shipments: each supplier incurs separate minimum international base dispatch fees + apportioned weight
+  const separateShipmentCost = supplierCount * currentDestination.baseRatePerSupplier + weightKg * currentDestination.ratePerKg * 1.15;
+  // Consolidated shipment: single base dispatch fee from Batam Hub + weight charge + small packing fee
+  const consolidatedShipmentCost = currentDestination.consolidatedBaseRate + weightKg * currentDestination.ratePerKg + (supplierCount > 1 ? 4 : 0);
+  
+  const savingsAmount = Math.max(0, separateShipmentCost - consolidatedShipmentCost);
+  const savingsPercentage = separateShipmentCost > 0 ? Math.round((savingsAmount / separateShipmentCost) * 100) : 0;
 
   return (
     <div className="glass-card border border-graphite/80 rounded-2xl overflow-hidden shadow-2xl mt-6">
@@ -67,313 +166,412 @@ export default function OoiDemo() {
       <div className="bg-graphite-dark/95 border-b border-graphite/80 flex items-center justify-between p-1.5">
         <div className="flex gap-1 overflow-x-auto">
           <button
-            onClick={() => setActiveTab("calculator")}
+            onClick={() => setActiveTab("estimator")}
             className={`px-3.5 py-2 rounded-xl font-mono text-[10px] uppercase flex items-center gap-2 transition-all ${
-              activeTab === "calculator"
+              activeTab === "estimator"
                 ? "bg-gold-muted/15 border border-gold-muted/40 text-gold-muted font-bold shadow-md"
                 : "text-cream-dark/50 hover:text-cream border border-transparent"
             }`}
           >
-            <Ship className="w-3.5 h-3.5" />
-            <span>Escrow & Freight Calc</span>
+            <Boxes className="w-3.5 h-3.5" />
+            <span>Consolidated Shipping Estimator</span>
           </button>
           <button
-            onClick={() => setActiveTab("documents")}
+            onClick={() => setActiveTab("catalog")}
             className={`px-3.5 py-2 rounded-xl font-mono text-[10px] uppercase flex items-center gap-2 transition-all ${
-              activeTab === "documents"
+              activeTab === "catalog"
                 ? "bg-gold-muted/15 border border-gold-muted/40 text-gold-muted font-bold shadow-md"
                 : "text-cream-dark/50 hover:text-cream border border-transparent"
             }`}
           >
-            <FileCheck className="w-3.5 h-3.5" />
-            <span>Customs Verification</span>
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>Curated Brand Sampler</span>
           </button>
           <button
-            onClick={() => setActiveTab("rfq")}
+            onClick={() => setActiveTab("inquiry")}
             className={`px-3.5 py-2 rounded-xl font-mono text-[10px] uppercase flex items-center gap-2 transition-all ${
-              activeTab === "rfq"
+              activeTab === "inquiry"
                 ? "bg-gold-muted/15 border border-gold-muted/40 text-gold-muted font-bold shadow-md"
                 : "text-cream-dark/50 hover:text-cream border border-transparent"
             }`}
           >
-            <Anchor className="w-3.5 h-3.5" />
-            <span>RFQ Generator</span>
+            <Send className="w-3.5 h-3.5" />
+            <span>B2B &amp; Sample Inquiry</span>
           </button>
         </div>
-        <span className="font-mono text-[9px] text-cream-dark/40 uppercase tracking-widest hidden sm:block pr-3 font-semibold">
-          OOI EXPORT ENGINE v3.1
-        </span>
+
+        <div className="hidden sm:flex items-center gap-2 font-mono text-[9px] text-amber-400 bg-amber-950/40 border border-amber-500/30 px-2.5 py-1 rounded-full mr-2">
+          <Sparkles className="w-3 h-3" />
+          <span>Batam FTZ Consolidation</span>
+        </div>
       </div>
 
-      {/* Content area */}
-      <div className="p-6">
-        {/* TAB 1: Escrow & Freight Calculator */}
-        {activeTab === "calculator" && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            {/* Input Controls */}
-            <div className="lg:col-span-6 space-y-4">
-              <span className="font-mono text-[9px] text-gold-muted uppercase tracking-widest font-bold block">
-                B2B Cargo Parameters
-              </span>
+      {/* Main Tab Area */}
+      <div className="p-5 sm:p-7">
+        {/* TAB 1: CONSOLIDATED SHIPPING ESTIMATOR */}
+        {activeTab === "estimator" && (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Left Column: Interactive Inputs */}
+              <div className="lg:col-span-7 space-y-5">
+                <div className="border border-graphite/60 rounded-xl p-4 bg-slate-950/50 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs text-gold-muted font-bold uppercase tracking-wider flex items-center gap-1.5">
+                      <Truck className="w-3.5 h-3.5" />
+                      1. Destination &amp; Buyer Journey
+                    </span>
+                    {/* Buyer Type Toggle */}
+                    <div className="flex bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-[10px] font-mono">
+                      <button
+                        onClick={() => setBuyerType("retail")}
+                        className={`px-2.5 py-1 rounded-md transition-colors ${
+                          buyerType === "retail" ? "bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30" : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        Retail Sample
+                      </button>
+                      <button
+                        onClick={() => setBuyerType("b2b")}
+                        className={`px-2.5 py-1 rounded-md transition-colors ${
+                          buyerType === "b2b" ? "bg-teal-500/20 text-teal-300 font-bold border border-teal-500/30" : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        B2B Sourcing
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Commodity Dropdown */}
-              <div className="space-y-1">
-                <label className="font-mono text-[9px] text-cream-dark/50 uppercase block">
-                  Export Commodity Product
-                </label>
-                <select
-                  value={selectedCommodityId}
-                  onChange={(e) => setSelectedCommodityId(e.target.value)}
-                  className="w-full glass-input rounded-xl px-3.5 py-2.5 text-xs text-cream outline-none cursor-pointer font-sans"
-                >
-                  {COMMODITIES.map((c) => (
-                    <option key={c.id} value={c.id} className="bg-graphite-dark text-cream">
-                      {c.name} (${c.basePricePerKg}/kg)
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  {/* Destination dropdown */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-mono text-slate-400 uppercase">Target Destination Region</label>
+                    <select
+                      value={selectedDestination}
+                      onChange={(e) => setSelectedDestination(e.target.value)}
+                      className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-slate-100 focus:outline-none focus:border-gold-muted"
+                    >
+                      {DESTINATIONS.map((dest) => (
+                        <option key={dest.id} value={dest.id}>
+                          {dest.region} (Indicative Lead Time: {dest.leadTime})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
 
-              {/* Volume & Container */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="font-mono text-[9px] text-cream-dark/50 uppercase block">
-                    Cargo Net Weight (KG)
-                  </label>
+                {/* Multi-Supplier Selection */}
+                <div className="border border-graphite/60 rounded-xl p-4 bg-slate-950/50 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs text-gold-muted font-bold uppercase tracking-wider flex items-center gap-1.5">
+                      <Building2 className="w-3.5 h-3.5" />
+                      2. Select Regional Brands to Combine ({selectedBrandIds.length} Selected)
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-400">Single Batam Box</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {BRAND_SUPPLIERS.map((brand) => {
+                      const isSelected = selectedBrandIds.includes(brand.id);
+                      return (
+                        <button
+                          key={brand.id}
+                          type="button"
+                          onClick={() => toggleBrand(brand.id)}
+                          className={`p-2.5 rounded-lg border text-left transition-all flex items-start justify-between ${
+                            isSelected
+                              ? "bg-amber-950/20 border-amber-500/40 text-slate-100"
+                              : "bg-slate-900/40 border-slate-800 text-slate-400 hover:border-slate-700"
+                          }`}
+                        >
+                          <div>
+                            <div className="font-bold text-xs flex items-center gap-1.5">
+                              <span>{brand.name}</span>
+                              <span className="text-[9px] font-mono text-gold-muted font-normal bg-gold-muted/10 px-1.5 py-0.2 rounded">
+                                {brand.category}
+                              </span>
+                            </div>
+                            <div className="text-[10px] font-mono text-slate-400 mt-0.5">{brand.origin}</div>
+                          </div>
+                          <div
+                            className={`w-4 h-4 rounded-md border flex items-center justify-center text-[10px] mt-0.5 shrink-0 ${
+                              isSelected ? "bg-amber-500 border-amber-400 text-slate-950 font-bold" : "border-slate-700"
+                            }`}
+                          >
+                            {isSelected && "✓"}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Weight Slider */}
+                <div className="border border-graphite/60 rounded-xl p-4 bg-slate-950/50 space-y-2">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-slate-300">Estimated Total Shipment Weight:</span>
+                    <span className="text-gold-muted font-bold text-sm">{weightKg} kg</span>
+                  </div>
                   <input
-                    type="number"
-                    step={500}
-                    min={1000}
-                    max={50000}
+                    type="range"
+                    min="1"
+                    max="25"
+                    step="1"
                     value={weightKg}
                     onChange={(e) => setWeightKg(Number(e.target.value))}
-                    className="w-full glass-input rounded-xl px-3.5 py-2 text-xs text-cream outline-none font-mono"
+                    className="w-full accent-amber-400 bg-slate-800 h-2 rounded-lg cursor-pointer"
                   />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-mono text-[9px] text-cream-dark/50 uppercase block">
-                    Container Spec
-                  </label>
-                  <select
-                    value={containerType}
-                    onChange={(e) => setContainerType(e.target.value as "20ft" | "40ft")}
-                    className="w-full glass-input rounded-xl px-3.5 py-2 text-xs text-cream outline-none cursor-pointer font-mono"
-                  >
-                    <option value="20ft" className="bg-graphite-dark text-cream">20ft FCL Container</option>
-                    <option value="40ft" className="bg-graphite-dark text-cream">40ft FCL Container</option>
-                  </select>
+                  <div className="flex justify-between text-[9px] font-mono text-slate-500">
+                    <span>1 kg (Sample Box)</span>
+                    <span>10 kg (Commercial Sample)</span>
+                    <span>25 kg (Wholesale Batch)</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Port & Incoterm */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="font-mono text-[9px] text-cream-dark/50 uppercase block">
-                    Destination Discharge Port
-                  </label>
-                  <select
-                    value={destinationPort}
-                    onChange={(e) => setDestinationPort(e.target.value)}
-                    className="w-full glass-input rounded-xl px-3.5 py-2 text-xs text-cream outline-none cursor-pointer font-sans"
-                  >
-                    <option value="Rotterdam, NL (NLRTM)" className="bg-graphite-dark text-cream">Port of Rotterdam (NL)</option>
-                    <option value="Hamburg, DE (DEHAM)" className="bg-graphite-dark text-cream">Port of Hamburg (DE)</option>
-                    <option value="Los Angeles, US (USLAX)" className="bg-graphite-dark text-cream">Port of Los Angeles (US)</option>
-                    <option value="Singapore (SGSIN)" className="bg-graphite-dark text-cream">Port of Singapore (SG)</option>
-                  </select>
-                </div>
+              {/* Right Column: Comparative Telemetry Card */}
+              <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
+                <div className="bg-gradient-to-b from-slate-900/90 to-slate-950 border border-gold-muted/30 rounded-2xl p-6 relative overflow-hidden shadow-xl space-y-5">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Logistics Telemetry</span>
+                    <span className="text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold">
+                      {savingsPercentage}% Lower Freight Cost
+                    </span>
+                  </div>
 
-                <div className="space-y-1">
-                  <label className="font-mono text-[9px] text-cream-dark/50 uppercase block">
-                    Incoterm Terms
-                  </label>
-                  <select
-                    value={incoterm}
-                    onChange={(e) => setIncoterm(e.target.value as "FOB" | "CIF")}
-                    className="w-full glass-input rounded-xl px-3.5 py-2 text-xs text-cream outline-none cursor-pointer font-mono"
-                  >
-                    <option value="CIF" className="bg-graphite-dark text-cream">CIF (Cost, Insurance & Freight)</option>
-                    <option value="FOB" className="bg-graphite-dark text-cream">FOB (Free On Board Tanjung Priok)</option>
-                  </select>
+                  {/* Comparison Bars */}
+                  <div className="space-y-4">
+                    {/* Separate Shipments */}
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-mono">
+                        <span className="text-slate-400">Separate Shipments ({supplierCount} packages):</span>
+                        <span className="text-slate-300 font-semibold">${separateShipmentCost.toFixed(0)} USD</span>
+                      </div>
+                      <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                        <div className="h-full bg-red-400/70 w-full" />
+                      </div>
+                      <div className="text-[9px] font-mono text-red-400/80">
+                        {supplierCount}x individual origin dispatch fees + duplicate customs overhead
+                      </div>
+                    </div>
+
+                    {/* Consolidated Shipment */}
+                    <div className="space-y-1 pt-2">
+                      <div className="flex justify-between text-xs font-mono">
+                        <span className="text-amber-300 font-bold flex items-center gap-1.5">
+                          <Package className="w-3.5 h-3.5 text-amber-400" />
+                          Batam FTZ Consolidated Box:
+                        </span>
+                        <span className="text-amber-300 font-bold text-base">${consolidatedShipmentCost.toFixed(0)} USD</span>
+                      </div>
+                      <div className="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden border border-amber-500/30">
+                        <div
+                          className="h-full bg-gradient-to-r from-amber-500 to-emerald-400 rounded-full transition-all duration-500"
+                          style={{ width: `${Math.min(100, (consolidatedShipmentCost / separateShipmentCost) * 100)}%` }}
+                        />
+                      </div>
+                      <div className="text-[9px] font-mono text-emerald-400">
+                        Single consolidated dispatch from Batam Hub · Combined master invoice
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Savings Highlight Box */}
+                  <div className="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-4 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider block">Estimated Savings</span>
+                      <span className="text-xl font-bold text-white font-mono">${savingsAmount.toFixed(0)} USD</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Lead Time</span>
+                      <span className="text-xs font-semibold text-slate-200 font-mono">{currentDestination.leadTime}</span>
+                    </div>
+                  </div>
+
+                  {/* Key Operational Highlights */}
+                  <div className="space-y-2 pt-2 border-t border-slate-800 text-[11px] text-slate-300">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Single packaging checkpoint &amp; unified export declaration.</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Certified compliance tracking across BPOM, Halal &amp; HACCP.</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Live Financial & Escrow Summary */}
-            <div className="lg:col-span-6 glass-card p-5 rounded-2xl border border-graphite/60 space-y-4">
-              <div className="flex items-center justify-between border-b border-graphite/50 pb-3">
-                <span className="font-mono text-[10px] text-cream-dark/60 uppercase font-bold">
-                  Transaction Escrow Breakdown
-                </span>
-                <span className="text-[9px] font-mono text-gold-muted glass-badge px-2.5 py-0.5 rounded-full font-bold">
-                  HS: {selectedCommodity.hsCode}
-                </span>
-              </div>
-
-              <div className="space-y-2 text-xs font-mono">
-                <div className="flex justify-between text-cream-dark/70">
-                  <span>Commodity Value ({weightKg.toLocaleString()} kg):</span>
-                  <span className="text-cream font-bold">${rawGoodsCost.toLocaleString()}</span>
-                </div>
-                {incoterm === "CIF" && (
-                  <>
-                    <div className="flex justify-between text-cream-dark/70">
-                      <span>Ocean Freight ({containerType}):</span>
-                      <span className="text-cream font-bold">${freightCost.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between text-cream-dark/70">
-                      <span>Marine Cargo Insurance (1.5%):</span>
-                      <span className="text-cream font-bold">${insuranceCost.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
-                    </div>
-                  </>
-                )}
-                <div className="flex justify-between text-sm text-gold-muted font-bold pt-2 border-t border-graphite/40">
-                  <span>TOTAL CONTRACT VALUE:</span>
-                  <span>${totalTransaction.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
-                </div>
-              </div>
-
-              {/* Escrow Release Timeline */}
-              <div className="space-y-2 pt-3 border-t border-graphite/40">
-                <span className="font-mono text-[9px] text-cream-dark/50 uppercase block font-semibold">
-                  Secured Escrow Release Stages
-                </span>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 rounded-xl bg-graphite-dark/60 border border-graphite/50 space-y-1">
-                    <span className="text-[9px] font-mono text-amber-400 block font-bold">STAGE 1: 30% DEPOSIT</span>
-                    <span className="text-sm font-bold text-cream font-mono">${depositEscrow.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
-                    <p className="text-[9px] text-cream-dark/50 leading-tight font-sans">Released upon Original B/L issuing</p>
-                  </div>
-                  <div className="p-3 rounded-xl bg-graphite-dark/60 border border-graphite/50 space-y-1">
-                    <span className="text-[9px] font-mono text-emerald-400 block font-bold">STAGE 2: 70% FINAL</span>
-                    <span className="text-sm font-bold text-cream font-mono">${finalEscrow.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
-                    <p className="text-[9px] text-cream-dark/50 leading-tight font-sans">Released upon customs clearance at {destinationPort.split(" ")[0]}</p>
-                  </div>
-                </div>
-              </div>
+            {/* Disclaimer */}
+            <div className="text-center bg-slate-950/60 border border-slate-800/80 rounded-xl p-3 text-slate-400 text-[10px] font-mono flex items-center justify-center gap-2">
+              <AlertCircle className="w-3.5 h-3.5 text-gold-muted shrink-0" />
+              <span>
+                <strong>Illustrative estimate only.</strong> Final shipping cost depends on destination, weight, carrier, product category, and current logistics rates.
+              </span>
             </div>
           </div>
         )}
 
-        {/* TAB 2: Customs Verification */}
-        {activeTab === "documents" && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[9px] text-gold-muted uppercase tracking-widest font-bold">
-                Export Compliance Document Pipeline
-              </span>
-              <span className="text-[9px] font-mono text-emerald-400 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                AUTOMATED CLEARANCE ENGINE
+        {/* TAB 2: CURATED BRAND SAMPLER */}
+        {activeTab === "catalog" && (
+          <div className="space-y-5">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <h3 className="text-sm font-bold text-white font-mono uppercase tracking-wider">
+                  Curated Indonesian Food Brands &amp; Origins
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Unified catalog spanning regional snacks, cashews, specialty coffee, and traditional spice blends.
+                </p>
+              </div>
+              <span className="text-[10px] font-mono text-teal-400 bg-teal-950/60 border border-teal-500/30 px-2.5 py-1 rounded-full">
+                5 Certified Categories
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {docs.map((doc) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+              {BRAND_SUPPLIERS.map((brand) => (
                 <div
-                  key={doc.id}
-                  className="glass-card p-4 rounded-xl border border-graphite/60 flex items-start justify-between gap-3"
+                  key={brand.id}
+                  className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 flex flex-col justify-between space-y-3 hover:border-gold-muted/40 transition-colors"
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-xs text-cream">{doc.name}</span>
-                      {doc.critical && (
-                        <span className="text-[8px] font-mono text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20 uppercase">
-                          Mandatory
-                        </span>
-                      )}
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-mono text-[9px] uppercase tracking-wider bg-gold-muted/10 border border-gold-muted/30 text-gold-muted px-2 py-0.5 rounded font-semibold">
+                        {brand.category}
+                      </span>
+                      <span className="text-[9px] font-mono text-slate-400">{brand.origin}</span>
                     </div>
-                    <p className="text-[10px] font-mono text-cream-dark/50">Issuer: {doc.issuer}</p>
+                    <h4 className="font-bold text-sm text-white">{brand.name}</h4>
+                    <p className="text-xs text-slate-300 mt-1 font-serif italic">
+                      Sample: {brand.sampleProduct}
+                    </p>
                   </div>
 
-                  <button
-                    onClick={() => toggleDocStatus(doc.id)}
-                    className={`shrink-0 px-2.5 py-1 rounded-lg text-[9px] font-mono uppercase tracking-wider font-bold transition-all ${
-                      doc.status === "Verified"
-                        ? "bg-emerald-500/15 border border-emerald-500/40 text-emerald-400"
-                        : "bg-amber-500/15 border border-amber-500/40 text-amber-400"
-                    }`}
-                  >
-                    {doc.status}
-                  </button>
+                  <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      {brand.certifications.map((cert) => (
+                        <span key={cert} className="text-[8px] font-mono bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700">
+                          {cert}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="text-[9px] font-mono text-emerald-400 font-semibold">Verified Brand</span>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="p-4 rounded-xl glass-card border border-graphite/50 text-[11px] font-mono text-cream-dark/70 flex items-center justify-between">
-              <span>System Verification Progress: 3 of 4 documents verified for export release</span>
+            <div className="bg-slate-900/40 border border-slate-800 p-4 rounded-xl flex items-center justify-between text-xs font-mono text-slate-300">
+              <span className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-gold-muted" />
+                <span>Need customized product specifications or private-label sourcing?</span>
+              </span>
               <button
-                onClick={() => setDocs(docs.map((d) => ({ ...d, status: "Verified" })))}
-                className="px-3 py-1 bg-gold-muted text-deep-black font-bold text-[10px] rounded-lg hover:bg-cream transition-colors"
+                onClick={() => setActiveTab("inquiry")}
+                className="text-gold-muted hover:text-white font-bold flex items-center gap-1 transition-colors"
               >
-                Approve All Documents
+                <span>Request B2B Deck</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
         )}
 
-        {/* TAB 3: RFQ Generator */}
-        {activeTab === "rfq" && (
-          <div className="space-y-4">
-            <span className="font-mono text-[9px] text-gold-muted uppercase tracking-widest font-bold">
-              B2B International Request for Quotation
-            </span>
+        {/* TAB 3: B2B & SAMPLE INQUIRY FUNNEL */}
+        {activeTab === "inquiry" && (
+          <div className="space-y-6 max-w-2xl mx-auto">
+            <div className="text-center space-y-1">
+              <h3 className="text-base font-bold text-white font-mono uppercase tracking-wider">
+                B2B Sourcing &amp; Curated Sample Request
+              </h3>
+              <p className="text-xs text-slate-400">
+                Direct inquiry channel for specialty retailers, food importers, and international distribution partners.
+              </p>
+            </div>
 
-            {rfqSubmitted ? (
-              <div className="glass-card p-6 rounded-2xl border border-emerald-500/30 text-center space-y-3">
-                <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto" />
-                <h4 className="font-bold text-cream text-sm">RFQ Sheet Transmitted to OOI Network</h4>
-                <p className="text-xs text-cream-dark/80 max-w-md mx-auto">
-                  Quotation proposal for <span className="text-gold-muted font-bold">{selectedCommodity.name}</span> dispatched to verified producers in {selectedCommodity.origin}.
+            {inquirySubmitted ? (
+              <div className="bg-emerald-950/30 border border-emerald-500/40 rounded-2xl p-8 text-center space-y-3">
+                <div className="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-6 h-6" />
+                </div>
+                <h4 className="text-base font-bold text-white font-mono">Inquiry Prototype Registered</h4>
+                <p className="text-xs text-slate-300 max-w-md mx-auto">
+                  Sample inquiry routed to Batam Consolidation desk for <strong>{inquiryData.companyName}</strong>. Standard turnaround for quotation and spec sheets is 24–48 hours.
                 </p>
                 <button
-                  onClick={() => setRfqSubmitted(false)}
-                  className="px-4 py-2 bg-graphite border border-graphite/80 text-cream text-xs rounded-xl font-mono uppercase"
+                  onClick={() => setInquirySubmitted(false)}
+                  className="mt-4 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono rounded-lg transition-colors"
                 >
-                  Generate Another RFQ
+                  Reset Prototype Form
                 </button>
               </div>
             ) : (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  setRfqSubmitted(true);
+                  setInquirySubmitted(true);
                 }}
-                className="space-y-4 glass-card p-5 rounded-2xl border border-graphite/60"
+                className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 space-y-4 font-mono text-xs"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="font-mono text-[9px] text-cream-dark/50 uppercase block mb-1">
-                      Buyer Entity Name
-                    </label>
+                  <div className="space-y-1">
+                    <label className="text-[10px] text-slate-400 uppercase">Company / Organization</label>
                     <input
                       type="text"
                       required
-                      value={buyerCompany}
-                      onChange={(e) => setBuyerCompany(e.target.value)}
-                      className="w-full glass-input rounded-xl px-3.5 py-2 text-xs text-cream outline-none"
+                      value={inquiryData.companyName}
+                      onChange={(e) => setInquiryData({ ...inquiryData, companyName: e.target.value })}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-gold-muted"
                     />
                   </div>
-                  <div>
-                    <label className="font-mono text-[9px] text-cream-dark/50 uppercase block mb-1">
-                      Target Delivery Window
-                    </label>
+                  <div className="space-y-1">
+                    <label className="text-[10px] text-slate-400 uppercase">Contact Work Email</label>
                     <input
-                      type="text"
-                      defaultValue="Q3 / Q4 Shipping Season"
-                      className="w-full glass-input rounded-xl px-3.5 py-2 text-xs text-cream outline-none"
+                      type="email"
+                      required
+                      value={inquiryData.contactEmail}
+                      onChange={(e) => setInquiryData({ ...inquiryData, contactEmail: e.target.value })}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-gold-muted"
                     />
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  className="shimmer-button w-full py-3 bg-cream hover:bg-gold-muted text-deep-black font-sans text-xs font-bold rounded-xl transition-all shadow-lg flex items-center justify-center gap-2"
-                >
-                  <span>Dispatch B2B Commodity RFQ</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] text-slate-400 uppercase">Inquiry Type</label>
+                    <select
+                      value={inquiryData.interest}
+                      onChange={(e) => setInquiryData({ ...inquiryData, interest: e.target.value })}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-gold-muted"
+                    >
+                      <option>Curated Sample Kit + Wholesale Price List</option>
+                      <option>Bulk Container Wholesale (FCL/LCL)</option>
+                      <option>Private Label / OEM Packaging</option>
+                      <option>Regional Distributor Partnership</option>
+                    </select>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] text-slate-400 uppercase">Estimated Monthly Volume</label>
+                    <input
+                      type="text"
+                      value={inquiryData.estimatedVolume}
+                      onChange={(e) => setInquiryData({ ...inquiryData, estimatedVolume: e.target.value })}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-gold-muted"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-amber-500/20"
+                  >
+                    <span>Generate Sample Sourcing Ticket</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </form>
             )}
           </div>

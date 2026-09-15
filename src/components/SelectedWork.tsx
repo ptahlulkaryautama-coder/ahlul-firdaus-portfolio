@@ -17,8 +17,16 @@ export default function SelectedWork() {
   const [selectedTech, setSelectedTech] = useState<string>("All Stack");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const categories = ["All", "Export Platform & Ecosystem", "Digital Community System", "SaaS Product System", "E-Commerce & Logistics", "Brand Strategy & Design"];
-  const popularTechs = ["All Stack", "Next.js", "TypeScript", "Supabase", "Escrow", "PWA", "PostgreSQL"];
+  const categories = [
+    "All",
+    "Commerce, Export & Sourcing Platform",
+    "Digital Community System",
+    "Community & Philanthropy",
+    "Business Ecosystem & Operating System",
+    "ESG & Industrial Reporting",
+    "FinTech & Wealth Operating System"
+  ];
+  const popularTechs = ["All Stack", "Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PWA", "Recharts"];
 
   const filteredProjects = projects.filter((p) => {
     const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
@@ -399,7 +407,7 @@ export default function SelectedWork() {
                 {activeProject.id === "cgv10" && (
                   <div className="space-y-3 pt-6 border-t border-graphite/40">
                     <h4 className="font-mono text-[10px] text-cream-dark/40 uppercase tracking-wider">
-                      Ecosystem Simulation (Warga Hub, Pengurus & TPQ)
+                      Resident Access Journey (Public, Resident &amp; Administrator)
                     </h4>
                     <Cgv10Demo />
                   </div>
@@ -409,7 +417,7 @@ export default function SelectedWork() {
                 {activeProject.id === "ooi" && (
                   <div className="space-y-3 pt-6 border-t border-graphite/40">
                     <h4 className="font-mono text-[10px] text-cream-dark/40 uppercase tracking-wider">
-                      B2B Trade Simulation (Escrow Calc, Customs & RFQ)
+                      Consolidated Shipping Estimator &amp; Sourcing Prototype (Batam FTZ Hub)
                     </h4>
                     <OoiDemo />
                   </div>

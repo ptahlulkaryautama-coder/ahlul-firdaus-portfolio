@@ -11,51 +11,49 @@ export interface Artifact {
 export const artifacts: Artifact[] = [
   {
     id: "ooi-system-architecture",
-    title: "OOI System Architecture Blueprint",
+    title: "OOI Product & Consolidation Architecture Blueprint",
     category: "Blueprint",
-    filename: "ooi_architecture_v2.1.yaml",
-    description: "Multi-service infrastructure layout mapping supply chain APIs, transaction escrow, and document pipelines.",
+    filename: "ooi_commerce_consolidation_v1.yaml",
+    description: "Multi-service infrastructure layout mapping verified brand cataloging, inquiry routing, and Batam FTZ consolidation pipelines.",
     language: "yaml",
     content: `services:
-  supplier-gateway:
-    image: ooi/supplier-portal:latest
+  catalog-gateway:
+    image: ooi/catalog-service:latest
     environment:
-      - DATABASE_URL=postgresql://db-replica.ooi.internal:5432/supplier
+      - DATABASE_URL=postgresql://db-replica.ooi.internal:5432/catalog
       - REDIS_CACHE=redis://redis-cluster.ooi.internal:6379
     ports:
       - "4000:4000"
     deploy:
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           cpus: '1.0'
           memory: 2Gi
 
-  document-vault:
-    image: ooi/compliance-vault:latest
-    description: "Processes custom clearance documents automatically"
+  batam-consolidation-hub:
+    image: ooi/fulfillment-hub:latest
+    description: "Coordinates multi-supplier package consolidation, packaging specs, and dispatch at Batam FTZ"
     volumes:
-      - trade-docs:/var/lib/ooi/vault
+      - hub-manifests:/var/lib/ooi/manifests
     depends_on:
-      - supplier-gateway
+      - catalog-gateway
 
-  payment-escrow-bridge:
-    image: ooi/escrow-bridge:latest
-    security_context:
-      read_only_root_filesystem: true
-    secrets:
-      - STRIPE_ESCROW_SIGNING_KEY
-      - INDONESIAN_CUSTOMS_API_CERT
+  b2b-inquiry-engine:
+    image: ooi/inquiry-router:latest
+    environment:
+      - NOTIFICATION_WEBHOOK=https://api.ooi.internal/hooks/inquiry
+      - CRM_SYNC_CHANNEL=wholesale-leads
 
 volumes:
-  trade-docs:
+  hub-manifests:
     driver: aws-efs
     driver_opts:
-      performanceMode: maxIO`
+      performanceMode: generalPurpose`
   },
   {
     id: "cgv10-db-schema",
-    title: "CGV10 Supabase Database Schema",
+    title: "Portal Warga CGV Database Schema",
     category: "Database Schema",
     filename: "cgv10_portal_schema.sql",
     description: "Relational structure detailing household tracking, resident authentication, and ledger associations.",

@@ -12,6 +12,9 @@ import AlIkhlasDemo from "../../../components/work/AlIkhlasDemo";
 import CorumDemo from "../../../components/work/CorumDemo";
 import SakkuDemo from "../../../components/work/SakkuDemo";
 import ArchitectureDiagram from "../../../components/work/ArchitectureDiagram";
+import ProjectGallery from "../../../components/work/ProjectGallery";
+import AccessArchitectureFlow from "../../../components/work/AccessArchitectureFlow";
+import MasjidArchitectureFlow from "../../../components/work/MasjidArchitectureFlow";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -184,38 +187,291 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         </header>
 
-        {/* Screenshot Gallery — shown if project has images */}
-        {project.images && project.images.length > 0 && (
+        {/* Screenshot Gallery / System Preview with Click-to-Enlarge Lightbox */}
+        <ProjectGallery
+          projectId={project.id}
+          projectName={project.name}
+          images={project.images || []}
+        />
+
+        {/* 3-Tier Access Architecture Explanatory Section for CGV10 */}
+        {project.id === "cgv10" && (
           <section className="mb-16">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-slate-400 font-semibold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-teal-400" />
-                System Preview
-              </h2>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-teal-400 font-bold block mb-1">
+                  System Hierarchy
+                </span>
+                <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                  <span>3-Tier Access Architecture</span>
+                </h2>
+              </div>
+              <span className="text-xs font-mono text-slate-400 bg-slate-900 border border-slate-700/60 px-3 py-1 rounded-full">
+                Strict Role Separation
+              </span>
             </div>
-            <div className="grid grid-cols-1 gap-4">
-              {project.images.map((src, i) => (
-                <div
-                  key={i}
-                  className="relative w-full rounded-2xl overflow-hidden border border-slate-800 shadow-2xl group"
-                  style={{ aspectRatio: "16/9" }}
-                >
-                  <Image
-                    src={src}
-                    alt={`${project.name} — screenshot ${i + 1}`}
-                    fill
-                    className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 900px"
-                    priority={i === 0}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="font-mono text-[10px] text-teal-400 bg-slate-950/80 px-2.5 py-1 rounded-full border border-teal-500/30 uppercase tracking-wider">
-                      {project.name}
-                    </span>
-                  </div>
+
+            {/* Interactive Flow Chart Diagram (Architecture Baru) */}
+            <div className="mb-8">
+              <AccessArchitectureFlow />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Layer 1: Public */}
+              <div className="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 space-y-4 hover:border-teal-500/40 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-teal-400 font-bold uppercase bg-teal-950/60 px-2.5 py-1 rounded-full border border-teal-500/30">
+                    Tier 01 // Public
+                  </span>
                 </div>
-              ))}
+                <h3 className="text-lg font-bold text-white">Public Portal</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Open community reference point accessible to all visitors and residents without authentication.
+                </p>
+                <ul className="space-y-2 text-xs text-slate-300 font-mono">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span>Community Homepage</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span>News &amp; Neighborhood Notices</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span>Leadership &amp; Committee Contacts</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span>Public Transparency Information</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span>Public PALUGADA UMKM Listings</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span>Resident Sign In &amp; Registration</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Layer 2: Authenticated Resident */}
+              <div className="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 space-y-4 hover:border-emerald-500/40 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-emerald-400 font-bold uppercase bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-500/30">
+                    Tier 02 // Resident
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-white">Authenticated Resident Portal</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Personalized resident workspace unlocked upon secure authentication for services, finance, and trade.
+                </p>
+                <ul className="space-y-2 text-xs text-slate-300 font-mono">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Personalized Resident Dashboard</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Environmental Issue Reporting</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Administrative Document Requests</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Photo Evidence Attachments</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Community Finance &amp; Kas RT View</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>PALUGADA Listing Registration</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Installable PWA Experience</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Layer 3: Authorized Admin */}
+              <div className="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 space-y-4 hover:border-amber-500/40 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-amber-400 font-bold uppercase bg-amber-950/60 px-2.5 py-1 rounded-full border border-amber-500/30">
+                    Tier 03 // Admin
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-white">Authorized Admin Operations</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Dedicated administrator operations center for neighborhood management, verification, and moderation.
+                </p>
+                <ul className="space-y-2 text-xs text-slate-300 font-mono">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Operational Overview Dashboard</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Resident Data Administration</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Service Request Review &amp; Follow-up</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Contribution &amp; Dues Verification</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>PALUGADA Marketplace Moderation</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>News &amp; Content Management</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Role-Based Operational Security</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Community Information & Stewardship Architecture for Masjid Al Ikhlas */}
+        {project.id === "masjid-al-ikhlas" && (
+          <section className="mb-16">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#C9A55A] font-bold block mb-1">
+                  System Hierarchy &amp; Stewardship
+                </span>
+                <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                  <span>Community Information &amp; Stewardship Architecture</span>
+                </h2>
+              </div>
+              <span className="text-xs font-mono text-emerald-400 bg-[#0E3828] border border-[#C9A55A]/40 px-3 py-1 rounded-full font-bold">
+                Faith &amp; Civic Tech Model
+              </span>
+            </div>
+
+            {/* Interactive Flow Chart Diagram (Masjid Architecture) */}
+            <div className="mb-8">
+              <MasjidArchitectureFlow />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Layer 1: Public & Jamaah */}
+              <div className="bg-[#0C1810]/60 border border-[#0E3828] rounded-2xl p-6 space-y-4 hover:border-emerald-500/40 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-emerald-400 font-bold uppercase bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-500/30">
+                    Tier 01 // Jamaah &amp; Public
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-white">Worship &amp; Education Gateway</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Open community access point for daily prayer timetables, TPQ education curriculum, and warta publications.
+                </p>
+                <ul className="space-y-2 text-xs text-slate-300 font-mono">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Dynamic Batam Prayer Times &amp; Countdown</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>TPQ Al-Mardhotillah Student Portal</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Kajian Schedule &amp; Agenda Calendar</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Media Hub &amp; Khutbah Archive</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Installable Mobile PWA Experience</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Layer 2: Financial Transparency */}
+              <div className="bg-[#0C1810]/60 border border-[#0E3828] rounded-2xl p-6 space-y-4 hover:border-[#C9A55A]/40 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-[#C9A55A] font-bold uppercase bg-amber-950/60 px-2.5 py-1 rounded-full border border-[#C9A55A]/30">
+                    Tier 02 // Transparency
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-white">Public Kas &amp; Infaq Guidance</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Open financial summaries and official donation channels building trusted community stewardship.
+                </p>
+                <ul className="space-y-2 text-xs text-slate-300 font-mono">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A55A]" />
+                    <span>Published Monthly Cash Summaries</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A55A]" />
+                    <span>Social &amp; Friday Program Balances</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A55A]" />
+                    <span>Verified Official QRIS Guidance</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A55A]" />
+                    <span>Bank Transfer Verification Workflow</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A55A]" />
+                    <span>100% Donor Privacy Protection</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Layer 3: DKM Stewardship */}
+              <div className="bg-[#0C1810]/60 border border-[#0E3828] rounded-2xl p-6 space-y-4 hover:border-amber-500/40 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-amber-400 font-bold uppercase bg-amber-950/60 px-2.5 py-1 rounded-full border border-amber-500/30">
+                    Tier 03 // Protected
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-white">DKM Admin &amp; Reconciliation</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Protected administrative workspace for monthly financial bookkeeping, reconciliation, and bulletin management.
+                </p>
+                <ul className="space-y-2 text-xs text-slate-300 font-mono">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Cash Flow &amp; Expense Composition</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Ledger Reconciliation Operations</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Official Warta &amp; News Publishing</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>TPQ Santri &amp; Program Administration</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span>Demonstration State Compliance</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </section>
         )}
@@ -231,16 +487,16 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <ArchitectureDiagram projectId={project.id} />
         </section>
 
-        {/* Dynamic Interactive Demo Preview section if available */}
+        {/* Dynamic Interactive Demo Preview section */}
         {project.id === "cgv10" && (
           <section className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-cream flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-gold-muted" />
-                Interactive System Prototype
+                Resident Access Journey (Public, Resident &amp; Administrator)
               </h2>
-              <span className="text-xs font-mono text-gold-muted glass-badge px-2.5 py-1 rounded-full font-bold">
-                Live Interactive Component
+              <span className="text-xs font-mono text-emerald-400 glass-badge px-2.5 py-1 rounded-full font-bold">
+                Live Interactive Prototype
               </span>
             </div>
             <Cgv10Demo />
@@ -252,7 +508,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-cream flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-gold-muted" />
-                Interactive Trade Simulation (Escrow, Customs &amp; RFQ)
+                Interactive Consolidated Shipping Estimator &amp; Sourcing Flow
               </h2>
               <span className="text-xs font-mono text-gold-muted glass-badge px-2.5 py-1 rounded-full font-bold">
                 Live Interactive Component
@@ -281,11 +537,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <section className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-cream flex items-center gap-2">
-                <Terminal className="w-5 h-5 text-gold-muted" />
-                Interactive Digital Ecosystem Prototype (Prayer, Financial Ledger &amp; Agenda)
+                <Terminal className="w-5 h-5 text-[#C9A55A]" />
+                Digital Mosque Journey Explorer (Jamaah, TPQ, Supporter &amp; DKM)
               </h2>
-              <span className="text-xs font-mono text-gold-muted glass-badge px-2.5 py-1 rounded-full font-bold">
-                Live Interactive Component
+              <span className="text-xs font-mono text-emerald-400 glass-badge px-2.5 py-1 rounded-full font-bold">
+                Interactive Journey Explorer
               </span>
             </div>
             <AlIkhlasDemo />
