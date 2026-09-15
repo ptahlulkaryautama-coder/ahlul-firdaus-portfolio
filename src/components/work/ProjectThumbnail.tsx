@@ -26,6 +26,8 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
             src="/screenshots/ooi-portfolio-thumbnail-v2.png"
             alt="OOI Origin of Indonesia premium food marketplace and global sourcing platform"
             fill
+            unoptimized
+            priority
             className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
           />
