@@ -298,94 +298,100 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     ]
   },
   oneecos: {
-    title: "OneEcos Business Operating System",
+    title: "OneEcos Trade Operations Architecture",
     subtitle: "People Execute. OneEcos Connects. Business Scales.",
-    badgeText: "A Fundamental Stage",
+    badgeText: "B2B Trade Workflow Architecture",
     badgeColor: "cyan",
     description:
-      "A Fundamental Stage (Live Order-to-Cash engine) & OneEcos Enterprise Stage roadmap (AI Insights, Workflow Alerts, Integrated Data & Compliance Audit Trail).",
+      "Architecture model illustrating the connected operational chain: Commercial Records, Operational Execution, Trade & Logistics, Financial Control, Decision Support, and Platform Foundation.",
     nodes: [
       {
-        id: "sales",
-        name: "1. Sales Order",
-        subtitle: "Capture | Validate | Confirm",
+        id: "commercial",
+        name: "1. Commercial Records",
+        subtitle: "Buyers | Products | Quotes | Orders",
         category: "Client",
-        icon: <Globe className="w-5 h-5 text-cyan-400" />,
+        icon: <Layers className="w-5 h-5 text-cyan-400" />,
         status: "Active",
-        description: "Omnichannel order capture, customer validation, and inventory allocation.",
+        description: "Maintains linked commercial account profiles, SKU & carton specifications, RFQ inbox, and confirmed sales orders.",
         specs: [
-          { label: "Orders", value: "1,246 Active (+12.5%)" },
-          { label: "Validation", value: "Automated Credit Check" }
+          { label: "Flow", value: "Buyer → Quote → Order" },
+          { label: "Catalog", value: "SKU, MOQ & CBM specs" },
+          { label: "Records", value: "Sample Workspace Data" }
         ],
-        connections: ["procurement", "mfg"]
+        connections: ["execution", "decision_support"]
       },
       {
-        id: "procurement",
-        name: "2. Procurement",
-        subtitle: "Source | Order | Manage",
-        category: "Gateway",
-        icon: <Cpu className="w-5 h-5 text-blue-400" />,
-        status: "Idle",
-        description: "Vendor PO generation, raw material sourcing, and supplier lead-time management.",
-        specs: [
-          { label: "Suppliers", value: "Multi-Vendor Network" },
-          { label: "Availability", value: "99.2% Raw Material" }
-        ],
-        connections: ["mfg"]
-      },
-      {
-        id: "mfg",
-        name: "3. Manufacturing",
-        subtitle: "Plan | Produce | Monitor",
+        id: "execution",
+        name: "2. Operational Execution",
+        subtitle: "Procurement | Work Orders | Packing",
         category: "Logic",
-        icon: <Building2 className="w-5 h-5 text-indigo-400" />,
-        status: "Idle",
-        description: "Work order scheduling, shop floor machine telemetry, and quality control batch audits.",
+        icon: <Building2 className="w-5 h-5 text-blue-400" />,
+        status: "Active",
+        description: "Coordinates supplier procurement requests, work-order status, production readiness gates, and export packaging.",
         specs: [
-          { label: "Yield", value: "98.4% Quality Pass" },
-          { label: "OEE", value: "Realtime Telemetry" }
+          { label: "Coordination", value: "Work Order Pipeline" },
+          { label: "Readiness", value: "Material & QC Gates" },
+          { label: "State", value: "Operational Prototype" }
         ],
-        connections: ["shipment"]
+        connections: ["logistics", "decision_support"]
       },
       {
-        id: "shipment",
-        name: "4. Shipment",
-        subtitle: "Pack | Ship | Track",
+        id: "logistics",
+        name: "3. Trade & Logistics",
+        subtitle: "Shipments | Routing | Trade Docs",
         category: "Logic",
         icon: <Ship className="w-5 h-5 text-teal-400" />,
         status: "Idle",
-        description: "Container load planning, carrier dispatch, bill of lading generation, and global vessel tracking.",
+        description: "Tracks dispatch milestones, container loading references, ETD/ETA routing, and export document preview sets.",
         specs: [
-          { label: "Shipments", value: "982 Active (+8.7%)" },
-          { label: "On-Time", value: "96.4% Delivery Rate" }
+          { label: "Dispatch", value: "Route & Container Ref" },
+          { label: "Documents", value: "PEB, BL, Packing List" },
+          { label: "Tracking", value: "Milestone Log" }
         ],
-        connections: ["invoice"]
+        connections: ["finance", "decision_support"]
       },
       {
-        id: "invoice",
-        name: "5. Invoice",
-        subtitle: "Bill | Reconcile | Send",
-        category: "Logic",
+        id: "finance",
+        name: "4. Financial Control",
+        subtitle: "Invoices | Milestones | Collection",
+        category: "External",
         icon: <FileCheck className="w-5 h-5 text-emerald-400" />,
         status: "Idle",
-        description: "Automated B2B tax invoicing, multi-currency matching, and customer portal dispatch.",
+        description: "Monitors billing milestones, invoice status, overdue collection follow-ups, and monthly operational records.",
         specs: [
-          { label: "Invoicing", value: "Automated Tax & VAT" },
-          { label: "Reconciliation", value: "Realtime Matching" }
+          { label: "Billing", value: "Milestone Invoices" },
+          { label: "Collection", value: "Overdue Follow-up" },
+          { label: "Telemetry", value: "Sample Workspace Data" }
         ],
-        connections: ["payment"]
+        connections: ["platform"]
       },
       {
-        id: "payment",
-        name: "6. Payment",
-        subtitle: "Collect | Match | Settle",
-        category: "External",
-        icon: <ShieldCheck className="w-5 h-5 text-emerald-300" />,
-        status: "Idle",
-        description: "Payment collection, Virtual Account & Escrow matching, ledger posting, and cash settlement.",
+        id: "decision_support",
+        name: "5. Decision Support",
+        subtitle: "Daily Brief | Alerts | Next Actions",
+        category: "Gateway",
+        icon: <Zap className="w-5 h-5 text-amber-400" />,
+        status: "Active",
+        description: "Surfaces operational exception alerts, guided next actions, attention triggers, and KPI reference views.",
         specs: [
-          { label: "Cash Flow", value: "$8.42M Collected (+15.3%)" },
-          { label: "Settlement", value: "Automated Ledger Posting" }
+          { label: "Brief", value: "Daily Context & Triggers" },
+          { label: "Logic", value: "Rule-Based Alerts" },
+          { label: "Modes", value: "Operator & Executive" }
+        ],
+        connections: ["platform"]
+      },
+      {
+        id: "platform",
+        name: "6. Platform Foundation",
+        subtitle: "Data Schema | Auth | Roadmap",
+        category: "Database",
+        icon: <Database className="w-5 h-5 text-indigo-400" />,
+        status: "Idle",
+        description: "Client-side state management, backup/export utilities, and planned PostgreSQL/Supabase multi-user architecture.",
+        specs: [
+          { label: "Current", value: "Reactive Prototype State" },
+          { label: "Roadmap", value: "Postgres + Supabase Auth" },
+          { label: "Security", value: "RBAC & Audit History" }
         ],
         connections: []
       }
@@ -393,26 +399,26 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     simulationSteps: [
       {
         step: 1,
-        title: "1. Sales Order Captured",
-        activeNodes: ["sales", "procurement"],
-        activeConnections: [["sales", "procurement"]],
-        logMessage: "SALES_ENGINE -> Order #SO-1246 captured & credit validated. Material PO dispatched.",
+        title: "1. Commercial Ingestion & Quotation",
+        activeNodes: ["commercial", "decision_support"],
+        activeConnections: [["commercial", "decision_support"]],
+        logMessage: "COMMERCIAL_CHAIN -> Buyer Al-Noor Trading linked to Quote QT-2026-001 and Sales Order SO-2026-001.",
         status: "INITIALIZING"
       },
       {
         step: 2,
-        title: "2. Manufacturing & Packing",
-        activeNodes: ["procurement", "mfg", "shipment"],
-        activeConnections: [["procurement", "mfg"], ["mfg", "shipment"]],
-        logMessage: "MFG_SCHEDULER -> Work order completed (Yield 98.4%). Container dispatched to carrier.",
+        title: "2. Operational Execution & Readiness",
+        activeNodes: ["commercial", "execution", "decision_support"],
+        activeConnections: [["commercial", "execution"], ["execution", "decision_support"]],
+        logMessage: "EXECUTION_STAGE -> Work Order WO-2026-001 coordinated; material readiness verified; QC gate passed.",
         status: "PROCESSING"
       },
       {
         step: 3,
-        title: "3. Invoicing & Payment Settlement",
-        activeNodes: ["shipment", "invoice", "payment"],
-        activeConnections: [["shipment", "invoice"], ["invoice", "payment"]],
-        logMessage: "FINANCE_CORE -> Invoice #INV-982 reconciled. $8.42M Payment matched and posted to ledger.",
+        title: "3. Dispatch, Documentation & Financial Control",
+        activeNodes: ["execution", "logistics", "finance", "platform"],
+        activeConnections: [["execution", "logistics"], ["logistics", "finance"], ["finance", "platform"]],
+        logMessage: "FINANCE_LOGISTICS -> Shipment EXP-2026-001 logged with docs preview; Invoice INV-2026-001 linked for collection tracking.",
         status: "SUCCESS"
       }
     ]

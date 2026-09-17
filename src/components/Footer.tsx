@@ -44,8 +44,8 @@ FEATURED PROJECTS & ECOSYSTEMS
 3. Masjid Al Ikhlas Digital Presence (Community Philanthropy Hub)
    • Live digital presence featuring weekly transparent financial disbursement ledgers.
 
-4. OneEcos (High-Density SaaS Cockpit)
-   • Operations dashboard consolidating multi-channel business metrics with real-time threshold alerts.
+4. OneEcos — B2B Trade Operations System (Operational Prototype)
+   • Connected operational workspace organizing buyers, quotes, orders, fulfillment, shipments, documents, and invoices in one structured trade workflow.
 
 ==================================================
 ENGAGEMENT MODELS

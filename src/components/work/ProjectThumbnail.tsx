@@ -3,12 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { 
-  Building2, 
-  CheckCircle2, 
-  Clock,
-  Sparkles,
-  ShoppingBag,
-  Users
+  CheckCircle2
 } from "lucide-react";
 
 interface ProjectThumbnailProps {
@@ -66,42 +61,16 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
 
     case "oneecos":
       return (
-        <div className="w-full h-44 rounded-xl bg-gradient-to-br from-[#061525] via-[#040D18] to-[#0A223B] border border-cyan-500/30 p-3.5 relative overflow-hidden flex flex-col justify-between group-hover:border-cyan-400/60 transition-colors">
-          <div className="absolute -right-6 -bottom-6 w-36 h-36 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all duration-500" />
-          
-          <div className="relative z-10 flex items-center justify-between">
-            <div className="flex items-center gap-2 bg-cyan-950/80 border border-cyan-500/40 px-2 py-0.5 rounded-md">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo/oneecos-logo.png" alt="OneEcos Logo" className="w-3.5 h-3.5 object-contain" />
-              <span className="font-mono text-[9px] text-cyan-300 uppercase tracking-wider font-bold">OneEcos OS</span>
-            </div>
-            <span className="font-mono text-[8.5px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30 font-semibold">
-              A Fundamental Stage
-            </span>
-          </div>
-
-          {/* Connected Transaction Flow Pipeline */}
-          <div className="relative z-10 my-auto bg-cyan-950/40 border border-cyan-500/25 p-2 rounded-lg space-y-1">
-            <div className="text-[7.5px] font-mono text-cyan-300/80 uppercase text-center font-semibold tracking-wider">
-              Connected Order-to-Cash Transaction Flow
-            </div>
-            <div className="flex items-center justify-between text-[7.5px] font-mono font-bold text-cream gap-0.5 overflow-x-auto">
-              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1 py-0.5 rounded text-cyan-200 text-[7px] shrink-0">RFQ</span>
-              <span className="text-cyan-400 text-[7px]">→</span>
-              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1 py-0.5 rounded text-cyan-200 text-[7px] shrink-0">Quote</span>
-              <span className="text-cyan-400 text-[7px]">→</span>
-              <span className="bg-cyan-950 border border-cyan-400 px-1 py-0.5 rounded text-cyan-300 font-extrabold text-[7px] shrink-0">Sales Order</span>
-              <span className="text-cyan-400 text-[7px]">→</span>
-              <span className="bg-cyan-900/40 border border-cyan-500/30 px-1 py-0.5 rounded text-cyan-200 text-[7px] shrink-0">Procure</span>
-              <span className="text-cyan-400 text-[7px]">→</span>
-              <span className="bg-emerald-900/50 border border-emerald-500/40 px-1 py-0.5 rounded text-emerald-300 text-[7px] shrink-0">Billing</span>
-            </div>
-          </div>
-
-          <div className="relative z-10 flex items-center justify-between text-[8.5px] font-mono text-cream-dark/70 pt-1.5 border-t border-cyan-900/40">
-            <span className="text-cream-dark/80 font-medium truncate">People Execute. OneEcos Connects.</span>
-            <span className="text-cyan-400 font-bold shrink-0">Zero Handoff Loss</span>
-          </div>
+        <div className="w-full h-44 rounded-xl border border-cyan-500/30 relative overflow-hidden bg-slate-950 group-hover:border-cyan-400/60 transition-colors">
+          <Image
+            src="/Image/project/oneecos/oneecos-portfolio-thumbnail-v2.png"
+            alt="OneEcos connected B2B trade workflow and export operations dashboard"
+            fill
+            unoptimized
+            priority
+            className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+          />
         </div>
       );
 

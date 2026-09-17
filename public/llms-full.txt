@@ -30,11 +30,13 @@ Ahlul Firdaus is a Founder, Product Strategist, UI/UX Designer & AI-Assisted Ful
 - **Overview**: A responsive public information website for Masjid Al Ikhlas Cipta Greenville, making prayer schedules, mosque programs, community updates, donation guides, and published financial reports accessible.
 - **Tech Stack**: HTML5, Tailwind CSS, JavaScript, SVG Design Assets, Netlify.
 
-### 4. OneEcos Operational SaaS Cockpit
-- **Classification**: Proof of Concept / Dashboard System
-- **Role**: UI/UX Designer & Front-End Developer
-- **Overview**: High-density operational management dashboard exploring multi-warehouse monitoring and telemetry data visualization.
-- **Tech Stack**: Next.js, React, Recharts, Tailwind CSS.
+### 4. OneEcos — B2B Trade Operations System
+- **Classification**: Founder-Led Product — Operational Prototype
+- **Role**: Product Strategy, Operational Workflow Design, UI/UX & AI-Assisted Development
+- **Duration**: Founder-Led Operational Prototype
+- **Overview**: Connected operational workspace that helps small B2B trading and export teams organize buyers, quotations, orders, fulfillment, shipments, export documents, invoices, and follow-ups in one structured workflow.
+- **Current Scope**: Validates the 9-step trade chain (`Buyer → Product → Quote → Sales Order → Work Order → Shipment → Documents → Invoice → Collection`) with Simple Daily Workspace for operators and Executive Command Center for leadership.
+- **Tech Stack**: Next.js, TypeScript, Tailwind CSS, React, Vercel.
 
 ---
 

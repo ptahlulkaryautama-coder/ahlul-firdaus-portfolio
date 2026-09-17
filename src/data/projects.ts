@@ -7,7 +7,7 @@ export interface Project {
   challenge: string;
   solution: string;
   status: string;
-  statusBadge: "Live Project" | "Client Work" | "Active Concept" | "Proof of Concept" | "In Development" | "Founder-Led Product — Active Prototype" | "Founder-Led Product — Phase 1 Launch" | "Founder-Led Civic-Tech Product — Live Community Platform" | "Community Portal — In Development" | "Live Community Project" | "A Fundamental Stage";
+  statusBadge: "Live Project" | "Client Work" | "Active Concept" | "Proof of Concept" | "In Development" | "Founder-Led Product — Active Prototype" | "Founder-Led Product — Phase 1 Launch" | "Founder-Led Civic-Tech Product — Live Community Platform" | "Community Portal — In Development" | "Live Community Project" | "A Fundamental Stage" | "Founder-Led Product — Operational Prototype";
   context: string;
   techStack: string[];
   duration: string;
@@ -172,33 +172,45 @@ export const projects: Project[] = [
   },
   {
     id: "oneecos",
-    name: "OneEcos Business Operating System",
-    category: "Business Ecosystem & Operating System",
-    oneLiner: "People Execute. OneEcos Connects. Business Scales — transforming fragmented manual handoffs into one connected Order-to-Cash transaction flow.",
-    problem: "Traditional businesses struggle with operational chaos: 12-14 disconnected functions, 18+ manual spreadsheet handoffs, redundant data entry, and endless status meetings across disparate tools, causing high overhead and delayed cash settlement.",
-    challenge: "Unifying the entire end-to-end commercial lifecycle—from initial RFQ and Quotation to Sales Order, Procurement, Production, Logistics, Invoicing, and Payment Collection—into a single coherent transaction flow.",
-    solution: "Designed OneEcos: A connected Business Operating System where every department works off a single source of truth. 'A Fundamental Stage' establishes the connected 8-phase Order-to-Cash engine, while 'OneEcos Enterprise Stage' introduces AI telemetry and automated workflow triggers.",
-    status: "A Fundamental Stage (Live) | Enterprise Stage (In Development)",
-    statusBadge: "A Fundamental Stage",
-    context: "Unified business operating system orchestrating the complete Order-to-Cash commercial lifecycle.",
-    techStack: ["React", "TypeScript", "Recharts", "Framer Motion", "Tailwind CSS", "REST APIs"],
-    duration: "Ongoing Product Evolution",
-    role: "Product Strategist, UI/UX Designer & Systems Architect",
-    images: ["/screenshots/oneecos-dashboard.png", "/screenshots/oneecos-cockpit.jpg"],
-    longDescription: "OneEcos fundamentally rethinks how modern enterprises scale: instead of employees manually coordinating business processes across disjointed spreadsheets and chat apps, OneEcos connects every operational step around a unified transaction flow. 'A Fundamental Stage' delivers real-time visibility across the 8 core phases of Order-to-Cash, dramatically reducing coordination friction and accelerating time-to-cash.",
+    name: "OneEcos — B2B Trade Operations System",
+    category: "B2B Trade, Export Operations & Business Workflow",
+    oneLiner: "From scattered records to one connected trade workflow.",
+    problem: "Small trading and export teams often coordinate work across spreadsheets, messaging apps, manually prepared documents, and individual follow-up lists. The information may exist, but the operational context is fragmented: a buyer record is separated from its quotation, the accepted quote is separated from fulfillment, and shipment or payment follow-ups depend on individual memory.",
+    challenge: "The core challenge was not simply to create another dashboard. It was to design a shared operational structure that connects commercial intent with execution: who the buyer is, what was quoted, what was confirmed, what must be fulfilled, what has shipped, which documents are required, and what remains unpaid.",
+    solution: "OneEcos organizes those activities around linked business records and guided next actions. The interface provides two levels of detail: a simple daily workspace for operators and a higher-density command center for founders or managers monitoring exceptions and workflow health.",
+    status: "Founder-Led Product — Operational Prototype",
+    statusBadge: "Founder-Led Product — Operational Prototype",
+    context: "People Execute. OneEcos Connects. Business Scales — connected operational workspace for small B2B trading and export teams.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "React", "Vercel"],
+    duration: "Founder-Led Operational Prototype",
+    role: "Product Strategy, Operational Workflow Design, UI/UX & AI-Assisted Development",
+    images: [
+      "/Image/project/oneecos/oneecos-portfolio-thumbnail-v2.png",
+      "/Image/project/oneecos/OneEcos.png"
+    ],
+    liveUrl: undefined,
+    githubUrl: undefined,
+    longDescription: "OneEcos is a connected operational workspace that helps small trading and export teams organize buyers, quotations, orders, fulfillment, shipments, documents, invoices, and follow-ups through one structured workflow.\n\nRather than forcing small teams into oversized enterprise platforms or leaving them with disjointed spreadsheets, OneEcos models the complete operational chain: Buyer → Product → Quote → Sales Order → Work Order → Shipment → Documents → Invoice → Collection.",
     keyDeliverables: [
-      "A Fundamental Stage: Core 8-Phase Order-to-Cash transaction engine (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment)",
-      "Single-source-of-truth architecture cutting manual handoffs from 18+ to 5 and duplicate data entries from 8+ to 1",
-      "High-density executive operational cockpit with real-time financial telemetry",
-      "Role-based visibility tailored for Sales, Planning, Purchasing, Production QC, Logistics, and Finance",
-      "Enterprise Stage Roadmap: Automated exception alerts, AI insights, and compliance audit logging"
+      "Connected trade-record workflow (Buyer, Product, Quote, Order, Work Order, Shipment, Docs, Invoice)",
+      "Daily Brief and Current Work contextual workspace",
+      "Guided next actions and operational readiness gates",
+      "Rule-based decision support prototype and prototype attention alerts",
+      "Export-document previews and record links",
+      "CBM and container-loading reference calculators",
+      "Financial and KPI reference telemetry (sample workspace data)",
+      "Dual workspace modes: Simple Daily Workspace & Executive Command Center",
+      "Workspace data backup and export utilities",
+      "Next-stage roadmap (PostgreSQL/Supabase persistence, RBAC, multi-user audit history)"
     ],
     keyDecisions: [
-      "Anchored the system around the core paradigm: 'People Execute. OneEcos Connects. Business Scales.'",
-      "Placed the Sales Order at the mathematical center of the transaction graph to eliminate manual status inquiries.",
-      "Engineered high-density, low-clutter interfaces to provide executives and operators with immediate situational awareness."
+      "One connected record chain — Buyers, products, quotations, orders, work orders, shipments, documents, and invoices are treated as related operational records.",
+      "Action before analytics — The product prioritizes the next required action instead of displaying metrics without operational context.",
+      "Manual-first foundation — Core workflows are modeled and tested before introducing external integrations or automation.",
+      "Two information densities — Operators receive a guided workflow, while managers receive exception-focused oversight.",
+      "Visible readiness — The prototype identifies what is functional, what remains manual, and what is planned for later phases."
     ],
-    outcome: "Engineered a foundational business operating system that empowers enterprises to process higher transaction volumes with lower coordination overhead, allowing revenue to scale without proportional headcount growth."
+    outcome: "The current result is an operational prototype that demonstrates how fragmented trade activities can be translated into one coherent workspace. It validates information architecture, workflow relationships, interface hierarchy, and the transition from daily operator actions to management oversight without claiming unverified enterprise adoption."
   },
   {
     id: "corum",

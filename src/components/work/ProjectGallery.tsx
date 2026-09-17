@@ -12,8 +12,7 @@ import {
   ChevronRight,
   ShieldCheck,
   RotateCcw,
-  ExternalLink,
-  Layers
+  ExternalLink
 } from "lucide-react";
 
 export interface GalleryItem {
@@ -37,10 +36,28 @@ export default function ProjectGallery({
 }: ProjectGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   // Define structured gallery items for CGV10 or fallback for other projects
   const getGalleryItems = (): GalleryItem[] => {
+    if (projectId === "oneecos") {
+      return [
+        {
+          src: "/Image/project/oneecos/oneecos-portfolio-thumbnail-v2.png",
+          title: "OneEcos — Connected Trade Operations Dashboard",
+          badge: "Hero & Executive Command Center",
+          alt: "OneEcos connected B2B trade workflow and export operations dashboard",
+          isPrimary: true,
+        },
+        {
+          src: "/Image/project/oneecos/OneEcos.png",
+          title: "OneEcos — System Architecture & Workflow Board",
+          badge: "Architecture & Brand Board",
+          alt: "OneEcos brand design reference and system architecture board",
+          isPrimary: false,
+        },
+      ];
+    }
+
     if (projectId === "cgv10") {
       return [
         {
@@ -175,6 +192,17 @@ export default function ProjectGallery({
         </span>
       </div>
 
+      {/* Sample Data Disclosure Banner for OneEcos */}
+      {projectId === "oneecos" && (
+        <div className="mb-6 p-4 rounded-xl bg-slate-900/70 border border-cyan-500/30 text-xs text-slate-300 flex items-start gap-3">
+          <ShieldCheck className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
+          <p className="leading-relaxed text-slate-300">
+            <strong className="text-white">Sample Workspace Data Disclosure:</strong>{" "}
+            Interface data shown in this case study is sample workspace data used to demonstrate workflow behavior. It does not represent audited customer activity, transaction volume, or financial performance.
+          </p>
+        </div>
+      )}
+
       {/* Privacy Notice Banner for CGV10 */}
       {projectId === "cgv10" && (
         <div className="mb-6 p-4 rounded-xl bg-slate-900/70 border border-slate-800 text-xs text-slate-300 flex items-start gap-3">
@@ -189,8 +217,89 @@ export default function ProjectGallery({
         </div>
       )}
 
-      {/* Structured Layout for CGV10 */}
-      {projectId === "cgv10" ? (
+      {/* Structured Layout for OneEcos */}
+      {projectId === "oneecos" ? (
+        <div className="space-y-4">
+          {/* Primary Large Screenshot (OneEcos Operational Dashboard) */}
+          {galleryItems[0] && (
+            <div
+              onClick={() => handleOpenModal(0)}
+              className="group relative w-full rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-400/60 shadow-2xl bg-slate-950 cursor-zoom-in transition-all duration-300"
+              style={{ aspectRatio: "16/9" }}
+            >
+              <Image
+                src={galleryItems[0].src}
+                alt={galleryItems[0].alt}
+                fill
+                unoptimized
+                priority
+                className="object-cover object-top group-hover:scale-[1.015] transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              
+              {/* Top Hover Hint */}
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                <span className="flex items-center gap-1.5 text-xs font-mono text-white bg-slate-900/90 border border-cyan-500/40 px-3 py-1.5 rounded-full shadow-xl backdrop-blur-sm">
+                  <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
+                  Click to View Full HD
+                </span>
+              </div>
+
+              {/* Bottom Label */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <span className="font-mono text-xs font-bold text-cyan-300 bg-slate-950/90 px-3.5 py-1.5 rounded-full border border-cyan-500/40 uppercase tracking-wider shadow-lg backdrop-blur-sm">
+                  {galleryItems[0].title}
+                </span>
+                <span className="hidden sm:inline-block text-[11px] font-mono text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded border border-slate-700">
+                  {galleryItems[0].badge}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Supporting Screenshots/Reference Board */}
+          {galleryItems.length > 1 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {galleryItems.slice(1).map((item, idx) => {
+                const actualIndex = idx + 1;
+                return (
+                  <div
+                    key={actualIndex}
+                    onClick={() => handleOpenModal(actualIndex)}
+                    className="group relative w-full rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 shadow-xl bg-slate-950 cursor-zoom-in transition-all duration-300"
+                    style={{ aspectRatio: "16/9" }}
+                  >
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      unoptimized
+                      className="object-cover object-top group-hover:scale-[1.025] transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent opacity-80 group-hover:opacity-50 transition-opacity" />
+                    
+                    {/* Hover Icon */}
+                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <span className="p-1.5 rounded-full bg-slate-950/90 border border-cyan-500/40 text-cyan-400 flex items-center justify-center shadow-lg">
+                        <ZoomIn className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+
+                    {/* Label */}
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <span className="font-mono text-[10.5px] font-bold text-slate-200 bg-slate-950/90 px-2.5 py-1 rounded-full border border-slate-700 group-hover:border-cyan-500/40 uppercase tracking-wider block truncate shadow backdrop-blur-sm">
+                        {item.title}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      ) : projectId === "cgv10" ? (
         <div className="space-y-4">
           {/* Primary Large Screenshot (Resident Portal) */}
           {galleryItems[0] && (

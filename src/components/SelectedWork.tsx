@@ -20,9 +20,9 @@ export default function SelectedWork() {
   const categories = [
     "All",
     "Commerce, Export & Sourcing Platform",
-    "Digital Community System",
-    "Community & Philanthropy",
-    "Business Ecosystem & Operating System",
+    "Civic Tech, Community Operations & Resident Services",
+    "Faith-Based Civic Tech, Education & Community Services",
+    "B2B Trade, Export Operations & Business Workflow",
     "ESG & Industrial Reporting",
     "FinTech & Wealth Operating System"
   ];
@@ -427,7 +427,7 @@ export default function SelectedWork() {
                 {activeProject.id === "oneecos" && (
                   <div className="space-y-3 pt-6 border-t border-graphite/40">
                     <h4 className="font-mono text-[10px] text-cream-dark/40 uppercase tracking-wider">
-                      SaaS Cockpit Simulation (Webhooks & Operations Matrix)
+                      Connected B2B Trade Workflow &amp; Operations Prototype
                     </h4>
                     <OneEcosDemo />
                   </div>

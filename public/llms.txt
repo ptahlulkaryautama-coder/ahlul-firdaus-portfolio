@@ -15,7 +15,7 @@
 - **OOI — Origin Of Indonesia** (https://ooindonesia.com): Founder-Led B2B export showcase platform & commodity catalog presenting premium Indonesian agricultural and manufactured products to global importers.
 - **CGV10 Portal Warga** (https://portalwargacgv.id): Live centralized community information hub, transparent Kas RT financial ledger, and PALUGADA resident marketplace for RT 010 / RW 021.
 - **Masjid Al-Ikhlas Digital Presence** (https://alikhlascgv.vercel.app/): Live public information hub featuring Batam prayer times with live countdown, weekly transparent Infaq accounting, and QRIS donation guides.
-- **OneEcos Business Operating System**: Unified commercial operating system orchestrating the 8-phase Order-to-Cash transaction lifecycle (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment).
+- **OneEcos — B2B Trade Operations System**: Founder-led operational prototype connecting buyers, quotations, orders, fulfillment, shipments, export documents, invoices, and follow-ups in one structured trade workflow.
 - **PT. Corum — Sustainability Reporting System**: Industrial ESG reporting package (SRP2026) consolidating 23 compliance parameters across 7 factory departments with offline-first client JSON data sync and PDF audit export.
 - **Sakku 2.0 — Privacy-First Wealth OS** (https://sakku.ahlulfirdaus.com/): Zero-knowledge Local-First PWA personal & family financial operating system with conversational Indonesian 'Catat Cepat' parser, envelope budgeting, and multi-wallet Net Worth telemetry.
 

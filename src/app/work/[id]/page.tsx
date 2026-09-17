@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProjectById, getAllProjectIds } from "../../../data/projects";
 import Header from "../../../components/Header";
@@ -522,11 +521,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <section className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-cream flex items-center gap-2">
-                <Terminal className="w-5 h-5 text-gold-muted" />
-                Interactive Operations Cockpit Simulation
+                <Terminal className="w-5 h-5 text-cyan-400" />
+                Interactive Connected Trade Operations Prototype
               </h2>
-              <span className="text-xs font-mono text-gold-muted glass-badge px-2.5 py-1 rounded-full font-bold">
-                Live Interactive Component
+              <span className="text-xs font-mono text-cyan-300 glass-badge px-2.5 py-1 rounded-full font-bold">
+                Operational Prototype
               </span>
             </div>
             <OneEcosDemo />
