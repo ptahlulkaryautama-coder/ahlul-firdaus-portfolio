@@ -88,21 +88,49 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   const projectJsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: project.name,
-    description: project.oneLiner,
-    applicationCategory: project.category,
-    operatingSystem: "Web-based",
-    author: {
-      "@type": "Person",
-      name: "Ahlul Firdaus",
-      url: "https://ahlulfirdaus.com",
-    },
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": `https://ahlulfirdaus.com/work/${id}#application`,
+        name: project.name,
+        description: project.oneLiner,
+        applicationCategory: project.category,
+        operatingSystem: "Web-based",
+        author: {
+          "@type": "Person",
+          name: "Ahlul Firdaus",
+          url: "https://ahlulfirdaus.com",
+        },
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://ahlulfirdaus.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Selected Work",
+            item: "https://ahlulfirdaus.com/#selected-work",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: project.name,
+            item: `https://ahlulfirdaus.com/work/${id}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (

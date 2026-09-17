@@ -31,6 +31,20 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${artifact.title} | Technical Artifact`,
     description: artifact.description,
+    alternates: {
+      canonical: `https://ahlulfirdaus.com/artifacts/${id}`,
+    },
+    openGraph: {
+      title: `${artifact.title} | System Artifact`,
+      description: artifact.description,
+      url: `https://ahlulfirdaus.com/artifacts/${id}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title: `${artifact.title} | System Artifact`,
+      description: artifact.description,
+    },
   };
 }
 
@@ -42,8 +56,53 @@ export default async function ArtifactDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const artifactJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": `https://ahlulfirdaus.com/artifacts/${id}#code`,
+        name: artifact.title,
+        description: artifact.description,
+        programmingLanguage: artifact.language || "TypeScript",
+        author: {
+          "@type": "Person",
+          name: "Ahlul Firdaus",
+          url: "https://ahlulfirdaus.com",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://ahlulfirdaus.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "System Artifacts",
+            item: "https://ahlulfirdaus.com/#artifacts",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: artifact.title,
+            item: `https://ahlulfirdaus.com/artifacts/${id}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-teal-500 selection:text-slate-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(artifactJsonLd) }}
+      />
       <Header />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">

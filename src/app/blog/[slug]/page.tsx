@@ -72,14 +72,51 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const postJsonLd = {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.date,
-    author: {
-      "@type": "Person",
-      name: post.author.name,
-    },
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": `https://ahlulfirdaus.com/blog/${slug}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        inLanguage: "en-US",
+        mainEntityOfPage: `https://ahlulfirdaus.com/blog/${slug}`,
+        author: {
+          "@type": "Person",
+          name: post.author.name,
+          jobTitle: post.author.role,
+          url: "https://ahlulfirdaus.com",
+        },
+        publisher: {
+          "@type": "Person",
+          name: "Ahlul Firdaus",
+          url: "https://ahlulfirdaus.com",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://ahlulfirdaus.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "System Writings",
+            item: "https://ahlulfirdaus.com/blog",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: `https://ahlulfirdaus.com/blog/${slug}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (

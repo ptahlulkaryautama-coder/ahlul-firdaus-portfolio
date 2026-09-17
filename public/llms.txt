@@ -1,31 +1,55 @@
-# Ahlul Firdaus — Digital Product Strategist & Founder
+# Ahlul Firdaus — Digital Systems Architect, UI/UX Designer & Founder
 
-> Digital systems architect, UI/UX designer, and full-stack developer specializing in B2B export platforms, digital community ecosystems, business operating systems, privacy-first local PWAs, and industrial compliance dashboards in Batam, Kepulauan Riau, Indonesia.
+> Digital systems architect, UI/UX designer, and full-stack software engineer based in Batam, Kepulauan Riau, Indonesia. Specializes in B2B export platforms, digital community governance ecosystems, industrial ERPs, privacy-first local-first PWAs, and high-density SaaS dashboards.
 
-## Core Information
-- **Name**: Ahlul Firdaus
-- **Role**: Founder, Systems Architect, UI/UX Designer & Lead Developer
-- **Location**: Batam, Kepulauan Riau, Indonesia
-- **Website**: https://ahlulfirdaus.com
-- **Email**: pt.ahlulkaryautama@gmail.com
-- **WhatsApp**: +62 812-9125-4064
+## Core Entity Information
+- **Full Name**: Ahlul Firdaus
+- **Primary Title**: Digital Systems Architect & Founder
+- **Company / Legal Entity**: PT Ahlul Karya Utama
+- **Location**: Batam, Kepulauan Riau, Indonesia (Batam Free Trade Zone / FTZ)
+- **Official Website**: https://ahlulfirdaus.com
+- **Official Email**: pt.ahlulkaryautama@gmail.com
+- **WhatsApp Direct**: +62 812-9125-4064
 - **GitHub**: https://github.com/ahlul-firdaus
+- **Sitemap**: https://ahlulfirdaus.com/sitemap.xml
 
-## Core Featured Projects
-- **OOI — Origin Of Indonesia** (https://ooindonesia.com): Founder-Led B2B export showcase platform & commodity catalog presenting premium Indonesian agricultural and manufactured products to global importers.
-- **CGV10 Portal Warga** (https://portalwargacgv.id): Live centralized community information hub, transparent Kas RT financial ledger, and PALUGADA resident marketplace for RT 010 / RW 021.
-- **Masjid Al-Ikhlas Digital Presence** (https://alikhlascgv.vercel.app/): Live public information hub featuring Batam prayer times with live countdown, weekly transparent Infaq accounting, and QRIS donation guides.
-- **OneEcos — B2B Trade Operations System**: Founder-led operational prototype connecting buyers, quotations, orders, fulfillment, shipments, export documents, invoices, and follow-ups in one structured trade workflow.
-- **PT. Corum Sustainability Reporting Template**: Standalone browser-based reporting prototype structuring 23 sustainability sections across 7 operational departments with client-side localStorage persistence, manual JSON export/import consolidation, and print-to-PDF formatting.
-- **Sakku 2.0 — Privacy-First Wealth OS** (https://sakku.ahlulfirdaus.com/): Zero-knowledge Local-First PWA personal & family financial operating system with conversational Indonesian 'Catat Cepat' parser, envelope budgeting, and multi-wallet Net Worth telemetry.
+## Key Competencies & Services
+- **B2B Export & Trade Platforms**: End-to-end multi-supplier commodity showcases, RFQ pipelines, escrow integration, and FTZ cross-docking workflows.
+- **High-Density SaaS Dashboards**: Dense operations cockpits, multi-channel commerce telemetry, real-time inventory synchronizers.
+- **Local-First & Zero-Knowledge PWAs**: Client-side encrypted financial tracking, offline-first sync engines, zero-server footprint applications.
+- **Community Governance Systems**: Integrated citizen portals, automated RT/RW dues collection, transparent digital cash ledgers, QR gate access.
+- **Industrial & ESG Reporting Kits**: Multi-department sustainability compliance matrices, client-side JSON consolidation, print-ready PDF reporting.
+
+## Flagship Systems & Live Deployments
+1. **OOI — Origin Of Indonesia** (https://ooindonesia.com)
+   - *Description*: Founder-led B2B export platform showcasing verified Indonesian agricultural commodities, spices, and artisan products to global buyers.
+   - *Key Architecture*: Next.js App Router, FTZ Hub Consolidation, bilingual RFQ routing.
+
+2. **CGV10 Portal Warga** (https://portalwargacgv.id)
+   - *Description*: Live community governance platform serving RT 010 / RW 021 with transparent Infaq/Kas RT accounting, PWA offline tablet security gate checks, and resident marketplace.
+   - *Impact*: Increased neighborhood dues collection from 58% to 94%.
+
+3. **Sakku 2.0 — Privacy-First Wealth OS** (https://sakku.ahlulfirdaus.com/)
+   - *Description*: Zero-knowledge, local-first personal and family wealth management operating system with conversational Indonesian 'Catat Cepat' parser and zero cloud data exposure.
+
+4. **Masjid Al-Ikhlas Digital Hub** (https://alikhlascgv.vercel.app/)
+   - *Description*: High-visibility religious community presence with real-time prayer schedule countdowns, weekly transparent financial ledger, and QRIS infaq workflows.
+
+5. **OneEcos B2B Operations Engine**
+   - *Description*: High-density trade operations prototype uniting buyer management, quotation generation, warehouse fulfillment, and export document trails.
+
+6. **PT. Corum Sustainability Reporting Tool**
+   - *Description*: Industrial ESG reporting tool structuring 23 sustainability sections across 7 operational departments with zero-backend local persistence.
 
 ## Technology Stack
-- **Frontend & App Engine**: Next.js 16, React 19, TypeScript, Tailwind CSS v4, Framer Motion, PWA, Recharts, Chart.js
-- **Data & Foundation**: Supabase, PostgreSQL, LocalStorage (Local-First), Vercel, Netlify, GitHub
+- **Languages**: TypeScript, JavaScript, SQL, HTML5, CSS3
+- **Frontend / Fullstack**: Next.js 16, React 19, Tailwind CSS v4, Framer Motion, Progressive Web Apps (PWA)
+- **Backend & Database**: Supabase, PostgreSQL, Node.js, LocalStorage / IndexedDB (Local-First)
+- **Infrastructure**: Vercel, Cloudflare, GitHub Actions, Docker
 
-## Full Details & Specifications
-For comprehensive project specs, technical summaries, and project narratives:
-- Full LLM Specification: https://ahlulfirdaus.com/llms-full.txt
-- Architecture Visualizer: https://ahlulfirdaus.com/#architecture
-- Case Studies: https://ahlulfirdaus.com/#work
-- System Writings: https://ahlulfirdaus.com/blog
+## System Architecture Papers & Case Studies
+- *Batam FTZ Food Export Consolidation*: https://ahlulfirdaus.com/blog/smart-consolidation-indonesian-food-export-ooi
+- *Residential Governance & Gate Control*: https://ahlulfirdaus.com/blog/from-whatsapp-chaos-to-qr-gate-control-cgv10
+- *High-Density SaaS Dashboard Architecture*: https://ahlulfirdaus.com/blog/designing-high-density-saas-dashboards-oneecos
+- *Full Architectural Specifications (LLM Markdown)*: https://ahlulfirdaus.com/llms-full.txt
+- *Industrial System Templates*: https://ahlulfirdaus.com/templates
