@@ -551,11 +551,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <section className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-cream flex items-center gap-2">
-                <Terminal className="w-5 h-5 text-gold-muted" />
-                Interactive ESG Compliance Dashboard (Multi-Dept Sync &amp; PDF Audit)
+                <Terminal className="w-5 h-5 text-emerald-400" />
+                Interactive Sustainability Reporting Template (4 Views &amp; JSON Interchange)
               </h2>
-              <span className="text-xs font-mono text-gold-muted glass-badge px-2.5 py-1 rounded-full font-bold">
-                Live Interactive Component
+              <span className="text-xs font-mono text-emerald-300 glass-badge px-2.5 py-1 rounded-full font-bold">
+                Interactive Prototype Simulator
               </span>
             </div>
             <CorumDemo />

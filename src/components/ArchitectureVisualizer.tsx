@@ -424,66 +424,85 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     ]
   },
   corum: {
-    title: "PT. Corum Sustainability Reporting Engine",
-    subtitle: "Multi-Department ESG Data Pipeline & Client-Side JSON Sync",
-    badgeText: "Industrial ESG Audit",
+    title: "PT. Corum Sustainability Reporting Workflow",
+    subtitle: "Reporting Package → Sections & Owners → Department Input → Completion Review → JSON Export → Manual Consolidation → Print/PDF Report",
+    badgeText: "Browser Reporting Prototype",
     badgeColor: "emerald",
     description:
-      "Architecture unifying 7 manufacturing departments (Facilities, EHS, HR, Finance, Procurement, QC, IT) for 23 industrial ESG compliance parameters.",
+      "Prototype workflow modeling how 23 sustainability sections across multiple departments are structured, recorded locally, reviewed for completion, exported via JSON, and prepared for browser print/PDF export.",
     nodes: [
       {
-        id: "pic_inputs",
-        name: "7 Department PICs",
-        subtitle: "Web Form Client",
+        id: "pkg_structure",
+        name: "1. Package & Section Structure",
+        subtitle: "23 Tracked Sections",
         category: "Client",
-        icon: <Building2 className="w-5 h-5 text-emerald-400" />,
+        icon: <Layers className="w-5 h-5 text-emerald-400" />,
         status: "Active",
-        description: "Department heads logging monthly figures for energy, water, raw resin, and waste.",
+        description: "Defines the 23 reporting sections and assigned departmental owners (Facilities, EHS, HR, Procurement, QA/QC, Finance, Production).",
         specs: [
-          { label: "Departments", value: "7 Tracked Teams" },
-          { label: "Parameters", value: "23 Compliance Fields" }
+          { label: "Tracked Sections", value: "23 Structured Fields" },
+          { label: "Departments", value: "7 Operational Teams" },
+          { label: "Status Modes", value: "Not Started | Progress | Complete" }
         ],
-        connections: ["json_engine"]
+        connections: ["dept_input"]
       },
       {
-        id: "json_engine",
-        name: "JSON Sync Protocol",
-        subtitle: "Offline Interchange",
+        id: "dept_input",
+        name: "2. Department Data Entry",
+        subtitle: "Browser-Local Input",
         category: "Gateway",
-        icon: <FileCheck className="w-5 h-5 text-gold-muted" />,
-        status: "Idle",
-        description: "Enables offline data logging and exports encrypted/formatted JSON packages for cross-department merging.",
+        icon: <Building2 className="w-5 h-5 text-teal-400" />,
+        status: "Active",
+        description: "Department contributors enter qualitative answers and sample monthly figures locally in their browser session.",
         specs: [
-          { label: "Mode", value: "Client-side Zero-Server" },
-          { label: "Merge Engine", value: "Conflict-Free Timestamp Sync" }
+          { label: "Input Engine", value: "Guided Form Fields" },
+          { label: "Persistence", value: "Browser localStorage" },
+          { label: "Infrastructure", value: "Zero Server Dependencies" }
         ],
-        connections: ["db_store"]
+        connections: ["review_trends"]
       },
       {
-        id: "db_store",
-        name: "LocalStorage / Cache",
-        subtitle: "SRP2026 Master Store",
+        id: "review_trends",
+        name: "3. Completion Review & Trends",
+        subtitle: "Status & Visualizer",
+        category: "Logic",
+        icon: <Activity className="w-5 h-5 text-gold-muted" />,
+        status: "Idle",
+        description: "Provides multi-view progress monitoring (Overview, Already Reported, Data Trends, Fill In Data) with sample trend charts.",
+        specs: [
+          { label: "Views", value: "Overview, Reported, Trends, Fill In" },
+          { label: "Analytics", value: "Client-Side Chart.js" },
+          { label: "Review", value: "Color-Coded Status Matrix" }
+        ],
+        connections: ["json_consolidate", "pdf_export"]
+      },
+      {
+        id: "json_consolidate",
+        name: "4. JSON Export & Consolidation",
+        subtitle: "File-Based Interchange",
         category: "Database",
-        icon: <Database className="w-5 h-5 text-cyan-400" />,
+        icon: <FileCheck className="w-5 h-5 text-cyan-400" />,
         status: "Idle",
-        description: "Stores historical baseline data and merged monthly compliance figures locally.",
+        description: "Allows department users to export their section data to a local JSON file or import and merge files manually without a cloud database.",
         specs: [
-          { label: "Storage", value: "LocalStorage / IndexedDB" },
-          { label: "Prefill Engine", value: "SRP2026 Historical Seed" }
+          { label: "Data Format", value: "Structured JSON File" },
+          { label: "Consolidation", value: "Manual File Import & Merge" },
+          { label: "Sync Model", value: "Standalone Client-Side" }
         ],
-        connections: ["pdf_engine"]
+        connections: ["pdf_export"]
       },
       {
-        id: "pdf_engine",
-        name: "PDF Audit Generator",
-        subtitle: "CSS Print Engine",
+        id: "pdf_export",
+        name: "5. Print & PDF Document Output",
+        subtitle: "CSS Print Formatter",
         category: "External",
         icon: <ShieldCheck className="w-5 h-5 text-emerald-300" />,
         status: "Idle",
-        description: "Formats live Chart.js analytics and department entries into C-level PDF audit packages.",
+        description: "Formats the completed reporting package into a clean print layout for browser-native PDF export.",
         specs: [
-          { label: "Print Engine", value: "@media print CSS" },
-          { label: "Export", value: "Audit-Ready PDF" }
+          { label: "Print Engine", value: "Browser @media print CSS" },
+          { label: "Output", value: "Print / Export to PDF" },
+          { label: "Scope", value: "Executive Summary & Sections" }
         ],
         connections: []
       }
@@ -491,26 +510,26 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     simulationSteps: [
       {
         step: 1,
-        title: "1. Department PIC Entry Logged",
-        activeNodes: ["pic_inputs", "json_engine"],
-        activeConnections: [["pic_inputs", "json_engine"]],
-        logMessage: "DEPT_EHS -> Logged 310,049 kWh Electricity & 273 m³ Net Water Usage (Jan 2026)",
+        title: "1. Reporting Package & Department Structure",
+        activeNodes: ["pkg_structure", "dept_input"],
+        activeConnections: [["pkg_structure", "dept_input"]],
+        logMessage: "PACKAGE_LOAD -> 23 sections structured across 7 department owners (Sample Data).",
         status: "INITIALIZING"
       },
       {
         step: 2,
-        title: "2. Offline JSON Package Export",
-        activeNodes: ["json_engine", "db_store"],
-        activeConnections: [["json_engine", "db_store"]],
-        logMessage: "JSON_INTERCHANGE -> Exported signed package 'corum-srp2026-ehs.json'",
+        title: "2. Department Entry & Completion Review",
+        activeNodes: ["dept_input", "review_trends"],
+        activeConnections: [["dept_input", "review_trends"]],
+        logMessage: "DATA_ENTRY -> Sample department entries recorded. Section completion tracked locally via browser localStorage.",
         status: "PROCESSING"
       },
       {
         step: 3,
-        title: "3. Master Multi-Department Merge",
-        activeNodes: ["db_store", "pdf_engine"],
-        activeConnections: [["db_store", "pdf_engine"]],
-        logMessage: "MASTER_MERGE -> Merged 7 department payloads into Master Store. All 23 sections VERIFIED.",
+        title: "3. JSON Export, Manual Consolidation & PDF Report",
+        activeNodes: ["review_trends", "json_consolidate", "pdf_export"],
+        activeConnections: [["review_trends", "json_consolidate"], ["json_consolidate", "pdf_export"]],
+        logMessage: "WORKFLOW_COMPLETE -> JSON package exported for manual consolidation; browser print-to-PDF ready.",
         status: "SUCCESS"
       }
     ]

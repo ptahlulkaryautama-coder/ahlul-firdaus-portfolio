@@ -104,10 +104,10 @@ KEY ARCHITECTED SYSTEMS & PROJECTS
    • Single-source-of-truth architecture reducing manual handoffs and eliminating redundant data entry.
    • Tech Stack: React, TypeScript, Recharts, Framer Motion, Tailwind CSS.
 
-5. PT. Corum — Industrial Sustainability Reporting System (SRP2026)
-   • Consolidated 23 environmental, operational, and social parameters across 7 factory departments.
-   • Engineered client-side JSON data interchange with print-ready audit PDF export engine.
-   • Tech Stack: HTML5, JavaScript (ES6+), Chart.js, Tailwind CSS, CSS Print Engine.
+5. PT. Corum Sustainability Reporting Template
+   • Structured 23 reporting sections across 7 operational departments into a guided workflow.
+   • Client-side data persistence with manual JSON file export/import and browser print-to-PDF formatting.
+   • Tech Stack: HTML5, CSS3, JavaScript (ES6+), Chart.js, LocalStorage, CSS @media print.
 
 6. Sakku 2.0 — Privacy-First Wealth OS (sakku.ahlulfirdaus.com)
    • Local-First PWA financial operating system with zero-knowledge device storage (100% data sovereignty).
@@ -395,11 +395,11 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                       badge: "A Fundamental Stage"
                     },
                     {
-                      name: "PT. Corum — Sustainability Reporting System",
-                      tag: "Industrial ESG & Plant Compliance Dashboard",
-                      desc: "Consolidated 23 critical environmental and operational parameters across 7 factory departments with offline-first client-side JSON interchange and PDF audit generation.",
-                      stack: ["HTML5", "JavaScript (ES6+)", "Chart.js", "Tailwind CSS", "CSS Print"],
-                      badge: "Live Project"
+                      name: "PT. Corum Sustainability Reporting Template",
+                      tag: "Browser-Based Reporting & Data-Entry Template",
+                      desc: "Structured 23 reporting sections across 7 departments into a guided workflow with client-side localStorage persistence, manual JSON export/import consolidation, and print-to-PDF formatting.",
+                      stack: ["HTML5", "CSS3", "JavaScript (ES6+)", "Chart.js", "LocalStorage", "CSS Print"],
+                      badge: "Internal Prototype"
                     },
                     {
                       name: "Sakku 2.0 — Privacy-First Wealth OS",

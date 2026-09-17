@@ -37,8 +37,20 @@ export default function ProjectGallery({
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
 
-  // Define structured gallery items for CGV10 or fallback for other projects
+  // Define structured gallery items for projects
   const getGalleryItems = (): GalleryItem[] => {
+    if (projectId === "corum") {
+      return [
+        {
+          src: "/Image/project/pt.corum/pt-corum-portfolio-thumbnail-v2.png",
+          title: "PT. Corum — Sustainability Reporting Template",
+          badge: "Browser-Based Prototype",
+          alt: "PT. Corum browser-based sustainability reporting and data-entry template",
+          isPrimary: true,
+        },
+      ];
+    }
+
     if (projectId === "oneecos") {
       return [
         {
@@ -192,6 +204,17 @@ export default function ProjectGallery({
         </span>
       </div>
 
+      {/* Privacy Disclosure Banner for Corum */}
+      {projectId === "corum" && (
+        <div className="mb-6 p-4 rounded-xl bg-slate-900/70 border border-emerald-500/30 text-xs text-slate-300 flex items-start gap-3">
+          <ShieldCheck className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+          <p className="leading-relaxed text-slate-300">
+            <strong className="text-white">Privacy Disclosure:</strong>{" "}
+            Interface shown with anonymized sample data. Company figures, personnel information, and internal reporting details are not disclosed.
+          </p>
+        </div>
+      )}
+
       {/* Sample Data Disclosure Banner for OneEcos */}
       {projectId === "oneecos" && (
         <div className="mb-6 p-4 rounded-xl bg-slate-900/70 border border-cyan-500/30 text-xs text-slate-300 flex items-start gap-3">
@@ -217,8 +240,47 @@ export default function ProjectGallery({
         </div>
       )}
 
-      {/* Structured Layout for OneEcos */}
-      {projectId === "oneecos" ? (
+      {/* Structured Layout for Corum */}
+      {projectId === "corum" ? (
+        <div className="space-y-4">
+          {galleryItems[0] && (
+            <div
+              onClick={() => handleOpenModal(0)}
+              className="group relative w-full rounded-2xl overflow-hidden border border-slate-800 hover:border-emerald-500/60 shadow-2xl bg-slate-950 cursor-zoom-in transition-all duration-300"
+              style={{ aspectRatio: "16/9" }}
+            >
+              <Image
+                src={galleryItems[0].src}
+                alt={galleryItems[0].alt}
+                fill
+                unoptimized
+                priority
+                className="object-cover object-top group-hover:scale-[1.015] transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              
+              {/* Top Hover Hint */}
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                <span className="flex items-center gap-1.5 text-xs font-mono text-white bg-slate-900/90 border border-emerald-500/40 px-3 py-1.5 rounded-full shadow-xl backdrop-blur-sm">
+                  <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />
+                  Click to View Full HD
+                </span>
+              </div>
+
+              {/* Bottom Label */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <span className="font-mono text-xs font-bold text-emerald-300 bg-slate-950/90 px-3.5 py-1.5 rounded-full border border-emerald-500/40 uppercase tracking-wider shadow-lg backdrop-blur-sm">
+                  {galleryItems[0].title}
+                </span>
+                <span className="hidden sm:inline-block text-[11px] font-mono text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded border border-slate-700">
+                  {galleryItems[0].badge}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      ) : projectId === "oneecos" ? (
         <div className="space-y-4">
           {/* Primary Large Screenshot (OneEcos Operational Dashboard) */}
           {galleryItems[0] && (

@@ -38,6 +38,14 @@ Ahlul Firdaus is a Founder, Product Strategist, UI/UX Designer & AI-Assisted Ful
 - **Current Scope**: Validates the 9-step trade chain (`Buyer → Product → Quote → Sales Order → Work Order → Shipment → Documents → Invoice → Collection`) with Simple Daily Workspace for operators and Executive Command Center for leadership.
 - **Tech Stack**: Next.js, TypeScript, Tailwind CSS, React, Vercel.
 
+### 5. PT. Corum Sustainability Reporting Template
+- **Classification**: Internal Reporting Prototype — Browser-Based Template
+- **Role**: Reporting Structure, Workflow Design, Dashboard UI & Front-End Prototype
+- **Duration**: Prototype Sprint
+- **Overview**: A browser-based prototype designed to turn a multi-department sustainability reporting workbook into a guided, structured reporting workflow across 23 tracked sections (Facilities, EHS, HR, Procurement, QA/QC, Finance, Production).
+- **Current Scope**: Validates the 7-step reporting workflow (`Reporting Package → Sections & Owners → Department Input → Completion Review → JSON Export → Manual Consolidation → Print/PDF Report`) with 4 distinct views (Overview, Already Reported, Data Trends, Fill In Data), local persistence, and file-based JSON interchange.
+- **Tech Stack**: HTML5, CSS3, JavaScript (ES6+), Chart.js, LocalStorage, CSS @media print.
+
 ---
 
 ## Contact & Social Links

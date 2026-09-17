@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT. Corum — Sustainability Reporting Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+<style>
+  :root{
+    --forest:#0E3828; --ink:#0C1810; --gold:#C9A55A; --bg:#F3EFE6; --bg-inset:#EDE9DF;
+    --muted:#6B7F74; --card:#FFFFFF; --radius:12px; --gap:16px;
+    --pos:#1E7B4D; --neg:#B4472A; --warn:#B98A2E; --blue:#2E6E8E; --slate:#5B6B77;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'DM Sans','Segoe UI',Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1360px; margin:0 auto; padding:22px; }
+  header.top{
+    background:linear-gradient(135deg, var(--forest) 0%, #123f2e 60%, #0C1810 100%);
+    color:#F3EFE6; border-radius:var(--radius); padding:22px 26px; margin-bottom:18px;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px;
+    box-shadow:0 4px 18px rgba(12,24,16,0.18);
+  }
+  header.top h1{ margin:0 0 4px 0; font-size:20px; font-weight:700; }
+  header.top p{ margin:0; font-size:12.5px; color:#CFE0D3; }
+  .badge{ background:rgba(201,165,90,0.18); border:1px solid var(--gold); color:var(--gold); padding:5px 12px; border-radius:20px; font-size:11.5px; font-weight:600; }
+  .shared-note{ background:#FCEFD8; border:1px solid var(--warn); color:#7a5a1a; font-size:12px; padding:9px 14px; border-radius:8px; margin-bottom:18px; }
+
+  nav.tabs{ display:flex; gap:6px; background:var(--bg-inset); padding:6px; border-radius:10px; margin-bottom:18px; flex-wrap:wrap; }
+  nav.tabs button{ flex:1; min-width:140px; border:none; background:transparent; padding:10px 14px; font-size:13px; font-weight:600; color:var(--muted); border-radius:8px; cursor:pointer; }
+  nav.tabs button.active{ background:var(--forest); color:#F3EFE6; }
+  nav.tabs button:hover:not(.active){ background:rgba(14,56,40,0.08); color:var(--forest); }
+
+  .view{ display:none; } .view.active{ display:block; animation:fade .2s ease; }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+
+  .kpi-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:var(--gap); margin-bottom:var(--gap); }
+  .kpi-card{ background:var(--card); border-radius:var(--radius); padding:16px 18px; box-shadow:0 1px 3px rgba(12,24,16,0.08); border-left:4px solid var(--gold); }
+  .kpi-label{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px; font-weight:600;}
+  .kpi-value{ font-size:24px; font-weight:700; color:var(--forest); }
+  .kpi-sub{ font-size:11.5px; color:var(--muted); }
+
+  .chart-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:var(--gap); margin-bottom:var(--gap); }
+  .chart-container{ background:var(--card); border-radius:var(--radius); padding:18px 20px; box-shadow:0 1px 3px rgba(12,24,16,0.08); }
+  .chart-container h3{ margin:0 0 12px 0; font-size:13.5px; font-weight:700; color:var(--forest); }
+  .chart-container canvas{ max-height:280px; }
+
+  .layout{ display:grid; grid-template-columns:300px 1fr; gap:var(--gap); align-items:start; }
+  @media (max-width:900px){ .layout{ grid-template-columns:1fr; } }
+
+  .sidebar{ background:var(--card); border-radius:var(--radius); box-shadow:0 1px 3px rgba(12,24,16,0.08); padding:14px; max-height:78vh; overflow-y:auto; }
+  .sidebar .group-label{ font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:700; margin:14px 6px 6px; }
+  .sidebar .group-label:first-child{ margin-top:2px; }
+  .sec-item{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:9px 10px; border-radius:8px; cursor:pointer; font-size:12.5px; margin-bottom:3px; }
+  .sec-item:hover{ background:var(--bg); }
+  .sec-item.active{ background:var(--forest); color:#fff; }
+  .sec-item.active .sec-name{ color:#fff; }
+  .sec-name{ color:var(--ink); }
+  .dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .dot.notstarted{ background:var(--neg);} .dot.inprogress{ background:var(--warn);} .dot.complete{ background:var(--pos);}
+
+  .panel{ background:var(--card); border-radius:var(--radius); padding:20px 24px; box-shadow:0 1px 3px rgba(12,24,16,0.08); min-height:420px; }
+  .panel-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .panel-head h2{ margin:0 0 4px 0; font-size:17px; color:var(--forest); }
+  .meta-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+  .meta-tag{ font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; background:var(--bg-inset); color:var(--forest); }
+  .status-select{ font-size:12px; font-weight:700; padding:6px 10px; border-radius:8px; border:1px solid var(--bg-inset); }
+  .task-note{ font-size:12.5px; color:var(--muted); background:var(--bg); border-left:3px solid var(--gold); padding:10px 12px; border-radius:6px; margin-bottom:16px; }
+
+  table.grid-table{ width:100%; border-collapse:collapse; font-size:12.5px; margin-bottom:14px; }
+  table.grid-table th{ background:var(--bg-inset); padding:8px; font-size:11px; text-transform:uppercase; letter-spacing:.3px; color:var(--muted); text-align:left; }
+  table.grid-table td{ padding:5px; border-bottom:1px solid var(--bg-inset); }
+  table.grid-table input, table.grid-table select, .form-field input, .form-field textarea, .form-field select{
+    width:100%; padding:7px 9px; border:1px solid var(--bg-inset); border-radius:6px; font-size:12.5px; font-family:inherit; background:#fff;
+  }
+  .form-field{ margin-bottom:12px; }
+  .form-field label{ display:block; font-size:11.5px; font-weight:700; color:var(--muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:.3px; }
+  .form-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:8px; }
+
+  .log-row{ display:grid; gap:8px; margin-bottom:8px; align-items:end; }
+  .log-row .del-btn{ background:none; border:none; color:var(--neg); cursor:pointer; font-size:16px; padding:6px; }
+  .add-row-btn{ background:var(--bg-inset); border:none; color:var(--forest); font-weight:700; font-size:12px; padding:8px 14px; border-radius:8px; cursor:pointer; margin-top:4px; }
+  .add-row-btn:hover{ background:#e2dacb; }
+
+  .save-bar{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:14px; border-top:1px solid var(--bg-inset); flex-wrap:wrap; gap:10px; }
+  .save-btn{ background:var(--forest); color:#fff; border:none; padding:10px 22px; border-radius:8px; font-weight:700; font-size:13px; cursor:pointer; }
+  .save-btn:hover{ background:#123f2e; }
+  .save-status{ font-size:12px; color:var(--muted); }
+  .save-status.ok{ color:var(--pos); font-weight:600; }
+
+  footer{ text-align:center; font-size:11.5px; color:var(--muted); padding:20px 0 6px 0; }
+
+  @media print{
+    nav.tabs, .shared-note, #export-btn, #import-btn, #export-pdf-btn, #import-file, .sidebar,
+    .add-row-btn, .del-btn, .save-bar .save-btn, .status-select{ display:none !important; }
+    body, .kpi-card, .chart-container, .panel, header.top, .dept-tag, .pill, .dot{
+      -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact;
+    }
+    .layout{ grid-template-columns:1fr !important; }
+    .wrap{ max-width:100%; padding:6mm; }
+    header.top{ padding:14px 18px; margin-bottom:8px; }
+    .kpi-row{ grid-template-columns:repeat(auto-fit, minmax(150px,1fr)) !important; gap:8px !important; margin-bottom:8px !important; }
+    .kpi-card{ padding:9px 12px !important; box-shadow:none; border:1px solid var(--bg-inset); break-inside:avoid; }
+    .kpi-value{ font-size:18px !important; }
+    .chart-row{ grid-template-columns:1fr 1fr !important; gap:8px !important; margin-bottom:8px !important; break-inside:auto; }
+    .chart-container{ box-shadow:none; border:1px solid var(--bg-inset); break-inside:avoid; padding:10px 14px !important; }
+    .chart-container canvas{ max-height:170px !important; }
+    .chart-container .hint{ margin-bottom:6px !important; }
+    .panel{ box-shadow:none; border:1px solid var(--bg-inset); break-inside:avoid; padding:14px 16px !important; }
+    .flowable{ break-inside:auto !important; }
+    .flowable h3{ break-after:avoid; }
+    .flowable table{ break-inside:auto; }
+    .flowable tr{ break-inside:avoid; break-after:auto; }
+    .flowable thead{ display:table-header-group; }
+    footer{ display:none; }
+    @page{ margin:8mm; }
+  }
+</style>
+<!-- print target: whichever .view has class "active" prints as-is -- no separate report is generated -->
+
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>PT. Corum — Sustainability Reporting Dashboard</h1>
+      <p>Outstanding sections · Jan–Jun 2026 reporting period</p>
+    </div>
+    <div class="badge">SRP2026-CORUM</div>
+  </header>
+
+  <div class="shared-note">⚠️ This file saves data locally in <strong>this browser only</strong> — it does not sync between computers. To combine entries from different people: each person clicks <strong>Export Data</strong> after filling their sections, sends the small .json file to whoever is consolidating, and that person clicks <strong>Import Data</strong> to merge it in (then re-exports the merged file for everyone). Add your name in "Filled by" on each section so imports don't get mixed up.</div>
+
+  <div style="display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;">
+    <button class="save-btn" id="export-btn" style="background:var(--gold); color:var(--ink);">⬇ Export Data (.json)</button>
+    <button class="save-btn" id="import-btn" style="background:var(--bg-inset); color:var(--forest);">⬆ Import Data (.json)</button>
+    <button class="save-btn" id="export-pdf-btn" style="background:var(--forest); color:#fff;">📄 Export Report (PDF)</button>
+    <input type="file" id="import-file" accept="application/json" style="display:none;">
+  </div>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="reported">Already Reported</button>
+    <button class="tab-btn" data-tab="trends">Data Trends</button>
+    <button class="tab-btn" data-tab="fillin">Fill In Data</button>
+  </nav>
+
+  <!-- OVERVIEW -->
+  <div class="view active" id="view-overview">
+    <div class="kpi-row">
+      <div class="kpi-card" style="border-left-color:var(--forest);"><div class="kpi-label">Sections Tracked</div><div class="kpi-value" id="kpi-total">23</div><div class="kpi-sub">Outstanding items from SRP2026</div></div>
+      <div class="kpi-card" style="border-left-color:var(--pos);"><div class="kpi-label">Complete</div><div class="kpi-value" id="kpi-complete">0</div><div class="kpi-sub" id="kpi-complete-pct">0%</div></div>
+      <div class="kpi-card" style="border-left-color:var(--warn);"><div class="kpi-label">In Progress</div><div class="kpi-value" id="kpi-progress">0</div><div class="kpi-sub">Data partially entered</div></div>
+      <div class="kpi-card" style="border-left-color:var(--neg);"><div class="kpi-label">Not Started</div><div class="kpi-value" id="kpi-notstarted">23</div><div class="kpi-sub">Awaiting first entry</div></div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-container"><h3>Completion by Department</h3><canvas id="chart-dept"></canvas></div>
+      <div class="chart-container"><h3>Overall Status</h3><canvas id="chart-status"></canvas></div>
+    </div>
+    <div class="chart-container flowable">
+      <h3>All Sections</h3>
+      <table class="grid-table" id="overview-table">
+        <thead><tr><th>Section</th><th>Department</th><th>PIC</th><th>Status</th><th>Filled By</th><th>Last Updated</th></tr></thead>
+        <tbody id="overview-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ALREADY REPORTED -->
+  <div class="view" id="view-reported">
+    <p style="color:var(--muted); font-size:12.5px; margin:0 0 16px;">These sections were already complete in the source workbook (SRP2026-CORUM) before this dashboard was built — real figures, not placeholders. They're separate from the 23 outstanding sections since no action is needed here.</p>
+    <div class="kpi-row">
+      <div class="kpi-card" style="border-left-color:var(--forest);"><div class="kpi-label">Revenue (YTD)</div><div class="kpi-value" id="rep-revenue">-</div><div class="kpi-sub">IDR, Jan–Jun 2026</div></div>
+      <div class="kpi-card" style="border-left-color:var(--blue);"><div class="kpi-label">Electricity</div><div class="kpi-value" id="rep-elec">-</div><div class="kpi-sub">kWh net · 0% renewable</div></div>
+      <div class="kpi-card" style="border-left-color:var(--blue);"><div class="kpi-label">Water</div><div class="kpi-value" id="rep-water">-</div><div class="kpi-sub">m³ net</div></div>
+      <div class="kpi-card" style="border-left-color:var(--gold);"><div class="kpi-label">Raw Material — Resin</div><div class="kpi-value" id="rep-resin">-</div><div class="kpi-sub">MT, Batam plant</div></div>
+      <div class="kpi-card" style="border-left-color:#8a6d3b;"><div class="kpi-label">Diesel</div><div class="kpi-value" id="rep-diesel">-</div><div class="kpi-sub">Litres, forklift use</div></div>
+      <div class="kpi-card" style="border-left-color:var(--forest);"><div class="kpi-label">Purchases (YTD)</div><div class="kpi-value" id="rep-purchases">-</div><div class="kpi-sub">IDR, total across suppliers</div></div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-container"><h3>Monthly Revenue</h3><p class="hint">IDR</p><canvas id="rep-chart-revenue"></canvas></div>
+      <div class="chart-container"><h3>Monthly Purchases</h3><p class="hint">IDR, total across local + overseas suppliers</p><canvas id="rep-chart-purchases"></canvas></div>
+      <div class="chart-container"><h3>Electricity vs. Water</h3><p class="hint">kWh (left) vs. m³ (right)</p><canvas id="rep-chart-elecwater"></canvas></div>
+      <div class="chart-container"><h3>Raw Material Usage — Resin</h3><p class="hint">MT, monthly</p><canvas id="rep-chart-resin"></canvas></div>
+      <div class="chart-container"><h3>Diesel Consumption</h3><p class="hint">Litres, monthly</p><canvas id="rep-chart-diesel"></canvas></div>
+    </div>
+    <div class="panel flowable" style="margin-top:var(--gap);">
+      <h3>Other Complete Sections — No Action Needed</h3>
+      <p class="hint">These sections are also editable in Fill In Data — this table reflects whatever's currently saved there live.</p>
+      <table class="status">
+        <thead><tr><th>Section</th><th>Department</th><th>PIC</th><th>Status</th><th>Recorded Result</th></tr></thead>
+        <tbody id="rep-other-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DATA TRENDS -->
+  <div class="view" id="view-trends">
+    <p style="color:var(--muted); font-size:12.5px; margin:0 0 16px;">Charts below are built live from whatever has actually been entered in the Fill In Data tab. Sections with no data yet show as empty/flat.</p>
+    <div id="trends-container"></div>
+  </div>
+
+  <!-- FILL IN -->
+  <div class="view" id="view-fillin">
+    <div class="layout">
+      <div class="sidebar" id="sidebar"></div>
+      <div class="panel" id="panel">
+        <p style="color:var(--muted); font-size:13px;">Select a section from the left to view or fill in its data.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>PT. Corum — Sustainability Reporting Package 2026 · Data is stored per-section and shared across everyone using this dashboard link.</footer>
+</div>
+
+<script>
+const COLORS = { forest:'#0E3828', gold:'#C9A55A', blue:'#2E6E8E', pos:'#1E7B4D', neg:'#B4472A', warn:'#B98A2E', slate:'#5B6B77' };
+Chart.defaults.font.family = "'DM Sans','Segoe UI',Arial,sans-serif";
+Chart.defaults.color = '#6B7F74';
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun'];
+
+const sumArr = arr => arr.reduce((a,b)=>a+b,0);
+function fmtIDR(v){ if (v>=1e9) return 'Rp '+(v/1e9).toFixed(2)+'B'; if (v>=1e6) return 'Rp '+(v/1e6).toFixed(1)+'M'; return 'Rp '+v.toLocaleString(); }
+
+// ---------------- Already Reported: reads live from currentData (same store as Fill In Data) ----------------
+let reportedCharts = [];
+function seriesFor(id, key, months){
+  const s = SECTIONS.find(x=>x.id===id);
+  const values = (currentData[id]||{}).values || {};
+  const mList = months || s.months;
+  return mList.map(m => (values[m] && values[m][key] !== undefined && values[m][key] !== '') ? parseFloat(values[m][key]) : 0);
+}
+function summarizeGrid(s){
+  const values = (currentData[s.id]||{}).values || {};
+  return s.columns.map(c=>{
+    const nums = s.months.map(m => values[m] && values[m][c.key] !== undefined && values[m][c.key] !== '' ? parseFloat(values[m][c.key]) : null);
+    const present = nums.filter(v=>v!==null);
+    if(present.length===0) return `${c.label}: not entered`;
+    const val = c.agg==='last' ? present[present.length-1] : present.reduce((a,b)=>a+b,0);
+    return `${c.label}: ${val}`;
+  }).join(' · ');
+}
+
+function summarizeAny(s){
+  const values = (currentData[s.id]||{}).values || {};
+  if(s.type === 'grid') return summarizeGrid(s);
+  if(s.type === 'confirm'){
+    return s.fields.map(f=>{
+      const v = values[f.key];
+      if(v === undefined || v === '') return `${f.label}: not entered`;
+      return `${f.label}: ${v}`;
+    }).join(' · ');
+  }
+  if(s.type === 'log'){
+    const rows = values.rows || [];
+    if(rows.length === 0) return 'No entries logged';
+    return `${rows.length} entr${rows.length===1?'y':'ies'} logged`;
+  }
+  return '';
+}
+
+function renderReported(){
+  reportedCharts.forEach(c=>{ try{ c.destroy(); }catch(e){} });
+  reportedCharts = [];
+
+  const revenue = seriesFor('revenue','revenue');
+  const purchases = seriesFor('purchases','total');
+  const elec = seriesFor('electricity','kwh');
+  const water = seriesFor('water','m3');
+  const resin = seriesFor('rawmat','resin');
+  const diesel = seriesFor('diesel','litres');
+
+  document.getElementById('rep-revenue').textContent = fmtIDR(sumArr(revenue));
+  document.getElementById('rep-elec').textContent = sumArr(elec).toLocaleString()+' kWh';
+  document.getElementById('rep-water').textContent = sumArr(water).toLocaleString()+' m³';
+  document.getElementById('rep-resin').textContent = sumArr(resin).toFixed(1)+' MT';
+  document.getElementById('rep-diesel').textContent = sumArr(diesel).toLocaleString()+' L';
+  document.getElementById('rep-purchases').textContent = fmtIDR(sumArr(purchases));
+
+  function line(id, label, data, color){
+    return new Chart(document.getElementById(id).getContext('2d'), { type:'line',
+      data:{ labels:MONTHS, datasets:[{ label:label, data:data, borderColor:color, backgroundColor:color+'22', borderWidth:2.5, fill:true, tension:.35, pointRadius:4, pointBackgroundColor:color }] },
+      options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, grid:{ color:'#EDE9DF' } }, x:{ grid:{ display:false } } } } });
+  }
+  function bar(id, label, data, color){
+    return new Chart(document.getElementById(id).getContext('2d'), { type:'bar',
+      data:{ labels:MONTHS, datasets:[{ label:label, data:data, backgroundColor:color, borderRadius:5, maxBarThickness:38 }] },
+      options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, grid:{ color:'#EDE9DF' } }, x:{ grid:{ display:false } } } } });
+  }
+
+  reportedCharts.push(line('rep-chart-revenue','Revenue (IDR)',revenue,COLORS.forest));
+  reportedCharts.push(bar('rep-chart-purchases','Purchases (IDR)',purchases,COLORS.forest));
+  reportedCharts.push(line('rep-chart-resin','Resin (MT)',resin,COLORS.gold));
+  reportedCharts.push(bar('rep-chart-diesel','Diesel (L)',diesel,'#8a6d3b'));
+
+  reportedCharts.push(new Chart(document.getElementById('rep-chart-elecwater').getContext('2d'), {
+    data:{ labels:MONTHS, datasets:[
+      { type:'bar', label:'Electricity (kWh)', data:elec, backgroundColor:COLORS.blue, borderRadius:5, yAxisID:'y', maxBarThickness:30 },
+      { type:'line', label:'Water (m³)', data:water, borderColor:COLORS.gold, backgroundColor:COLORS.gold, borderWidth:2.5, tension:.35, pointRadius:4, yAxisID:'y1' }
+    ]},
+    options:{ responsive:true, interaction:{ mode:'index', intersect:false },
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:12, font:{size:11} } } },
+      scales:{ y:{ position:'left', beginAtZero:true, grid:{ color:'#EDE9DF' } }, y1:{ position:'right', beginAtZero:true, grid:{ display:false } }, x:{ grid:{ display:false } } } }
+  }));
+
+  // Dynamic "Other Complete Sections" table
+  const OTHER_IDS = ['dataprivacy','solar','otherfuel','humanrights','staffturnover','she','scheduledwaste','solidwaste','productsafety'];
+  const tbody = document.getElementById('rep-other-tbody');
+  if(tbody){
+    tbody.innerHTML = OTHER_IDS.map(id=>{
+      const s = SECTIONS.find(x=>x.id===id);
+      const d = currentData[id] || {};
+      const st = d.status || 'notstarted';
+      const label = st==='complete' ? 'Complete' : st==='inprogress' ? 'In Progress' : 'Not Started';
+      const color = st==='complete' ? COLORS.pos : st==='inprogress' ? COLORS.warn : COLORS.neg;
+      return `<tr>
+        <td><strong>${s.name}</strong></td>
+        <td><span class="dept-tag">${s.dept}</span></td>
+        <td>${s.pic}</td>
+        <td><span style="color:${color}; font-weight:700;">${label}</span></td>
+        <td>${summarizeGrid(s)}</td>
+      </tr>`;
+    }).join('');
+  }
+}
+
+// ---------------- SECTION DEFINITIONS ----------------
+const SECTIONS = [
+  { id:'revenue', name:'Revenue', dept:'Finance', pic:'Finance', doc:false,
+    task:'Already complete — continue monthly revenue reporting.',
+    type:'grid', months:MONTHS, columns:[ {key:'revenue', label:'Revenue (IDR)'} ] },
+
+  { id:'purchases', name:'Purchases', dept:'Finance / Procurement', pic:'Finance', doc:false,
+    task:'Review monthly purchase totals. May 2026 recorded as 0 — confirm this is correct, not a missed entry.',
+    type:'grid', months:MONTHS, columns:[ {key:'total', label:'Total Purchases (IDR)'} ] },
+
+  { id:'electricity', name:'Electricity Consumption', dept:'Engineering / Facilities', pic:'Facilities', doc:false,
+    task:'Already complete — continue monthly meter readings.',
+    type:'grid', months:MONTHS, columns:[ {key:'kwh', label:'Net Usage (kWh)'} ] },
+
+  { id:'water', name:'Water Consumption', dept:'Engineering / Facilities', pic:'Facilities', doc:false,
+    task:'Already complete — continue monthly meter readings.',
+    type:'grid', months:MONTHS, columns:[ {key:'m3', label:'Net Usage (m³)'} ] },
+
+  { id:'diesel', name:'Diesel Consumption', dept:'Production / Warehouse', pic:'Production', doc:false,
+    task:'Already complete — continue logging forklift diesel use monthly.',
+    type:'grid', months:MONTHS, columns:[ {key:'litres', label:'Diesel (L)'} ] },
+
+  { id:'rawmat', name:'Raw Material Consumption', dept:'Production / Warehouse', pic:'Production', doc:false,
+    task:'Resin usage already recorded. Confirm tinplate, aluminium & paper roll usage is genuinely nil for the period; fill in if not.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'resin', label:'Resin (MT)'}, {key:'tinplate', label:'Tinplate (MT)'}, {key:'aluminium', label:'Aluminium (MT)'}, {key:'paper', label:'Paper Roll (MT)'} ] },
+
+  { id:'watertype', name:'Water Type Breakdown', dept:'EHS', pic:'EHS', doc:false,
+    task:'Log rainwater harvested, water recycled/reused, and water discharged volumes (m³) for Jan–Jun.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'harvest', label:'Rainwater Harvest (m³)'}, {key:'recycle', label:'Water Recycled/Reused (m³)'}, {key:'discharge', label:'Water Discharged (m³)'} ] },
+
+  { id:'gas', name:'Natural Gas Consumption', dept:'Engineering / Facilities', pic:'Facilities', doc:false,
+    task:'Confirm applicability; provide monthly usage or confirm N/A.',
+    type:'grid', months:MONTHS, columns:[ {key:'usage', label:'Gas Usage (GJ)'} ] },
+
+  { id:'coalbiomass', name:'Coal & Biomass Consumption', dept:'Production / Facilities', pic:'Production', doc:false,
+    task:'Confirm applicability; provide monthly usage or confirm N/A.',
+    type:'grid', months:MONTHS, columns:[ {key:'coal', label:'Coal (MT)'}, {key:'biomass', label:'Biomass (MT)'} ] },
+
+  { id:'lpg', name:'LPG Consumption', dept:'Engineering / Facilities', pic:'Facilities', doc:false,
+    task:'Confirm applicability; provide monthly usage or confirm N/A.',
+    type:'grid', months:MONTHS, columns:[ {key:'lpg', label:'LPG (kg)'} ] },
+
+  { id:'petrol', name:'Petrol Consumption', dept:'Engineering / Facilities / Transport', pic:'Facilities', doc:false,
+    task:'Confirm applicability; provide monthly usage or confirm N/A.',
+    type:'grid', months:MONTHS, columns:[ {key:'petrol', label:'Petrol (L)'} ] },
+
+  { id:'fugitive', name:'Fugitive Emission (Refrigerants)', dept:'EHS', pic:'EHS', doc:false,
+    task:'Log refrigerant top-up quantities (kg) by type.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'r410', label:'R410 (kg)'}, {key:'r32', label:'R32 (kg)'}, {key:'r22', label:'R22 (kg)'}, {key:'r404', label:'R404 (kg)'} ] },
+
+  { id:'airemission', name:'Air Emission Monitoring', dept:'EHS', pic:'EHS', doc:true,
+    task:'Conduct stack/chimney emission monitoring; log date, parameter, unit, standard and result.',
+    type:'log', columns:[
+      {key:'date', label:'Date', type:'date'}, {key:'parameter', label:'Parameter', type:'text'},
+      {key:'unit', label:'Unit', type:'text'}, {key:'standard', label:'Standard', type:'text'}, {key:'result', label:'Result', type:'text'} ] },
+
+  { id:'wastecompliance', name:'Scheduled Waste Compliance (DOE)', dept:'EHS', pic:'EHS', doc:true,
+    task:'DOE compliance recorded as "No" — prepare and attach a corrective action plan / status update.',
+    type:'confirm', fields:[
+      {key:'compliance', label:'Currently Compliant to DOE?', type:'select', options:['No','Yes']},
+      {key:'corrective_action', label:'Corrective Action Plan', type:'textarea'},
+      {key:'target_date', label:'Target Resolution Date', type:'date'} ] },
+
+  { id:'hranalysis', name:'HR Headcount Analysis', dept:'HR', pic:'HR', doc:false,
+    task:'Complete headcount breakdown by gender and category, Jan–Jun.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'mgmt_male', label:'Management — Male'}, {key:'mgmt_female', label:'Management — Female'},
+      {key:'nonmgmt_male', label:'Non-Mgmt — Male'}, {key:'nonmgmt_female', label:'Non-Mgmt — Female'} ] },
+
+  { id:'anticorruption', name:'Anti Corruption Training', dept:'HR', pic:'HR', doc:false,
+    task:'Conduct anti-corruption & whistleblowing training; log participant counts by month.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'mgmt_trained', label:'Management Trained'}, {key:'nonmgmt_trained', label:'Non-Mgmt Trained'} ] },
+
+  { id:'antibribery', name:'Annual Anti-Bribery Statement', dept:'HR / Legal', pic:'HR', doc:true,
+    task:'Circulate statement to all employees for signature; attach signed copies.',
+    type:'confirm', fields:[
+      {key:'total_employees', label:'Total Employees', type:'number'},
+      {key:'signed_count', label:'Statements Signed', type:'number'},
+      {key:'note', label:'Note', type:'textarea'} ] },
+
+  { id:'empengagement', name:"Employee's Engagement Programs", dept:'HR', pic:'HR', doc:true,
+    task:'Log Q1/Q2 employee engagement activities.',
+    type:'log', columns:[
+      {key:'date', label:'Date', type:'date'}, {key:'program', label:'Program', type:'text'}, {key:'summary', label:'Summary', type:'text'} ] },
+
+  { id:'community', name:'Community Engagement Programs', dept:'HR / CSR', pic:'HR', doc:true,
+    task:'Log Q1/Q2 community programs with contribution amount.',
+    type:'log', columns:[
+      {key:'date', label:'Date', type:'date'}, {key:'program', label:'Program', type:'text'},
+      {key:'summary', label:'Summary', type:'text'}, {key:'amount_myr', label:'Amount (MYR)', type:'number'} ] },
+
+  { id:'sustinit', name:'Sustainability Initiatives', dept:'Management / CSR', pic:'Management', doc:false,
+    task:'Log sustainability initiatives undertaken during the period.',
+    type:'log', columns:[
+      {key:'date', label:'Date', type:'date'}, {key:'initiative', label:'Initiative', type:'text'}, {key:'explanation', label:'Explanation', type:'text'} ] },
+
+  { id:'sheprograms', name:'SHE Programs', dept:'EHS', pic:'EHS', doc:true,
+    task:'Log Q1/Q2 SHE program activities.',
+    type:'log', columns:[
+      {key:'date', label:'Date', type:'date'}, {key:'program', label:'Program', type:'text'}, {key:'summary', label:'Summary', type:'text'} ] },
+
+  { id:'trainq1', name:'Training Records — Q1', dept:'HR / Training', pic:'HR', doc:false,
+    task:'Log all training/workshops/OJT conducted in Q1.',
+    type:'log', columns:[
+      {key:'course', label:'Course', type:'text'}, {key:'date', label:'Date', type:'date'},
+      {key:'duration', label:'Duration (hrs)', type:'number'}, {key:'provider', label:'Provider', type:'text'},
+      {key:'participants', label:'Participants', type:'number'}, {key:'cost', label:'Cost (IDR)', type:'number'} ] },
+
+  { id:'trainq2', name:'Training Records — Q2', dept:'HR / Training', pic:'HR', doc:false,
+    task:'Log all training/workshops/OJT conducted in Q2.',
+    type:'log', columns:[
+      {key:'course', label:'Course', type:'text'}, {key:'date', label:'Date', type:'date'},
+      {key:'duration', label:'Duration (hrs)', type:'number'}, {key:'provider', label:'Provider', type:'text'},
+      {key:'participants', label:'Participants', type:'number'}, {key:'cost', label:'Cost (IDR)', type:'number'} ] },
+
+  { id:'suppliercode', name:'Supplier Code of Conduct', dept:'Procurement', pic:'Procurement', doc:true,
+    task:'Obtain signed Code of Conduct and self-assessment checklist from all suppliers.',
+    type:'log', columns:[
+      {key:'supplier', label:'Supplier Name', type:'text'}, {key:'signed', label:'Signed?', type:'select', options:['No','Yes']},
+      {key:'checklist_score', label:'Checklist Score', type:'text'} ] },
+
+  { id:'supplieraudit', name:'Supplier Plant Audit', dept:'Procurement / QA', pic:'Procurement', doc:true,
+    task:'Schedule and log supplier plant audits; attach audit results.',
+    type:'log', columns:[
+      {key:'supplier', label:'Supplier Name', type:'text'}, {key:'audit_date', label:'Audit Date', type:'date'},
+      {key:'purpose', label:'Purpose', type:'text'}, {key:'result', label:'Result', type:'text'} ] },
+
+  { id:'sustsourcing', name:'Sustainable Sourcing', dept:'Procurement', pic:'Procurement', doc:false,
+    task:'List suppliers, raw material type and certifications held.',
+    type:'log', columns:[
+      {key:'supplier', label:'Supplier Name', type:'text'}, {key:'material', label:'Material Type', type:'text'},
+      {key:'certification', label:'Certification', type:'text'} ] },
+
+  { id:'suppliercarbon', name:'Supplier Carbon Reduction Plan', dept:'Procurement / Sustainability', pic:'Procurement', doc:false,
+    task:'Collect supplier carbon emission reduction targets.',
+    type:'log', columns:[
+      {key:'supplier', label:'Supplier Name', type:'text'}, {key:'scope', label:'Scope', type:'text'},
+      {key:'base_year', label:'Base Year', type:'text'}, {key:'target_year', label:'Target Year', type:'text'},
+      {key:'target_pct', label:'Target Reduction (%)', type:'number'} ] },
+
+  { id:'dataprivacy', name:'Data Privacy & Security', dept:'IT', pic:'IT (Hanafiah)', doc:false,
+    task:'Already complete — continue monthly customer data complaint logging.',
+    type:'grid', months:MONTHS, columns:[ {key:'complaints', label:'Customer Complaints (cases)'} ] },
+
+  { id:'solar', name:'Solar Generation', dept:'Engineering / Facilities', pic:'Facilities', doc:false,
+    task:'Already complete — confirm no solar installation exists, or note plans to install.',
+    type:'grid', months:MONTHS, columns:[ {key:'kwh', label:'Solar Generation (kWh)'} ] },
+
+  { id:'otherfuel', name:'Other Fuel Consumption', dept:'Engineering / Facilities', pic:'Facilities', doc:false,
+    task:'Already complete — specify fuel type if any other fuel source is used.',
+    type:'grid', months:MONTHS, columns:[ {key:'usage', label:'Other Fuel Usage'} ] },
+
+  { id:'humanrights', name:'Human Rights Complaints', dept:'HR', pic:'HR Department', doc:false,
+    task:'Already complete — continue monthly complaint logging; attach audit/Sedex reports if any arise.',
+    type:'grid', months:MONTHS, columns:[ {key:'complaints', label:'Complaints (cases)'} ] },
+
+  { id:'staffturnover', name:'Staff Turnover Rate', dept:'HR', pic:'HR', doc:false,
+    task:'Already complete — continue monthly opening/closing headcount tracking.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'mgmt', label:'Management Headcount', agg:'last'}, {key:'nonmgmt', label:'Non-Management Headcount', agg:'last'} ] },
+
+  { id:'she', name:'SHE Incident Log', dept:'EHS', pic:'EHS', doc:false,
+    task:'Already complete — continue monthly minor/major/fatality incident tracking.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'minor', label:'Minor Incidents'}, {key:'major', label:'Major Incidents'}, {key:'fatality', label:'Fatality'} ] },
+
+  { id:'scheduledwaste', name:'Scheduled Waste', dept:'EHS', pic:'EHS', doc:false,
+    task:'Already complete — continue quarterly waste code tracking.',
+    type:'grid', months:['Q1','Q2','Q3'], columns:[ {key:'generated', label:'Total Generated (MT)'} ] },
+
+  { id:'solidwaste', name:'Solid Waste', dept:'EHS / Production', pic:'EHS', doc:false,
+    task:'Already complete — continue monthly scrap tracking by material type.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'tinplate', label:'Tinplate Scrap (MT)'}, {key:'aluminium', label:'Aluminium Scrap (MT)'}, {key:'paper', label:'Paper Scrap (MT)'},
+      {key:'plastic', label:'Plastic Scrap (MT)'}, {key:'metal', label:'Metal Scrap (MT)'}, {key:'wood', label:'Wooden Waste (MT)'}, {key:'office', label:'Office Waste (MT)'} ] },
+
+  { id:'productsafety', name:'Product Safety Complaints', dept:'QC / Quality', pic:'QC', doc:false,
+    task:'Already complete — continue monthly customer complaint logging.',
+    type:'grid', months:MONTHS, columns:[
+      {key:'minor', label:'Minor Complaints'}, {key:'major', label:'Major Complaints'}, {key:'critical', label:'Critical Complaints'}, {key:'recall', label:'Product Recalls'} ] },
+];
+
+const STORE_PREFIX = 'corum-srp2026:';
+const DEPTS = [...new Set(SECTIONS.map(s=>s.dept))];
+let currentData = {}; // id -> {status, filledBy, updatedAt, values:{...}}
+let activeSectionId = null;
+let currentTab = 'overview';
+
+// ---------------- PREFILL: real values already present in the source workbook ----------------
+// Only sections with genuine numeric/answered data in SRP2026-CORUM are seeded here.
+// Sections marked "NA" in the source (Water Type, Coal & Biomass, LPG, Petrol, Fugitive Emission,
+// Air Emission) have no real data to carry over and are intentionally left as Not Started.
+function gridFromSeries(months, seriesMap){
+  const out = {};
+  months.forEach((m,i)=>{
+    out[m] = {};
+    Object.keys(seriesMap).forEach(k => out[m][k] = String(seriesMap[k][i]));
+  });
+  return out;
+}
+const ZERO6 = [0,0,0,0,0,0];
+
+const PREFILL = {
+  revenue: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { revenue:[4509615000,5214172380,4080891000,1872418140,2964036900,5236123000] }) },
+
+  purchases: { status:'inprogress', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { total:[2129988723,709700210,1069265528,1361534850,0,103327817] }) },
+
+  electricity: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { kwh:[310049,272324,296517,219603,244349,242178] }) },
+
+  water: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { m3:[273,207,223,117,116,199] }) },
+
+  diesel: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { litres:[510,420,420,220,250,355] }) },
+
+  rawmat: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, {
+      resin:[96.415,29.9725,139.3275,48.8,46.6325,105.45],
+      tinplate:ZERO6, aluminium:ZERO6, paper:ZERO6 }) },
+
+  gas: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { usage:ZERO6 }) },
+
+  wastecompliance: { status:'inprogress', filledBy:'Imported from SRP2026-CORUM',
+    values: { compliance:'No', corrective_action:'', target_date:'' } },
+
+  anticorruption: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { mgmt_trained:ZERO6, nonmgmt_trained:ZERO6 }) },
+
+  antibribery: { status:'inprogress', filledBy:'Imported from SRP2026-CORUM',
+    values: { total_employees:'0', signed_count:'0',
+      note:'Source workbook records 0 total employees for sign-off tracking — but Staff Turnover Rate records 3 non-management employees. Please reconcile the actual headcount before circulating for signatures.' } },
+
+  hranalysis: { status:'inprogress', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { mgmt_male:ZERO6, mgmt_female:ZERO6, nonmgmt_male:ZERO6, nonmgmt_female:ZERO6 }) },
+
+  dataprivacy: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { complaints:ZERO6 }) },
+
+  solar: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { kwh:ZERO6 }) },
+
+  otherfuel: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { usage:ZERO6 }) },
+
+  humanrights: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { complaints:ZERO6 }) },
+
+  staffturnover: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { mgmt:ZERO6, nonmgmt:[3,3,3,3,3,3] }) },
+
+  she: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { minor:ZERO6, major:ZERO6, fatality:ZERO6 }) },
+
+  scheduledwaste: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(['Q1','Q2','Q3'], { generated:[0,0,0] }) },
+
+  solidwaste: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { tinplate:ZERO6, aluminium:ZERO6, paper:ZERO6, plastic:ZERO6, metal:ZERO6, wood:ZERO6, office:ZERO6 }) },
+
+  productsafety: { status:'complete', filledBy:'Imported from SRP2026-CORUM',
+    values: gridFromSeries(MONTHS, { minor:ZERO6, major:ZERO6, critical:ZERO6, recall:ZERO6 }) },
+};
+
+// ---------------- Storage helpers (localStorage-backed: works when opened as a local file) ----------------
+function safeLocalStorage(){
+  try{ localStorage.setItem('__test__','1'); localStorage.removeItem('__test__'); return true; }
+  catch(e){ return false; }
+}
+const HAS_LOCAL_STORAGE = safeLocalStorage();
+let memoryFallback = {}; // used only if localStorage is blocked entirely (rare, e.g. some locked-down browsers)
+
+async function loadSection(id){
+  try{
+    const raw = HAS_LOCAL_STORAGE ? localStorage.getItem(STORE_PREFIX+id) : memoryFallback[id];
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { status:'notstarted', filledBy:'', updatedAt:'', values:{} };
+}
+async function saveSection(id, data){
+  const raw = JSON.stringify(data);
+  if(HAS_LOCAL_STORAGE){ try{ localStorage.setItem(STORE_PREFIX+id, raw); }catch(e){} }
+  else { memoryFallback[id] = raw; }
+}
+
+// ---------------- Export / Import ----------------
+async function exportAllData(){
+  const out = {};
+  for(const s of SECTIONS){ out[s.id] = await loadSection(s.id); }
+  const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), data: out }, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `corum-srp2026-progress-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function mergeImported(imported){
+  // Newer updatedAt wins per section; sections with no local data just get added.
+  return Promise.all(SECTIONS.map(async s=>{
+    const incoming = imported[s.id];
+    if(!incoming) return;
+    const existing = await loadSection(s.id);
+    const incomingTime = incoming.updatedAt || '';
+    const existingTime = existing.updatedAt || '';
+    if(!existingTime || incomingTime > existingTime){
+      await saveSection(s.id, incoming);
+    }
+  }));
+}
+
+async function importAllData(file){
+  try{
+    const text = await file.text();
+    const parsed = JSON.parse(text);
+    const data = parsed.data || parsed; // tolerate raw export without wrapper
+    await mergeImported(data);
+    for(const s of SECTIONS){ currentData[s.id] = await loadSection(s.id); }
+    renderSidebar(); renderOverview(); renderReported();
+    if(activeSectionId){ renderPanel(activeSectionId); }
+    alert('Import complete — newer entries were merged in (existing more-recent entries were kept).');
+  }catch(e){
+    alert('Could not read that file. Please make sure it is a .json file exported from this dashboard.');
+  }
+}
+
+// ---------------- PDF Export (prints whichever tab is currently open, via browser print) ----------------
+function statusText(st){ return st==='complete' ? 'Complete' : st==='inprogress' ? 'In Progress' : 'Not Started'; }
+
+function exportPDF(){
+  if(currentTab === 'fillin' && !activeSectionId){
+    alert('Select a section on the left first — Export PDF prints whatever is currently on screen, and no section is open yet.');
+    return;
+  }
+  window.print();
+}
+
+function computeStatus(section, values){
+  if(section.type==='grid'){
+    const hasAny = section.months.some(m => section.columns.some(c => values[m] && values[m][c.key] !== undefined && values[m][c.key] !== ''));
+    const hasAll = section.months.every(m => section.columns.every(c => values[m] && values[m][c.key] !== undefined && values[m][c.key] !== ''));
+    return hasAll && hasAny ? 'complete' : hasAny ? 'inprogress' : 'notstarted';
+  }
+  if(section.type==='log'){
+    const rows = values.rows || [];
+    if(rows.length===0) return 'notstarted';
+    return 'inprogress'; // logs are manually marked complete
+  }
+  if(section.type==='confirm'){
+    const filled = section.fields.filter(f => values[f.key] !== undefined && values[f.key] !== '').length;
+    if(filled===0) return 'notstarted';
+    return filled===section.fields.length ? 'complete' : 'inprogress';
+  }
+  return 'notstarted';
+}
+
+// ---------------- Init: load all sections (seed from source-workbook prefill on first load) ----------------
+async function initAll(){
+  await Promise.all(SECTIONS.map(async s => {
+    let d = await loadSection(s.id);
+    const isUntouched = d.status === 'notstarted' && !d.filledBy && (!d.values || Object.keys(d.values).length === 0);
+    if(isUntouched && PREFILL[s.id]){
+      d = { updatedAt: new Date().toISOString().slice(0,16).replace('T',' '), ...PREFILL[s.id] };
+      await saveSection(s.id, d);
+    }
+    currentData[s.id] = d;
+  }));
+  renderSidebar();
+  renderOverview();
+  renderReported();
+}
+
+// ---------------- Sidebar ----------------
+function statusDotClass(status){
+  return status==='complete' ? 'complete' : status==='inprogress' ? 'inprogress' : 'notstarted';
+}
+function renderSidebar(){
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = '';
+  DEPTS.forEach(dept=>{
+    const label = document.createElement('div');
+    label.className = 'group-label';
+    label.textContent = dept;
+    sb.appendChild(label);
+    SECTIONS.filter(s=>s.dept===dept).forEach(s=>{
+      const d = currentData[s.id] || {status:'notstarted'};
+      const item = document.createElement('div');
+      item.className = 'sec-item' + (s.id===activeSectionId ? ' active' : '');
+      item.innerHTML = `<span class="sec-name">${s.name}</span><span class="dot ${statusDotClass(d.status)}"></span>`;
+      item.addEventListener('click', ()=>{ activeSectionId = s.id; renderSidebar(); renderPanel(s.id); });
+      sb.appendChild(item);
+    });
+  });
+}
+
+// ---------------- Panel / Form rendering ----------------
+function renderPanel(id){
+  const section = SECTIONS.find(s=>s.id===id);
+  const data = currentData[id] || { status:'notstarted', filledBy:'', updatedAt:'', values:{} };
+  const panel = document.getElementById('panel');
+
+  let bodyHtml = '';
+  if(section.type==='grid'){
+    bodyHtml = renderGridForm(section, data.values);
+  } else if(section.type==='log'){
+    bodyHtml = renderLogForm(section, data.values);
+  } else if(section.type==='confirm'){
+    bodyHtml = renderConfirmForm(section, data.values);
+  }
+
+  panel.innerHTML = `
+    <div class="panel-head">
+      <div>
+        <h2>${section.name}</h2>
+        <div class="meta-row">
+          <span class="meta-tag">${section.dept}</span>
+          <span class="meta-tag">PIC: ${section.pic}</span>
+          ${section.doc ? '<span class="meta-tag" style="background:#FBE4DE;color:#B4472A;">📎 Attachment needed</span>' : ''}
+        </div>
+      </div>
+      <select class="status-select" id="status-select">
+        <option value="notstarted" ${data.status==='notstarted'?'selected':''}>Not Started</option>
+        <option value="inprogress" ${data.status==='inprogress'?'selected':''}>In Progress</option>
+        <option value="complete" ${data.status==='complete'?'selected':''}>Complete</option>
+      </select>
+    </div>
+    <div class="task-note">${section.task}</div>
+    <div id="form-body">${bodyHtml}</div>
+    <div class="form-grid" style="margin-top:10px;">
+      <div class="form-field" style="margin-bottom:0;"><label>Filled By</label><input type="text" id="filled-by" value="${data.filledBy||''}" placeholder="Your name"></div>
+    </div>
+    <div class="save-bar">
+      <span class="save-status" id="save-status">${data.updatedAt ? 'Last updated: '+data.updatedAt+(data.filledBy?' by '+data.filledBy:'') : 'Not yet saved'}</span>
+      <button class="save-btn" id="save-btn">Save</button>
+    </div>
+  `;
+
+  if(section.type==='log'){
+    document.getElementById('add-row-btn').addEventListener('click', ()=>addLogRow(section));
+    panel.querySelectorAll('.del-btn').forEach(btn=>btn.addEventListener('click', (e)=>{
+      e.target.closest('.log-row').remove();
+    }));
+  }
+
+  document.getElementById('save-btn').addEventListener('click', ()=>saveCurrentForm(section));
+}
+
+function renderGridForm(section, values){
+  values = values || {};
+  let html = `<table class="grid-table"><thead><tr><th>Month</th>${section.columns.map(c=>`<th>${c.label}</th>`).join('')}</tr></thead><tbody>`;
+  section.months.forEach(m=>{
+    html += `<tr><td style="font-weight:700;">${m}</td>`;
+    section.columns.forEach(c=>{
+      const v = (values[m] && values[m][c.key] !== undefined) ? values[m][c.key] : '';
+      html += `<td><input type="number" step="any" data-month="${m}" data-key="${c.key}" value="${v}"></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  return html;
+}
+
+function renderConfirmForm(section, values){
+  values = values || {};
+  let html = '<div class="form-grid">';
+  section.fields.forEach(f=>{
+    const v = values[f.key] !== undefined ? values[f.key] : '';
+    html += `<div class="form-field" style="${f.type==='textarea'?'grid-column:1/-1;':''}"><label>${f.label}</label>`;
+    if(f.type==='textarea'){
+      html += `<textarea data-key="${f.key}" rows="3">${v}</textarea>`;
+    } else if(f.type==='select'){
+      html += `<select data-key="${f.key}">${f.options.map(o=>`<option value="${o}" ${v===o?'selected':''}>${o}</option>`).join('')}</select>`;
+    } else {
+      html += `<input type="${f.type}" data-key="${f.key}" value="${v}">`;
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderLogForm(section, values){
+  values = values || {};
+  const rows = values.rows || [];
+  const cols = section.columns;
+  let html = `<div id="log-rows">`;
+  const colTemplate = cols.map(()=>'1fr').join(' ') + ' 32px';
+  if(rows.length===0){
+    html += `<p style="color:var(--muted); font-size:12.5px; margin-bottom:10px;">No entries yet — click "Add Row" to start logging.</p>`;
+  } else {
+    html += `<div class="log-row" style="grid-template-columns:${colTemplate};">` + cols.map(c=>`<label style="font-size:10.5px; font-weight:700; color:var(--muted); text-transform:uppercase;">${c.label}</label>`).join('') + `<span></span></div>`;
+    rows.forEach((row, i)=>{
+      html += `<div class="log-row" data-row="${i}" style="grid-template-columns:${colTemplate};">`;
+      cols.forEach(c=>{
+        const v = row[c.key] !== undefined ? row[c.key] : '';
+        if(c.type==='select'){
+          html += `<select data-row="${i}" data-key="${c.key}">${c.options.map(o=>`<option value="${o}" ${v===o?'selected':''}>${o}</option>`).join('')}</select>`;
+        } else {
+          html += `<input type="${c.type}" data-row="${i}" data-key="${c.key}" value="${v}">`;
+        }
+      });
+      html += `<button class="del-btn" title="Remove row">✕</button></div>`;
+    });
+  }
+  html += `</div><button class="add-row-btn" id="add-row-btn">+ Add Row</button>`;
+  return html;
+}
+
+function addLogRow(section){
+  const container = document.getElementById('log-rows');
+  const cols = section.columns;
+  const colTemplate = cols.map(()=>'1fr').join(' ') + ' 32px';
+  const existingRows = container.querySelectorAll('.log-row[data-row]').length;
+  if(existingRows===0){
+    const placeholder = container.querySelector('p');
+    if(placeholder) placeholder.remove();
+    const headerRow = document.createElement('div');
+    headerRow.className = 'log-row';
+    headerRow.style.gridTemplateColumns = colTemplate;
+    headerRow.innerHTML = cols.map(c=>`<label style="font-size:10.5px; font-weight:700; color:var(--muted); text-transform:uppercase;">${c.label}</label>`).join('') + '<span></span>';
+    container.appendChild(headerRow);
+  }
+  const idx = existingRows;
+  const row = document.createElement('div');
+  row.className = 'log-row';
+  row.dataset.row = idx;
+  row.style.gridTemplateColumns = colTemplate;
+  row.innerHTML = cols.map(c=>{
+    if(c.type==='select'){
+      return `<select data-row="${idx}" data-key="${c.key}">${c.options.map(o=>`<option value="${o}">${o}</option>`).join('')}</select>`;
+    }
+    return `<input type="${c.type}" data-row="${idx}" data-key="${c.key}" value="">`;
+  }).join('') + `<button class="del-btn" title="Remove row">✕</button>`;
+  row.querySelector('.del-btn').addEventListener('click', ()=>row.remove());
+  container.appendChild(row);
+}
+
+async function saveCurrentForm(section){
+  const panel = document.getElementById('panel');
+  let values = {};
+  if(section.type==='grid'){
+    values = {};
+    panel.querySelectorAll('#form-body input[data-month]').forEach(inp=>{
+      const m = inp.dataset.month, k = inp.dataset.key;
+      values[m] = values[m] || {};
+      if(inp.value !== '') values[m][k] = inp.value;
+    });
+  } else if(section.type==='confirm'){
+    panel.querySelectorAll('#form-body [data-key]').forEach(inp=>{
+      if(inp.value !== '') values[inp.dataset.key] = inp.value;
+    });
+  } else if(section.type==='log'){
+    const rowsMap = {};
+    panel.querySelectorAll('#form-body [data-row]').forEach(inp=>{
+      const r = inp.dataset.row;
+      rowsMap[r] = rowsMap[r] || {};
+      rowsMap[r][inp.dataset.key] = inp.value;
+    });
+    const rows = Object.keys(rowsMap).sort((a,b)=>a-b).map(k=>rowsMap[k]).filter(row=>Object.values(row).some(v=>v!==''));
+    values = { rows };
+  }
+
+  const status = document.getElementById('status-select').value;
+  const filledBy = document.getElementById('filled-by').value;
+  const updatedAt = new Date().toISOString().slice(0,16).replace('T',' ');
+
+  const data = { status, filledBy, updatedAt, values };
+  await saveSection(section.id, data);
+  currentData[section.id] = data;
+
+  document.getElementById('save-status').textContent = 'Saved just now' + (filledBy?' by '+filledBy:'');
+  document.getElementById('save-status').classList.add('ok');
+  renderSidebar();
+  renderOverview();
+  renderReported();
+}
+
+// ---------------- Overview ----------------
+let deptChart=null, statusChart=null;
+function renderOverview(){
+  const counts = { complete:0, inprogress:0, notstarted:0 };
+  SECTIONS.forEach(s=>{
+    const st = (currentData[s.id]||{}).status || 'notstarted';
+    counts[st]++;
+  });
+  document.getElementById('kpi-total').textContent = SECTIONS.length;
+  document.getElementById('kpi-complete').textContent = counts.complete;
+  document.getElementById('kpi-complete-pct').textContent = Math.round(counts.complete/SECTIONS.length*100)+'%';
+  document.getElementById('kpi-progress').textContent = counts.inprogress;
+  document.getElementById('kpi-notstarted').textContent = counts.notstarted;
+
+  const deptData = {};
+  DEPTS.forEach(d=>deptData[d]={complete:0,inprogress:0,notstarted:0});
+  SECTIONS.forEach(s=>{ const st=(currentData[s.id]||{}).status||'notstarted'; deptData[s.dept][st]++; });
+
+  if(deptChart) deptChart.destroy();
+  deptChart = new Chart(document.getElementById('chart-dept').getContext('2d'), {
+    type:'bar',
+    data:{ labels:DEPTS, datasets:[
+      {label:'Complete', data:DEPTS.map(d=>deptData[d].complete), backgroundColor:COLORS.pos},
+      {label:'In Progress', data:DEPTS.map(d=>deptData[d].inprogress), backgroundColor:COLORS.warn},
+      {label:'Not Started', data:DEPTS.map(d=>deptData[d].notstarted), backgroundColor:COLORS.neg},
+    ]},
+    options:{ indexAxis:'y', responsive:true, plugins:{ legend:{ position:'bottom', labels:{boxWidth:12,font:{size:10}} } },
+      scales:{ x:{ stacked:true, grid:{color:'#EDE9DF'}, ticks:{stepSize:1} }, y:{ stacked:true, grid:{display:false}, ticks:{font:{size:10.5}} } } }
+  });
+
+  if(statusChart) statusChart.destroy();
+  statusChart = new Chart(document.getElementById('chart-status').getContext('2d'), {
+    type:'doughnut',
+    data:{ labels:['Complete','In Progress','Not Started'], datasets:[{ data:[counts.complete,counts.inprogress,counts.notstarted], backgroundColor:[COLORS.pos,COLORS.warn,COLORS.neg], borderWidth:2, borderColor:'#fff' }] },
+    options:{ responsive:true, plugins:{ legend:{ position:'bottom', labels:{boxWidth:12,font:{size:11}} } }, cutout:'62%' }
+  });
+
+  const tbody = document.getElementById('overview-tbody');
+  tbody.innerHTML = SECTIONS.map(s=>{
+    const d = currentData[s.id] || {};
+    const st = d.status || 'notstarted';
+    const label = st==='complete'?'Complete':st==='inprogress'?'In Progress':'Not Started';
+    const color = st==='complete'?COLORS.pos:st==='inprogress'?COLORS.warn:COLORS.neg;
+    return `<tr>
+      <td><strong>${s.name}</strong></td><td>${s.dept}</td><td>${s.pic}</td>
+      <td><span style="color:${color}; font-weight:700;">${label}</span></td>
+      <td>${d.filledBy||'—'}</td><td>${d.updatedAt||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ---------------- Data Trends (built live from entered values) ----------------
+const ALL_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const PALETTE = [COLORS.forest, COLORS.blue, COLORS.gold, COLORS.neg, COLORS.warn, COLORS.slate, '#8a6d3b'];
+let trendCharts = [];
+function destroyTrendCharts(){ trendCharts.forEach(c=>{ try{ c.destroy(); }catch(e){} }); trendCharts = []; }
+
+function renderTrends(){
+  destroyTrendCharts();
+  const container = document.getElementById('trends-container');
+  container.innerHTML = '';
+
+  const gridSections = SECTIONS.filter(s=>s.type==='grid');
+  const logSections = SECTIONS.filter(s=>s.type==='log');
+  const confirmSections = SECTIONS.filter(s=>s.type==='confirm');
+
+  // ---- Monthly grid trends (consumption, headcount, training) ----
+  const gridWrap = document.createElement('div');
+  gridWrap.innerHTML = `<h3 style="color:var(--forest); margin:4px 0 10px; font-size:15px;">Monthly Consumption &amp; Workforce Trends</h3>`;
+  const gridRow = document.createElement('div');
+  gridRow.className = 'chart-row';
+  gridSections.forEach(s=>{
+    const card = document.createElement('div');
+    card.className = 'chart-container';
+    card.innerHTML = `<h3>${s.name}</h3><canvas id="trend-${s.id}"></canvas>`;
+    gridRow.appendChild(card);
+  });
+  gridWrap.appendChild(gridRow);
+  container.appendChild(gridWrap);
+
+  gridSections.forEach(s=>{
+    const values = (currentData[s.id]||{}).values || {};
+    const hasAnyEntry = s.months.some(m => values[m] && s.columns.some(c => values[m][c.key] !== undefined && values[m][c.key] !== ''));
+    const canvasWrap = document.getElementById('trend-'+s.id).parentElement;
+
+    if(!hasAnyEntry){
+      document.getElementById('trend-'+s.id).style.display = 'none';
+      const empty = document.createElement('div');
+      empty.style.cssText = 'height:220px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:12.5px; text-align:center; padding:0 10px;';
+      empty.textContent = 'No data entered yet for this section — go to Fill In Data to add figures.';
+      canvasWrap.appendChild(empty);
+      return;
+    }
+
+    const allZero = s.months.every(m => s.columns.every(c => !values[m] || values[m][c.key] === undefined || values[m][c.key] === '' || parseFloat(values[m][c.key]) === 0));
+    if(allZero){
+      const note = document.createElement('p');
+      note.style.cssText = 'font-size:11px; color:var(--pos); font-weight:600; margin:-6px 0 8px;';
+      note.textContent = '✓ Recorded as 0 across all months (real reported value, not missing data)';
+      canvasWrap.insertBefore(note, document.getElementById('trend-'+s.id));
+    }
+
+    const datasets = s.columns.map((c,i)=>({
+      label: c.label,
+      data: s.months.map(m => (values[m] && values[m][c.key] !== undefined && values[m][c.key] !== '') ? parseFloat(values[m][c.key]) : null),
+      borderColor: PALETTE[i % PALETTE.length],
+      backgroundColor: PALETTE[i % PALETTE.length] + '22',
+      spanGaps: true, tension: .3, borderWidth: 2, pointRadius: 3
+    }));
+    const chart = new Chart(document.getElementById('trend-'+s.id).getContext('2d'), {
+      type: 'line',
+      data: { labels: s.months, datasets },
+      options: { responsive:true, plugins:{ legend:{ position:'bottom', labels:{ boxWidth:10, font:{size:9.5} } } },
+        scales:{ y:{ beginAtZero:true, suggestedMax: allZero ? 5 : undefined, grid:{ color:'#EDE9DF' } }, x:{ grid:{ display:false } } } }
+    });
+    trendCharts.push(chart);
+  });
+
+  // ---- Activity log volume (training, audits, engagement programs, etc.) ----
+  const logWrap = document.createElement('div');
+  logWrap.innerHTML = `<h3 style="color:var(--forest); margin:22px 0 10px; font-size:15px;">Activity Log Volume</h3>`;
+  const logRow = document.createElement('div');
+  logRow.className = 'chart-row';
+  logSections.forEach(s=>{
+    const card = document.createElement('div');
+    card.className = 'chart-container';
+    card.innerHTML = `<h3>${s.name}</h3><canvas id="trend-${s.id}"></canvas>`;
+    logRow.appendChild(card);
+  });
+  logWrap.appendChild(logRow);
+  container.appendChild(logWrap);
+
+  logSections.forEach(s=>{
+    const rows = ((currentData[s.id]||{}).values || {}).rows || [];
+    const canvasWrap = document.getElementById('trend-'+s.id).parentElement;
+
+    if(rows.length === 0){
+      document.getElementById('trend-'+s.id).style.display = 'none';
+      const empty = document.createElement('div');
+      empty.style.cssText = 'height:150px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:12.5px; text-align:center; padding:0 10px;';
+      empty.textContent = 'No entries logged yet — go to Fill In Data to add rows.';
+      canvasWrap.appendChild(empty);
+      return;
+    }
+
+    const dateCol = s.columns.find(c=>c.type==='date');
+    let labels, counts;
+    if(dateCol){
+      const buckets = {};
+      rows.forEach(r=>{
+        if(!r[dateCol.key]) return;
+        const d = new Date(r[dateCol.key]);
+        if(isNaN(d)) return;
+        const key = ALL_MONTHS[d.getMonth()];
+        buckets[key] = (buckets[key]||0) + 1;
+      });
+      labels = ALL_MONTHS.filter(m=>buckets[m]);
+      counts = labels.map(m=>buckets[m]);
+    }
+    if(!labels || labels.length===0){ labels = ['Total Entries']; counts = [rows.length]; }
+    const chart = new Chart(document.getElementById('trend-'+s.id).getContext('2d'), {
+      type: 'bar',
+      data: { labels, datasets:[{ label:'Entries logged', data:counts, backgroundColor:COLORS.blue, borderRadius:5, maxBarThickness:34 }] },
+      options: { responsive:true, plugins:{ legend:{ display:false } },
+        scales:{ y:{ beginAtZero:true, ticks:{ stepSize:1 }, grid:{ color:'#EDE9DF' } }, x:{ grid:{ display:false } } } }
+    });
+    trendCharts.push(chart);
+  });
+
+  // ---- Confirm-type sections: single-point verification figures ----
+  const confirmWrap = document.createElement('div');
+  confirmWrap.innerHTML = `<h3 style="color:var(--forest); margin:22px 0 10px; font-size:15px;">Verification Figures</h3>`;
+  const kpiRow = document.createElement('div');
+  kpiRow.className = 'kpi-row';
+  confirmSections.forEach(s=>{
+    const values = (currentData[s.id]||{}).values || {};
+    const numericField = s.fields.find(f=>f.type==='number' || f.type==='select');
+    const hasVal = numericField && values[numericField.key] !== undefined && values[numericField.key] !== '';
+    const val = hasVal ? values[numericField.key] : 'Not entered';
+    const card = document.createElement('div');
+    card.className = 'kpi-card';
+    card.style.borderLeftColor = hasVal ? 'var(--gold)' : 'var(--neg)';
+    card.innerHTML = `<div class="kpi-label">${s.name}</div><div class="kpi-value" style="font-size:18px; ${hasVal?'':'color:var(--neg);'}">${numericField ? val : '—'}</div><div class="kpi-sub">${numericField ? numericField.label : 'No numeric field'}</div>`;
+    kpiRow.appendChild(card);
+  });
+  confirmWrap.appendChild(kpiRow);
+  container.appendChild(confirmWrap);
+}
+
+// ---------------- Tabs ----------------
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('view-'+btn.dataset.tab).classList.add('active');
+    currentTab = btn.dataset.tab;
+    if(btn.dataset.tab === 'trends') renderTrends();
+    if(btn.dataset.tab === 'reported') renderReported();
+  });
+});
+
+document.getElementById('export-btn').addEventListener('click', exportAllData);
+document.getElementById('import-btn').addEventListener('click', ()=>document.getElementById('import-file').click());
+document.getElementById('export-pdf-btn').addEventListener('click', exportPDF);
+document.getElementById('import-file').addEventListener('change', (e)=>{
+  if(e.target.files && e.target.files[0]) importAllData(e.target.files[0]);
+  e.target.value = '';
+});
+
+if(!HAS_LOCAL_STORAGE){
+  const warn = document.createElement('div');
+  warn.className = 'shared-note';
+  warn.style.background = '#F5CFC4'; warn.style.borderColor = 'var(--neg)'; warn.style.color = '#7a2e1a';
+  warn.textContent = '⚠️ This browser is blocking local storage (e.g. private/incognito mode with strict settings). Your entries will only last for this session — export your data before closing the tab.';
+  document.querySelector('.wrap').insertBefore(warn, document.querySelector('nav.tabs'));
+}
+
+initAll();
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@ export interface Project {
   challenge: string;
   solution: string;
   status: string;
-  statusBadge: "Live Project" | "Client Work" | "Active Concept" | "Proof of Concept" | "In Development" | "Founder-Led Product — Active Prototype" | "Founder-Led Product — Phase 1 Launch" | "Founder-Led Civic-Tech Product — Live Community Platform" | "Community Portal — In Development" | "Live Community Project" | "A Fundamental Stage" | "Founder-Led Product — Operational Prototype";
+  statusBadge: "Live Project" | "Client Work" | "Active Concept" | "Proof of Concept" | "In Development" | "Founder-Led Product — Active Prototype" | "Founder-Led Product — Phase 1 Launch" | "Founder-Led Civic-Tech Product — Live Community Platform" | "Community Portal — In Development" | "Live Community Project" | "A Fundamental Stage" | "Founder-Led Product — Operational Prototype" | "Internal Reporting Prototype — Browser-Based Template";
   context: string;
   techStack: string[];
   duration: string;
@@ -214,35 +214,40 @@ export const projects: Project[] = [
   },
   {
     id: "corum",
-    name: "PT. Corum — Sustainability Reporting System",
-    category: "ESG & Industrial Reporting",
-    oneLiner: "Multi-department industrial ESG & sustainability reporting dashboard with offline-first client-side data interchange for plant operations.",
-    problem: "Compiling annual industrial Sustainability Reporting Packages (SRP2026) in manufacturing plants involved manual data collection across 7 disparate departments (Finance, Facilities, EHS, HR, Procurement, QC, IT), resulting in version conflicts and lengthy audit preparations.",
-    challenge: "Tracking 23 sensitive industrial parameters—including electricity (kWh), water discharge (m³), raw resin imports (MT), diesel fuel burn (L), and hazardous waste compliance—without deploying complex server infrastructure or compromising plant data security.",
-    solution: "Engineered an offline-first, client-side ESG reporting dashboard featuring dynamic JSON data interchange, department PIC data validation, real-time Chart.js trend analytics, and print-optimized PDF generation for official audit submissions.",
-    status: "Live & Deployed",
-    statusBadge: "Live Project",
-    context: "Industrial ESG reporting portal consolidating multi-department operational metrics for Batam manufacturing operations.",
-    techStack: ["HTML5", "JavaScript (ES6+)", "Chart.js", "Tailwind CSS", "LocalStorage Sync", "CSS Print Engine"],
-    duration: "3 Months",
-    role: "Digital Systems Architect & Lead Engineer",
-    images: ["/screenshots/corum-dashboard.jpg"],
+    name: "PT. Corum Sustainability Reporting Template",
+    category: "Sustainability Reporting, Data Collection & Progress Monitoring",
+    oneLiner: "Turning a complex sustainability workbook into a clearer, guided reporting workflow.",
+    problem: "Preparing periodic sustainability reporting packages often requires compiling qualitative answers and quantitative metrics across multiple company departments (Facilities, EHS, HR, Procurement, QA/QC, Finance, Production). Spreadsheets can be overwhelming, error-prone, and difficult to monitor for overall reporting progress.",
+    challenge: "The core challenge was translating a comprehensive sustainability reporting package into a self-contained, browser-local template that guides department contributors through their assigned sections without introducing complex server infrastructure, database administration, or external cloud dependencies.",
+    solution: "Designed and built a browser-based sustainability reporting prototype that structures 23 tracked reporting sections across departments into clear views (Overview, Already Reported, Data Trends, Fill In Data), tracks completion statuses locally, supports client-side JSON export/import for file-based consolidation, and enables print/export to PDF.",
+    status: "Internal Prototype",
+    statusBadge: "Internal Reporting Prototype — Browser-Based Template",
+    context: "Client-side sustainability reporting prototype and data-entry template organizing multi-department metrics without server dependencies.",
+    techStack: ["HTML5", "CSS3", "JavaScript (ES6+)", "Chart.js", "LocalStorage", "CSS @media print"],
+    duration: "Prototype Sprint",
+    role: "Reporting Structure, Workflow Design, Dashboard UI & Front-End Prototype",
+    images: ["/Image/project/pt.corum/pt-corum-portfolio-thumbnail-v2.png"],
     liveUrl: undefined,
     githubUrl: undefined,
-    longDescription: "PT. Corum Sustainability Reporting Package (SRP2026) transforms industrial ESG compliance into an interactive, zero-latency dashboard. The system tracks 23 critical environmental, social, and operational parameters across 7 departments, allowing individual PICs to record monthly figures offline, merge JSON data files seamlessly, and generate audit-ready PDF reports with a single click.",
+    longDescription: "PT. Corum Sustainability Reporting Template is a browser-based prototype designed to turn a multi-department sustainability reporting workbook into a guided, structured reporting workflow.\n\nThe prototype organizes 23 tracked sections across 7 operational domains (Facilities, EHS, HR, Procurement, QA/QC, Finance, Production), providing completion tracking, client-side data persistence, trend visualizations, and JSON file export/import for manual consolidation.\n\nWorkflow: Reporting Package → Sections & Owners → Department Input → Completion Review → JSON Export → Manual Consolidation → Print/PDF Report.",
     keyDeliverables: [
-      "7-Department PIC tracking matrix (Finance, Facilities, EHS, HR, Procurement, QC, IT)",
-      "Client-side JSON data import/export merge protocol for offline multi-user collaboration",
-      "Interactive Chart.js data trends for electricity, water, raw resin, and diesel burn",
-      "Print-optimized PDF report generator (@media print CSS) for instant audit package printing",
-      "Zero-server architecture ensuring 100% internal plant data sovereignty"
+      "23 tracked reporting sections across 7 departments",
+      "4 structured views: Overview, Already Reported, Data Trends, and Fill In Data",
+      "Visual completion indicators (Not Started, In Progress, Complete)",
+      "Client-side data persistence via browser localStorage",
+      "Manual JSON export and file-based merge/import utilities",
+      "Interactive Chart.js trend visualizations for sample consumption metrics",
+      "Browser-optimized print stylesheet (@media print) for PDF export",
+      "Self-contained architecture with zero external database dependencies"
     ],
     keyDecisions: [
-      "Adopted an offline-first browser architecture so department heads can input monthly data securely on plant laptops without server dependencies.",
-      "Implemented a structured JSON schema merge algorithm to resolve concurrent submissions across multiple department PICs.",
-      "Built print-specific CSS stylesheets ensuring exported PDF documents perfectly match official industrial audit formats."
+      "Structured 23 reporting sections into clear operational domains rather than an unguided monolithic spreadsheet.",
+      "Employed client-side browser storage to allow standalone, offline-capable operation on plant workstations.",
+      "Provided manual JSON export and import functions so distributed department files can be consolidated without cloud synchronization.",
+      "Implemented browser @media print formatting to generate clean summary reports directly from the web interface.",
+      "Clearly demarcated prototype boundaries: database persistence, authentication, and automated audit trails remain future roadmap items."
     ],
-    outcome: "Reduced annual ESG audit compilation time by 60% and established a transparent, verifiable digital data trail across all 23 industrial compliance parameters."
+    outcome: "Delivered a functioning standalone prototype that validates the information hierarchy, section ownership matrix, and data-entry workflow needed to transform a static sustainability workbook into a user-friendly digital reporting template."
   },
   {
     id: "sakku",

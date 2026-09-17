@@ -16,7 +16,7 @@
 - **CGV10 Portal Warga** (https://portalwargacgv.id): Live centralized community information hub, transparent Kas RT financial ledger, and PALUGADA resident marketplace for RT 010 / RW 021.
 - **Masjid Al-Ikhlas Digital Presence** (https://alikhlascgv.vercel.app/): Live public information hub featuring Batam prayer times with live countdown, weekly transparent Infaq accounting, and QRIS donation guides.
 - **OneEcos — B2B Trade Operations System**: Founder-led operational prototype connecting buyers, quotations, orders, fulfillment, shipments, export documents, invoices, and follow-ups in one structured trade workflow.
-- **PT. Corum — Sustainability Reporting System**: Industrial ESG reporting package (SRP2026) consolidating 23 compliance parameters across 7 factory departments with offline-first client JSON data sync and PDF audit export.
+- **PT. Corum Sustainability Reporting Template**: Standalone browser-based reporting prototype structuring 23 sustainability sections across 7 operational departments with client-side localStorage persistence, manual JSON export/import consolidation, and print-to-PDF formatting.
 - **Sakku 2.0 — Privacy-First Wealth OS** (https://sakku.ahlulfirdaus.com/): Zero-knowledge Local-First PWA personal & family financial operating system with conversational Indonesian 'Catat Cepat' parser, envelope budgeting, and multi-wallet Net Worth telemetry.
 
 ## Technology Stack
