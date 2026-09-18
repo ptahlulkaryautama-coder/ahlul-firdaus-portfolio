@@ -16,12 +16,17 @@ export default function CursorGlow() {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Check if coarse pointer (touch device)
-    if (window.matchMedia("(pointer: coarse)").matches) {
+    // Check if coarse pointer (touch device) or prefers-reduced-motion
+    if (
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       return;
     }
 
-    setMounted(true);
+    const raf = requestAnimationFrame(() => {
+      setMounted(true);
+    });
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
@@ -30,7 +35,10 @@ export default function CursorGlow() {
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, [mouseX, mouseY]);
 
   if (!mounted) return null;

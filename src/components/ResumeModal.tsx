@@ -17,7 +17,6 @@ import {
   Phone,
   Globe,
   Award,
-  ExternalLink,
   Code2,
   Database,
   ShieldCheck,
@@ -34,17 +33,26 @@ interface ResumeModalProps {
 export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   const [activeTab, setActiveTab] = useState<"summary" | "projects" | "skills" | "services">("summary");
   const [copied, setCopied] = useState(false);
+  const previousActiveElement = React.useRef<HTMLElement | null>(null);
+  const closeButtonRef = React.useRef<HTMLButtonElement>(null);
 
-  // Prevent background scroll when modal is open
+  // Prevent background scroll and manage focus when modal is open
   useEffect(() => {
     if (isOpen) {
+      if (typeof document !== "undefined" && document.activeElement instanceof HTMLElement) {
+        previousActiveElement.current = document.activeElement;
+      }
       document.body.style.overflow = "hidden";
+      const timer = setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 50);
+      return () => clearTimeout(timer);
     } else {
       document.body.style.overflow = "unset";
+      if (previousActiveElement.current) {
+        previousActiveElement.current.focus();
+      }
     }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
   }, [isOpen]);
 
   // Handle ESC key press
@@ -64,62 +72,58 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
   const handleDownloadText = () => {
     const resumeText = `AHLUL FIRDAUS
-Digital Systems Architect & Full-Stack Engineer
+Operational Systems Builder & Product Specialist
 Location: Batam, Kepulauan Riau, Indonesia (GMT+7)
 Email: ahlul.firdaus@gmail.com | Phone/WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
 
 ==================================================
 EXECUTIVE SUMMARY
 ==================================================
-Digital Systems Architect & Full-Stack Engineer with extensive experience engineering high-performance web applications, B2B export transaction platforms, neighborhood governance ledgers, and operational SaaS cockpits. Specializes in end-to-end strategy, database design, Escrow transaction engines, PWA systems, and high-density UI/UX.
+Operational Systems Builder with 15+ years of practical leadership across manufacturing operations, quality control, process improvement, and digital product workflows. Specializes in turning complex operational processes into clear web applications, internal dashboards, portals, and structured digital tools using modern web stacks and AI-assisted workflows.
 
 ==================================================
 CORE COMPETENCIES
 ==================================================
-• Systems Architecture: B2B Escrow Engines, Multi-tier SaaS Architecture, Database Schemas, API Webhooks.
+• Systems Architecture: Operational Process Deconstruction, Workflow Design, Relational Data Modeling, API Integration.
 • Modern Frontend: Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS v4, Framer Motion, PWA.
-• Backend & Database: Node.js, GraphQL, REST APIs, PostgreSQL, Supabase, Prisma ORM, AWS S3.
-• Business & Security: Customs API Integrations, Payment Gateways (QRIS/Bank), Hardware Grading Algorithms.
+• Backend & Database: Node.js, REST APIs, PostgreSQL, Supabase, Prisma ORM, Netlify/Vercel Edge.
+• Operations & Governance: Internal Dashboards, Community Portals, Public Ledger Transparency, ESG Templates.
 
 ==================================================
-KEY ARCHITECTED SYSTEMS & PROJECTS
+KEY SYSTEMS & PROJECTS
 ==================================================
-1. OOI — Origin Of Indonesia (B2B Export Platform & Commodity Catalog)
-   • Built B2B export showcase platform presenting Indonesian origin commodities to global buyers.
-   • Standardized technical specifications, origin traceability, packaging standards, and sample-request funnels.
+1. OOI — Origin of Indonesia (Status: Founder-Led Product — Phase 1 Launch)
+   • B2B showcase catalog platform connecting Indonesian producers with global commercial buyers.
+   • Standardized technical specifications, origin traceability, and sample-request funnels.
    • Tech Stack: Next.js, TypeScript, Tailwind CSS, Netlify, GitHub.
 
-2. CGV10 Portal Warga (Digital Community Ecosystem — portalwargacgv.id)
+2. CGV10 Portal Warga (Status: Live Product)
    • Centralized community information hub for 500+ residents of RT 010 / RW 021.
-   • Implemented official announcements, pengurus directory, transparent Kas RT reporting, and PALUGADA resident marketplace.
+   • Implemented official announcements, pengurus directory, transparent Kas RT reporting, and resident marketplace.
    • Tech Stack: Next.js, Supabase, TypeScript, Tailwind CSS, Vercel.
 
-3. Masjid Al-Ikhlas Digital Presence (alikhlascgv.vercel.app)
-   • Centralized digital hub providing Batam prayer timetables with live countdown clock.
-   • Integrated transparent weekly Infaq/Sedekah financial reports and digital QRIS donation channels.
+3. Masjid Al-Ikhlas Digital Presence (Status: In Development)
+   • Centralized community platform providing Batam prayer schedule information with live countdown clock and weekly transparent Infaq reporting.
    • Tech Stack: Next.js, HTML5, Tailwind CSS, JavaScript, Vercel.
 
-4. OneEcos Business Operating System (Order-to-Cash Engine)
-   • Unified end-to-end commercial transaction flow (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment).
-   • Single-source-of-truth architecture reducing manual handoffs and eliminating redundant data entry.
+4. OneEcos Business Operating System (Status: Active Prototype)
+   • Unified commercial trade workflow organizing buyers, quotes, sales orders, procurement, logistics, and invoicing in one connected interface.
    • Tech Stack: React, TypeScript, Recharts, Framer Motion, Tailwind CSS.
 
-5. PT. Corum Sustainability Reporting Template
-   • Structured 23 reporting sections across 7 operational departments into a guided workflow.
-   • Client-side data persistence with manual JSON file export/import and browser print-to-PDF formatting.
+5. PT. Corum Sustainability Reporting Template (Status: Internal Template)
+   • Browser-based ESG reporting tool structuring 23 sections across 7 departments with local persistence, JSON export/import, and print-to-PDF formatting.
    • Tech Stack: HTML5, CSS3, JavaScript (ES6+), Chart.js, LocalStorage, CSS @media print.
 
-6. Sakku 2.0 — Privacy-First Wealth OS (sakku.ahlulfirdaus.com)
-   • Local-First PWA financial operating system with zero-knowledge device storage (100% data sovereignty).
-   • Features conversational Indonesian 'Catat Cepat' parser, envelope budgeting, and multi-wallet Net Worth telemetry.
+6. Sakku 2.0 — Personal & Household Finance (Status: Live Product)
+   • Local-First PWA financial tool with zero-knowledge device storage, rule-based conversational 'Catat Cepat' parsing, and envelope budgeting.
    • Tech Stack: Next.js, React 19, TypeScript, Tailwind CSS, Recharts, LocalStorage, PWA.
 
 ==================================================
-ENGAGEMENT MODELS
+ENGAGEMENT MODELS (PRELIMINARY ESTIMATES)
 ==================================================
-• System Audit & Consultation: IDR 7.5M ($500) | 3-5 days
-• Full B2B / SaaS Ecosystem Build: IDR 25M ($1,800) | 3-6 weeks
-• Fractional CTO Retainer: IDR 15M/month ($1,000/mo)
+• Digital Product & Workflow Review: Rp 4.5M (~$300) | 3-5 days
+• Business Website or Portal MVP: Rp 15M (~$1,000) | 3-6 weeks
+• Ongoing Product Improvement: Rp 4.5M/month (~$300/mo) | Monthly retainer
 
 ==================================================
 CONTACT & PORTFOLIO
@@ -141,11 +145,11 @@ Email: ahlul.firdaus@gmail.com
   };
 
   const handleCopyText = () => {
-    const text = `AHLUL FIRDAUS — Digital Systems Architect & Full-Stack Builder
+    const text = `AHLUL FIRDAUS — Operational Systems Builder
 Email: ahlul.firdaus@gmail.com | WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
 
 EXECUTIVE SUMMARY:
-Digital Systems Architect & Full-Stack Engineer with extensive experience engineering high-performance web applications, B2B export transaction platforms (OOI), neighborhood governance ledgers (CGV10), and operational SaaS cockpits (OneEcos). Specializes in database design, Escrow engines, PWA systems, and high-density UI/UX.`;
+Operational Systems Builder with 15+ years of practical leadership across manufacturing, quality control, process improvement, and digital product workflows. Specializes in turning complex operational processes into clear web applications, internal dashboards, portals, and structured digital tools.`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -154,7 +158,12 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Technical Resume and Verified Credentials"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto"
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -166,6 +175,9 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
 
           {/* Modal Container */}
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Technical Resume and Operational Experience"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -188,7 +200,7 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                     </span>
                   </div>
                   <p className="font-mono text-xs text-gold-muted tracking-wider">
-                    Digital Systems Architect & Full-Stack Builder • Batam, ID (GMT+7)
+                    Operational Systems Builder • Batam, ID (GMT+7)
                   </p>
                 </div>
               </div>
@@ -220,6 +232,7 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                   <span className="hidden sm:inline">Print / PDF</span>
                 </button>
                 <button
+                  ref={closeButtonRef}
                   onClick={onClose}
                   className="p-2 glass-card hover:bg-graphite text-cream-dark hover:text-cream rounded-lg transition-colors ml-2"
                   aria-label="Close modal"
@@ -231,18 +244,18 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
 
             {/* Navigation Tabs */}
             <div className="flex items-center gap-2 px-6 pt-4 border-b border-graphite/40 bg-graphite/20 overflow-x-auto no-scrollbar">
-              {[
+              {([
                 { id: "summary", label: "Executive Summary", icon: Terminal },
                 { id: "projects", label: "Systems & Projects", icon: Layers },
                 { id: "skills", label: "Tech Stack & Skills", icon: Cpu },
                 { id: "services", label: "Engagement Models", icon: Award },
-              ].map((tab) => {
+              ] as const).map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id as any)}
+                    onClick={() => setActiveTab(tab.id)}
                     className={`px-4 py-2.5 font-mono text-xs uppercase tracking-wider transition-all duration-200 border-b-2 flex items-center gap-2 whitespace-nowrap ${
                       isActive
                         ? "border-gold-muted text-gold-muted font-bold bg-gold-muted/5 rounded-t-lg"
@@ -273,10 +286,10 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                       <span>Professional Profile</span>
                     </h4>
                     <p className="text-sm text-cream-dark/90 leading-relaxed font-sans">
-                      I am <strong className="text-cream">Ahlul Firdaus</strong>, a <strong className="text-gold-muted">Digital Systems Architect & Full-Stack Builder</strong> based in Batam, Indonesia. I specialize in designing and engineering custom software ecosystems from strategic architecture blueprint to high-fidelity deployment.
+                      I am <strong className="text-cream">Ahlul Firdaus</strong>, an <strong className="text-gold-muted">Operational Systems Builder</strong> based in Batam, Indonesia. With 15+ years of practical leadership across manufacturing operations, quality control, process improvement, and digital workflows, I specialize in turning complex operational processes into clear web applications, internal dashboards, portals, and structured digital tools.
                     </p>
                     <p className="text-sm text-cream-dark/90 leading-relaxed font-sans">
-                      My experience spans building B2B export escrow systems, community governance PWA portals, high-density operational SaaS dashboards, transparent public ledgers, and sub-second headless storefronts.
+                      My work spans B2B export showcase portals, community governance platforms, operations dashboards, transparent public ledgers, and privacy-first local applications.
                     </p>
                   </div>
 
@@ -319,37 +332,37 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                     </div>
                   </div>
 
-                  {/* Architectural Philosophy */}
+                  {/* Operational Philosophy */}
                   <div className="p-5 glass-card rounded-xl border border-graphite/60 space-y-3">
                     <h5 className="font-mono text-xs text-cream uppercase tracking-wider font-bold">
-                      Architectural Philosophy
+                      Operational Principles
                     </h5>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                       <div className="space-y-1">
                         <div className="text-xs font-bold text-gold-muted flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>Clean Domain Design</span>
+                          <span>Clarify Reality First</span>
                         </div>
                         <p className="text-[11px] text-cream-dark/70 leading-normal">
-                          Model exact real-world business constraints into domain logic & clean database schemas before coding.
+                          Understand the physical constraints, handoffs, and people involved before writing software.
                         </p>
                       </div>
                       <div className="space-y-1">
                         <div className="text-xs font-bold text-gold-muted flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>Sub-Second Velocity</span>
+                          <span>Structured Data Models</span>
                         </div>
                         <p className="text-[11px] text-cream-dark/70 leading-normal">
-                          LCP &lt; 0.8s loading benchmarks with Next.js Turbopack, SSR caching, and asset optimization.
+                          Clean relational structures and explicit status transitions to prevent messy data debt.
                         </p>
                       </div>
                       <div className="space-y-1">
                         <div className="text-xs font-bold text-gold-muted flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>Zero-Downtime Reliability</span>
+                          <span>Practical Interfaces</span>
                         </div>
                         <p className="text-[11px] text-cream-dark/70 leading-normal">
-                          Fail-safe error fallbacks, lazy API client initialization, and type-checked payload contracts.
+                          Information density balanced with visual clarity so non-technical users can execute confidently.
                         </p>
                       </div>
                     </div>
@@ -368,45 +381,45 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                   {[
                     {
                       name: "OOI — Origin Of Indonesia",
-                      tag: "B2B Export Platform & Commodity Catalog",
+                      tag: "B2B Export Showcase & Commodity Catalog",
                       desc: "Founder-led B2B showcase platform presenting premium Indonesian origin commodities to global importers with standardized technical specs and sample-request workflows.",
                       stack: ["Next.js", "TypeScript", "Tailwind CSS", "Netlify", "GitHub"],
-                      badge: "B2B Export"
+                      badge: "Founder-Led Product — Phase 1 Launch"
                     },
                     {
                       name: "CGV10 Portal Warga",
                       tag: "Digital Community System — portalwargacgv.id",
                       desc: "Centralized community hub for 500+ residents of RT 010 / RW 021 with official notices, pengurus directory, transparent Kas RT balance, and PALUGADA resident marketplace.",
                       stack: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS", "Vercel"],
-                      badge: "Live Project"
+                      badge: "Live Product"
                     },
                     {
                       name: "Masjid Al-Ikhlas Digital Presence",
                       tag: "Public Info & Transparency Hub — alikhlascgv.vercel.app",
-                      desc: "Mosque portal featuring real-time Batam prayer schedule sync, live prayer countdown clock, weekly transparent Infaq financial reporting, and QRIS donation guide.",
+                      desc: "Mosque portal featuring Batam prayer schedule information, live prayer countdown clock, weekly transparent Infaq financial reporting, and QRIS donation guide.",
                       stack: ["Next.js", "HTML5", "Tailwind CSS", "JavaScript", "Vercel"],
-                      badge: "Live Project"
+                      badge: "In Development"
                     },
                     {
                       name: "OneEcos Business Operating System",
                       tag: "Unified Order-to-Cash Transaction Engine",
                       desc: "Business operating system eliminating manual coordination across 8 transaction phases (RFQ -> Quote -> Sales Order -> Procurement -> Production -> Logistics -> Invoicing -> Payment).",
                       stack: ["React", "TypeScript", "Recharts", "Framer Motion", "Tailwind CSS"],
-                      badge: "A Fundamental Stage"
+                      badge: "Active Prototype"
                     },
                     {
                       name: "PT. Corum Sustainability Reporting Template",
                       tag: "Browser-Based Reporting & Data-Entry Template",
                       desc: "Structured 23 reporting sections across 7 departments into a guided workflow with client-side localStorage persistence, manual JSON export/import consolidation, and print-to-PDF formatting.",
                       stack: ["HTML5", "CSS3", "JavaScript (ES6+)", "Chart.js", "LocalStorage", "CSS Print"],
-                      badge: "Internal Prototype"
+                      badge: "Internal Template"
                     },
                     {
-                      name: "Sakku 2.0 — Privacy-First Wealth OS",
+                      name: "Sakku 2.0 — Personal & Household Finance",
                       tag: "Local-First PWA — sakku.ahlulfirdaus.com",
-                      desc: "Zero-knowledge personal & family financial operating system featuring natural-language 'Catat Cepat' parsing, envelope budgeting, and multi-account Net Worth tracking.",
+                      desc: "Zero-knowledge personal & household financial tool featuring rule-based conversational 'Catat Cepat' parsing, envelope budgeting, and multi-wallet balance tracking.",
                       stack: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Recharts", "PWA"],
-                      badge: "Live Project"
+                      badge: "Live Product"
                     }
                   ].map((proj, idx) => (
                     <div
@@ -454,23 +467,23 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                     <ul className="space-y-2 text-xs text-cream-dark/85 font-sans">
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
                         <span>Next.js 16 (Turbopack, SSR, SSG)</span>
-                        <span className="font-mono text-[10px] text-emerald-400">Expert</span>
+                        <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>React 19 & Client/Server Components</span>
-                        <span className="font-mono text-[10px] text-emerald-400">Expert</span>
+                        <span>React 19 & Modern Components</span>
+                        <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
                         <span>TypeScript & Type Safety</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>Tailwind CSS v4 & Glassmorphism UI</span>
-                        <span className="font-mono text-[10px] text-emerald-400">Expert</span>
+                        <span>Tailwind CSS v4 Design Systems</span>
+                        <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between">
                         <span>Progressive Web Apps (PWA)</span>
-                        <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
+                        <span className="font-mono text-[10px] text-emerald-400">Proficient</span>
                       </li>
                     </ul>
                   </div>
@@ -482,23 +495,23 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                     </div>
                     <ul className="space-y-2 text-xs text-cream-dark/85 font-sans">
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>Node.js & Express REST APIs</span>
+                        <span>Node.js & REST APIs</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>PostgreSQL & Supabase BaaS</span>
+                        <span>PostgreSQL & Supabase</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
-                      </li>
-                      <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>GraphQL Query Architectures</span>
-                        <span className="font-mono text-[10px] text-emerald-400">Proficient</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
                         <span>Prisma ORM Data Modeling</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
+                      <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
+                        <span>Relational Schema Architecture</span>
+                        <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
+                      </li>
                       <li className="flex items-center justify-between">
-                        <span>Resend Email API & Webhook Listeners</span>
+                        <span>Transactional Email & Webhooks</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                     </ul>
@@ -507,23 +520,23 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                   <div className="p-5 glass-card rounded-xl border border-graphite/60 space-y-3">
                     <div className="flex items-center gap-2 text-gold-muted font-mono text-xs uppercase font-bold">
                       <ShieldCheck className="w-4 h-4" />
-                      <span>Architecture & Business Domain</span>
+                      <span>Operations & Systems</span>
                     </div>
                     <ul className="space-y-2 text-xs text-cream-dark/85 font-sans">
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>Automated B2B Escrow Logic</span>
+                        <span>Process Deconstruction & Mapping</span>
                         <span className="font-mono text-[10px] text-emerald-400">Specialist</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>Customs API Documentation Sync</span>
+                        <span>Quality Systems & Standard Operating Procedures</span>
                         <span className="font-mono text-[10px] text-emerald-400">Specialist</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>QRIS & Bank Gateway Integration</span>
+                        <span>B2B Catalog & Inquiry Funnels</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between">
-                        <span>Algorithmic Valuation Models</span>
+                        <span>Community Governance & Public Ledgers</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                     </ul>
@@ -532,23 +545,23 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                   <div className="p-5 glass-card rounded-xl border border-graphite/60 space-y-3">
                     <div className="flex items-center gap-2 text-gold-muted font-mono text-xs uppercase font-bold">
                       <Server className="w-4 h-4" />
-                      <span>Infrastructure & Hosting</span>
+                      <span>Tooling & Deployment</span>
                     </div>
                     <ul className="space-y-2 text-xs text-cream-dark/85 font-sans">
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>Vercel Edge Network Deployment</span>
-                        <span className="font-mono text-[10px] text-emerald-400">Expert</span>
+                        <span>Vercel & Netlify Edge Deployment</span>
+                        <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>AWS S3 Asset Management</span>
-                        <span className="font-mono text-[10px] text-emerald-400">Proficient</span>
+                        <span>AI-Assisted Development Workflows</span>
+                        <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between border-b border-graphite/40 pb-1.5">
-                        <span>Git, GitHub Actions & CI/CD</span>
+                        <span>Git & GitHub Workflows</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                       <li className="flex items-center justify-between">
-                        <span>Netlify Static & Edge Hosting</span>
+                        <span>Local-First & Offline Storage Patterns</span>
                         <span className="font-mono text-[10px] text-emerald-400">Advanced</span>
                       </li>
                     </ul>
@@ -567,11 +580,11 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="p-5 glass-card rounded-xl border border-graphite/60 flex flex-col justify-between space-y-4">
                       <div className="space-y-2">
-                        <span className="font-mono text-[10px] text-cream-dark/50 uppercase tracking-widest block">Option 01</span>
-                        <h5 className="font-sans font-bold text-cream text-lg">System Audit & Blueprint</h5>
-                        <div className="font-mono text-gold-muted font-bold text-sm">Rp 7.5M / $500</div>
+                        <span className="font-mono text-[10px] text-cream-dark/50 uppercase tracking-widest block">Option 01 • Preliminary Estimate</span>
+                        <h5 className="font-sans font-bold text-cream text-lg">Digital Product &amp; Workflow Review</h5>
+                        <div className="font-mono text-gold-muted font-bold text-sm">Rp 4.5M / ~$300</div>
                         <p className="text-xs text-cream-dark/70 font-sans leading-relaxed pt-2">
-                          Comprehensive analysis of existing legacy codebases, security bottlenecks, and database schemas. Delivered as an actionable 3-5 day architectural blueprint.
+                          Focused 3–5 day review of existing workflows, bottlenecks, or product concepts. Delivers an actionable scope breakdown, interface plan, and implementation roadmap.
                         </p>
                       </div>
                       <a
@@ -579,7 +592,7 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                         onClick={onClose}
                         className="w-full py-2.5 glass-card hover:border-gold-muted text-center text-xs font-mono uppercase tracking-wider text-cream hover:text-gold-muted rounded-lg transition-colors"
                       >
-                        Request Audit
+                        Request Review
                       </a>
                     </div>
 
@@ -588,11 +601,11 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                         Most Requested
                       </span>
                       <div className="space-y-2">
-                        <span className="font-mono text-[10px] text-gold-muted uppercase tracking-widest block">Option 02</span>
-                        <h5 className="font-sans font-bold text-cream text-lg">Full Ecosystem Build</h5>
-                        <div className="font-mono text-gold-muted font-bold text-sm">Rp 25M / $1,800</div>
+                        <span className="font-mono text-[10px] text-gold-muted uppercase tracking-widest block">Option 02 • Preliminary Estimate</span>
+                        <h5 className="font-sans font-bold text-cream text-lg">Business Website or Portal MVP</h5>
+                        <div className="font-mono text-gold-muted font-bold text-sm">Rp 15M / ~$1,000</div>
                         <p className="text-xs text-cream-dark/80 font-sans leading-relaxed pt-2">
-                          End-to-end strategy, custom database architecture, payment gateway integration (QRIS/Escrow), and production deployment in 3–6 weeks with 30-day warranty.
+                          End-to-end design and build of a production website, operational dashboard, or internal portal tailored to your operational needs in 3–6 weeks.
                         </p>
                       </div>
                       <a
@@ -600,17 +613,17 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                         onClick={onClose}
                         className="w-full py-2.5 bg-cream hover:bg-gold-muted text-deep-black text-center text-xs font-sans font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md"
                       >
-                        Inquire Build
+                        Inquire Scope
                       </a>
                     </div>
 
                     <div className="p-5 glass-card rounded-xl border border-graphite/60 flex flex-col justify-between space-y-4">
                       <div className="space-y-2">
-                        <span className="font-mono text-[10px] text-cream-dark/50 uppercase tracking-widest block">Option 03</span>
-                        <h5 className="font-sans font-bold text-cream text-lg">Fractional CTO Retainer</h5>
-                        <div className="font-mono text-gold-muted font-bold text-sm">Rp 15M/mo / $1,000/mo</div>
+                        <span className="font-mono text-[10px] text-cream-dark/50 uppercase tracking-widest block">Option 03 • Preliminary Estimate</span>
+                        <h5 className="font-sans font-bold text-cream text-lg">Ongoing Product Improvement</h5>
+                        <div className="font-mono text-gold-muted font-bold text-sm">Rp 4.5M/mo / ~$300/mo</div>
                         <p className="text-xs text-cream-dark/70 font-sans leading-relaxed pt-2">
-                          Ongoing weekly architectural guidance, code reviews, and technology advisory for growing enterprises without full-time executive overhead.
+                          Continuous weekly iterations, feature additions, and workflow refinements for systems that evolve alongside ongoing operations.
                         </p>
                       </div>
                       <a
@@ -618,7 +631,7 @@ Digital Systems Architect & Full-Stack Engineer with extensive experience engine
                         onClick={onClose}
                         className="w-full py-2.5 glass-card hover:border-gold-muted text-center text-xs font-mono uppercase tracking-wider text-cream hover:text-gold-muted rounded-lg transition-colors"
                       >
-                        Retain Advisor
+                        Discuss Support
                       </a>
                     </div>
                   </div>

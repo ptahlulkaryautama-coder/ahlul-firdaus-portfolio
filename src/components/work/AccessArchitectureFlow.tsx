@@ -7,9 +7,7 @@ import {
   Globe,
   Layers,
   Info,
-  Sparkles,
   ArrowRight,
-  MousePointerClick,
   Activity
 } from "lucide-react";
 

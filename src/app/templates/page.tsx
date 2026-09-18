@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -9,8 +10,6 @@ import {
   Layers,
   Filter,
   CheckCircle2,
-  ExternalLink,
-  Download,
   Building2,
   HardHat,
   Home,
@@ -19,12 +18,8 @@ import {
   Zap,
   MessageSquare,
   ShieldCheck,
-  Cpu,
-  FileText,
   X,
   Play,
-  Calculator,
-  MapPin,
   Check,
   ChevronRight
 } from "lucide-react";
@@ -151,10 +146,12 @@ export default function TemplatesStudioPage() {
                       onClick={() => setActiveDemoTemplate(kit)}
                       className="relative w-full h-56 md:h-64 rounded-xl overflow-hidden mb-6 border border-graphite/80 group-hover:border-gold-muted/50 cursor-pointer bg-graphite-dark"
                     >
-                      <img
+                      <Image
                         src={kit.previewImage}
                         alt={kit.name}
-                        className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 group-hover:object-bottom"
+                        fill
+                        unoptimized
+                        className="object-cover object-top transition-all duration-700 group-hover:scale-105 group-hover:object-bottom"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent opacity-80" />
 
@@ -359,9 +356,12 @@ export default function TemplatesStudioPage() {
                     <span>SCROLL DOWN TO INSPECT FULL LAYOUT</span>
                   </div>
                   <div className="w-full max-h-[450px] overflow-y-auto rounded-xl border border-graphite/60 custom-scrollbar shadow-inner bg-black">
-                    <img
+                    <Image
                       src={activeDemoTemplate.previewImage}
                       alt={`${activeDemoTemplate.name} Full Preview`}
+                      width={1200}
+                      height={1600}
+                      unoptimized
                       className="w-full h-auto object-cover"
                     />
                   </div>
@@ -370,7 +370,7 @@ export default function TemplatesStudioPage() {
                 {/* Simulated Hero Banner */}
                 <div className="p-8 rounded-2xl glass-card border border-graphite/80 relative overflow-hidden bg-gradient-to-r from-graphite-dark via-deep-black to-gold-muted/10">
                   <span className="font-mono text-[9px] text-gold-muted uppercase tracking-widest block mb-2 font-bold">
-                    // OFFICIAL CORPORATE PROFILE PREVIEW
+                    {"//"} OFFICIAL CORPORATE PROFILE PREVIEW
                   </span>
                   <h2 className="text-2xl md:text-3xl font-extrabold text-cream font-sans tracking-tight">
                     {activeDemoTemplate.tagline}

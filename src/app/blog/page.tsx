@@ -3,12 +3,12 @@ import Link from "next/link";
 import { blogPosts } from "../../data/posts";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { ArrowLeft, Clock, ArrowRight, BookOpen, Sparkles, User, Tag } from "lucide-react";
+import { ArrowLeft, Clock, ArrowRight, Sparkles, User, Tag } from "lucide-react";
 
 export const metadata = {
-  title: "Engineering Writings & Architecture Thoughts | Ahlul Firdaus",
+  title: "Articles & Operational Reflections | Ahlul Firdaus",
   description:
-    "Deep-dive articles on B2B escrow architecture, community SaaS systems, high-density dashboard design, and software engineering strategy.",
+    "Practical articles and reflections on operational workflows, community systems, digital tools, and interface design.",
 };
 
 export default function BlogListingPage() {
@@ -32,13 +32,13 @@ export default function BlogListingPage() {
         <div className="max-w-3xl mb-16">
           <span className="font-mono text-[10px] uppercase tracking-widest text-gold-muted flex items-center gap-2 mb-3 font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Technical Insights &amp; Architecture Papers</span>
+            <span>Articles &amp; Operational Reflections</span>
           </span>
           <h1 className="font-sans font-black tracking-tight text-4xl sm:text-5xl lg:text-6xl text-cream mb-4">
-            System Writings
+            Writings &amp; Articles
           </h1>
           <p className="text-cream-dark/75 text-base sm:text-lg leading-relaxed">
-            In-depth breakdowns of real-world software architecture, fintech escrow flows, high-density visual design, and operational engineering.
+            Practical breakdowns on operational processes, community tools, workflow clarity, and digital interface design.
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export default function BlogListingPage() {
                   href={`/blog/${post.slug}`}
                   className="font-mono text-xs text-gold-muted group-hover:text-cream font-bold flex items-center gap-1 transition-colors"
                 >
-                  <span>Read Paper</span>
+                  <span>Read Article</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

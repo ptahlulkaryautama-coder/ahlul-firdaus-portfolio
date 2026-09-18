@@ -120,7 +120,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             "@type": "ListItem",
             position: 2,
             name: "Selected Work",
-            item: "https://ahlulfirdaus.com/#selected-work",
+            item: "https://ahlulfirdaus.com/#work",
           },
           {
             "@type": "ListItem",
@@ -141,11 +141,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       />
       <Header />
 
-      <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+      <main id="main-content" className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
         {/* Back Link */}
         <div className="mb-8">
           <Link
-            href="/#selected-work"
+            href="/#work"
             className="inline-flex items-center gap-2 text-sm text-teal-400 hover:text-teal-300 transition-colors font-mono group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -161,7 +161,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </span>
             <span className="text-slate-500">•</span>
             <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-200">
-              <span className={`w-2 h-2 rounded-full ${project.statusBadge === "Live Project" ? "bg-emerald-400 animate-pulse" : "bg-amber-400"}`} />
+              <span className={`w-2 h-2 rounded-full ${project.statusBadge === "Live Product" ? "bg-emerald-400 animate-pulse" : "bg-amber-400"}`} />
               <span className="font-semibold">{project.statusBadge || project.status}</span>
             </span>
           </div>
@@ -590,12 +590,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </section>
         )}
 
-        {(project.id === "sakku" || project.id === "rumah-ringkas") && (
+        {project.id === "sakku" && (
           <section className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-cream flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-teal-400" />
-                Interactive Wealth Engine (Catat Cepat &amp; Envelope Budgeting)
+                Interactive Personal Finance Demo (Rule-Based Conversational Input &amp; Envelope Budgeting)
               </h2>
               <span className="text-xs font-mono text-teal-300 glass-badge px-2.5 py-1 rounded-full font-bold">
                 Live Interactive Component
@@ -728,7 +728,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   <ExternalLink className="w-4 h-4" />
                 </Link>
                 <Link
-                  href="/#selected-work"
+                  href="/#work"
                   className="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors text-center"
                 >
                   Explore All Projects

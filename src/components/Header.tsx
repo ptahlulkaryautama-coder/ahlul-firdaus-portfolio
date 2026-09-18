@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, Cpu, Sparkles, Search } from "lucide-react";
+import { Menu, X, Sparkles, Search } from "lucide-react";
 import AccentSwitcher from "./AccentSwitcher";
 import Logo from "./Logo";
 
@@ -54,17 +54,38 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle ESC key and background scroll lock for mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const handleOpenCommandPalette = () => {
     window.dispatchEvent(new CustomEvent("open-command-palette"));
   };
 
   const navLinks = [
-    { name: "Identity", href: "/#identity" },
+    { name: "What I Build", href: "/#what-i-build" },
     { name: "Selected Work", href: "/#work" },
-    { name: "Templates", href: "/templates" },
     { name: "Services", href: "/#services" },
-    { name: "Capabilities", href: "/#capabilities" },
-    { name: "Artifacts", href: "/#artifacts" },
+    { name: "How I Work", href: "/#method" },
+    { name: "Templates", href: "/templates" },
+    { name: "About", href: "/#biography" },
     { name: "Writings", href: "/blog" },
   ];
 
@@ -93,18 +114,18 @@ export default function Header() {
               <Sparkles className="w-3 h-3 text-gold-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </span>
             <span className="font-mono text-[9px] text-cream-dark/40 tracking-widest">
-              SYSTEMS ARCHITECT
+              OPERATIONAL SYSTEMS BUILDER
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 px-6 py-2 rounded-full glass-card border border-graphite/50 shadow-inner">
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 px-5 xl:px-6 py-2 rounded-full glass-card border border-graphite/50 shadow-inner shrink-0">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-[11px] font-mono tracking-wider text-cream-dark/70 hover:text-cream transition-colors duration-200 uppercase relative py-1 group"
+              className="text-[10px] xl:text-[11px] font-mono tracking-wider text-cream-dark/70 hover:text-cream transition-colors duration-200 uppercase relative py-1 group whitespace-nowrap"
             >
               {link.name}
               <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-gradient-to-r from-gold-muted to-cream transition-all duration-300 group-hover:w-full"></span>
@@ -113,7 +134,7 @@ export default function Header() {
         </nav>
 
         {/* Timezone Heartbeat & CTA */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden md:flex items-center gap-2.5 xl:gap-3.5 shrink-0">
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-badge shrink-0 whitespace-nowrap">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -135,9 +156,9 @@ export default function Header() {
           <AccentSwitcher />
           <a
             href="#contact"
-            className="shimmer-button px-5 py-2.5 bg-cream text-deep-black font-sans text-xs tracking-wider rounded-lg hover:bg-gold-muted hover:shadow-lg transition-all duration-300 font-bold focus-visible:ring-2 focus-visible:ring-gold-muted flex items-center gap-2 shrink-0"
+            className="shimmer-button px-4 xl:px-5 py-2.5 bg-cream text-deep-black font-sans text-xs tracking-wider rounded-lg hover:bg-gold-muted hover:shadow-lg transition-all duration-300 font-bold focus-visible:ring-2 focus-visible:ring-gold-muted flex items-center gap-2 shrink-0 whitespace-nowrap"
           >
-            <span>Inquire Project</span>
+            <span>Discuss Workflow</span>
           </a>
         </div>
 
@@ -152,7 +173,9 @@ export default function Header() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg glass-card text-cream hover:text-gold-muted transition-colors duration-200"
-            aria-label="Toggle Menu"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -161,7 +184,10 @@ export default function Header() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-graphite/60 bg-deep-black/95 backdrop-blur-2xl absolute top-20 left-0 right-0 py-6 px-6 shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-top-2">
+        <div
+          id="mobile-menu"
+          className="lg:hidden border-b border-graphite/60 bg-deep-black/95 backdrop-blur-2xl absolute top-20 left-0 right-0 py-6 px-6 shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-top-2"
+        >
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
@@ -178,7 +204,7 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center px-4 py-3 bg-cream text-deep-black font-sans text-xs tracking-wider rounded-lg hover:bg-gold-muted transition-colors duration-300 font-bold mt-2"
             >
-              Inquire Project
+              Discuss Workflow
             </a>
           </div>
         </div>

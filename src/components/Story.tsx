@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Anchor, MapPin, Sparkles, Compass } from "lucide-react";
+import { MapPin, Sparkles, Factory, Layers, Cpu } from "lucide-react";
 
 export default function Story() {
   return (
@@ -24,26 +24,30 @@ export default function Story() {
               <div className="space-y-1">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-gold-muted glass-badge px-3 py-1 rounded-full flex items-center gap-1.5 w-fit font-bold">
                   <Sparkles className="w-3 h-3 text-gold-muted" />
-                  <span>Biography // 06</span>
+                  <span>About Me // 09</span>
                 </span>
                 <span className="font-mono text-[9px] text-cream-dark/40 tracking-wider block pt-1">
-                  NARRATIVE FOUNDATION
+                  OPERATOR TO DIGITAL SYSTEMS
                 </span>
               </div>
               
               {/* Meta details */}
               <div className="pt-6 border-t border-graphite/40 space-y-3 font-mono text-[11px] text-cream-dark/70">
                 <div className="flex items-center gap-2.5 p-2.5 rounded-xl glass-card border border-graphite/40">
-                  <MapPin className="w-4 h-4 text-gold-muted" />
+                  <Factory className="w-4 h-4 text-gold-muted shrink-0" />
+                  <span>15+ Years Operational &amp; Project Background</span>
+                </div>
+                <div className="flex items-center gap-2.5 p-2.5 rounded-xl glass-card border border-graphite/40">
+                  <MapPin className="w-4 h-4 text-gold-muted shrink-0" />
                   <span>Based in Batam, Indonesia</span>
                 </div>
                 <div className="flex items-center gap-2.5 p-2.5 rounded-xl glass-card border border-graphite/40">
-                  <Anchor className="w-4 h-4 text-gold-muted" />
-                  <span>Global Export Mindset</span>
+                  <Layers className="w-4 h-4 text-gold-muted shrink-0" />
+                  <span>Modern Web Stack (Next.js, React, Tailwind)</span>
                 </div>
                 <div className="flex items-center gap-2.5 p-2.5 rounded-xl glass-card border border-graphite/40">
-                  <Compass className="w-4 h-4 text-gold-muted" />
-                  <span>Full-Stack Systems Thinker</span>
+                  <Cpu className="w-4 h-4 text-gold-muted shrink-0" />
+                  <span>AI-Assisted Development Workflow</span>
                 </div>
               </div>
             </div>
@@ -58,19 +62,19 @@ export default function Story() {
                 className="space-y-6 text-cream-dark/85 text-base md:text-lg leading-relaxed font-sans"
               >
                 <h3 className="font-sans font-black text-2xl md:text-3xl lg:text-4xl tracking-tight text-cream">
-                  Operating at the Intersection of <span className="gradient-gold-text">Commerce and Software Architecture</span>
+                  I Build from an <span className="gradient-gold-text">Operator&apos;s Perspective</span>
                 </h3>
                 
                 <p>
-                  My journey began with a core insight: <strong className="text-cream">beautiful design is incomplete if the underlying logic fails.</strong> I watched organizations invest in aesthetic storefronts that broke under high-density data workloads, cross-border customs requirements, or complex user access levels.
+                  I spent more than 15 years in manufacturing, operations, project delivery, and process improvement. In those environments, you quickly learn that systems succeed or fail based on clarity, reliability, and whether people can actually do their work without friction.
                 </p>
                 
                 <p>
-                  I set out to bridge this gap. By combining product strategy with production-ready code, I build interfaces and backend workflows that move business forward. Whether engineering <strong className="text-cream">Origin Of Indonesia (OOI)</strong> to link local agricultural producers with global freight buyers, or creating resident management portals for <strong className="text-cream">CGV10</strong>, I approach every project with end-to-end architectural rigor.
+                  Today, I bring that operational background into digital products. Whether building a business website, a community portal, an internal reporting tool, or a product prototype, I start from the real-world workflow—not assumptions.
                 </p>
                 
                 <p>
-                  My methodology is transparent and quantifiable: document database schemas, eliminate friction, and deliver high-performance compilation speeds.
+                  Based in Batam, Indonesia, I combine modern web development (Next.js, TypeScript, Tailwind) with AI-assisted build workflows to deliver focused, usable digital systems faster and more thoughtfully.
                 </p>
               </motion.div>
 
@@ -83,7 +87,7 @@ export default function Story() {
                 className="glass-card border-l-4 border-gold-muted p-6 rounded-r-2xl shadow-lg"
               >
                 <p className="font-serif text-base md:text-lg text-cream italic leading-relaxed">
-                  “A dashboard is not just a collection of widgets. It is the nervous system of an enterprise — fast, dense, clear, and resilient.”
+                  “A digital tool succeeds when the underlying workflow is clear, reliable, and straightforward for the people who use it.”
                 </p>
               </motion.div>
             </div>

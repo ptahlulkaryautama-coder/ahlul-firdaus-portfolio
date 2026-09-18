@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { CheckCircle2, Sparkles, Clock, ArrowRight, ShieldCheck, Calendar } from "lucide-react";
+import { CheckCircle2, Sparkles, Clock, ArrowRight } from "lucide-react";
 import { serviceTiers } from "../data/services";
 
 export default function ServicesSection() {
@@ -21,13 +20,13 @@ export default function ServicesSection() {
           <div className="max-w-2xl">
             <span className="font-mono text-[10px] uppercase tracking-widest text-gold-muted flex items-center gap-2 mb-2 font-semibold">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Engagement Models // 04</span>
+              <span>Engagement Models // 06</span>
             </span>
             <h2 className="font-sans font-black tracking-tight text-3xl md:text-4xl lg:text-5xl text-cream mb-4">
-              Services &amp; Architecture Tiers
+              Ways I Can Help
             </h2>
             <p className="text-cream-dark/75 text-sm leading-relaxed font-sans">
-              Clear scope, transparent pricing, and predictable timelines. Choose between advisory, full system execution, or ongoing fractional CTO leadership.
+              Practical support for businesses and organizations that need a clearer website, dashboard, portal, internal tool, or product direction. All figures and timelines are preliminary estimates.
             </p>
           </div>
 
@@ -70,7 +69,7 @@ export default function ServicesSection() {
               {tier.popular && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gold-muted text-deep-black font-mono text-[9px] uppercase tracking-widest font-black shadow-lg flex items-center gap-1">
                   <Sparkles className="w-3 h-3" />
-                  Most Popular for Businesses
+                  Popular Starting Model
                 </div>
               )}
 
@@ -96,7 +95,7 @@ export default function ServicesSection() {
                 {/* Price Display */}
                 <div className="py-4 border-y border-graphite/40 mb-6">
                   <div className="text-xs font-mono text-cream-dark/50 uppercase tracking-wider mb-1">
-                    Starting Investment
+                    Preliminary Estimate
                   </div>
                   <div className="font-sans font-black text-2xl md:text-3xl text-cream flex items-baseline gap-1">
                     <span className="text-gold-muted">
@@ -129,7 +128,7 @@ export default function ServicesSection() {
                       : "bg-cream/10 hover:bg-cream/20 text-cream border border-graphite/60"
                   }`}
                 >
-                  <span>Inquire {tier.badge.split(" ")[0]} Scope</span>
+                  <span>{tier.ctaLabel}</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
@@ -137,24 +136,24 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* Custom Systems & Larger Platforms Callout */}
+        {/* Custom Systems & Complex Requirements Callout */}
         <div className="mt-12 p-8 rounded-3xl glass-panel border border-gold-muted/20 bg-gradient-to-r from-deep-black via-graphite-dark to-gold-muted/5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="font-mono text-[10px] uppercase text-gold-muted tracking-widest font-bold">
-              Enterprise &amp; High-Complexity Projects
+              Complex &amp; Regulated Requirements
             </span>
             <h3 className="font-sans font-bold text-xl text-cream">
-              Custom System Development
+              Discovery &amp; Feasibility Review
             </h3>
             <p className="text-cream-dark/75 text-xs leading-relaxed font-sans">
-              For larger platforms requiring multiple user roles, payment processing, multi-tenant architecture, complex automation, or high-volume data workflows.
+              Larger systems involving multiple roles, payments, sensitive information, complex integrations, or regulatory requirements require a separate discovery and feasibility review before scope and timeline commitment.
             </p>
             <div className="flex flex-wrap gap-4 text-xs font-mono pt-1">
               <span className="text-gold-muted">
-                Estimated Investment: {currency === "IDR" ? "Rp 25.000.000 – Rp 60.000.000+" : "$1,800 – $4,500+"}
+                Custom Scope: Evaluated per project complexity
               </span>
               <span className="text-cream-dark/50">•</span>
-              <span className="text-cream-dark/70">Timeline: 6 – 12+ Weeks</span>
+              <span className="text-cream-dark/70">Timeline: Iterative phased delivery</span>
             </div>
           </div>
 
@@ -162,12 +161,12 @@ export default function ServicesSection() {
             href="#contact"
             className="px-5 py-3 rounded-xl glass-badge font-sans text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:border-gold-muted shrink-0 transition-all"
           >
-            <span>Request Custom Quote</span>
+            <span>Request Initial Discovery</span>
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>
 
-        {/* Project Inquiry & Payment Terms Banner */}
+        {/* Project Inquiry Banner */}
         <div className="mt-8 p-8 rounded-3xl glass-card border border-graphite/80 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-gradient-to-r from-emerald-950/20 via-deep-black to-gold-muted/10">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-2xl bg-gold-muted/10 border border-gold-muted/40 flex items-center justify-center text-gold-muted shrink-0">
@@ -175,24 +174,24 @@ export default function ServicesSection() {
             </div>
             <div>
               <h4 className="font-sans font-bold text-lg text-cream">
-                Ready to Discuss Your Project Requirements?
+                Ready to Discuss Your Workflow?
               </h4>
-              <p className="text-cream-dark/70 text-xs mt-1">
-                Send your project brief or specifications directly via WhatsApp or email for instant evaluation and architectural quote.
+              <p className="text-cream-dark/70 text-xs mt-1 font-sans">
+                Share your current spreadsheet, website, prototype link, or early concept to identify a practical starting point.
               </p>
               <div className="mt-2 text-[10px] font-mono text-cream-dark/50">
-                Payment Terms: 50% deposit • 30% design approval • 20% launch
+                Typical engagement: 50% deposit • 30% milestone review • 20% launch &amp; handover
               </div>
             </div>
           </div>
 
           <a
-            href="https://wa.me/6282283549457?text=Hello%20Ahlul,%20I%20would%20like%20to%20inquire%20about%20a%20project."
+            href="https://wa.me/6281291254064?text=Hello%20Ahlul,%20I%20would%20like%20to%20discuss%20a%20project%20workflow."
             target="_blank"
             rel="noopener noreferrer"
             className="shimmer-button px-6 py-3.5 bg-cream hover:bg-gold-muted text-deep-black font-sans text-xs tracking-wider rounded-xl font-bold transition-all duration-300 flex items-center gap-2 shrink-0"
           >
-            <span>Inquire via WhatsApp</span>
+            <span>Discuss via WhatsApp</span>
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>

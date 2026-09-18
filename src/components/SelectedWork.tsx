@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, Cpu, Layers, FileText, CheckCircle2, ExternalLink, Sparkles, Filter, Search, RotateCcw } from "lucide-react";
@@ -17,14 +17,43 @@ export default function SelectedWork() {
   const [selectedTech, setSelectedTech] = useState<string>("All Stack");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
+  const previousActiveElement = React.useRef<HTMLElement | null>(null);
+  const closeButtonRef = React.useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (activeProject) {
+      if (typeof document !== "undefined" && document.activeElement instanceof HTMLElement) {
+        previousActiveElement.current = document.activeElement;
+      }
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setActiveProject(null);
+        }
+      };
+      document.body.style.overflow = "hidden";
+      const timer = setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 50);
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = "unset";
+        window.removeEventListener("keydown", handleKeyDown);
+        if (previousActiveElement.current) {
+          previousActiveElement.current.focus();
+        }
+      };
+    }
+  }, [activeProject]);
+
   const categories = [
     "All",
     "Commerce, Export & Sourcing Platform",
     "Civic Tech, Community Operations & Resident Services",
     "Faith-Based Civic Tech, Education & Community Services",
     "B2B Trade, Export Operations & Business Workflow",
-    "ESG & Industrial Reporting",
-    "FinTech & Wealth Operating System"
+    "Operational Reporting & Workflow Concept",
+    "Privacy-First Personal Finance & Budgeting"
   ];
   const popularTechs = ["All Stack", "Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PWA", "Recharts"];
 
@@ -41,14 +70,23 @@ export default function SelectedWork() {
   });
 
   const getStatusColor = (status: string) => {
+    if (status.includes("Founder-Led") || status.includes("Phase 1")) {
+      return "bg-amber-400 shadow-sm shadow-amber-400/50";
+    }
     if (status.includes("Live")) {
       return "bg-emerald-400 shadow-sm shadow-emerald-400/50";
     }
     if (status.includes("Active")) {
       return "bg-teal-400 shadow-sm shadow-teal-400/50";
     }
-    if (status.includes("Concept") || status.includes("Proof")) {
+    if (status.includes("Internal")) {
+      return "bg-cyan-400 shadow-sm shadow-cyan-400/50";
+    }
+    if (status.includes("Development")) {
       return "bg-amber-400 shadow-sm shadow-amber-400/50";
+    }
+    if (status.includes("Concept") || status.includes("Roadmap")) {
+      return "bg-purple-400 shadow-sm shadow-purple-400/50";
     }
     return "bg-cream-dark/40";
   };
@@ -65,11 +103,11 @@ export default function SelectedWork() {
               <span>Selected Work // 02</span>
             </span>
             <h2 className="font-sans font-black tracking-tight text-3xl md:text-4xl lg:text-5xl text-cream">
-              Selected Work & Case Studies
+              Selected Work &amp; Case Studies
             </h2>
           </div>
-          <p className="text-cream-dark/60 font-mono text-xs max-w-md leading-relaxed">
-            Live systems, export platforms, community software, and SaaS dashboards. Click any project to view full specifications.
+          <p className="text-cream-dark/70 font-sans text-xs max-w-md leading-relaxed">
+            Live products, functional prototypes, and internal tools exploring commerce, community services, reporting, finance, and operational workflows. Each case study identifies what is implemented, what uses sample data, and what remains planned.
           </p>
         </div>
 
@@ -160,7 +198,7 @@ export default function SelectedWork() {
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
                 layout
@@ -192,27 +230,52 @@ export default function SelectedWork() {
                   </div>
 
                   {/* Header Elements */}
-                  <div className="flex items-center justify-between mb-3 gap-2">
+                  <div className="flex items-center justify-between mb-2.5 gap-2 flex-wrap">
                     <span className="text-[9px] font-mono tracking-wider text-gold-muted uppercase glass-badge px-2.5 py-1 rounded-full font-semibold">
                       {project.category}
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       <span className={`w-2 h-2 rounded-full ${getStatusColor(project.statusBadge || project.status)}`}></span>
-                      <span className="font-mono text-[9px] text-cream-dark/50 uppercase tracking-wider">
+                      <span className="font-mono text-[9px] text-cream-dark/60 uppercase tracking-wider">
                         {project.statusBadge || project.status}
                       </span>
                     </div>
                   </div>
 
+                  {/* Evidence Label */}
+                  {project.evidenceLabel && (
+                    <div className="mb-2.5">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-mono font-medium tracking-wide bg-graphite-dark/80 text-cream/80 border border-graphite/60">
+                        {project.evidenceLabel}
+                      </span>
+                    </div>
+                  )}
+
                   {/* Project Title */}
-                  <h3 className="font-sans font-bold text-xl text-cream group-hover:text-gold-muted transition-colors duration-300 mb-2 flex items-center justify-between">
+                  <h3 className="font-sans font-bold text-xl text-cream group-hover:text-gold-muted transition-colors duration-300 mb-2.5 flex items-center justify-between">
                     <span>{project.name}</span>
                   </h3>
 
-                  {/* One Liner */}
-                  <p className="text-cream-dark/80 text-xs leading-relaxed mb-4 line-clamp-2">
-                    {project.oneLiner}
-                  </p>
+                  {/* Problem & Built Snippets */}
+                  <div className="space-y-1.5 mb-4 text-xs leading-relaxed">
+                    {project.problemSnippet && (
+                      <p className="text-cream-dark/70 line-clamp-2">
+                        <strong className="text-gold-muted/90 font-mono text-[10px] uppercase font-semibold mr-1">Problem:</strong>
+                        {project.problemSnippet}
+                      </p>
+                    )}
+                    {project.builtSnippet && (
+                      <p className="text-cream-dark/90 line-clamp-2">
+                        <strong className="text-gold-muted/90 font-mono text-[10px] uppercase font-semibold mr-1">Built:</strong>
+                        {project.builtSnippet}
+                      </p>
+                    )}
+                    {!project.problemSnippet && !project.builtSnippet && (
+                      <p className="text-cream-dark/80 line-clamp-2 leading-relaxed">
+                        {project.oneLiner}
+                      </p>
+                    )}
+                  </div>
 
                   {/* Tech stack badge row */}
                   <div className="flex flex-wrap gap-1.5 mt-3">
@@ -271,6 +334,9 @@ export default function SelectedWork() {
 
             {/* Slide-over Container */}
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Case Study: ${activeProject.name}`}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -288,6 +354,7 @@ export default function SelectedWork() {
                   </span>
                 </div>
                 <button
+                  ref={closeButtonRef}
                   onClick={() => setActiveProject(null)}
                   className="p-2 rounded-full glass-card text-cream-dark hover:text-cream hover:bg-gold-muted hover:text-deep-black transition-all duration-200"
                   aria-label="Close panel"

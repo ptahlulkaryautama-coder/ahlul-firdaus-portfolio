@@ -4,18 +4,25 @@ import React, { useState, useEffect } from "react";
 import { Palette } from "lucide-react";
 
 export default function AccentSwitcher() {
-  const [currentTheme, setCurrentTheme] = useState<"gold" | "emerald" | "blue">("gold");
+  const [currentTheme, setCurrentTheme] = useState<"gold" | "emerald" | "blue">(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("af-portfolio-theme") as "gold" | "emerald" | "blue" | null;
+        if (saved && (saved === "emerald" || saved === "blue")) {
+          return saved;
+        }
+      } catch {
+        // LocalStorage unavailable
+      }
+    }
+    return "gold";
+  });
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("af-portfolio-theme") as "gold" | "emerald" | "blue" | null;
-      if (saved && (saved === "emerald" || saved === "blue")) {
-        setCurrentTheme(saved);
-      }
-    } catch {
-      // LocalStorage unavailable
+    if (currentTheme !== "gold") {
+      document.documentElement.setAttribute("data-theme", currentTheme);
     }
-  }, []);
+  }, [currentTheme]);
 
   const setTheme = (theme: "gold" | "emerald" | "blue") => {
     setCurrentTheme(theme);

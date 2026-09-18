@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, Clock, Sparkles } from "lucide-react";
 import { blogPosts } from "../data/posts";
 
 export default function WritingsPreview() {
@@ -17,17 +17,17 @@ export default function WritingsPreview() {
               <span>System Writings // 09</span>
             </span>
             <h2 className="font-sans font-black tracking-tight text-3xl md:text-4xl lg:text-5xl text-cream mb-4">
-              Architecture &amp; Strategy Papers
+              Articles &amp; Operational Reflections
             </h2>
             <p className="text-cream-dark/75 text-sm leading-relaxed font-sans">
-              Technical breakdowns of B2B escrow engineering, community governance systems, and high-density interface design.
+              Practical breakdowns on digital workflows, community systems, operational clarity, and interface design.
             </p>
           </div>
           <Link
             href="/blog"
             className="shimmer-button px-5 py-2.5 bg-cream hover:bg-gold-muted text-deep-black font-sans text-xs tracking-wider rounded-xl font-bold transition-all duration-300 flex items-center gap-2 shrink-0"
           >
-            <span>Explore All Papers</span>
+            <span>Explore All Articles</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -67,7 +67,7 @@ export default function WritingsPreview() {
                   href={`/blog/${post.slug}`}
                   className="font-mono text-xs text-gold-muted group-hover:text-cream font-bold flex items-center gap-1 transition-colors"
                 >
-                  <span>Read Paper</span>
+                  <span>Read Article</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getBlogPostBySlug, getAllBlogSlugs } from "../../../data/posts";
 import { getProjectById } from "../../../data/projects";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import { ArrowLeft, Clock, Calendar, User, Tag, BookOpen, ExternalLink, ArrowRight } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, ArrowRight } from "lucide-react";
 
 interface PageProps {
   params: Promise<{
@@ -167,9 +168,11 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* Author Card */}
           <div className="flex items-center gap-3 mt-8 pt-6 border-t border-graphite/40">
-            <img
+            <Image
               src={post.author.avatar}
               alt={post.author.name}
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-full border border-gold-muted/40 object-cover"
             />
             <div>

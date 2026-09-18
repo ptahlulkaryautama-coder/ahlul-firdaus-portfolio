@@ -6,16 +6,12 @@ import {
   BookOpen,
   Heart,
   ShieldCheck,
-  Calendar as CalendarIcon,
-  CheckCircle2,
   Lock,
   Sparkles,
   Info,
   MapPin,
   Phone,
   FileText,
-  Building2,
-  Users,
   GraduationCap,
   Wallet
 } from "lucide-react";

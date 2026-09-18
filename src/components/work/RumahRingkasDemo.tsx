@@ -1,22 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Smartphone,
-  Wallet,
   CheckCircle2,
-  TrendingUp,
-  TrendingDown,
   Sparkles,
-  ArrowRight,
-  ShieldCheck,
-  Send,
-  Plus,
-  Zap,
-  Building2,
-  CreditCard,
-  HeartHandshake
+  Send
 } from "lucide-react";
 
 interface AccountItem {
@@ -151,7 +141,7 @@ export default function RumahRingkasDemo() {
           <div className="flex items-center justify-between">
             <h4 className="font-sans font-bold text-base text-cream flex items-center gap-2">
               <Smartphone className="w-4 h-4 text-teal-400" />
-              "Catat Cepat" AI Input
+              &quot;Catat Cepat&quot; AI Input
             </h4>
             <span className="font-mono text-[9px] bg-teal-500/20 text-teal-300 border border-teal-500/40 px-2 py-0.5 rounded-full font-bold">
               Natural Language
@@ -195,7 +185,7 @@ export default function RumahRingkasDemo() {
                   }}
                   className="text-[10px] font-mono bg-graphite-dark/60 hover:bg-teal-500/20 hover:text-teal-300 border border-graphite/40 px-2.5 py-1 rounded-lg text-cream-dark/70 transition-colors"
                 >
-                  "{sample}"
+                  &quot;{sample}&quot;
                 </button>
               ))}
             </div>
@@ -216,7 +206,7 @@ export default function RumahRingkasDemo() {
                 <span>{parsedLog.type.toUpperCase()}</span>
               </div>
               <div className="text-cream text-xs font-sans font-semibold font-mono">
-                "{parsedLog.note}"
+                &quot;{parsedLog.note}&quot;
               </div>
               <div className="grid grid-cols-2 gap-2 text-[10px] pt-1 border-t border-teal-500/20">
                 <div>

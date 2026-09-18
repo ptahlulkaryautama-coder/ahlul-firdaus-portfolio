@@ -23,93 +23,93 @@ interface ServiceOption {
 const PROJECT_TYPES: ServiceOption[] = [
   {
     id: "b2b-platform",
-    label: "B2B Export / Trade Ecosystem",
+    label: "B2B Trade & Sourcing Platform",
     category: "type",
     basePoints: 100,
-    description: "Escrow payments, custom compliance, multi-vendor portal",
+    description: "Catalog structure, buyer inquiry flows, product attributes",
   },
   {
     id: "saas-dashboard",
-    label: "High-Density SaaS Dashboard",
+    label: "Operational Dashboard & Workspace",
     category: "type",
     basePoints: 75,
-    description: "Real-time metrics, Webhooks, custom charts & analytics",
+    description: "Activity tracking, guided actions, data-entry forms",
   },
   {
     id: "community-portal",
     label: "Residential / Community Portal",
     category: "type",
     basePoints: 60,
-    description: "Resident ledgers, visitor passes, automated invoicing",
+    description: "Resident directory, service requests, public notices",
   },
   {
     id: "custom-architecture",
-    label: "Custom System Architecture & API",
+    label: "Custom Digital Tool / MVP",
     category: "type",
     basePoints: 85,
-    description: "Microservices design, Supabase/PostgreSQL schema, DevOps",
+    description: "Next.js / React implementation, custom data model",
   },
 ];
 
 const DELIVERABLES: ServiceOption[] = [
   {
     id: "auth-rbac",
-    label: "Role-Based Authentication (RBAC)",
+    label: "Role-Based Access (RBAC)",
     category: "deliverable",
     basePoints: 15,
-    description: "Admin, Resident, Security & Guard access controls",
+    description: "Admin, Resident, Contributor & Public access levels",
   },
   {
     id: "payment-gateway",
-    label: "Stripe / Escrow Payment Gateway",
+    label: "Payment & Invoicing Integration",
     category: "deliverable",
     basePoints: 25,
-    description: "Automated billing, instant invoices & disbursements",
+    description: "Gateway integration evaluated per project compliance",
   },
   {
     id: "qr-scanner",
-    label: "QR Scanner & Pass System",
+    label: "Pass & Verification Interface",
     category: "deliverable",
     basePoints: 20,
-    description: "Tablet-friendly visitor verification dashboard",
+    description: "Mobile/tablet verification and pass generation",
   },
   {
     id: "analytics-webhooks",
-    label: "Webhook Ingestion & Data Pipelines",
+    label: "Data Export & Reporting",
     category: "deliverable",
     basePoints: 25,
-    description: "Live payload parsing & real-time metric streams",
+    description: "CSV / JSON / PDF generation and data tracking",
   },
   {
     id: "cms-i18n",
-    label: "Multi-Language & Custom CMS",
+    label: "Multi-Language & Content Publishing",
     category: "deliverable",
     basePoints: 18,
-    description: "Bilingual translation triggers & content management",
+    description: "Bilingual content presentation and news publishing",
   },
 ];
 
 const TIMELINES: ServiceOption[] = [
   {
     id: "expedited",
-    label: "Rapid Delivery (2 - 4 Weeks)",
+    label: "Focused Sprint (2 – 4 Weeks)",
     category: "timeline",
     basePoints: 40,
-    description: "High priority sprint focus",
+    description: "Compact initial version with core essentials",
   },
   {
     id: "standard",
-    label: "Standard Timeline (6 - 8 Weeks)",
+    label: "Standard Phased Build (4 – 8 Weeks)",
     category: "timeline",
     basePoints: 20,
-    description: "Balanced iterative milestones",
+    description: "Balanced milestones from discovery to launch",
   },
   {
     id: "enterprise",
-    label: "Comprehensive Roadmap (3+ Months)",
+    label: "Comprehensive Scope (2 – 3+ Months)",
     category: "timeline",
     basePoints: 10,
-    description: "Full staging, automated QA, enterprise security",
+    description: "Multi-stage delivery with discovery & validation",
   },
 ];
 
@@ -117,7 +117,7 @@ export default function ProjectEstimator() {
   const [selectedType, setSelectedType] = useState<string>("saas-dashboard");
   const [selectedDeliverables, setSelectedDeliverables] = useState<string[]>([
     "auth-rbac",
-    "payment-gateway",
+    "analytics-webhooks",
   ]);
   const [selectedTimeline, setSelectedTimeline] = useState<string>("standard");
   const [submitted, setSubmitted] = useState(false);
@@ -143,20 +143,20 @@ export default function ProjectEstimator() {
     }, 0);
 
   const getEstBudget = (points: number) => {
-    if (points > 140) return "$8,000 – $15,000+";
-    if (points > 100) return "$5,000 – $8,000";
-    return "$2,500 – $5,000";
+    if (points > 140) return "$5,000 – $10,000+ (Est.)";
+    if (points > 100) return "$3,000 – $5,000 (Est.)";
+    return "$1,500 – $3,000 (Est.)";
   };
 
   const getEstDuration = () => {
-    if (selectedTimeline === "expedited") return "2 – 4 Weeks";
-    if (selectedTimeline === "standard") return "6 – 8 Weeks";
-    return "3+ Months";
+    if (selectedTimeline === "expedited") return "2 – 4 Weeks (Est.)";
+    if (selectedTimeline === "standard") return "4 – 8 Weeks (Est.)";
+    return "2 – 3+ Months (Est.)";
   };
 
   const handleReset = () => {
     setSelectedType("saas-dashboard");
-    setSelectedDeliverables(["auth-rbac", "payment-gateway"]);
+    setSelectedDeliverables(["auth-rbac", "analytics-webhooks"]);
     setSelectedTimeline("standard");
     setSubmitted(false);
   };
@@ -175,12 +175,12 @@ export default function ProjectEstimator() {
       const payload = {
         name: clientEmail.split("@")[0] || "Prospect Client",
         email: clientEmail,
-        scope: typeObj?.label || "Custom Architecture",
-        message: `[Interactive Estimator Request]
+        scope: typeObj?.label || "Custom Scope",
+        message: `[Interactive Scope Estimator Request]
 - Project Type: ${typeObj?.label}
-- Estimated Investment: ${getEstBudget(totalPoints)}
+- Estimated Investment Range: ${getEstBudget(totalPoints)}
 - Target Timeline: ${getEstDuration()} (${timelineObj?.label})
-- Included Specifications / Deliverables: ${deliverablesList}
+- Selected Deliverables: ${deliverablesList}
 - Total Architecture Score: ${totalPoints} pts`,
       };
 
@@ -192,7 +192,7 @@ export default function ProjectEstimator() {
 
       setSubmitted(true);
     } catch (err) {
-      console.error("Failed to submit estimate proposal:", err);
+      console.error("Failed to submit estimate request:", err);
       // Still show submitted UI gracefully
       setSubmitted(true);
     } finally {
@@ -206,10 +206,10 @@ export default function ProjectEstimator() {
         <div>
           <span className="text-xs font-mono text-gold-muted uppercase tracking-widest flex items-center gap-2 mb-1 font-bold">
             <Calculator className="w-4 h-4 text-gold-muted" />
-            Interactive Scope & Cost Estimator
+            Interactive Scope &amp; Timeline Estimator
           </span>
           <h3 className="text-2xl sm:text-3xl font-extrabold text-cream tracking-tight">
-            Configure Project Architecture
+            Configure Project Parameters
           </h3>
         </div>
 
@@ -231,7 +231,7 @@ export default function ProjectEstimator() {
               <span className="w-5 h-5 rounded-full bg-gold-muted/20 text-gold-muted flex items-center justify-center text-[10px] font-bold">
                 1
               </span>
-              Select Core Architecture Type
+              Select Core System Type
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {PROJECT_TYPES.map((type) => {
@@ -270,7 +270,7 @@ export default function ProjectEstimator() {
               <span className="w-5 h-5 rounded-full bg-gold-muted/20 text-gold-muted flex items-center justify-center text-[10px] font-bold">
                 2
               </span>
-              Select Module Deliverables (Multi-Select)
+              Select Deliverables &amp; Workflows (Multi-Select)
             </label>
             <div className="space-y-2.5">
               {DELIVERABLES.map((del) => {
@@ -317,7 +317,7 @@ export default function ProjectEstimator() {
               <span className="w-5 h-5 rounded-full bg-gold-muted/20 text-gold-muted flex items-center justify-center text-[10px] font-bold">
                 3
               </span>
-              Target Execution Speed
+              Target Delivery Pace
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {TIMELINES.map((tl) => {
@@ -353,10 +353,10 @@ export default function ProjectEstimator() {
               <div className="flex items-center justify-between pb-4 border-b border-graphite/50">
                 <span className="text-xs font-mono text-cream-dark/70 uppercase flex items-center gap-1.5 font-bold">
                   <Sparkles className="w-3.5 h-3.5 text-gold-muted" />
-                  Estimated Scope Metrics
+                  Preliminary Scope Estimate
                 </span>
                 <span className="text-[10px] font-mono text-emerald-400 glass-badge px-2.5 py-1 rounded-full font-bold">
-                  Ready to Build
+                  Indicative Only
                 </span>
               </div>
 
@@ -367,7 +367,7 @@ export default function ProjectEstimator() {
                     <DollarSign className="w-3 h-3 text-gold-muted" />
                     Est. Investment
                   </span>
-                  <span className="text-lg sm:text-xl font-extrabold text-gold-muted">
+                  <span className="text-base sm:text-lg font-extrabold text-gold-muted">
                     {getEstBudget(totalPoints)}
                   </span>
                 </div>
@@ -377,7 +377,7 @@ export default function ProjectEstimator() {
                     <Clock className="w-3 h-3 text-gold-muted" />
                     Est. Timeline
                   </span>
-                  <span className="text-lg sm:text-xl font-extrabold text-cream">
+                  <span className="text-base sm:text-lg font-extrabold text-cream">
                     {getEstDuration()}
                   </span>
                 </div>
@@ -386,7 +386,7 @@ export default function ProjectEstimator() {
               {/* Summary List */}
               <div className="mt-6 space-y-2 pt-4 border-t border-graphite/40">
                 <span className="text-[11px] font-mono text-cream-dark/60 uppercase block font-semibold">
-                  Included Specifications:
+                  Selected Inclusions:
                 </span>
                 <div className="space-y-1.5 text-xs text-cream-dark/90 font-mono">
                   <div className="flex items-center gap-2">
@@ -406,6 +406,11 @@ export default function ProjectEstimator() {
                   })}
                 </div>
               </div>
+
+              {/* Disclaimer */}
+              <div className="mt-4 p-3 rounded-lg bg-black/40 border border-graphite/40 text-[10px] text-cream-dark/60 leading-relaxed font-sans">
+                Estimates are preliminary and indicative only. Final project scope and timeline depend on detailed discovery, required integrations, data structures, and feasibility review.
+              </div>
             </div>
 
             {/* Submission Form */}
@@ -413,12 +418,12 @@ export default function ProjectEstimator() {
               <div className="bg-emerald-950/30 border border-emerald-500/30 p-4 rounded-xl text-center space-y-2">
                 <ShieldCheck className="w-8 h-8 text-emerald-400 mx-auto" />
                 <h4 className="font-bold text-cream text-sm">
-                  Estimate Request Received!
+                  Scope Review Request Received!
                 </h4>
-                <p className="text-xs text-cream-dark/80">
-                  I will review your scope specifications and follow up at{" "}
+                <p className="text-xs text-cream-dark/80 font-sans">
+                  I will review your scope requirements and follow up at{" "}
                   <span className="text-gold-muted font-mono font-bold">{clientEmail}</span>{" "}
-                  within 24 hours with a custom proposal.
+                  within 24-48 business hours with an initial evaluation.
                 </p>
               </div>
             ) : (
@@ -427,7 +432,7 @@ export default function ProjectEstimator() {
                 className="space-y-3 pt-4 border-t border-graphite/40"
               >
                 <label className="text-[11px] font-mono text-cream-dark/60 block font-semibold">
-                  Get Official Proposal & Execution Plan:
+                  Request an Initial Scope Review:
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -443,7 +448,7 @@ export default function ProjectEstimator() {
                     disabled={isSubmitting}
                     className="shimmer-button px-4 py-2.5 bg-cream hover:bg-gold-muted disabled:opacity-50 text-deep-black font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all shrink-0 shadow-lg"
                   >
-                    <span>{isSubmitting ? "Sending..." : "Request Proposal"}</span>
+                    <span>{isSubmitting ? "Sending..." : "Request Review"}</span>
                     <Send className="w-3.5 h-3.5" />
                   </button>
                 </div>

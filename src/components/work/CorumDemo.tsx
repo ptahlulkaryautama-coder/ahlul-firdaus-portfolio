@@ -12,14 +12,12 @@ import {
   Upload,
   Printer,
   BarChart2,
-  Activity,
   Layers,
   ShieldCheck,
   Zap,
   Droplets,
   Container,
   Truck,
-  RotateCcw,
   Edit3,
   HelpCircle
 } from "lucide-react";
@@ -343,7 +341,7 @@ export default function CorumDemo() {
               Prototype Scope &amp; Workflow
             </h5>
             <p className="leading-relaxed">
-              This prototype models a standalone client-side reporting package. It replaces chaotic spreadsheet forwards with clear departmental ownership. Data is persisted in your browser's local storage and consolidated manually via JSON file export/import.
+              This prototype models a standalone client-side reporting package. It replaces chaotic spreadsheet forwards with clear departmental ownership. Data is persisted in your browser&apos;s local storage and consolidated manually via JSON file export/import.
             </p>
           </div>
         </div>

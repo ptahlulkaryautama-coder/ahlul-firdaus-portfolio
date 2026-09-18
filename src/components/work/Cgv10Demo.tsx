@@ -12,8 +12,6 @@ import {
   CheckCircle2,
   Clock,
   Camera,
-  AlertCircle,
-  Eye,
   Building,
   Info,
   ChevronRight,

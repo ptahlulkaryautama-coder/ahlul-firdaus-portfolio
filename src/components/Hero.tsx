@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal, Network, Shield, Settings, Activity, Sparkles, Layers, FileText } from "lucide-react";
+import { ArrowRight, Terminal, Network, Shield, Settings, Activity, Sparkles, FileText, MessageSquare } from "lucide-react";
 import ResumeModal from "./ResumeModal";
 
 export default function Hero() {
@@ -34,7 +34,7 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
         
-        {/* Left Side: Modern Bold Sans-Serif Hero Typography */}
+        {/* Left Side: Modern Bold Typography */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           
           <motion.div
@@ -44,7 +44,7 @@ export default function Hero() {
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge text-gold-muted font-mono text-[10px] uppercase tracking-wider mb-6 shadow-sm"
           >
             <Terminal className="w-3.5 h-3.5 text-gold-muted" />
-            <span>Digital Product Architect &amp; Systems Specialist</span>
+            <span>Operational Systems Builder • AI-Assisted Development</span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-1" />
           </motion.div>
 
@@ -58,7 +58,7 @@ export default function Hero() {
               Ahlul Firdaus
             </h1>
             <p className="font-mono text-xs text-gold-muted mt-1 uppercase tracking-widest flex items-center gap-2 flex-wrap">
-              <span>Operational Systems Architect</span> • <span>20+ Yrs Industrial Background</span> • <span>Full-Stack Engineer</span>
+              <span>Operational Systems Builder</span> • <span>15+ Years in Manufacturing, Quality &amp; Process Improvement</span> • <span>AI-Assisted Product Development</span>
             </p>
           </motion.div>
 
@@ -66,10 +66,9 @@ export default function Hero() {
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-sans font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter leading-[1.05] mb-6"
+            className="font-sans font-black text-4xl sm:text-5xl md:text-6xl lg:text-6xl tracking-tighter leading-[1.1] mb-6"
           >
-            I build <span className="gradient-gold-text">operational products</span><br />
-            that give businesses clarity.
+            I build practical <span className="gradient-gold-text">digital systems</span> that make complex work clearer.
           </motion.h2>
 
           <motion.p
@@ -78,14 +77,14 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-base md:text-lg text-cream-dark/85 leading-relaxed font-sans max-w-xl mb-8"
           >
-            Designing &amp; engineering premium websites, operational dashboards, and digital systems for businesses that need clarity, credibility, and room to scale.
+            I turn complicated workflows, scattered information, and manual processes into clear websites, dashboards, portals, and practical digital tools.
           </motion.p>
 
           <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto flex-wrap"
           >
             <a
               href="#work"
@@ -95,11 +94,11 @@ export default function Hero() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="#artifacts"
-              className="px-6 py-3.5 glass-card text-cream hover:border-gold-muted/50 font-sans text-xs tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+              href="#contact"
+              className="px-6 py-3.5 glass-card text-cream hover:text-gold-muted hover:border-gold-muted/50 font-sans text-xs tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
             >
-              <Layers className="w-4 h-4 text-gold-muted group-hover:rotate-12 transition-transform" />
-              <span>Inspect Architecture Artifacts</span>
+              <MessageSquare className="w-4 h-4 text-gold-muted group-hover:scale-110 transition-transform" />
+              <span>Discuss Your Workflow</span>
             </a>
             <button
               onClick={() => setIsResumeOpen(true)}
@@ -115,19 +114,19 @@ export default function Hero() {
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="grid grid-cols-3 gap-6 pt-10 mt-10 border-t border-graphite/40 w-full max-w-lg"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 mt-10 border-t border-graphite/40 w-full max-w-xl"
           >
             <div>
-              <div className="font-sans font-extrabold text-2xl text-gold-muted">20+ Yrs</div>
-              <div className="font-mono text-[10px] text-cream-dark/50 uppercase tracking-wider mt-0.5">Ops &amp; Quality Background</div>
+              <div className="font-sans font-extrabold text-2xl text-gold-muted">15+ Years</div>
+              <div className="font-mono text-[10px] text-cream-dark/60 uppercase tracking-wider mt-0.5">Manufacturing, Quality &amp; Process Improvement</div>
             </div>
             <div>
-              <div className="font-sans font-extrabold text-2xl text-cream">6+</div>
-              <div className="font-mono text-[10px] text-cream-dark/50 uppercase tracking-wider mt-0.5">Built Ecosystems</div>
+              <div className="font-sans font-extrabold text-2xl text-cream">6 Systems</div>
+              <div className="font-mono text-[10px] text-cream-dark/60 uppercase tracking-wider mt-0.5">Live Products, Prototypes &amp; Internal Tools</div>
             </div>
             <div>
-              <div className="font-sans font-extrabold text-2xl text-cream">100%</div>
-              <div className="font-mono text-[10px] text-cream-dark/50 uppercase tracking-wider mt-0.5">Execution Fidelity</div>
+              <div className="font-sans font-extrabold text-2xl text-cream">Batam, ID</div>
+              <div className="font-mono text-[10px] text-cream-dark/60 uppercase tracking-wider mt-0.5">Operational &amp; Export Perspective</div>
             </div>
           </motion.div>
 
@@ -146,7 +145,7 @@ export default function Hero() {
             <div className="bg-graphite-dark/90 px-5 py-3 border-b border-graphite/80 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Activity className="w-3.5 h-3.5 text-gold-muted animate-pulse" />
-                <span className="font-mono text-[9px] text-cream-dark/60 tracking-wider uppercase">ARCHITECT COCKPIT</span>
+                <span className="font-mono text-[9px] text-cream-dark/60 tracking-wider uppercase">OPERATIONAL OVERVIEW</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500/80"></span>
@@ -161,13 +160,13 @@ export default function Hero() {
               <div className="space-y-1.5">
                 <span className="font-mono text-[9px] text-gold-muted uppercase tracking-widest block font-semibold">Active Focus</span>
                 <p className="text-xs text-cream font-medium leading-relaxed">
-                  Engineered custom B2B trade pipelines, neighborhood community ledgers, and high-density SaaS management tools.
+                  Designing and building functional digital products, prototypes, and internal tools that streamline real-world operations.
                 </p>
               </div>
 
               {/* Core Pillars */}
               <div className="space-y-3 pt-3 border-t border-graphite/40">
-                <span className="font-mono text-[9px] text-cream-dark/40 uppercase tracking-wider block">Operational Focus</span>
+                <span className="font-mono text-[9px] text-cream-dark/40 uppercase tracking-wider block">Operational Domains</span>
                 
                 <div className="grid grid-cols-1 gap-2.5">
                   <div className="flex items-center gap-3 p-3 rounded-xl glass-card hover:bg-graphite/60 transition-all duration-300 group/item">
@@ -176,10 +175,10 @@ export default function Hero() {
                     </div>
                     <div>
                       <div className="text-[11px] font-bold text-cream flex items-center gap-2">
-                        <span>Transaction Ecosystems</span>
+                        <span>Commerce &amp; Sourcing Platforms</span>
                         <Sparkles className="w-3 h-3 text-gold-muted opacity-0 group-hover/item:opacity-100 transition-opacity" />
                       </div>
-                      <div className="text-[9px] text-cream-dark/50 font-mono">B2B Trade, Customs documentation, escrow flows.</div>
+                      <div className="text-[9px] text-cream-dark/50 font-mono">Curated catalogs, buyer inquiry flows, Batam consolidation.</div>
                     </div>
                   </div>
 
@@ -189,10 +188,10 @@ export default function Hero() {
                     </div>
                     <div>
                       <div className="text-[11px] font-bold text-cream flex items-center gap-2">
-                        <span>Community Governance</span>
+                        <span>Community &amp; Civic Tech</span>
                         <Sparkles className="w-3 h-3 text-gold-muted opacity-0 group-hover/item:opacity-100 transition-opacity" />
                       </div>
-                      <div className="text-[9px] text-cream-dark/50 font-mono">Neighborhood ledger management, entry security systems.</div>
+                      <div className="text-[9px] text-cream-dark/50 font-mono">Resident service workflows, timetable hubs, public transparency.</div>
                     </div>
                   </div>
 
@@ -202,10 +201,10 @@ export default function Hero() {
                     </div>
                     <div>
                       <div className="text-[11px] font-bold text-cream flex items-center gap-2">
-                        <span>Modular SaaS Architectures</span>
+                        <span>Workspaces &amp; Reporting Tools</span>
                         <Sparkles className="w-3 h-3 text-gold-muted opacity-0 group-hover/item:opacity-100 transition-opacity" />
                       </div>
-                      <div className="text-[9px] text-cream-dark/50 font-mono">High-density visual layouts, API sync pipelines.</div>
+                      <div className="text-[9px] text-cream-dark/50 font-mono">Connected order chains, data-entry forms, local-first tools.</div>
                     </div>
                   </div>
                 </div>
@@ -217,7 +216,7 @@ export default function Hero() {
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                   OPERATING FROM:
                 </span>
-                <span className="text-cream font-bold">BATAM (GMT+7)</span>
+                <span className="text-cream font-bold">BATAM, INDONESIA (GMT+7)</span>
               </div>
 
             </div>

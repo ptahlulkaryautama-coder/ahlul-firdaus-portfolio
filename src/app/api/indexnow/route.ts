@@ -3,7 +3,7 @@ import { getAllProjectIds } from "../../../data/projects";
 import { getAllBlogSlugs } from "../../../data/posts";
 import { getAllArtifactIds } from "../../../data/artifacts";
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
     const host = "ahlulfirdaus.com";
     const baseUrl = `https://${host}`;

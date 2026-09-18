@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Cpu, ArrowUp, Sparkles, ShieldCheck, Download } from "lucide-react";
+import { ArrowUp, Sparkles, Download } from "lucide-react";
 import Logo from "./Logo";
 
 export default function Footer() {
@@ -12,47 +12,54 @@ export default function Footer() {
   const handleDownloadCV = (e: React.MouseEvent) => {
     e.preventDefault();
     const resumeText = `AHLUL FIRDAUS
-Operational Systems Architect & Full-Stack Engineer
+Operational Systems Builder & Product Specialist
 Email: ahlul.firdaus@gmail.com | Phone/WhatsApp: +62 812-9125-4064
 Website: https://ahlulfirdaus.com
+Location: Batam, Kepulauan Riau, Indonesia (GMT+7)
 
 ==================================================
 EXECUTIVE SUMMARY
 ==================================================
-Senior Systems Builder & Product Architect with 20+ years of operational leadership experience across manufacturing, quality assurance, and software systems engineering. Specialized in building high-density SaaS dashboards, B2B export platforms, community governance systems, and operational workflow tools.
+Operational Systems Builder with 15+ years of practical leadership across manufacturing operations, quality control, process improvement, and digital product workflows. Specializes in turning complex operational processes into clear web applications, internal dashboards, portals, and structured digital tools using modern web stacks and AI-assisted workflows.
 
 ==================================================
 CORE CAPABILITIES
 ==================================================
-• Operational Systems Architecture & Digital Workflow Optimization
-• Full-Stack Web Development (Next.js, React, TypeScript, Node.js, PostgreSQL)
-• High-Density UI/UX & Information Design
-• Escrow Payment & Trade Compliance Workflows (BPOM, Halal, HACCP data readiness)
-• Estate Governance & Community Digital Systems
+• Operational Process Deconstruction & Workflow Structuring
+• Modern Web Application Development (Next.js, React, TypeScript, Tailwind CSS)
+• Database Modeling & Backend Integration (PostgreSQL, Supabase)
+• Operations & Governance Dashboards (Internal Portals, Ledger Displays, Community Tools)
+• B2B Catalog & Inquiry Workflow Design
 
 ==================================================
-FEATURED PROJECTS & ECOSYSTEMS
+SELECTED SYSTEMS & PROJECTS
 ==================================================
-1. OOI — Origin Of Indonesia (B2B Export Ecosystem)
-   • B2B transactional platform connecting Indonesian producers with global buyers.
-   • Features Escrow milestone payments, container freight calculators, and customs readiness workflows.
+1. OOI — Origin of Indonesia (Status: Founder-Led Product — Phase 1 Launch)
+   • B2B showcase catalog platform connecting Indonesian producers with global commercial buyers.
+   • Structured commodity specs, origin documentation funnels, and verified sample inquiry workflows.
 
-2. CGV10 Portal Warga (Residential Management Platform)
-   • Integrated neighborhood management system linking 500+ households with security gate checkpoints.
-   • PWA with QR-code visitor verification and transparent accounting ledgers.
+2. CGV10 Portal Warga (Status: Live Product)
+   • Centralized residential governance platform for 500+ households.
+   • Integrated neighborhood announcements, pengurus directory, transparent Kas RT balance, and resident commerce directory.
 
-3. Masjid Al Ikhlas Digital Presence (Community Philanthropy Hub)
-   • Live digital presence featuring weekly transparent financial disbursement ledgers.
+3. Masjid Al-Ikhlas Digital Presence (Status: In Development)
+   • Public community platform featuring Batam prayer schedule information and weekly financial disbursement transparency.
 
-4. OneEcos — B2B Trade Operations System (Operational Prototype)
-   • Connected operational workspace organizing buyers, quotes, orders, fulfillment, shipments, documents, and invoices in one structured trade workflow.
+4. OneEcos — B2B Trade Operations System (Status: Active Prototype)
+   • Connected operational workspace organizing buyers, quotes, orders, fulfillment, shipments, documents, and invoices into a unified trade workflow.
+
+5. PT. Corum Sustainability Reporting Template (Status: Internal Template)
+   • Browser-based ESG compliance reporting template structuring 23 sections across 7 departments with local persistence and print-to-PDF formatting.
+
+6. Sakku 2.0 — Personal & Household Finance (Status: Live Product)
+   • Local-first personal & household financial management PWA featuring rule-based conversational entry parsing and multi-wallet tracking.
 
 ==================================================
-ENGAGEMENT MODELS
+ENGAGEMENT MODELS (PRELIMINARY ESTIMATES)
 ==================================================
-• Digital Product Discovery & Advisory: Rp 4,500,000 ($300) | 3-5 days
-• Custom Business Website / MVP: Rp 15,000,000 ($1,000) | 3-6 weeks
-• Product Support Retainer: Rp 4,500,000/mo ($300/mo) | Monthly
+• Digital Product & Workflow Review: Rp 4,500,000 (~$300) | 3-5 days
+• Business Website or Portal MVP: Rp 15,000,000 (~$1,000) | 3-6 weeks
+• Ongoing Product Improvement: Rp 4,500,000/mo (~$300/mo) | Monthly retainer
 
 ==================================================
 CONTACT INFORMATION
@@ -104,10 +111,9 @@ WhatsApp: +62 812-9125-4064
             <span className="text-cream-dark/80 font-bold">TAILWIND CSS V4</span>
           </div>
           <div className="space-y-0.5">
-            <span className="text-cream-dark/30 block font-semibold">PERFORMANCE TARGET:</span>
-            <span className="text-emerald-400 font-bold flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3" />
-              LCP &lt; 0.8S
+            <span className="text-cream-dark/30 block font-semibold">ACCESSIBILITY:</span>
+            <span className="text-cream-dark/80 font-bold">
+              CONTINUOUSLY IMPROVED
             </span>
           </div>
         </div>

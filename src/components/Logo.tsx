@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface LogoProps {
@@ -38,12 +39,14 @@ export default function Logo({
   }
 
   if (variant === "png") {
+    const numSize = typeof size === "number" ? size : 40;
     return (
-      <img
+      <Image
         src="/logo/af-monogram-alternate.png"
         alt="AF Monogram Logo"
+        width={numSize}
+        height={numSize}
         className={`object-contain ${className}`}
-        style={{ width: size, height: size }}
       />
     );
   }
@@ -57,11 +60,7 @@ export default function Logo({
   const pathF = "M 51,29.7 L 80,29.7 L 80,38.7 L 60,38.7 L 60,49.7 L 72,49.7 L 78,58.7 L 60,58.7 L 60,84.8 L 51,90 Z";
   const pathTriangle = "M 51,10 L 80,26.7 L 51,26.7 Z";
 
-  // Outline drawing animation definition
-  const drawTransition = {
-    duration: 1.5,
-    ease: "easeInOut",
-  };
+
 
   // 1. Draw Animation Profiles
   if (animateMode === "draw") {

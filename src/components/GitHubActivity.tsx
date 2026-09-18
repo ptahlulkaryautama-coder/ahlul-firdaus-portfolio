@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { GitCommit, GitBranch, ShieldCheck, Terminal, ExternalLink, Activity } from "lucide-react";
+import { GitCommit, ExternalLink, Activity } from "lucide-react";
 
 interface CommitItem {
   id: string;
@@ -16,26 +16,26 @@ export default function GitHubActivity() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulated live commit feed matching user's repos (ooindonesia, cgv10, alikhlas)
+    // Recent commit feed matching representative project repositories
     const mockCommits: CommitItem[] = [
       {
         id: "c8f92a1",
         repo: "ahlul-firdaus/ooindonesia",
-        message: "feat(escrow): add automated BL document checksum validation & Midtrans webhook listener",
+        message: "feat(marketplace): refine international inquiry workflow & quote request validation",
         time: "3 hours ago",
         author: "ahlul-firdaus",
       },
       {
         id: "f4b109e",
         repo: "ahlul-firdaus/cgv10",
-        message: "perf(pwa): optimize QR scanner frame rate for gate tablet interface & offline fallback",
+        message: "perf(pwa): improve resident directory search and payment status caching",
         time: "1 day ago",
         author: "ahlul-firdaus",
       },
       {
         id: "a1c772b",
         repo: "ahlul-firdaus/alikhlas-cgv-digital-ecosystem",
-        message: "fix(finance): weekly disbursement ledger sync & Batam prayer time calculation offset",
+        message: "fix(finance): weekly donation ledger reconciliation & schedule calculation offset",
         time: "3 days ago",
         author: "ahlul-firdaus",
       },
@@ -54,7 +54,7 @@ export default function GitHubActivity() {
       <div className="flex items-center justify-between mb-4 pb-3 border-b border-graphite/40 font-mono text-xs">
         <div className="flex items-center gap-2 text-gold-muted font-bold">
           <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
-          <span>LIVE ARCHITECTURE ACTIVITY STREAM</span>
+          <span>RECENT REPOSITORY UPDATES & COMMIT LOG</span>
         </div>
         <a
           href="https://github.com/ahlul-firdaus"

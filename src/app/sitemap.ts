@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllProjectIds } from "../data/projects";
 import { getAllArtifactIds } from "../data/artifacts";
-import { getAllBlogSlugs, blogPosts } from "../data/posts";
+import { blogPosts } from "../data/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://ahlulfirdaus.com";

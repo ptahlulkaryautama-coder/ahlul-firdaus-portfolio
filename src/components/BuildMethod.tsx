@@ -16,45 +16,45 @@ export default function BuildMethod() {
   const steps: MethodStep[] = [
     {
       num: "01",
-      title: "Clarify",
-      subtitle: "DECONSTRUCT GOALS",
+      title: "Understand",
+      subtitle: "REAL PROBLEM & CONSTRAINTS",
       icon: <Search className="w-4 h-4" />,
-      description: "Deconstruct the business problem. Eliminate fuzzy assumptions. Lock quantitative objectives, functional boundaries, and target specifications."
+      description: "Map the real problem, actual workflow bottlenecks, user types, and organizational constraints before choosing tools or writing code."
     },
     {
       num: "02",
       title: "Structure",
-      subtitle: "LOGIC ARCHITECTURE",
+      subtitle: "PAGES, ROLES & DATA FLOWS",
       icon: <Compass className="w-4 h-4" />,
-      description: "Draft database relations, API schemas, transactional user flows, and logistics structures. Ensure compliance before writing lines of code."
+      description: "Organize clear page layouts, information architecture, role-based permissions, and pragmatic data structures for MVP stability."
     },
     {
       num: "03",
       title: "Design",
-      subtitle: "HIGH-FIDELITY INTERFACE",
+      subtitle: "CLEAR & ACCESSIBLE UI",
       icon: <Palette className="w-4 h-4" />,
-      description: "Translate architectures into sleek dark-luxury interfaces. Prioritize typography hierarchy, metric densities, and user interaction clarity."
+      description: "Create focused, responsive, dark-mode polished interfaces with clear typography hierarchy and intuitive user flows."
     },
     {
       num: "04",
       title: "Build",
-      subtitle: "HIGH-SPEED CODING",
+      subtitle: "MODERN WEB ARCHITECTURE",
       icon: <Code className="w-4 h-4" />,
-      description: "Program utilizing premium Next.js and Tailwind CSS frameworks. Build clean, reusable components integrated with robust state-sync engines."
+      description: "Develop with robust modern standards using Next.js, TypeScript, and Tailwind CSS for rapid loading and reliable frontend state."
     },
     {
       num: "05",
       title: "Validate",
-      subtitle: "STRESS TESTING",
+      subtitle: "SPEED, LAYOUT & EDGE CASES",
       icon: <CheckCircle className="w-4 h-4" />,
-      description: "Audit compilation integrity, responsiveness, accessibility parameters, load-speed metrics, and operational edge-case behaviors."
+      description: "Test real-world usability, mobile responsiveness, layout consistency, loading performance, and operational edge-case behaviors."
     },
     {
       num: "06",
-      title: "Launch",
-      subtitle: "DEPLOY & ACTIVATE",
+      title: "Improve",
+      subtitle: "DEPLOY & ITERATE",
       icon: <Rocket className="w-4 h-4" />,
-      description: "Deploy to globally optimized CDN architectures, hook up automated monitoring integrations, transfer project control keys, and sync active operations."
+      description: "Deploy to production, hand over project documentation, gather early user feedback, and iterate based on practical usage."
     }
   ];
 
@@ -66,13 +66,13 @@ export default function BuildMethod() {
         <div className="max-w-3xl mb-16">
           <span className="font-mono text-[10px] uppercase tracking-widest text-gold-muted flex items-center gap-2 mb-2 font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>The Process // 03</span>
+            <span>How I Work // 07</span>
           </span>
           <h2 className="font-sans font-black tracking-tight text-3xl md:text-4xl lg:text-5xl text-cream mb-4">
-            Repeatable Build Methodology
+            From Problem to Practical First Version
           </h2>
           <p className="text-cream-dark/75 text-sm leading-relaxed font-sans">
-            How raw concepts transform into resilient digital products. Each stage acts as an operational check-gate to eliminate project risk, maintain velocity, and guarantee visual and technical excellence.
+            How messy requirements transform into clear digital products. Each stage acts as an operational check-gate to clarify scope, maintain momentum, and build reliable tools.
           </p>
         </div>
 

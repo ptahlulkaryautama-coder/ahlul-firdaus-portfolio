@@ -28,16 +28,16 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitSuccess(false);
     setConsoleLogs([
-      "Connecting to mailgate.ahlul.systems...",
-      "Validating inquiry parameters...",
+      "Connecting to contact service...",
+      "Validating message parameters...",
     ]);
 
-    // Animate the first log steps while the real request fires
+    // Animate the status steps while the real request fires
     const steps = [
-      `Formatting data payload...`,
-      `Checking target: scope=${formData.scope}`,
-      "Establishing TLS 1.3 encrypted tunnel...",
-      "Sending payload [1024 bytes]...",
+      `Formatting inquiry data...`,
+      `Selected scope: ${formData.scope}`,
+      "Sending message...",
+      "Processing transmission...",
     ];
 
     for (let i = 0; i < steps.length; i++) {
@@ -53,15 +53,15 @@ export default function Contact() {
       });
 
       if (res.ok) {
-        setConsoleLogs((prev) => [...prev, "Awaiting gateway ACK response...", "✔ Payload received. Status 202 ACCEPTED."]);
+        setConsoleLogs((prev) => [...prev, "✔ Message sent successfully. Status 200 OK."]);
         setSubmitSuccess(true);
         setFormData({ name: "", email: "", scope: "systems", message: "" });
       } else {
         const data = await res.json();
-        setConsoleLogs((prev) => [...prev, `✖ Gateway error: ${data.error || "Unknown error. Please retry."}`]);
+        setConsoleLogs((prev) => [...prev, `✖ Message error: ${data.error || "Unknown error. Please retry."}`]);
       }
     } catch {
-      setConsoleLogs((prev) => [...prev, "✖ Network error: Could not reach mail gateway. Please email directly."]);
+      setConsoleLogs((prev) => [...prev, "✖ Network error: Could not send message. Please reach out directly."]);
     }
 
     setIsSubmitting(false);
@@ -76,13 +76,13 @@ export default function Contact() {
         <div className="max-w-3xl mb-16">
           <span className="font-mono text-[10px] uppercase tracking-widest text-gold-muted flex items-center gap-2 mb-2 font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Contact // 07</span>
+            <span>Contact // 13</span>
           </span>
           <h2 className="font-sans font-black tracking-tight text-3xl md:text-4xl lg:text-5xl text-cream mb-4">
-            Start a System Conversation
+            Tell Me What You Are Trying to Improve
           </h2>
           <p className="text-cream-dark/75 text-sm leading-relaxed font-sans">
-            Ready to design a cockpit dashboard, structure B2B export systems, or automate your digital operations? Calculate estimated timelines below or submit your project scope.
+            You do not need a technical brief. Describe the current problem, workflow, spreadsheet, website, or early idea in your own words. Calculate a preliminary estimate or send your context below.
           </p>
         </div>
 
@@ -137,7 +137,7 @@ export default function Contact() {
               {/* Scope/Category */}
               <div className="space-y-2">
                 <label htmlFor="scope" className="font-mono text-[10px] uppercase text-cream-dark/60 tracking-wider font-semibold">
-                  PROJECT SCOPE
+                  WHAT ARE YOU LOOKING TO BUILD OR IMPROVE?
                 </label>
                 <select
                   id="scope"
@@ -146,18 +146,18 @@ export default function Contact() {
                   onChange={handleInputChange}
                   className="w-full glass-input rounded-xl px-4 py-3 text-sm text-cream outline-none cursor-pointer"
                 >
-                  <option value="systems" className="bg-graphite-dark text-cream">Ecosystem & Dashboard Operations</option>
-                  <option value="export" className="bg-graphite-dark text-cream">B2B Export Platform / Trade</option>
-                  <option value="web" className="bg-graphite-dark text-cream">Premium Editorial Portfolio / SaaS Landing</option>
-                  <option value="brand" className="bg-graphite-dark text-cream">Brand Strategy & Asset Design</option>
-                  <option value="consulting" className="bg-graphite-dark text-cream">Operational Consultation</option>
+                  <option value="systems" className="bg-graphite-dark text-cream">Business Website or Portal MVP</option>
+                  <option value="export" className="bg-graphite-dark text-cream">Operational Dashboard or Internal Tool</option>
+                  <option value="web" className="bg-graphite-dark text-cream">Community Platform or Directory</option>
+                  <option value="brand" className="bg-graphite-dark text-cream">Digital Product &amp; Workflow Review</option>
+                  <option value="consulting" className="bg-graphite-dark text-cream">Ongoing Product Improvement</option>
                 </select>
               </div>
 
               {/* Project Brief */}
               <div className="space-y-2">
                 <label htmlFor="message" className="font-mono text-[10px] uppercase text-cream-dark/60 tracking-wider font-semibold">
-                  PROJECT BRIEF / SPECIFICATIONS *
+                  DESCRIBE YOUR CURRENT SITUATION OR GOAL *
                 </label>
                 <textarea
                   id="message"
@@ -166,7 +166,7 @@ export default function Contact() {
                   rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
-                  placeholder="Describe your current project bottlenecks, functional requirements, or target timeline..."
+                  placeholder="Tell me about what you are currently doing (e.g. manual spreadsheets, outdated site, messy process) and what you want to achieve..."
                   className="w-full glass-input rounded-xl px-4 py-3 text-sm text-cream placeholder-cream-dark/30 outline-none resize-y"
                 ></textarea>
               </div>
@@ -180,12 +180,12 @@ export default function Contact() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Delivering Inquiry packet...</span>
+                    <span>Delivering context packet...</span>
                   </>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>Send Project Inquiry</span>
+                    <span>Send Your Project Context</span>
                   </>
                 )}
               </button>
@@ -203,7 +203,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-2 font-mono text-[9px] text-cream-dark/60 tracking-wider truncate font-semibold">
                 <Terminal className="w-3.5 h-3.5 text-gold-muted" />
-                <span>stdout: inquiry_delivery.log</span>
+                <span>stdout: contact_status.log</span>
               </div>
             </div>
 
@@ -234,7 +234,7 @@ export default function Contact() {
                     <span>INQUIRY DELIVERED</span>
                   </div>
                   <p className="text-[11px] text-emerald-300/80 leading-relaxed font-sans">
-                    Ahlul Firdaus' mail gateway has received your message packet. You will receive a direct email response within 24 operational hours.
+                    Your message has been received. I will review your workflow details and respond directly.
                   </p>
                 </div>
               )}
@@ -243,7 +243,7 @@ export default function Contact() {
             {/* Console Footer */}
             <div className="bg-graphite-dark/95 px-5 py-2.5 border-t border-graphite/80 flex items-center justify-between font-mono text-[9px] text-cream-dark/50 font-bold">
               <span>STATUS: {submitSuccess ? "READY" : isSubmitting ? "BUSY" : "IDLE"}</span>
-              <span>TUNNEL: TLS_1.3_ENCRYPTED</span>
+              <span>PROTOCOL: SECURE_POST</span>
             </div>
           </div>
 

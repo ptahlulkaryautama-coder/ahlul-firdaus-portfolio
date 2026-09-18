@@ -29,26 +29,26 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://ahlulfirdaus.com"),
   title: {
-    default: "Ahlul Firdaus | Digital Systems Architect & Founder",
+    default: "Ahlul Firdaus | Operational Systems Builder",
     template: "%s | Ahlul Firdaus",
   },
   description:
-    "Engineering digital systems, high-density dashboards, B2B export platforms, and community ecosystems — from architectural concept to launch-ready execution.",
+    "Operational Systems Builder with 15+ years in manufacturing, quality & process improvement. Turning complex workflows, scattered information, and manual processes into clear websites, dashboards, portals, and practical digital tools.",
   keywords: [
     "Ahlul Firdaus",
-    "Digital Systems Architect",
-    "Systems Architect Indonesia",
-    "Full-Stack Developer Batam",
-    "B2B Export Platform Founder",
+    "Operational Systems Builder",
+    "Workflow Optimization",
+    "Operations Specialist Batam",
+    "Process Improvement",
+    "B2B Showcase Catalog",
     "Origin Of Indonesia OOI",
     "CGV10 Portal Warga",
-    "Masjid Al Ikhlas Digital Ecosystem",
+    "Masjid Al Ikhlas Digital Platform",
     "Next.js Systems Developer",
-    "TypeScript SaaS Architect",
   ],
   authors: [{ name: "Ahlul Firdaus", url: "https://ahlulfirdaus.com" }],
   creator: "Ahlul Firdaus",
-  publisher: "Ahlul Firdaus Architecture",
+  publisher: "Ahlul Firdaus",
   alternates: {
     canonical: "https://ahlulfirdaus.com",
   },
@@ -57,12 +57,12 @@ export const metadata: Metadata = {
     apple: "/logo/af-monogram-alternate.png",
   },
   openGraph: {
-    title: "Ahlul Firdaus | Digital Systems Architect & Founder",
+    title: "Ahlul Firdaus | Operational Systems Builder",
     description:
-      "Engineering digital systems, high-density dashboards, B2B export platforms, and community ecosystems.",
+      "Turning complex workflows, scattered information, and manual processes into clear websites, dashboards, portals, and practical digital tools.",
     type: "website",
     url: "https://ahlulfirdaus.com",
-    siteName: "Ahlul Firdaus Systems Portfolio",
+    siteName: "Ahlul Firdaus Portfolio",
     locale: "en_US",
     images: [
       {
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ahlul Firdaus | Digital Systems Architect",
+    title: "Ahlul Firdaus | Operational Systems Builder",
     description:
-      "Full-stack software architect & founder specializing in high-density SaaS dashboards, B2B platforms, and digital community hubs.",
+      "Operational systems builder turning complex workflows into clear websites, dashboards, portals, and digital tools.",
     creator: "@ahlulfirdaus",
     images: ["/logo/af-monogram-alternate.png"],
   },
@@ -98,7 +98,7 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Ahlul Firdaus",
-  jobTitle: "Digital Systems Architect & Founder",
+  jobTitle: "Operational Systems Builder & Product Specialist",
   url: "https://ahlulfirdaus.com",
   sameAs: [
     "https://github.com/ahlul-firdaus",
@@ -108,31 +108,39 @@ const personJsonLd = {
     "https://ooindonesia.com",
   ],
   knowsAbout: [
+    "Manufacturing Operations",
+    "Quality Management Systems",
+    "Process Improvement",
+    "Operational Workflows",
     "Next.js",
     "React",
     "TypeScript",
-    "Systems Architecture",
     "Supabase & PostgreSQL",
-    "B2B Escrow Platforms",
-    "Digital Community Governance",
-    "SaaS Operations Cockpits",
+    "Internal Portals & Dashboards",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Architectural & Development Services",
+    name: "Digital Systems & Workflow Services",
     itemListElement: [
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "B2B System Architecture & Custom Development",
+          name: "Digital Product & Workflow Review",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Digital Community Governance Systems",
+          name: "Business Website or Portal MVP Build",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Ongoing Product Improvement",
         },
       },
     ],
@@ -142,7 +150,7 @@ const personJsonLd = {
 const webSiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Ahlul Firdaus Systems Portfolio",
+  name: "Ahlul Firdaus Portfolio",
   url: "https://ahlulfirdaus.com",
   author: {
     "@type": "Person",
@@ -153,11 +161,11 @@ const webSiteJsonLd = {
 const professionalServiceJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Ahlul Firdaus Digital Systems Architecture",
+  name: "Ahlul Firdaus Operational Systems Builder",
   image: "https://ahlulfirdaus.com/logo/af-monogram-alternate.png",
   url: "https://ahlulfirdaus.com",
   telephone: "+6281291254064",
-  priceRange: "$$$",
+  priceRange: "$$",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Batam",
@@ -176,7 +184,7 @@ const professionalServiceJsonLd = {
     closes: "20:00",
   },
   sameAs: [
-    "https://github.com/ptahlulkaryautama-coder",
+    "https://github.com/ahlul-firdaus",
     "https://wa.me/6281291254064",
   ],
 };
@@ -218,6 +226,13 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-screen bg-deep-black text-cream selection:bg-gold-muted selection:text-deep-black font-sans relative"
       >
+        {/* Skip to Main Content Landmark Link (WCAG 2.2 AA) */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2.5 focus:bg-gold-muted focus:text-deep-black focus:font-bold focus:font-sans focus:text-xs focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cream transition-transform"
+        >
+          Skip to main content
+        </a>
         <CursorGlow />
         <CommandPalette />
         {children}

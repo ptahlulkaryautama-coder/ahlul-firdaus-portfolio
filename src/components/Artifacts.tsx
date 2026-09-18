@@ -41,11 +41,11 @@ export default function Artifacts() {
               <span>System Artifacts // 05</span>
             </span>
             <h2 className="font-sans font-black tracking-tight text-3xl md:text-4xl lg:text-5xl text-cream">
-              Visible Project Blueprints
+              System Blueprints & Artifacts
             </h2>
           </div>
           <p className="text-cream-dark/60 font-mono text-xs max-w-md leading-relaxed">
-            Real configurations, database schemas, AI prompts, and launch roadbooks representing my operational execution methodology.
+            Representative schemas, prompt frameworks, architectural references, and launch roadbooks illustrating how I structure operational systems.
           </p>
         </div>
 

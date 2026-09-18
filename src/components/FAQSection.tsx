@@ -1,51 +1,51 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle, ShieldCheck, Code, Zap, FileText } from "lucide-react";
 
 interface FAQItem {
   question: string;
   answer: string;
-  icon: any;
+  icon: React.ElementType;
   category: string;
 }
 
 const faqData: FAQItem[] = [
   {
-    question: "What types of systems do you specialize in engineering?",
+    question: "What types of digital systems do you specialize in building?",
     answer:
-      "I specialize in custom B2B export transaction platforms with milestone escrow engines, neighborhood governance PWAs (dues ledgers, gate visitor verification), high-density SaaS operational cockpits, transparent public accounting ledgers, and sub-second headless storefronts.",
+      "I specialize in practical web applications, B2B trade and sourcing platforms, residential community portals, sustainability reporting templates, operational dashboards, and focused digital MVPs that streamline real-world workflows.",
     icon: Code,
     category: "Architecture Scope"
   },
   {
-    question: "What is your typical project timeline and milestone delivery model?",
+    question: "What is your typical project timeline and development process?",
     answer:
-      "Projects follow a structured 4-phase pipeline: (1) Architectural Schematics & Data Model design (Days 1–3), (2) Core DB Schema & Escrow Logic build (Week 1–2), (3) High-Density UI & Interactive Demos (Week 2–3), and (4) Security Audit, CSP configuration & Vercel deployment (Final Week). Delivery ranges from 1 to 4 weeks based on scope.",
+      "Projects typically follow a structured 4-stage process: (1) Workflow Discovery & Requirement Definition, (2) Information Architecture & Interface Design, (3) Next.js / React Implementation, and (4) Testing, Deployment Configuration & Handover. Typical delivery ranges from 1 to 6 weeks depending on scope.",
     icon: Zap,
     category: "Process & Delivery"
   },
   {
-    question: "Do clients receive full IP and source code ownership?",
+    question: "Do clients receive full code ownership and repository access?",
     answer:
-      "Yes, 100%. Upon final deployment and milestone clearance, complete source code ownership, private GitHub repository access, database credentials, and production environment keys are transferred directly to your organization.",
+      "Yes. Unless agreed otherwise under a custom contract, clients receive full source code ownership, private repository access, deployment configurations, and handover documentation upon final project completion.",
     icon: ShieldCheck,
     category: "IP & Ownership"
   },
   {
-    question: "How do you handle B2B Escrow and Payment Gateway integrations?",
+    question: "How do you handle payment integrations and complex requirements?",
     answer:
-      "I engineer multi-tier escrow pipelines supporting QRIS, Virtual Accounts (Midtrans/Xendit/Stripe), manual bank transfer reconciliation with verification audit trails, multi-currency invoicing (USD, IDR, SGD), and automated PDF dispatch via Resend API.",
+      "Integrations such as payment gateways (QRIS, bank transfers, or checkout services), authentication providers, transactional email, and data exports are evaluated and scoped based on project requirements and compliance needs during discovery.",
     icon: FileText,
-    category: "Escrow & Payments"
+    category: "Integrations & Scoping"
   },
   {
-    question: "Can you audit and optimize existing legacy applications for performance and security?",
+    question: "Can you review and improve existing workflows, prototypes, or websites?",
     answer:
-      "Yes. I perform technical due diligence audits, migrate legacy monoliths to Next.js App Router, implement strict Content Security Policies (CSP), optimize bundle sizes, and tune Core Web Vitals to achieve 95+ Google Lighthouse performance scores.",
+      "Yes. I conduct digital product and workflow reviews to examine existing spreadsheets, legacy interfaces, or early prototypes, identifying usability bottlenecks, structuring data models, and providing an actionable improvement plan.",
     icon: HelpCircle,
-    category: "Audits & Tuning"
+    category: "Reviews & Advisory"
   }
 ];
 
@@ -76,14 +76,14 @@ export default function FAQSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-muted/10 border border-gold-muted/20 text-gold text-xs font-mono mb-4">
-            <HelpCircle className="w-3.5 h-3.5" />
-            <span>Architecture & Engagement FAQ</span>
+            <HelpCircle className="w-3.5 h-3.5 text-gold-muted" />
+            <span>Process &amp; Scope FAQ</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-cream mb-4">
-            Frequently Asked <span className="text-gold italic">Questions</span>
+          <h2 className="text-3xl sm:text-4xl font-sans font-bold text-cream mb-4">
+            Frequently Asked <span className="text-gold-muted italic">Questions</span>
           </h2>
-          <p className="text-cream-dark/70 text-sm max-w-xl mx-auto">
-            Direct answers on project scope, milestone escrow delivery, source code transfer, and technical security standards.
+          <p className="text-cream-dark/70 text-sm max-w-xl mx-auto font-sans">
+            Direct answers on project scope, phased delivery models, source code ownership, and technical review procedures.
           </p>
         </div>
 
@@ -98,37 +98,30 @@ export default function FAQSection() {
                 className={`rounded-xl border transition-all duration-300 overflow-hidden ${
                   isOpen
                     ? "bg-forest-dark/70 border-gold-muted/40 shadow-lg shadow-gold-muted/5"
-                    : "bg-forest-dark/30 border-forest-light/30 hover:border-forest-light/60"
+                    : "bg-forest-dark/30 border-graphite/40 hover:border-graphite/60"
                 }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full px-6 py-4 flex items-center justify-between text-left gap-4"
+                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 transition-colors"
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-3.5">
-                    <div
-                      className={`p-2 rounded-lg ${
-                        isOpen
-                          ? "bg-gold-muted/20 text-gold"
-                          : "bg-forest-light/20 text-cream-dark/60"
-                      }`}
-                    >
+                    <div className={`p-2 rounded-lg ${isOpen ? "bg-gold-muted/20 text-gold-muted" : "bg-graphite/40 text-cream-dark/60"}`}>
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-gold/80 block mb-0.5">
+                      <span className="font-mono text-[10px] uppercase text-gold-muted tracking-wider block mb-1">
                         {faq.category}
                       </span>
-                      <h3 className="text-base font-semibold text-cream">
+                      <h3 className="font-sans font-bold text-sm sm:text-base text-cream">
                         {faq.question}
                       </h3>
                     </div>
                   </div>
-
                   <ChevronDown
-                    className={`w-5 h-5 text-gold/70 transition-transform duration-300 flex-shrink-0 ${
-                      isOpen ? "rotate-180 text-gold" : ""
+                    className={`w-4 h-4 text-gold-muted shrink-0 transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
@@ -139,9 +132,9 @@ export default function FAQSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <div className="px-6 pb-5 pt-1 text-sm text-cream-dark/80 border-t border-forest-light/20 leading-relaxed pl-[3.25rem]">
+                      <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-cream-dark/80 leading-relaxed border-t border-graphite/30 font-sans">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -150,18 +143,6 @@ export default function FAQSection() {
               </div>
             );
           })}
-        </div>
-
-        <div className="mt-10 text-center text-xs font-mono text-cream-dark/50">
-          Have a unique custom architectural requirement?{" "}
-          <a
-            href="https://wa.me/6281291254064"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline hover:text-gold-light"
-          >
-            Direct WhatsApp Consultation &rarr;
-          </a>
         </div>
       </div>
     </section>

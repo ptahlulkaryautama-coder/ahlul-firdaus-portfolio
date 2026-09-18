@@ -11,60 +11,53 @@ export interface Artifact {
 export const artifacts: Artifact[] = [
   {
     id: "ooi-system-architecture",
-    title: "OOI Product & Consolidation Architecture Blueprint",
+    title: "OOI Product & Consolidation Blueprint (Conceptual)",
     category: "Blueprint",
-    filename: "ooi_commerce_consolidation_v1.yaml",
-    description: "Multi-service infrastructure layout mapping verified brand cataloging, inquiry routing, and Batam FTZ consolidation pipelines.",
+    filename: "ooi_commerce_consolidation_conceptual.yaml",
+    description: "Conceptual architecture blueprint mapping curated brand cataloging, dual retail/wholesale inquiry routing, and Batam FTZ consolidation pipelines.",
     language: "yaml",
-    content: `services:
-  catalog-gateway:
-    image: ooi/catalog-service:latest
-    environment:
-      - DATABASE_URL=postgresql://db-replica.ooi.internal:5432/catalog
-      - REDIS_CACHE=redis://redis-cluster.ooi.internal:6379
-    ports:
-      - "4000:4000"
-    deploy:
-      replicas: 2
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 2Gi
+    content: `# Conceptual Architecture Blueprint
+# System: OOI — Origin of Indonesia Commerce & Consolidation
+version: "1.0-conceptual"
 
-  batam-consolidation-hub:
-    image: ooi/fulfillment-hub:latest
-    description: "Coordinates multi-supplier package consolidation, packaging specs, and dispatch at Batam FTZ"
-    volumes:
-      - hub-manifests:/var/lib/ooi/manifests
-    depends_on:
-      - catalog-gateway
+services:
+  catalog-frontend:
+    description: "Next.js responsive storefront and curated product catalog"
+    features:
+      - origin-traceability
+      - certification-badges
+      - gift-kit-customizer
+    routing:
+      retail-funnel: "/shop -> cart -> checkout"
+      wholesale-funnel: "/sourcing -> sample-request -> quotation-ticket"
 
-  b2b-inquiry-engine:
-    image: ooi/inquiry-router:latest
-    environment:
-      - NOTIFICATION_WEBHOOK=https://api.ooi.internal/hooks/inquiry
-      - CRM_SYNC_CHANNEL=wholesale-leads
+  batam-consolidation-model:
+    description: "Fulfillment coordination model at Batam FTZ"
+    workflow:
+      - receive-multi-supplier-manifest
+      - verify-compliance-and-packaging
+      - single-export-carton-assembly
+      - dispatch-international-freight
 
-volumes:
-  hub-manifests:
-    driver: aws-efs
-    driver_opts:
-      performanceMode: generalPurpose`
+  inquiry-routing-service:
+    description: "Routes buyer sample inquiries and wholesale requests"
+    channels:
+      - email-notifications
+      - structured-lead-logging`
   },
   {
     id: "cgv10-db-schema",
     title: "Portal Warga CGV Database Schema",
     category: "Database Schema",
     filename: "cgv10_portal_schema.sql",
-    description: "Relational structure detailing household tracking, resident authentication, and ledger associations.",
+    description: "Relational schema detailing household records, resident authentication, and community billing ledger associations.",
     language: "sql",
-    content: `-- Neighborhood Core Schema
+    content: `-- Neighborhood Community Core Schema
 CREATE TABLE households (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     block_number VARCHAR(10) NOT NULL,
     house_number VARCHAR(10) NOT NULL,
     resident_count INT DEFAULT 1,
-    outstanding_dues NUMERIC(12,2) DEFAULT 0.00,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())
 );
 
@@ -91,54 +84,54 @@ CREATE TABLE billing_ledger (
   },
   {
     id: "ai-system-prompt",
-    title: "System Orchestrator Prompt",
+    title: "Shipping Ledger Parser Prompt",
     category: "Prompt",
-    filename: "llm_systems_orchestrator.txt",
-    description: "Custom context-scoping prompt used to build structured JSON payloads from raw shipping broker emails.",
+    filename: "llm_shipping_parser_prompt.txt",
+    description: "Context-scoping prompt used in prototypes to extract structured JSON data from shipping notices and cargo manifests.",
     language: "markdown",
-    content: `# SYSTEM PROMPT: SHIPPING LEDGER INGESTION
-You are an expert logistics coordinator and data structure extraction engine.
-Your goal is to parse raw communication logs (emails, Slack messages, PDFs) from international shipping brokers and extract cargo milestones.
+    content: `# SYSTEM PROMPT: SHIPPING RECORD EXTRACTION (PROTOTYPE)
+You are an operational data structuring assistant.
+Your task is to parse raw logistics notes, emails, or text snippets and extract structured shipment milestones.
 
-## Output JSON Schema:
+## Expected JSON Schema:
 {
-  "trackingNumber": "String (e.g. OOI-ID-XXXX)",
-  "containerId": "String (e.g. MSKUXXXXXXX)",
-  "vesselName": "String",
-  "portOfDeparture": "String (IDJKT or comparable UN/LOCODE)",
-  "portOfArrival": "String",
-  "eta": "ISO-8601 Date",
-  "customsStatus": "UNRELEASED | EXAMINING | RELEASED | CLEAR_ERROR",
-  "anomaliesDetected": "String or null"
+  "referenceNumber": "String (e.g. OOI-EXP-XXXX)",
+  "originPort": "String (UN/LOCODE or City Name)",
+  "destinationPort": "String",
+  "estimatedDeparture": "ISO-8601 Date or null",
+  "estimatedArrival": "ISO-8601 Date or null",
+  "cargoStatus": "PENDING | IN_TRANSIT | ARRIVED | EXAMINING",
+  "notes": "String or null"
 }
 
-## Rule-sets:
-1. Do not assume or guess any dates. If ETA is written as 'next Tuesday', compute it relative to the email timestamp [{{EMAIL_TIMESTAMP}}].
-2. Identify customs delays: If key-phrases like 'retention', 'quarantine', or 'verification audit' are present, flag "customsStatus" as "EXAMINING".`
+## Guidelines:
+1. Do not assume or invent missing dates; leave as null if unstated.
+2. Flag records requiring follow-up if document verification or customs review is pending.`
   },
   {
     id: "launch-checklist",
-    title: "Export Platform Launch Runbook",
+    title: "Web Project Pre-Launch Runbook",
     category: "Launch Checklist",
-    filename: "runbook_production_launch.md",
-    description: "Production launch operations roadmap detailing critical checks before open transaction processing.",
+    filename: "runbook_prelaunch_checklist.md",
+    description: "Standard pre-launch verification checklist for responsive web applications, form validations, and deployment hygiene.",
     language: "markdown",
-    content: `# OOI Production Launch Checklist
-Critical checklist for migrating OOI from staging-sandbox to direct production live-traffic.
+    content: `# Web Application Pre-Launch Checklist
+Quality and operational check-gates before opening public access.
 
-## [x] Layer 1: Infrastructure Security
-- [x] Configure SSL/TLS parameters to restrict cipher suites to TLS 1.3
-- [x] Validate AWS CloudFront Web Application Firewall (WAF) rule sets
-- [x] Run penetration script scanning for exposed postgres credentials on container ports
+## [ ] Layer 1: Usability & Responsiveness
+- [ ] Test mobile navigation, touch targets, and viewport scaling (320px to 1440px)
+- [ ] Verify keyboard accessibility, focus rings, and screen-reader headings
+- [ ] Verify image aspect ratios, WebP formats, and loading performance
 
-## [ ] Layer 2: External Integrations (Launch Blockers)
-- [ ] Toggle Stripe API keys from \`test_mode\` to \`live_mode\`
-- [ ] Verify Webhook endpoint security verification hashes
-- [ ] Complete live-payout tests with the Indonesian Customs Bank gateway ($1 transaction check)
+## [ ] Layer 2: Forms & Operational Routing
+- [ ] Test contact and inquiry form submissions with valid and invalid inputs
+- [ ] Confirm email notification delivery and error fallbacks
+- [ ] Validate sample data disclosures on demonstration views
 
-## [ ] Layer 3: Support Readiness
-- [ ] Initialize intercom chat system triggers for support operators
-- [ ] Sync database emergency read-replica failovers`
+## [ ] Layer 3: SEO, Metadata & Handover
+- [ ] Verify Open Graph cards, favicon, and canonical URLs
+- [ ] Ensure proper robots.txt and sitemap.xml configuration
+- [ ] Provide client handover documentation and credential access`
   }
 ];
 
@@ -149,4 +142,3 @@ export function getArtifactById(id: string): Artifact | undefined {
 export function getAllArtifactIds(): string[] {
   return artifacts.map((a) => a.id);
 }
-

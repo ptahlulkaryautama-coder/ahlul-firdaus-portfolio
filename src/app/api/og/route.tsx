@@ -156,7 +156,7 @@ export async function GET(request: NextRequest) {
                 textTransform: "uppercase",
               }}
             >
-              // {tag}
+              {"//"} {tag}
             </div>
             <div
               style={{
@@ -207,8 +207,9 @@ export async function GET(request: NextRequest) {
         height: 630,
       }
     );
-  } catch (e: any) {
-    return new Response(`Failed to generate OG image: ${e.message}`, {
+  } catch (e: unknown) {
+    const errorMsg = e instanceof Error ? e.message : "Unknown error";
+    return new Response(`Failed to generate OG image: ${errorMsg}`, {
       status: 500,
     });
   }

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Play, RefreshCw, Copy, Check, Sliders, Code, LayoutGrid, Info, Activity, Sparkles, Terminal, Download, Video, Image as ImageIcon, Box } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
+import { ArrowLeft, RefreshCw, Copy, Check, Sliders, Code, LayoutGrid, Info, Sparkles, Terminal, Video, Image as ImageIcon, Activity, Box, Download } from "lucide-react";
 import Logo from "../../components/Logo";
 
 export default function LogoPlayground() {
@@ -12,7 +12,7 @@ export default function LogoPlayground() {
   const [hoverMode, setHoverMode] = useState<"glow" | "lift" | "none">("glow");
   const [size, setSize] = useState<number>(240);
   const [accentColor, setAccentColor] = useState<string>("#C5A880"); // Gold default
-  const [customTriangleColor, setCustomTriangleColor] = useState<string>("#F7F4EF");
+  const customTriangleColor = "#F7F4EF";
   const [gridStyle, setGridStyle] = useState<"blueprint" | "dots" | "radar" | "clean">("blueprint");
   const [copiedText, setCopiedText] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"svg" | "react">("svg");
@@ -143,7 +143,7 @@ export default function AHLogo() {
                 return (
                   <button
                     key={item.id}
-                    onClick={() => setVariant(item.id as any)}
+                    onClick={() => setVariant(item.id as "vector" | "video" | "png")}
                     className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border text-center font-mono text-[9px] transition-all ${
                       variant === item.id
                         ? "bg-gold-muted/15 border-gold-muted text-gold-muted font-bold shadow-lg"
@@ -176,7 +176,7 @@ export default function AHLogo() {
                 <button
                   key={item.id}
                   onClick={() => {
-                    setAnimateMode(item.id as any);
+                    setAnimateMode(item.id as "draw" | "assemble" | "fold" | "glitch" | "hud");
                     replayAnimation();
                   }}
                   className={`w-full text-left p-3.5 rounded-xl border transition-all duration-300 relative group/btn ${
@@ -222,7 +222,7 @@ export default function AHLogo() {
                 ].map((mode) => (
                   <button
                     key={mode.id}
-                    onClick={() => setHoverMode(mode.id as any)}
+                    onClick={() => setHoverMode(mode.id as "glow" | "lift" | "none")}
                     className={`py-2 px-1 text-center font-mono text-[9px] rounded-lg border transition-colors ${
                       hoverMode === mode.id
                         ? "bg-gold-muted/10 border-gold-muted/40 text-gold-muted"
@@ -299,7 +299,7 @@ export default function AHLogo() {
                 ].map((style) => (
                   <button
                     key={style.id}
-                    onClick={() => setGridStyle(style.id as any)}
+                    onClick={() => setGridStyle(style.id as "blueprint" | "dots" | "radar" | "clean")}
                     className={`px-2 py-0.5 font-mono text-[8px] rounded transition-colors ${
                       gridStyle === style.id
                         ? "bg-cream text-deep-black font-semibold"
@@ -396,8 +396,8 @@ export default function AHLogo() {
                 The monogram is constructed inside a vertically-elongated pointy-topped hexagon profile.
               </p>
               <ul className="list-disc list-inside space-y-1 font-mono text-[10px] text-cream-dark/60">
-                <li>Left pillar forms <strong>"A"</strong>.</li>
-                <li>Right pillar forms <strong>"F"</strong>.</li>
+                <li>Left pillar forms <strong>&quot;A&quot;</strong>.</li>
+                <li>Right pillar forms <strong>&quot;F&quot;</strong>.</li>
                 <li>Top triangle completes the hex form.</li>
                 <li>Diagonal angles set to 30° / 60°.</li>
                 <li>Internal paths gap ratio is 9%.</li>

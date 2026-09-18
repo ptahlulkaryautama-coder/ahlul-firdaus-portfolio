@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Quote, CheckCircle2, Sparkles, Cpu, Layers } from "lucide-react";
+import { Quote, Sparkles, Cpu, Layers } from "lucide-react";
 
 export default function Identity() {
   return (
@@ -40,7 +40,7 @@ export default function Identity() {
                 className="relative"
               >
                 <h2 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl text-cream leading-tight tracking-tight">
-                  “I do not only build websites. <span className="gradient-gold-text">I engineer operational products</span> that give businesses clarity.”
+                  “I do not only build websites. <span className="gradient-gold-text">I build practical digital systems</span> that make complex work clearer.”
                 </h2>
               </motion.div>
 
@@ -51,7 +51,7 @@ export default function Identity() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-cream-dark/85 text-base md:text-lg leading-relaxed max-w-2xl font-sans"
               >
-                With over 20 years of leadership experience in manufacturing, quality, and operational management, I bridge real-world business workflows with modern web technology — translating complex operational requirements into clear, credible, and user-friendly digital tools.
+                With more than 15 years of experience across manufacturing, quality, project delivery, and process improvement, I bring an operator&apos;s perspective to digital products — structuring real workflows, clarifying information, and using modern tools and AI-assisted development to build functional web applications and prototypes.
               </motion.p>
 
               {/* Micro grid data indicators */}
@@ -65,25 +65,25 @@ export default function Identity() {
                 <div className="p-4 rounded-xl glass-card border border-graphite/40 hover:border-gold-muted/30 transition-colors">
                   <div className="flex items-center gap-2 font-mono text-[9px] text-gold-muted uppercase tracking-wider mb-1">
                     <Cpu className="w-3 h-3" />
-                    <span>Domain Mastery</span>
+                    <span>Operational Background</span>
                   </div>
-                  <div className="text-xs font-bold text-cream tracking-wide">20+ Yrs Ops &amp; Quality</div>
+                  <div className="text-xs font-bold text-cream tracking-wide">15+ Yrs Quality &amp; Ops</div>
                 </div>
 
                 <div className="p-4 rounded-xl glass-card border border-graphite/40 hover:border-gold-muted/30 transition-colors">
                   <div className="flex items-center gap-2 font-mono text-[9px] text-gold-muted uppercase tracking-wider mb-1">
                     <Sparkles className="w-3 h-3" />
-                    <span>Product Architecture</span>
+                    <span>Product Building</span>
                   </div>
-                  <div className="text-xs font-bold text-cream tracking-wide">Clean System Design</div>
+                  <div className="text-xs font-bold text-cream tracking-wide">AI-Assisted Development</div>
                 </div>
 
                 <div className="p-4 rounded-xl glass-card border border-graphite/40 hover:border-gold-muted/30 transition-colors">
                   <div className="flex items-center gap-2 font-mono text-[9px] text-gold-muted uppercase tracking-wider mb-1">
                     <Layers className="w-3 h-3" />
-                    <span>Delivery</span>
+                    <span>Execution Focus</span>
                   </div>
-                  <div className="text-xs font-bold text-cream tracking-wide">Strategy to Handover</div>
+                  <div className="text-xs font-bold text-cream tracking-wide">Workflow to Interface</div>
                 </div>
               </motion.div>
             </div>

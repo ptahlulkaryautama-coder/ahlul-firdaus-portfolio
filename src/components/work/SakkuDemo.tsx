@@ -3,20 +3,16 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Smartphone,
   Wallet,
   CheckCircle2,
   TrendingUp,
   Sparkles,
   ShieldCheck,
   Send,
-  Plus,
   Zap,
   Lock,
   ExternalLink,
-  ArrowUpRight,
-  PieChart,
-  DollarSign
+  PieChart
 } from "lucide-react";
 
 interface AccountItem {
@@ -225,7 +221,7 @@ export default function SakkuDemo() {
         <div className="lg:col-span-6 space-y-4">
           <div className="bg-graphite-dark/60 border border-graphite/60 p-4 rounded-xl">
             <label className="block text-xs font-mono uppercase tracking-wider text-teal-400 font-bold mb-2">
-              ⚡ Catat Cepat Natural-Language Parser:
+              ⚡ Catat Cepat (Rule-Based Conversational Input):
             </label>
             <div className="flex gap-2">
               <input

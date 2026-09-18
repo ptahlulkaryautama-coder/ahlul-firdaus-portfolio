@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Ahlul Firdaus | Digital Systems Architect & Founder";
+export const alt = "Ahlul Firdaus | Operational Systems Builder";
 export const size = {
   width: 1200,
   height: 630,
@@ -54,7 +54,7 @@ export default async function Image() {
               fontWeight: 700,
             }}
           >
-            AHLUL FIRDAUS // PORTFOLIO ARCHITECTURE
+            AHLUL FIRDAUS // OPERATIONAL SYSTEMS BUILDER
           </span>
         </div>
 
@@ -77,7 +77,7 @@ export default async function Image() {
               margin: 0,
             }}
           >
-            Digital Systems Architect & Founder
+            Operational Systems Builder
           </h1>
           <p
             style={{
@@ -87,7 +87,7 @@ export default async function Image() {
               margin: 0,
             }}
           >
-            Engineering B2B export ecosystems, digital community hubs, and high-density SaaS operation dashboards.
+            Turning complex workflows, scattered information, and manual processes into clear websites, dashboards, and portals.
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default async function Image() {
               fontWeight: 700,
             }}
           >
-            🕌 Masjid Al Ikhlas Digital Hub
+            🕌 Masjid Al-Ikhlas Portal
           </div>
 
           <div
@@ -133,7 +133,7 @@ export default async function Image() {
               fontWeight: 600,
             }}
           >
-            🚢 OOI B2B Export System
+            🚢 OOI B2B Showcase
           </div>
 
           <div

@@ -2,9 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { 
-  CheckCircle2
-} from "lucide-react";
+
 
 interface ProjectThumbnailProps {
   projectId: string;
@@ -22,7 +20,6 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
             alt="OOI Origin of Indonesia premium food marketplace and global sourcing platform"
             fill
             unoptimized
-            priority
             className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
           />
@@ -37,7 +34,6 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
             alt="Portal Warga CGV integrated residential community platform with resident services, local marketplace, financial transparency, and admin operations"
             fill
             unoptimized
-            priority
             className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
           />
@@ -52,7 +48,6 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
             alt="Masjid Al Ikhlas digital mosque and community ecosystem with prayer times, TPQ education, programs, and financial transparency"
             fill
             unoptimized
-            priority
             className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
           />
@@ -67,7 +62,6 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
             alt="OneEcos connected B2B trade workflow and export operations dashboard"
             fill
             unoptimized
-            priority
             className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
           />
@@ -82,7 +76,6 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
             alt="PT. Corum browser-based sustainability reporting and data-entry template"
             fill
             unoptimized
-            priority
             className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
           />
@@ -90,16 +83,14 @@ export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
       );
 
     case "sakku":
-    case "rumah-ringkas":
     default:
       return (
         <div className="w-full h-44 rounded-xl border border-teal-500/30 relative overflow-hidden bg-slate-950 group-hover:border-teal-400/60 transition-colors">
           <Image
             src="/screenshots/sakkupreview.png"
-            alt="Sakku 2.0 — Privacy-First Personal & Family Wealth OS"
+            alt="Sakku 2.0 — Personal & Household Finance"
             fill
             unoptimized
-            priority
             className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
           />

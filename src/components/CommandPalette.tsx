@@ -1,26 +1,22 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
-  Command,
   FileText,
   Layers,
-  Sparkles,
   Terminal,
   ArrowRight,
   X,
-  ExternalLink,
   Code,
-  Box,
   User,
   MessageSquare,
   FileCode,
   Calculator,
-  Compass,
-  Building2
+  Building2,
+  Check
 } from "lucide-react";
 import { projects } from "../data/projects";
 import { blogPosts } from "../data/posts";
@@ -40,8 +36,10 @@ export default function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [copiedNotification, setCopiedNotification] = useState("");
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
 
   // Command items catalog
   const items: CommandItem[] = [
@@ -58,8 +56,8 @@ export default function CommandPalette() {
 
     {
       id: "tool-estimator",
-      title: "Project Cost & Architecture Estimator",
-      description: "Interactive timeline & scope cost visualizer",
+      title: "Project Scope & Timeline Estimator",
+      description: "Interactive preliminary scope & estimate tool",
       category: "Tools & Pages",
       icon: Calculator,
       url: "/#estimator",
@@ -67,17 +65,17 @@ export default function CommandPalette() {
     },
     {
       id: "tool-identity",
-      title: "Architectural Identity & Philosophy",
-      description: "Core engineering principles & profile overview",
+      title: "Professional Profile & Background",
+      description: "15+ years operational background and systems approach",
       category: "Tools & Pages",
       icon: User,
-      url: "/#identity",
-      keywords: ["identity", "about", "bio", "architect", "ahlul"]
+      url: "/#biography",
+      keywords: ["identity", "about", "bio", "operations", "ahlul"]
     },
     {
       id: "tool-artifacts",
-      title: "System Architecture Artifacts",
-      description: "Technical DB schemas, blueprints, and system prompts",
+      title: "System Blueprints & Artifacts",
+      description: "Representative schemas, prompts, and launch roadbooks",
       category: "Tools & Pages",
       icon: FileCode,
       url: "/#artifacts",
@@ -85,12 +83,12 @@ export default function CommandPalette() {
     },
     {
       id: "tool-writings",
-      title: "Engineering Writings & Articles",
-      description: "Deep dives into escrow architecture & B2B platforms",
+      title: "Articles & Operational Reflections",
+      description: "Reflections on operational workflows and digital tools",
       category: "Tools & Pages",
       icon: FileText,
       url: "/blog",
-      keywords: ["blog", "writings", "articles", "posts", "architecture"]
+      keywords: ["blog", "writings", "articles", "posts", "reflections"]
     },
 
     // Projects
@@ -118,14 +116,14 @@ export default function CommandPalette() {
     // Quick Actions
     {
       id: "action-whatsapp",
-      title: "Direct WhatsApp Consultation",
-      description: "Open instant chat with Ahlul Firdaus (+62 822-8354-9457)",
+      title: "Discuss Workflow via WhatsApp",
+      description: "Open chat with Ahlul Firdaus (+62 812-9125-4064)",
       category: "Quick Actions",
       icon: MessageSquare,
       action: () => {
-        window.open("https://wa.me/6282283549457?text=Hello%20Ahlul,%20I%20came%20from%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.", "_blank");
+        window.open("https://wa.me/6281291254064?text=Hello%20Ahlul,%20I%20would%20like%20to%20discuss%20a%20digital%20project%20or%20workflow.", "_blank");
       },
-      keywords: ["whatsapp", "contact", "chat", "message", "hire", "consult"]
+      keywords: ["whatsapp", "contact", "chat", "message", "workflow"]
     },
     {
       id: "action-email",
@@ -135,7 +133,8 @@ export default function CommandPalette() {
       icon: Terminal,
       action: () => {
         navigator.clipboard.writeText("ahlul.firdaus@gmail.com");
-        alert("Email address copied to clipboard!");
+        setCopiedNotification("Email copied: ahlul.firdaus@gmail.com");
+        setTimeout(() => setCopiedNotification(""), 3000);
       },
       keywords: ["email", "contact", "copy", "mail"]
     },
@@ -165,6 +164,19 @@ export default function CommandPalette() {
         );
       });
 
+  const openPalette = () => {
+    if (typeof document !== "undefined" && document.activeElement instanceof HTMLElement) {
+      previousActiveElement.current = document.activeElement;
+    }
+    setQuery("");
+    setSelectedIndex(0);
+    setIsOpen(true);
+  };
+
+  const closePalette = () => {
+    setIsOpen(false);
+  };
+
   // Toggle open with Cmd+K / Ctrl+K or custom event
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -172,11 +184,11 @@ export default function CommandPalette() {
         e.preventDefault();
         setIsOpen((prev) => !prev);
       } else if (e.key === "Escape" && isOpen) {
-        setIsOpen(false);
+        closePalette();
       }
     };
 
-    const handleCustomOpen = () => setIsOpen(true);
+    const handleCustomOpen = () => openPalette();
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("open-command-palette", handleCustomOpen);
@@ -187,13 +199,17 @@ export default function CommandPalette() {
     };
   }, [isOpen]);
 
-  // Focus input when opened
+  // Focus input when opened, restore previous focus when closed
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
-      setSelectedIndex(0);
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 50);
+      return () => clearTimeout(timer);
     } else {
-      setQuery("");
+      if (previousActiveElement.current) {
+        previousActiveElement.current.focus();
+      }
     }
   }, [isOpen]);
 
@@ -212,7 +228,7 @@ export default function CommandPalette() {
   };
 
   const executeItem = (item: CommandItem) => {
-    setIsOpen(false);
+    closePalette();
     if (item.action) {
       item.action();
     } else if (item.url) {
@@ -227,13 +243,18 @@ export default function CommandPalette() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-start justify-center pt-16 md:pt-24 px-4 sm:px-6">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Command Palette"
+          className="fixed inset-0 z-[100] flex items-start justify-center pt-16 md:pt-24 px-4 sm:px-6"
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
+            onClick={closePalette}
             className="fixed inset-0 bg-deep-black/80 backdrop-blur-xl z-0"
           />
 
@@ -252,16 +273,24 @@ export default function CommandPalette() {
                 ref={inputRef}
                 type="text"
                 value={query}
+                aria-label="Search portfolio commands and systems"
                 onChange={(e) => {
                   setQuery(e.target.value);
                   setSelectedIndex(0);
                 }}
                 onKeyDown={handleItemKeyDown}
-                placeholder="Search projects, writings, artifacts, or commands... (e.g. Escrow, Logo, WhatsApp)"
+                placeholder="Search projects, writings, artifacts, or actions... (e.g. OOI, Sakku, Estimator, WhatsApp)"
                 className="w-full bg-transparent text-cream placeholder-cream-dark/40 font-sans text-xs md:text-sm focus:outline-none"
               />
+              {copiedNotification && (
+                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded flex items-center gap-1 shrink-0">
+                  <Check className="w-3 h-3" />
+                  {copiedNotification}
+                </span>
+              )}
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={closePalette}
+                aria-label="Close command palette"
                 className="p-1 rounded-lg text-cream-dark/50 hover:text-cream hover:bg-graphite transition-colors"
               >
                 <X className="w-4 h-4" />

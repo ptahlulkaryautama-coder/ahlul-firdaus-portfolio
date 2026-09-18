@@ -5,18 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ShieldCheck,
   Layers,
-  Server,
   Database,
   Cpu,
   Play,
   RotateCcw,
   Terminal,
   ArrowRight,
-  Lock,
   Smartphone,
   Globe,
   Ship,
-  QrCode,
   Zap,
   Activity,
   CheckCircle2,
@@ -25,7 +22,7 @@ import {
   HelpCircle
 } from "lucide-react";
 
-export type ProjectPreset = "ooi" | "cgv10" | "oneecos" | "corum" | "sakku" | "rumah-ringkas" | "masjid-al-ikhlas";
+export type ProjectPreset = "ooi" | "cgv10" | "oneecos" | "corum" | "sakku" | "masjid-al-ikhlas";
 
 interface NodeData {
   id: string;
@@ -535,104 +532,12 @@ const presets: Record<ProjectPreset, PresetConfig> = {
     ]
   },
   sakku: {
-    title: "Sakku 2.0 Privacy-First Wealth Architecture",
-    subtitle: "Natural Language Quick Entry -> Envelope Budgeting -> Multi-Account Net Worth Sync",
-    badgeText: "Local-First FinTech OS",
+    title: "Sakku 2.0 Personal & Household Finance Architecture",
+    subtitle: "Rule-Based Quick Entry -> Envelope Budgeting -> Multi-Wallet Balance Tracking",
+    badgeText: "Local-First Personal Finance",
     badgeColor: "teal",
     description:
-      "Zero-Knowledge FinTech PWA linking personal & family multi-account balances into a real-time Net Worth calculator with natural language text parsing.",
-    nodes: [
-      {
-        id: "catat_cepat",
-        name: "Catat Cepat Input",
-        subtitle: "Conversational Client",
-        category: "Client",
-        icon: <Smartphone className="w-5 h-5 text-teal-400" />,
-        status: "Active",
-        description: "Users type informal conversational notes (e.g. 'Makan siang 35rb pakai GoPay').",
-        specs: [
-          { label: "Input", value: "Natural Language String" },
-          { label: "Storage", value: "Zero-Knowledge Local-First" }
-        ],
-        connections: ["nlp_parser"]
-      },
-      {
-        id: "nlp_parser",
-        name: "Indonesian Regex Parser",
-        subtitle: "Text & Amount Classifier",
-        category: "Logic",
-        icon: <Cpu className="w-5 h-5 text-teal-300" />,
-        status: "Idle",
-        description: "Extracts amounts ('35rb' -> 35000), maps categories, and resolves payment channels.",
-        specs: [
-          { label: "Currency Match", value: "rb / jt / numerical" },
-          { label: "Category Match", value: "Auto-keyword map" }
-        ],
-        connections: ["envelope_engine"]
-      },
-      {
-        id: "envelope_engine",
-        name: "Envelope Budget Allocator",
-        subtitle: "Cap & Spending Ratios",
-        category: "Gateway",
-        icon: <Layers className="w-5 h-5 text-purple-400" />,
-        status: "Idle",
-        description: "Calculates weekly vs monthly budget limits and updates visual envelope percentages.",
-        specs: [
-          { label: "Method", value: "Envelope Budgeting" },
-          { label: "Alerts", value: "Threshold Warning (>90%)" }
-        ],
-        connections: ["wealth_hub"]
-      },
-      {
-        id: "wealth_hub",
-        name: "Wealth & Net Worth Hub",
-        subtitle: "Multi-Account Calculator",
-        category: "Database",
-        icon: <Database className="w-5 h-5 text-emerald-400" />,
-        status: "Idle",
-        description: "Aggregates Cash, BCA, GoPay, Jago, Bareksa, and Liabilities into live Net Worth.",
-        specs: [
-          { label: "Accounts", value: "Cash, Bank, E-Wallet, Utang" },
-          { label: "Calculation", value: "Realtime Net Worth" }
-        ],
-        connections: []
-      }
-    ],
-    simulationSteps: [
-      {
-        step: 1,
-        title: "1. Natural Language Input Received",
-        activeNodes: ["catat_cepat", "nlp_parser"],
-        activeConnections: [["catat_cepat", "nlp_parser"]],
-        logMessage: "INPUT_PARSER -> Received string: 'Makan siang 35rb pakai GoPay'",
-        status: "INITIALIZING"
-      },
-      {
-        step: 2,
-        title: "2. Regex Classification Executed",
-        activeNodes: ["nlp_parser", "envelope_engine"],
-        activeConnections: [["nlp_parser", "envelope_engine"]],
-        logMessage: "NLP_EXTRACT -> Parsed: Amount: Rp 35.000 | Category: Makan & Jajan | Account: GoPay",
-        status: "PROCESSING"
-      },
-      {
-        step: 3,
-        title: "3. Envelope & Net Worth Synced",
-        activeNodes: ["envelope_engine", "wealth_hub"],
-        activeConnections: [["envelope_engine", "wealth_hub"]],
-        logMessage: "WEALTH_HUB -> Deducted Rp 35.000 from GoPay. Envelope updated. Net Worth Synced locally.",
-        status: "SUCCESS"
-      }
-    ]
-  },
-  "rumah-ringkas": {
-    title: "Sakku 2.0 Privacy-First Wealth Architecture",
-    subtitle: "Natural Language Quick Entry -> Envelope Budgeting -> Multi-Account Net Worth Sync",
-    badgeText: "Local-First FinTech OS",
-    badgeColor: "teal",
-    description:
-      "Zero-Knowledge FinTech PWA linking personal & family multi-account balances into a real-time Net Worth calculator with natural language text parsing.",
+      "Local-first personal finance PWA linking personal & household balances with rule-based conversational text parsing and envelope budgeting.",
     nodes: [
       {
         id: "catat_cepat",
@@ -889,37 +794,42 @@ export default function ArchitectureVisualizer({
   const [activePresetKey, setActivePresetKey] = useState<ProjectPreset>(defaultPreset);
   const currentPreset = presets[activePresetKey];
 
-  const [selectedNodeId, setSelectedNodeId] = useState<string>(currentPreset.nodes[0].id);
+  const [selectedNodeId, setSelectedNodeId] = useState<string>(() => presets[defaultPreset]?.nodes[0]?.id || "node-1");
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(-1);
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
-  const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
+  const [consoleLogs, setConsoleLogs] = useState<string[]>(() => [`[SYSTEM_READY] Initialized blueprint for ${presets[defaultPreset]?.title || ""}`]);
 
-  // Update selected node when preset changes
-  useEffect(() => {
-    setSelectedNodeId(currentPreset.nodes[0].id);
+  const handleSelectPreset = (key: ProjectPreset) => {
+    setActivePresetKey(key);
+    setSelectedNodeId(presets[key].nodes[0].id);
     setCurrentStepIndex(-1);
     setIsSimulating(false);
-    setConsoleLogs([`[SYSTEM_READY] Initialized blueprint for ${currentPreset.title}`]);
-  }, [activePresetKey, currentPreset]);
+    setConsoleLogs([`[SYSTEM_READY] Initialized blueprint for ${presets[key].title}`]);
+  };
 
   // Simulation timer loop
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isSimulating) {
-      if (currentStepIndex < currentPreset.simulationSteps.length - 1) {
-        timer = setTimeout(() => {
-          const nextIndex = currentStepIndex + 1;
-          setCurrentStepIndex(nextIndex);
-          const stepObj = currentPreset.simulationSteps[nextIndex];
-          setConsoleLogs((prev) => [
-            ...prev,
-            `[${new Date().toLocaleTimeString()}] ${stepObj.logMessage}`
-          ]);
-        }, 1600);
-      } else {
+    if (!isSimulating) return;
+
+    if (currentStepIndex >= currentPreset.simulationSteps.length - 1) {
+      const timer = setTimeout(() => {
         setIsSimulating(false);
-      }
+      }, 1600);
+      return () => clearTimeout(timer);
     }
+
+    const timer = setTimeout(() => {
+      const nextIndex = currentStepIndex + 1;
+      setCurrentStepIndex(nextIndex);
+      const stepObj = currentPreset.simulationSteps[nextIndex];
+      if (stepObj) {
+        setConsoleLogs((prev) => [
+          ...prev,
+          `[${new Date().toLocaleTimeString()}] ${stepObj.logMessage}`
+        ]);
+      }
+    }, 1600);
+
     return () => clearTimeout(timer);
   }, [isSimulating, currentStepIndex, currentPreset]);
 
@@ -963,13 +873,13 @@ export default function ArchitectureVisualizer({
 
         {/* Preset Switcher Tabs */}
         <div className="flex flex-wrap items-center gap-2 bg-black/60 p-1.5 rounded-2xl border border-graphite/60 self-start lg:self-center">
-          {(["ooi", "cgv10", "oneecos", "corum", "rumah-ringkas"] as ProjectPreset[]).map((key) => {
+          {(["ooi", "cgv10", "oneecos", "corum", "sakku"] as ProjectPreset[]).map((key) => {
             const presetInfo = presets[key];
             const isActive = activePresetKey === key;
             return (
               <button
                 key={key}
-                onClick={() => setActivePresetKey(key)}
+                onClick={() => handleSelectPreset(key)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all duration-300 flex items-center gap-2 ${
                   isActive
                     ? "bg-gold-muted text-deep-black shadow-lg shadow-gold-muted/20"
@@ -980,7 +890,7 @@ export default function ArchitectureVisualizer({
                 {key === "cgv10" && <Layers className="w-3.5 h-3.5" />}
                 {key === "oneecos" && <Cpu className="w-3.5 h-3.5" />}
                 {key === "corum" && <FileCheck className="w-3.5 h-3.5" />}
-                {key === "rumah-ringkas" && <Smartphone className="w-3.5 h-3.5" />}
+                {key === "sakku" && <Smartphone className="w-3.5 h-3.5" />}
                 <span>{presetInfo.badgeText}</span>
               </button>
             );
