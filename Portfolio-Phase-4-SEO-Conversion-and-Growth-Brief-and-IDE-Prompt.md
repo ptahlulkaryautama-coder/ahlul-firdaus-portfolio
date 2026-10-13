@@ -28,6 +28,37 @@ Guiding principle:
 
 > Help the right client understand the work, verify the evidence, and start a conversation. Do not manufacture authority, urgency, or impact.
 
+### Revised production context
+
+Phases 1–3 are now deployed. A direct production inspection confirmed that the updated homepage and all six case studies are publicly accessible and that their visible titles, descriptions, project maturity labels, and Open Graph metadata largely match the approved content.
+
+Google Search Console registration and sitemap submission already exist. Do not create a second SEO system, replace the existing sitemap implementation, or remove the existing verification mechanism.
+
+Current Google snippets still contain pre-deployment content because the index has not yet refreshed. Treat this as stale crawl data, not evidence that the deployed source still contains the old copy.
+
+### Core execution scope for this Phase 4 pass
+
+This implementation pass is intentionally narrower than the full growth roadmap. Complete the following first:
+
+1. Standardize the canonical hostname.
+2. Correct and simplify structured data.
+3. Audit sitemap, robots, Open Graph URLs, and Search Console verification without rebuilding them.
+4. Apply two evidence-sensitive wording corrections to OOI and Masjid Al-Ikhlas where needed.
+5. Remove the remaining footer accessibility-status label.
+6. Verify contact CTAs and external links.
+7. Produce a post-deployment reindexing checklist.
+
+Defer new analytics providers, a full bilingual architecture, mass article creation, and new testimonial content unless separately approved.
+
+### Canonical hostname decision
+
+Use `https://www.ahlulfirdaus.com` as the canonical production hostname because the live browser remains on `www` and existing indexed URLs use `www`.
+
+- Update canonical, Open Graph URL/image origins, sitemap URLs, JSON-LD URLs, and other absolute internal production URLs to `https://www.ahlulfirdaus.com`.
+- Confirm the apex domain permanently redirects to the `www` hostname.
+- Do not create redirect loops.
+- Preserve path and query behavior where appropriate.
+
 ---
 
 ## 2. Evidence and Claims Policy
@@ -214,6 +245,18 @@ Ensure JSON-LD:
 - Does not duplicate conflicting entities
 - Does not expose private information
 
+### Production findings requiring correction
+
+The deployed homepage currently contains `Person`, `WebSite`, `ProfessionalService`, and `FAQPage` JSON-LD.
+
+- Keep `Person` and `WebSite` if their fields remain accurate.
+- Review whether `ProfessionalService` accurately describes a real public service business.
+- Remove `geo` and `openingHoursSpecification` unless Ahlul operates a public customer-facing location with those verified hours.
+- Retain the public telephone/WhatsApp number only if the owner intentionally wants it indexed.
+- Do not use project websites such as OOI, Portal Warga CGV, Sakku, or Masjid Al-Ikhlas as `Person.sameAs` identities. Reserve `sameAs` for verified identity/profile URLs such as GitHub and LinkedIn.
+- Represent projects through an appropriate relationship or omit the relationship rather than forcing an inaccurate schema property.
+- Audit FAQ statements about timelines, ownership, repository access, handover, and integrations. Keep only policies Ahlul is prepared to offer consistently or qualify them as scope/contract dependent.
+
 Validate with an available structured-data validator and report warnings separately from errors.
 
 ---
@@ -242,6 +285,28 @@ Validate with an available structured-data validator and report warnings separat
 - Verify absolute production URLs for generated images.
 
 Do not regenerate approved OOI, CGV, Masjid Al-Ikhlas, OneEcos, Corum, or Sakku thumbnails merely for stylistic consistency.
+
+Ensure every OG URL uses the selected `www` canonical hostname and resolves in production.
+
+---
+
+## 9A. Required Production Copy Corrections
+
+### OOI
+
+The deployed description currently refers broadly to `certified Indonesian food brands`. Unless certification evidence applies to every represented brand, prefer:
+
+> Founder-led commerce and sourcing platform connecting curated Indonesian food products with international consumers, specialty retailers, importers, and distribution partners.
+
+Show BPOM, Halal, or other certification indicators only where supported at product level.
+
+### Masjid Al-Ikhlas
+
+If the platform displays QRIS information or donation guidance but does not process donations itself, use `donation guidance` or `infaq guidance`, not language implying an integrated payment-processing system.
+
+### Footer
+
+Remove the remaining `ACCESSIBILITY: CONTINUOUSLY IMPROVED` operational label. Do not replace it with another compliance or performance badge.
 
 ---
 
@@ -498,6 +563,24 @@ Required workflow:
     - analytics status;
     - test/build results;
     - anything requiring owner approval or real business evidence.
+
+Production-specific corrections required in this pass:
+
+- Use `https://www.ahlulfirdaus.com` consistently as canonical hostname.
+- Confirm apex-to-www permanent redirect without a loop.
+- Preserve the existing Search Console verification and sitemap system.
+- Remove the footer `ACCESSIBILITY: CONTINUOUSLY IMPROVED` label.
+- Simplify homepage JSON-LD:
+  - remove unverified physical-business geo/opening-hours fields;
+  - keep the public phone only when intentionally approved for indexing;
+  - remove project websites from `Person.sameAs`;
+  - audit FAQ promises and qualify contract-dependent terms.
+- Replace broad OOI `certified ... brands` language with evidence-safe `curated
+  Indonesian food products` unless complete certification evidence exists.
+- Use `donation guidance` / `infaq guidance` for Masjid Al-Ikhlas unless the
+  portfolio product actually processes donations.
+- Do not install new analytics, i18n, CMS, or form infrastructure in this pass.
+- After deployment, return the exact URLs to inspect and request for reindexing.
 
 Do not commit or push unless explicitly requested.
 ```

@@ -16,7 +16,7 @@ export const systemContexts: SystemContext[] = [
     projectId: "ooi",
     category: "Commerce & Export Platform",
     designedFor: "International specialty retailers, food importers, and Indonesian artisanal food producers.",
-    problemSolved: "Eliminates fragmented supplier discovery, single-producer freight overhead, and inconsistent compliance data by consolidating certified origin products through the Batam FTZ hub.",
+    problemSolved: "Eliminates fragmented supplier discovery, single-producer freight overhead, and inconsistent compliance data by consolidating curated origin products through the Batam FTZ hub.",
     keyCapabilities: [
       "Curated multi-producer product catalog with origin and certification indicators",
       "Unified B2B wholesale inquiry and retail sample request pathways",

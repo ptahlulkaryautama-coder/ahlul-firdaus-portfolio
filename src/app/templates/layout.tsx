@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Custom Next.js & React system template kits: Industrial Manufacturing, B2B Export Showcases, Community Governance, and ESG Sustainability reporting tools.",
   alternates: {
-    canonical: "https://ahlulfirdaus.com/templates",
+    canonical: "https://www.ahlulfirdaus.com/templates",
   },
   openGraph: {
     title: "System Templates & Industrial UI Kits | Ahlul Firdaus",
     description:
       "Custom Next.js & React system template kits: Industrial Manufacturing, B2B Export Showcases, Community Governance, and ESG Sustainability reporting tools.",
-    url: "https://ahlulfirdaus.com/templates",
+    url: "https://www.ahlulfirdaus.com/templates",
     type: "website",
   },
   twitter: {
@@ -29,11 +29,11 @@ const templatesJsonLd = {
   name: "System Templates & Industrial UI Kits",
   description:
     "Custom Next.js & React template kits designed for business operations and industrial workflows.",
-  url: "https://ahlulfirdaus.com/templates",
+  url: "https://www.ahlulfirdaus.com/templates",
   creator: {
     "@type": "Person",
     name: "Ahlul Firdaus",
-    url: "https://ahlulfirdaus.com",
+    url: "https://www.ahlulfirdaus.com",
   },
   breadcrumb: {
     "@type": "BreadcrumbList",
@@ -42,13 +42,13 @@ const templatesJsonLd = {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://ahlulfirdaus.com",
+        item: "https://www.ahlulfirdaus.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Templates",
-        item: "https://ahlulfirdaus.com/templates",
+        item: "https://www.ahlulfirdaus.com/templates",
       },
     ],
   },

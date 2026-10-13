@@ -4,7 +4,7 @@ import { getAllArtifactIds } from "../data/artifacts";
 import { blogPosts } from "../data/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://ahlulfirdaus.com";
+  const baseUrl = "https://www.ahlulfirdaus.com";
   const now = new Date();
 
   const projectRoutes = getAllProjectIds().map((id) => ({

@@ -78,8 +78,8 @@ export async function POST(req: NextRequest) {
             <hr style="border-color: #1C1C1E; margin: 24px 0;" />
             <p style="color: #555; font-size: 11px; line-height: 1.6;">
               — Ahlul Firdaus<br/>
-              Digital Systems Architect &amp; Founder<br/>
-              Batam (GMT+7) · <a href="https://ahlulfirdaus.com" style="color: #C5A880;">ahlulfirdaus.com</a>
+              Operational Systems Builder<br/>
+              Batam (GMT+7) · <a href="https://www.ahlulfirdaus.com" style="color: #C5A880;">www.ahlulfirdaus.com</a>
             </p>
           </div>
         `,

@@ -35,12 +35,12 @@ export async function generateMetadata({ params }: PageProps) {
     title: `${post.title} | Systems Architecture Paper`,
     description: post.excerpt,
     alternates: {
-      canonical: `https://ahlulfirdaus.com/blog/${slug}`,
+      canonical: `https://www.ahlulfirdaus.com/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://ahlulfirdaus.com/blog/${slug}`,
+      url: `https://www.ahlulfirdaus.com/blog/${slug}`,
       images: [
         {
           url: ogUrl,
@@ -76,22 +76,22 @@ export default async function BlogPostPage({ params }: PageProps) {
     "@graph": [
       {
         "@type": "TechArticle",
-        "@id": `https://ahlulfirdaus.com/blog/${slug}#article`,
+        "@id": `https://www.ahlulfirdaus.com/blog/${slug}#article`,
         headline: post.title,
         description: post.excerpt,
         datePublished: post.date,
         inLanguage: "en-US",
-        mainEntityOfPage: `https://ahlulfirdaus.com/blog/${slug}`,
+        mainEntityOfPage: `https://www.ahlulfirdaus.com/blog/${slug}`,
         author: {
           "@type": "Person",
           name: post.author.name,
           jobTitle: post.author.role,
-          url: "https://ahlulfirdaus.com",
+          url: "https://www.ahlulfirdaus.com",
         },
         publisher: {
           "@type": "Person",
           name: "Ahlul Firdaus",
-          url: "https://ahlulfirdaus.com",
+          url: "https://www.ahlulfirdaus.com",
         },
       },
       {
@@ -101,19 +101,19 @@ export default async function BlogPostPage({ params }: PageProps) {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://ahlulfirdaus.com",
+            item: "https://www.ahlulfirdaus.com",
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "System Writings",
-            item: "https://ahlulfirdaus.com/blog",
+            item: "https://www.ahlulfirdaus.com/blog",
           },
           {
             "@type": "ListItem",
             position: 3,
             name: post.title,
-            item: `https://ahlulfirdaus.com/blog/${slug}`,
+            item: `https://www.ahlulfirdaus.com/blog/${slug}`,
           },
         ],
       },

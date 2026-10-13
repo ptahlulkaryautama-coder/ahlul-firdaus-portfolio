@@ -9,6 +9,7 @@ import Cgv10Demo from "./work/Cgv10Demo";
 import OoiDemo from "./work/OoiDemo";
 import OneEcosDemo from "./work/OneEcosDemo";
 import AlIkhlasDemo from "./work/AlIkhlasDemo";
+import TaminoDemo from "./work/TaminoDemo";
 import ProjectThumbnail from "./work/ProjectThumbnail";
 
 export default function SelectedWork() {
@@ -48,6 +49,7 @@ export default function SelectedWork() {
 
   const categories = [
     "All",
+    "F&B Operations & Point of Sale",
     "Commerce, Export & Sourcing Platform",
     "Civic Tech, Community Operations & Resident Services",
     "Faith-Based Civic Tech, Education & Community Services",
@@ -70,6 +72,9 @@ export default function SelectedWork() {
   });
 
   const getStatusColor = (status: string) => {
+    if (status.includes("Interactive") || status.includes("Demo")) {
+      return "bg-emerald-400 shadow-sm shadow-emerald-400/50";
+    }
     if (status.includes("Founder-Led") || status.includes("Phase 1")) {
       return "bg-amber-400 shadow-sm shadow-amber-400/50";
     }
@@ -507,6 +512,16 @@ export default function SelectedWork() {
                       Live Digital Ecosystem Simulation (Prayer Times, Transparency & Agenda)
                     </h4>
                     <AlIkhlasDemo />
+                  </div>
+                )}
+
+                {/* Interactive Demo for Tamino */}
+                {activeProject.id === "tamino" && (
+                  <div className="space-y-3 pt-6 border-t border-graphite/40">
+                    <h4 className="font-mono text-[10px] text-cream-dark/40 uppercase tracking-wider">
+                      Interactive F&amp;B Point of Sale &amp; Operations System Prototype
+                    </h4>
+                    <TaminoDemo />
                   </div>
                 )}
 

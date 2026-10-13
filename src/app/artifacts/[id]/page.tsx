@@ -32,12 +32,12 @@ export async function generateMetadata({ params }: PageProps) {
     title: `${artifact.title} | Technical Artifact`,
     description: artifact.description,
     alternates: {
-      canonical: `https://ahlulfirdaus.com/artifacts/${id}`,
+      canonical: `https://www.ahlulfirdaus.com/artifacts/${id}`,
     },
     openGraph: {
       title: `${artifact.title} | System Artifact`,
       description: artifact.description,
-      url: `https://ahlulfirdaus.com/artifacts/${id}`,
+      url: `https://www.ahlulfirdaus.com/artifacts/${id}`,
       type: "article",
     },
     twitter: {
@@ -61,14 +61,14 @@ export default async function ArtifactDetailPage({ params }: PageProps) {
     "@graph": [
       {
         "@type": "SoftwareSourceCode",
-        "@id": `https://ahlulfirdaus.com/artifacts/${id}#code`,
+        "@id": `https://www.ahlulfirdaus.com/artifacts/${id}#code`,
         name: artifact.title,
         description: artifact.description,
         programmingLanguage: artifact.language || "TypeScript",
         author: {
           "@type": "Person",
           name: "Ahlul Firdaus",
-          url: "https://ahlulfirdaus.com",
+          url: "https://www.ahlulfirdaus.com",
         },
       },
       {
@@ -78,19 +78,19 @@ export default async function ArtifactDetailPage({ params }: PageProps) {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://ahlulfirdaus.com",
+            item: "https://www.ahlulfirdaus.com",
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "System Artifacts",
-            item: "https://ahlulfirdaus.com/#artifacts",
+            item: "https://www.ahlulfirdaus.com/#artifacts",
           },
           {
             "@type": "ListItem",
             position: 3,
             name: artifact.title,
-            item: `https://ahlulfirdaus.com/artifacts/${id}`,
+            item: `https://www.ahlulfirdaus.com/artifacts/${id}`,
           },
         ],
       },

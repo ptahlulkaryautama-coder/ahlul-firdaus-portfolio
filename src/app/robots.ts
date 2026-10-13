@@ -28,7 +28,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://ahlulfirdaus.com/sitemap.xml",
-    host: "https://ahlulfirdaus.com",
+    sitemap: "https://www.ahlulfirdaus.com/sitemap.xml",
+    host: "https://www.ahlulfirdaus.com",
   };
 }

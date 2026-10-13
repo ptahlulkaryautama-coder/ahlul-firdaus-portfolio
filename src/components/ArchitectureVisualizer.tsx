@@ -19,10 +19,12 @@ import {
   CheckCircle2,
   FileCheck,
   Building2,
-  HelpCircle
+  HelpCircle,
+  Store,
+  TrendingUp
 } from "lucide-react";
 
-export type ProjectPreset = "ooi" | "cgv10" | "oneecos" | "corum" | "sakku" | "masjid-al-ikhlas";
+export type ProjectPreset = "tamino" | "ooi" | "cgv10" | "oneecos" | "corum" | "sakku" | "masjid-al-ikhlas";
 
 interface NodeData {
   id: string;
@@ -56,6 +58,110 @@ interface PresetConfig {
 }
 
 const presets: Record<ProjectPreset, PresetConfig> = {
+  tamino: {
+    title: "Tamino F&B Operating System Architecture",
+    subtitle: "Connected POS Workspace, Transaction Engine, Inventory Control & Business Insights",
+    badgeText: "F&B Operations & Point of Sale",
+    badgeColor: "emerald",
+    description:
+      "Operational architecture connecting cashier transactions, inventory tracking, role structures, and management decision support: POS Workspace → Transaction Engine → Inventory Control → Business Insights.",
+    nodes: [
+      {
+        id: "pos_workspace",
+        name: "POS Workspace",
+        subtitle: "Client / Operational Input",
+        category: "Client",
+        icon: <Store className="w-5 h-5 text-emerald-400" />,
+        status: "Active",
+        description: "Captures products, quantities, order types, table assignments, and payment selections through the cashier interface.",
+        specs: [
+          { label: "Product & Search", value: "Category Filtering & Fast Search" },
+          { label: "Order Modes", value: "Dine-in, Takeaway, Online (Tables)" },
+          { label: "Calculation", value: "Tax, Subtotal & Payment Simulation" }
+        ],
+        connections: ["transaction_engine"]
+      },
+      {
+        id: "transaction_engine",
+        name: "Transaction Engine",
+        subtitle: "Business Logic",
+        category: "Logic",
+        icon: <Cpu className="w-5 h-5 text-teal-400" />,
+        status: "Idle",
+        description: "Converts cashier input into structured transactions, payment states, totals, and operational records.",
+        specs: [
+          { label: "Transactions", value: "Creation, Tax & Status Tracking" },
+          { label: "Payments", value: "Cash & QRIS Simulation Handling" },
+          { label: "Attribution", value: "Cashier Attribution & Order Totals" }
+        ],
+        connections: ["inventory_control"]
+      },
+      {
+        id: "inventory_control",
+        name: "Inventory Control",
+        subtitle: "Operational Records",
+        category: "Database",
+        icon: <Layers className="w-5 h-5 text-amber-400" />,
+        status: "Idle",
+        description: "Maintains product availability, current stock, low-stock thresholds, and stock movement records.",
+        specs: [
+          { label: "Stock Balance", value: "Current Balance & Movement Log" },
+          { label: "Workflows", value: "Stock-in & Stock-out Operations" },
+          { label: "Alerts", value: "Configurable Low-Stock Thresholds" }
+        ],
+        connections: ["business_insights"]
+      },
+      {
+        id: "business_insights",
+        name: "Business Insights",
+        subtitle: "Decision Support",
+        category: "External",
+        icon: <TrendingUp className="w-5 h-5 text-cyan-400" />,
+        status: "Idle",
+        description: "Converts operational records into sales summaries, product performance, payment breakdowns, and actionable management alerts.",
+        specs: [
+          { label: "Sales & Volume", value: "Daily, 7-Day, 30-Day Metrics & AOV" },
+          { label: "Performance", value: "Best-Selling Products & Method Breakdown" },
+          { label: "Decision Support", value: "Needs Attention Triage & CSV Export" }
+        ],
+        connections: []
+      }
+    ],
+    simulationSteps: [
+      {
+        step: 1,
+        title: "1. POS Order Composition & Input",
+        activeNodes: ["pos_workspace", "transaction_engine"],
+        activeConnections: [["pos_workspace", "transaction_engine"]],
+        logMessage: "POS_WORKSPACE -> Cashier registered 2x Single Origin Latte + 1x Butter Croissant (Dine-in, Table 04). Subtotal & tax calculated.",
+        status: "INITIALIZING"
+      },
+      {
+        step: 2,
+        title: "2. Transaction Engine & Payment Simulation",
+        activeNodes: ["transaction_engine", "inventory_control"],
+        activeConnections: [["transaction_engine", "inventory_control"]],
+        logMessage: "TRANSACTION_ENGINE -> Order validated, tax computed. QRIS payment simulated as PAID. Structured transaction #TRX-8842 recorded.",
+        status: "PROCESSING"
+      },
+      {
+        step: 3,
+        title: "3. Inventory Control & Threshold Verification",
+        activeNodes: ["inventory_control", "business_insights"],
+        activeConnections: [["inventory_control", "business_insights"]],
+        logMessage: "INVENTORY_CONTROL -> Current stock balance updated. Stock-out movement logged. Low-stock thresholds evaluated.",
+        status: "PROCESSING"
+      },
+      {
+        step: 4,
+        title: "4. Business Insights & Management Triage",
+        activeNodes: ["business_insights"],
+        activeConnections: [],
+        logMessage: "BUSINESS_INSIGHTS -> Daily gross sales aggregated, best-seller rankings updated, 'Needs Attention' operational triage refreshed.",
+        status: "SUCCESS"
+      }
+    ]
+  },
   ooi: {
     title: "OOI Product & Fulfillment Architecture",
     subtitle: "Curated Brands, Unified Catalog, Batam Consolidation Hub & Global Delivery",
@@ -873,7 +979,7 @@ export default function ArchitectureVisualizer({
 
         {/* Preset Switcher Tabs */}
         <div className="flex flex-wrap items-center gap-2 bg-black/60 p-1.5 rounded-2xl border border-graphite/60 self-start lg:self-center">
-          {(["ooi", "cgv10", "oneecos", "corum", "sakku"] as ProjectPreset[]).map((key) => {
+          {(["tamino", "ooi", "cgv10", "oneecos", "corum", "sakku"] as ProjectPreset[]).map((key) => {
             const presetInfo = presets[key];
             const isActive = activePresetKey === key;
             return (
@@ -886,6 +992,7 @@ export default function ArchitectureVisualizer({
                     : "text-cream-dark/70 hover:text-cream hover:bg-graphite/40"
                 }`}
               >
+                {key === "tamino" && <Store className="w-3.5 h-3.5" />}
                 {key === "ooi" && <ShieldCheck className="w-3.5 h-3.5" />}
                 {key === "cgv10" && <Layers className="w-3.5 h-3.5" />}
                 {key === "oneecos" && <Cpu className="w-3.5 h-3.5" />}

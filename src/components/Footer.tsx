@@ -14,7 +14,7 @@ export default function Footer() {
     const resumeText = `AHLUL FIRDAUS
 Operational Systems Builder & Product Specialist
 Email: ahlul.firdaus@gmail.com | Phone/WhatsApp: +62 812-9125-4064
-Website: https://ahlulfirdaus.com
+Website: https://www.ahlulfirdaus.com
 Location: Batam, Kepulauan Riau, Indonesia (GMT+7)
 
 ==================================================
@@ -34,6 +34,10 @@ CORE CAPABILITIES
 ==================================================
 SELECTED SYSTEMS & PROJECTS
 ==================================================
+0. Tamino (Status: Interactive MVP — Phase 1 Demo)
+   • Desktop-first F&B operating system connecting POS transactions, inventory monitoring, staff roles, payments, and business reporting.
+   • Operational workflow connecting cashier execution, inventory control, and management decision support.
+
 1. OOI — Origin of Indonesia (Status: Founder-Led Product — Phase 1 Launch)
    • B2B showcase catalog platform connecting Indonesian producers with global commercial buyers.
    • Structured commodity specs, origin documentation funnels, and verified sample inquiry workflows.
@@ -64,7 +68,7 @@ ENGAGEMENT MODELS (PRELIMINARY ESTIMATES)
 ==================================================
 CONTACT INFORMATION
 ==================================================
-Website: https://ahlulfirdaus.com
+Website: https://www.ahlulfirdaus.com
 Email: ahlul.firdaus@gmail.com
 WhatsApp: +62 812-9125-4064
 `;
@@ -109,12 +113,6 @@ WhatsApp: +62 812-9125-4064
           <div className="space-y-0.5">
             <span className="text-cream-dark/30 block font-semibold">DESIGN SYSTEM:</span>
             <span className="text-cream-dark/80 font-bold">TAILWIND CSS V4</span>
-          </div>
-          <div className="space-y-0.5">
-            <span className="text-cream-dark/30 block font-semibold">ACCESSIBILITY:</span>
-            <span className="text-cream-dark/80 font-bold">
-              CONTINUOUSLY IMPROVED
-            </span>
           </div>
         </div>
 

@@ -12,6 +12,20 @@ interface ProjectThumbnailProps {
 
 export default function ProjectThumbnail({ projectId }: ProjectThumbnailProps) {
   switch (projectId) {
+    case "tamino":
+      return (
+        <div className="w-full h-44 rounded-xl border border-[#16735B]/40 relative overflow-hidden bg-[#17201C] group-hover:border-emerald-500/50 transition-colors">
+          <Image
+            src="/Image/project/tamino/tamino-portfolio-thumbnail.png"
+            alt="Tamino F&B point-of-sale and operations dashboard showing sales, transactions, inventory alerts, and payment performance."
+            fill
+            unoptimized
+            className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+          />
+        </div>
+      );
+
     case "ooi":
       return (
         <div className="w-full h-44 rounded-xl border border-amber-900/30 relative overflow-hidden bg-[#FBF7F0] group-hover:border-[#8B263E]/50 transition-colors">

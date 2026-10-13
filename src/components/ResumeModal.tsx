@@ -74,7 +74,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     const resumeText = `AHLUL FIRDAUS
 Operational Systems Builder & Product Specialist
 Location: Batam, Kepulauan Riau, Indonesia (GMT+7)
-Email: ahlul.firdaus@gmail.com | Phone/WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
+Email: ahlul.firdaus@gmail.com | Phone/WhatsApp: +62 812-9125-4064 | Web: https://www.ahlulfirdaus.com
 
 ==================================================
 EXECUTIVE SUMMARY
@@ -92,6 +92,11 @@ CORE COMPETENCIES
 ==================================================
 KEY SYSTEMS & PROJECTS
 ==================================================
+0. Tamino (Status: Interactive MVP — Phase 1 Demo)
+   • Desktop-first F&B operating system connecting POS transactions, inventory monitoring, staff roles, payments, and business reporting.
+   • Operational workflow connecting cashier execution, inventory control, and management decision support.
+   • Tech Stack: React, TypeScript, Tailwind CSS, LocalStorage, Vercel.
+
 1. OOI — Origin of Indonesia (Status: Founder-Led Product — Phase 1 Launch)
    • B2B showcase catalog platform connecting Indonesian producers with global commercial buyers.
    • Standardized technical specifications, origin traceability, and sample-request funnels.
@@ -128,7 +133,7 @@ ENGAGEMENT MODELS (PRELIMINARY ESTIMATES)
 ==================================================
 CONTACT & PORTFOLIO
 ==================================================
-Website: https://ahlulfirdaus.com
+Website: https://www.ahlulfirdaus.com
 WhatsApp: +62 812-9125-4064
 Email: ahlul.firdaus@gmail.com
 `;
@@ -146,7 +151,7 @@ Email: ahlul.firdaus@gmail.com
 
   const handleCopyText = () => {
     const text = `AHLUL FIRDAUS — Operational Systems Builder
-Email: ahlul.firdaus@gmail.com | WhatsApp: +62 812-9125-4064 | Web: https://ahlulfirdaus.com
+Email: ahlul.firdaus@gmail.com | WhatsApp: +62 812-9125-4064 | Web: https://www.ahlulfirdaus.com
 
 EXECUTIVE SUMMARY:
 Operational Systems Builder with 15+ years of practical leadership across manufacturing, quality control, process improvement, and digital product workflows. Specializes in turning complex operational processes into clear web applications, internal dashboards, portals, and structured digital tools.`;
@@ -379,6 +384,13 @@ Operational Systems Builder with 15+ years of practical leadership across manufa
                   className="space-y-4"
                 >
                   {[
+                    {
+                      name: "Tamino — F&B Point of Sale & Operations System",
+                      tag: "F&B Operations & Point of Sale — custom-fnb-pos-system-desktop.vercel.app",
+                      desc: "A desktop-first F&B operating system connecting point-of-sale transactions, inventory monitoring, staff roles, payments, and business reporting in one focused workspace.",
+                      stack: ["React", "TypeScript", "Tailwind CSS", "LocalStorage", "Vercel"],
+                      badge: "Interactive MVP — Phase 1 Demo"
+                    },
                     {
                       name: "OOI — Origin Of Indonesia",
                       tag: "B2B Export Showcase & Commodity Catalog",

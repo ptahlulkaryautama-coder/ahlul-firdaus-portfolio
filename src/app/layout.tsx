@@ -27,9 +27,9 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ahlulfirdaus.com"),
+  metadataBase: new URL("https://www.ahlulfirdaus.com"),
   title: {
-    default: "Ahlul Firdaus | Operational Systems Builder",
+    default: "Ahlul Firdaus — Operational Web Systems for Businesses & Communities",
     template: "%s | Ahlul Firdaus",
   },
   description:
@@ -46,22 +46,22 @@ export const metadata: Metadata = {
     "Masjid Al Ikhlas Digital Platform",
     "Next.js Systems Developer",
   ],
-  authors: [{ name: "Ahlul Firdaus", url: "https://ahlulfirdaus.com" }],
+  authors: [{ name: "Ahlul Firdaus", url: "https://www.ahlulfirdaus.com" }],
   creator: "Ahlul Firdaus",
   publisher: "Ahlul Firdaus",
   alternates: {
-    canonical: "https://ahlulfirdaus.com",
+    canonical: "https://www.ahlulfirdaus.com",
   },
   icons: {
     icon: "/logo/af-monogram-alternate.png",
     apple: "/logo/af-monogram-alternate.png",
   },
   openGraph: {
-    title: "Ahlul Firdaus | Operational Systems Builder",
+    title: "Ahlul Firdaus — Operational Web Systems for Businesses & Communities",
     description:
       "Turning complex workflows, scattered information, and manual processes into clear websites, dashboards, portals, and practical digital tools.",
     type: "website",
-    url: "https://ahlulfirdaus.com",
+    url: "https://www.ahlulfirdaus.com",
     siteName: "Ahlul Firdaus Portfolio",
     locale: "en_US",
     images: [
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ahlul Firdaus | Operational Systems Builder",
+    title: "Ahlul Firdaus — Operational Web Systems for Businesses & Communities",
     description:
       "Operational systems builder turning complex workflows into clear websites, dashboards, portals, and digital tools.",
     creator: "@ahlulfirdaus",
@@ -99,13 +99,9 @@ const personJsonLd = {
   "@type": "Person",
   name: "Ahlul Firdaus",
   jobTitle: "Operational Systems Builder & Product Specialist",
-  url: "https://ahlulfirdaus.com",
+  url: "https://www.ahlulfirdaus.com",
   sameAs: [
     "https://github.com/ahlul-firdaus",
-    "https://portalwargacgv.id",
-    "https://sakku.ahlulfirdaus.com/",
-    "https://alikhlascgv.vercel.app/",
-    "https://ooindonesia.com",
   ],
   knowsAbout: [
     "Manufacturing Operations",
@@ -118,75 +114,18 @@ const personJsonLd = {
     "Supabase & PostgreSQL",
     "Internal Portals & Dashboards",
   ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Digital Systems & Workflow Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Digital Product & Workflow Review",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Business Website or Portal MVP Build",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Ongoing Product Improvement",
-        },
-      },
-    ],
-  },
 };
 
 const webSiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Ahlul Firdaus Portfolio",
-  url: "https://ahlulfirdaus.com",
+  url: "https://www.ahlulfirdaus.com",
   author: {
     "@type": "Person",
     name: "Ahlul Firdaus",
+    url: "https://www.ahlulfirdaus.com",
   },
-};
-
-const professionalServiceJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Ahlul Firdaus Operational Systems Builder",
-  image: "https://ahlulfirdaus.com/logo/af-monogram-alternate.png",
-  url: "https://ahlulfirdaus.com",
-  telephone: "+6281291254064",
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Batam",
-    addressRegion: "Kepulauan Riau",
-    addressCountry: "ID",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 1.1301,
-    longitude: 104.0529,
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    opens: "08:00",
-    closes: "20:00",
-  },
-  sameAs: [
-    "https://github.com/ahlul-firdaus",
-    "https://wa.me/6281291254064",
-  ],
 };
 
 export default function RootLayout({
@@ -217,16 +156,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
-        />
       </head>
       <body
         suppressHydrationWarning
         className="min-h-screen bg-deep-black text-cream selection:bg-gold-muted selection:text-deep-black font-sans relative"
       >
-        {/* Skip to Main Content Landmark Link (WCAG 2.2 AA) */}
+        {/* Skip to Main Content Landmark Link */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2.5 focus:bg-gold-muted focus:text-deep-black focus:font-bold focus:font-sans focus:text-xs focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cream transition-transform"

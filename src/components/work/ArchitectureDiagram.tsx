@@ -9,7 +9,9 @@ interface ArchitectureDiagramProps {
 
 export default function ArchitectureDiagram({ projectId }: ArchitectureDiagramProps) {
   const presetKey: ProjectPreset =
-    projectId === "ooi"
+    projectId === "tamino"
+      ? "tamino"
+      : projectId === "ooi"
       ? "ooi"
       : projectId === "cgv10"
       ? "cgv10"

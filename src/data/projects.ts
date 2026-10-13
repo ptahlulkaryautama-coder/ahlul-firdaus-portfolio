@@ -7,8 +7,8 @@ export interface Project {
   challenge: string;
   solution: string;
   status: string;
-  statusBadge: "Live Product" | "Active Prototype" | "Internal Template" | "In Development" | "Concept / Roadmap" | "Founder-Led Product — Phase 1 Launch";
-  evidenceLabel: "Public Live Product" | "Public Demo" | "Functional Prototype" | "Internal Template" | "In Development" | "Concept / Roadmap" | "Founder-Led Product — Phase 1 Launch";
+  statusBadge: "Live Product" | "Active Prototype" | "Internal Template" | "In Development" | "Concept / Roadmap" | "Founder-Led Product — Phase 1 Launch" | "Interactive Demo" | "Interactive MVP — Phase 1 Demo";
+  evidenceLabel: "Public Live Product" | "Public Demo" | "Functional Prototype" | "Internal Template" | "In Development" | "Concept / Roadmap" | "Founder-Led Product — Phase 1 Launch" | "Interactive Demo" | "Interactive MVP — Phase 1 Demo";
   problemSnippet: string;
   builtSnippet: string;
   context: string;
@@ -26,10 +26,72 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "tamino",
+    name: "Tamino — F&B Point of Sale & Operations System",
+    category: "F&B Operations & Point of Sale",
+    oneLiner: "A desktop-first F&B operating system connecting point-of-sale transactions, inventory monitoring, staff roles, payments, and business reporting in one focused workspace.",
+    problem: "Small F&B businesses often manage sales, menu availability, inventory, payments, and reporting through separate tools or manual records. This creates fragmented information, delayed stock updates, limited visibility for owners, and unnecessary administrative work for staff.\n\nTamino was developed as an exploration of how a focused digital operating system could connect these workflows without overwhelming everyday users.\n\nThe product was designed around three operational roles—Owner, Manager, and Cashier—each requiring different levels of access and information. The result is a structured but approachable system that supports both frontline transactions and management-level decision-making.",
+    problemSnippet: "F&B operations often manage sales, menus, inventory, and reporting in separate tools, causing delayed updates and fragmented visibility.",
+    builtSnippet: "A focused F&B operating system connecting cashier workflows, inventory monitoring, role structures, and business reporting.",
+    challenge: "F&B teams need to process orders quickly while simultaneously maintaining accurate product availability, payment records, inventory levels, and daily sales information. The key challenge was to connect these operational areas without creating a crowded or overly technical interface. Cashiers need speed, managers need operational control, and owners need concise business visibility.",
+    solution: "Tamino unifies the primary F&B workflow into one connected system:\n\nOrder → Payment → Transaction Record → Inventory Update → Business Report\n\nThe POS interface enables staff to search and select products, choose order types, assign tables, calculate tax, and simulate cash or QRIS payments. Operational data then flows into transaction history, inventory monitoring, sales summaries, product performance, payment breakdowns, and management alerts.",
+    status: "Interactive MVP — Phase 1 Demo",
+    statusBadge: "Interactive MVP — Phase 1 Demo",
+    evidenceLabel: "Public Demo",
+    context: "A focused F&B operating system designed to connect everyday cashier workflows with inventory visibility, transaction control, and actionable business reporting.",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Client-Side State Management",
+      "Browser Local Storage",
+      "Responsive Web Interface",
+      "CSV Export",
+      "Vercel Deployment",
+      "AI-Assisted Product Development"
+    ],
+    duration: "Independent Product · 2026",
+    role: "Product Concept, Operational Workflow Design, UI/UX Direction & AI-Assisted Development",
+    images: ["/Image/project/tamino/tamino-portfolio-thumbnail.png"],
+    liveUrl: "https://custom-fnb-pos-system-desktop.vercel.app/",
+    githubUrl: "https://github.com/ahlul-firdaus/custom-fnb-pos-system-desktop",
+    longDescription: "Tamino is a desktop-first point-of-sale and operational management system designed for cafés, restaurants, bakeries, and other small F&B businesses. It brings order processing, payments, menu management, inventory monitoring, transaction records, staff roles, and business reporting into one clear operational workspace.\n\nThe product focuses on helping owners and frontline teams run daily operations with less complexity while keeping essential business information visible and actionable.",
+    keyDeliverables: [
+      "Desktop-first POS and cashier workspace",
+      "Product search and category filtering",
+      "Dine-in, takeaway, and online order types",
+      "Table selection for dine-in orders",
+      "Automated subtotal, tax, and total calculation",
+      "Cash and QRIS payment simulation",
+      "Menu and product management",
+      "Inventory monitoring with configurable low-stock thresholds",
+      "Stock-in and stock-out operational workflow",
+      "Transaction history with payment and status tracking",
+      "Daily, seven-day, and thirty-day reporting periods",
+      "Sales, transaction, average order value, and product-volume metrics",
+      "Best-selling product analysis",
+      "Payment-method breakdown",
+      "Operational alerts for low inventory and incomplete payments",
+      "CSV report export",
+      "Owner, Manager, and Cashier role structure",
+      "Responsive operational dashboard",
+      "Browser-based demo data persistence"
+    ],
+    keyDecisions: [
+      "Designed around real operational roles — The system separates Owner, Manager, and Cashier responsibilities to reduce unnecessary information and keep each workspace relevant.",
+      "Prioritised transaction speed — The POS layout keeps product selection, categories, order details, totals, and payment controls within one focused operational view.",
+      "Connected sales with inventory awareness — Products display availability and low-stock status directly within the ordering workflow, helping staff avoid selling unavailable items.",
+      "Turned data into operational priorities — Instead of displaying metrics alone, the dashboard highlights items requiring attention, including low inventory and incomplete payments.",
+      "Used plain business language — Labels such as “Kondisi bisnis hari ini,” “Perlu Perhatian,” and “Angka yang membantu Anda mengambil langkah berikutnya” make the system understandable to non-technical business users.",
+      "Created a calm, premium interface — The visual direction uses restrained colour, clear hierarchy, generous spacing, and focused calls to action to reduce cognitive load in a busy operating environment."
+    ],
+    outcome: "Tamino demonstrates how a small F&B business can manage daily sales and operational information from a single, structured workspace. The interactive MVP connects cashier activities with inventory visibility and management reporting, reducing the separation between frontline transactions and owner-level decision-making. The current release serves as a functional Phase 1 demonstration. Data is stored locally in the user’s browser, payments are simulated, and server-side authentication, authorisation, and production integrations are planned for a future phase."
+  },
+  {
     id: "ooi",
     name: "OOI — Origin of Indonesia",
     category: "Commerce, Export & Sourcing Platform",
-    oneLiner: "Founder-led commerce and sourcing platform connecting certified Indonesian food brands with international consumers, specialty retailers, importers, and distribution partners.",
+    oneLiner: "Founder-led commerce and sourcing platform connecting curated Indonesian food products with international consumers, specialty retailers, importers, and distribution partners.",
     problem: "Indonesia has thousands of quality regional products, but international access is fragmented. Buyers often face disconnected suppliers, inconsistent product information, unclear certification status, high shipping costs, and no simple way to combine products from several origins into one order or inquiry.",
     problemSnippet: "Indonesian specialty products are fragmented across separate suppliers with high shipping costs and unclear buyer pathways.",
     builtSnippet: "A curated B2B & retail showcase catalog highlighting origin traceability, product specs, and Batam consolidation.",

@@ -39,6 +39,18 @@ export default function ProjectGallery({
 
   // Define structured gallery items for projects
   const getGalleryItems = (): GalleryItem[] => {
+    if (projectId === "tamino") {
+      return [
+        {
+          src: "/Image/project/tamino/tamino-portfolio-thumbnail.png",
+          title: "Tamino — F&B Point of Sale & Operations System",
+          badge: "Interactive MVP — Phase 1 Demo",
+          alt: "Tamino F&B point-of-sale and operations dashboard showing sales, transactions, inventory alerts, and payment performance.",
+          isPrimary: true,
+        },
+      ];
+    }
+
     if (projectId === "corum") {
       return [
         {
@@ -240,8 +252,36 @@ export default function ProjectGallery({
         </div>
       )}
 
-      {/* Structured Layout for Corum */}
-      {projectId === "corum" ? (
+      {/* Structured Layout for Tamino */}
+      {projectId === "tamino" ? (
+        <div className="space-y-4">
+          {galleryItems[0] && (
+            <div
+              onClick={() => handleOpenModal(0)}
+              className="group relative w-full rounded-2xl overflow-hidden border border-[#16735B]/40 hover:border-[#16735B]/80 shadow-2xl bg-[#17201C] cursor-zoom-in transition-all duration-300"
+              style={{ aspectRatio: "16/9" }}
+            >
+              <Image
+                src={galleryItems[0].src}
+                alt={galleryItems[0].alt}
+                fill
+                unoptimized
+                priority
+                className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+              />
+              
+              {/* Top Hover Hint */}
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                <span className="flex items-center gap-1.5 text-xs font-mono text-white bg-slate-900/90 border border-emerald-500/40 px-3 py-1.5 rounded-full shadow-xl backdrop-blur-sm">
+                  <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />
+                  Click to View Full HD
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      ) : projectId === "corum" ? (
         <div className="space-y-4">
           {galleryItems[0] && (
             <div

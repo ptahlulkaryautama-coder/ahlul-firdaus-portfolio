@@ -196,9 +196,9 @@ export async function GET(request: NextRequest) {
               zIndex: 10,
             }}
           >
-            <span>https://ahlulfirdaus.com</span>
+            <span>https://www.ahlulfirdaus.com</span>
             <span>BATAM, INDONESIA (UTC+7)</span>
-            <span>B2B ESCROW // COMMUNITY // SAAS</span>
+            <span>OPERATIONAL SYSTEMS // WORKFLOWS // TOOLS</span>
           </div>
         </div>
       ),
